@@ -1,0 +1,498 @@
+.cgtwp-root {
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif !important;
+    color: #ffffff !important;
+    position: relative !important;
+    width: 100% !important;
+    display: block !important;
+}
+
+.cgtwp-root *,
+.cgtwp-root *::before,
+.cgtwp-root *::after {
+    box-sizing: border-box !important;
+    font-family: inherit !important;
+}
+
+.cgtwp-shell {
+    background: radial-gradient(circle at top, #1f2a44, #0f1624) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    padding: 32px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 100% !important;
+    box-shadow: 0 40px 60px rgba(10, 14, 29, 0.35) !important;
+    backdrop-filter: blur(8px) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.cgtwp-shell::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: radial-gradient(circle at 20% 20%, rgba(60, 120, 255, 0.18), transparent 60%) !important;
+    pointer-events: none !important;
+}
+
+.cgtwp-shell::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: radial-gradient(circle at 80% 20%, rgba(255, 80, 180, 0.18), transparent 60%) !important;
+    pointer-events: none !important;
+}
+
+.cgtwp-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 16px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.cgtwp-status {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+}
+
+.cgtwp-status-dot {
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 50% !important;
+    background: #ff5858 !important;
+    box-shadow: 0 0 12px rgba(255, 88, 88, 0.7) !important;
+    transition: background 0.3s ease !important;
+}
+
+.cgtwp-status-dot.cgtwp-online {
+    background: #4cffc7 !important;
+    box-shadow: 0 0 18px rgba(76, 255, 199, 0.8) !important;
+}
+
+.cgtwp-header-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.cgtwp-device-select {
+    background: rgba(18, 27, 45, 0.85) !important;
+    color: #e7ecff !important;
+    border: 1px solid rgba(98, 123, 255, 0.4) !important;
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    appearance: none !important;
+    cursor: pointer !important;
+    min-width: 220px !important;
+    transition: border 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.cgtwp-device-select:focus {
+    outline: none !important;
+    border-color: rgba(98, 123, 255, 0.9) !important;
+    box-shadow: 0 0 0 4px rgba(98, 123, 255, 0.2) !important;
+}
+
+.cgtwp-refresh-btn,
+.cgtwp-rumble-btn {
+    background: linear-gradient(135deg, #627bff, #a855f7) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 10px 18px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.03em !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.cgtwp-refresh-btn:hover,
+.cgtwp-rumble-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 24px rgba(98, 123, 255, 0.35) !important;
+}
+
+.cgtwp-refresh-btn:active,
+.cgtwp-rumble-btn:active {
+    transform: translateY(0) !important;
+    box-shadow: none !important;
+}
+
+.cgtwp-refresh-btn:disabled,
+.cgtwp-rumble-btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.cgtwp-body {
+    display: flex !important;
+    gap: 28px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    flex-wrap: wrap !important;
+}
+
+.cgtwp-visual-column {
+    flex: 1 1 320px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+}
+
+.cgtwp-controller-wrapper {
+    background: linear-gradient(145deg, rgba(20, 30, 50, 0.95), rgba(15, 22, 36, 0.95)) !important;
+    border-radius: 28px !important;
+    padding: 28px !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.cgtwp-controller-wrapper::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: radial-gradient(circle at 30% 0%, rgba(98, 123, 255, 0.25), transparent 70%) !important;
+    pointer-events: none !important;
+}
+
+.cgtwp-controller-svg {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    filter: drop-shadow(0 18px 35px rgba(8, 12, 20, 0.65)) !important;
+}
+
+.cgtwp-outline {
+    fill: none !important;
+    stroke: rgba(255, 255, 255, 0.18) !important;
+    stroke-width: 3 !important;
+}
+
+.cgtwp-button-sprite {
+    fill: rgba(50, 73, 120, 0.65) !important;
+    stroke: rgba(255, 255, 255, 0.12) !important;
+    stroke-width: 2 !important;
+    transition: transform 0.18s ease, fill 0.18s ease, stroke 0.18s ease, box-shadow 0.18s ease !important;
+}
+
+.cgtwp-button-sprite.cgtwp-face-button {
+    fill: rgba(45, 66, 110, 0.65) !important;
+}
+
+.cgtwp-button-sprite.cgtwp-active {
+    fill: #8f9eff !important;
+    stroke: rgba(255, 255, 255, 0.85) !important;
+    box-shadow: 0 0 12px rgba(143, 158, 255, 0.8) !important;
+    filter: drop-shadow(0 0 10px rgba(143, 158, 255, 0.6)) !important;
+    transform: scale(1.05) !important;
+}
+
+.cgtwp-button-a.cgtwp-active {
+    fill: #3cffaf !important;
+}
+
+.cgtwp-button-b.cgtwp-active {
+    fill: #ff6b7d !important;
+}
+
+.cgtwp-button-x.cgtwp-active {
+    fill: #78a0ff !important;
+}
+
+.cgtwp-button-y.cgtwp-active {
+    fill: #ffd76d !important;
+}
+
+.cgtwp-stick-disc {
+    fill: rgba(25, 35, 55, 0.95) !important;
+    stroke: rgba(130, 160, 255, 0.35) !important;
+    stroke-width: 3 !important;
+}
+
+.cgtwp-stick-disc.cgtwp-active {
+    fill: #6c83ff !important;
+}
+
+.cgtwp-stick-panels {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 16px !important;
+}
+
+.cgtwp-stick-monitor {
+    background: rgba(15, 21, 35, 0.9) !important;
+    border-radius: 20px !important;
+    padding: 18px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    border: 1px solid rgba(98, 123, 255, 0.25) !important;
+}
+
+.cgtwp-stick-label {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+}
+
+.cgtwp-stick-surface {
+    position: relative !important;
+    width: 100% !important;
+    padding-top: 100% !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(30, 45, 80, 0.65), rgba(15, 24, 45, 0.95)) !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(140, 170, 255, 0.3) !important;
+}
+
+.cgtwp-stick-crosshair {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% !important;
+    height: 1px !important;
+    background: rgba(200, 210, 255, 0.2) !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.cgtwp-stick-crosshair::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    width: 1px !important;
+    height: 200% !important;
+    background: rgba(200, 210, 255, 0.2) !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.cgtwp-stick-indicator {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 32% !important;
+    height: 32% !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(120, 150, 255, 0.6), rgba(70, 100, 200, 0.4)) !important;
+    transform: translate(-50%, -50%) !important;
+    transition: transform 0.08s linear !important;
+    box-shadow: 0 0 12px rgba(120, 150, 255, 0.6) !important;
+}
+
+.cgtwp-stick-coords {
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: 13px !important;
+    color: rgba(220, 227, 255, 0.8) !important;
+}
+
+.cgtwp-trigger-panels {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 16px !important;
+}
+
+.cgtwp-trigger {
+    background: rgba(18, 25, 44, 0.9) !important;
+    border-radius: 18px !important;
+    padding: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    border: 1px solid rgba(98, 123, 255, 0.25) !important;
+}
+
+.cgtwp-trigger-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+}
+
+.cgtwp-trigger-bar {
+    position: relative !important;
+    width: 100% !important;
+    height: 14px !important;
+    border-radius: 14px !important;
+    background: rgba(25, 35, 60, 0.85) !important;
+    overflow: hidden !important;
+}
+
+.cgtwp-trigger-fill {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100% !important;
+    width: 0% !important;
+    border-radius: inherit !important;
+    background: linear-gradient(90deg, rgba(118, 154, 255, 0.9), rgba(118, 255, 208, 0.9)) !important;
+    transition: width 0.08s ease !important;
+}
+
+.cgtwp-trigger-value {
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    color: rgba(220, 227, 255, 0.75) !important;
+}
+
+.cgtwp-data-column {
+    flex: 1 1 260px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+}
+
+.cgtwp-panel {
+    background: rgba(15, 21, 35, 0.88) !important;
+    border-radius: 20px !important;
+    padding: 22px !important;
+    border: 1px solid rgba(98, 123, 255, 0.25) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+}
+
+.cgtwp-panel-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.cgtwp-button-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 12px !important;
+}
+
+.cgtwp-button-item {
+    background: rgba(21, 30, 50, 0.95) !important;
+    border-radius: 14px !important;
+    padding: 12px 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    border: 1px solid rgba(98, 123, 255, 0.22) !important;
+    transition: border 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+.cgtwp-button-item.cgtwp-active {
+    border-color: rgba(140, 170, 255, 0.9) !important;
+    box-shadow: 0 8px 18px rgba(110, 145, 255, 0.35) !important;
+    transform: translateY(-3px) !important;
+}
+
+.cgtwp-button-name {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    text-transform: uppercase !important;
+}
+
+.cgtwp-button-index {
+    font-size: 12px !important;
+    color: rgba(220, 227, 255, 0.65) !important;
+    letter-spacing: 0.04em !important;
+}
+
+.cgtwp-diagnostics {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.cgtwp-diagnostic-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 13px !important;
+}
+
+.cgtwp-diagnostic-label {
+    color: rgba(220, 227, 255, 0.68) !important;
+    letter-spacing: 0.04em !important;
+}
+
+.cgtwp-diagnostic-value {
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    letter-spacing: 0.05em !important;
+}
+
+.cgtwp-rumble-note {
+    font-size: 11px !important;
+    color: rgba(220, 227, 255, 0.55) !important;
+    letter-spacing: 0.04em !important;
+}
+
+.cgtwp-empty-state {
+    background: rgba(18, 27, 45, 0.9) !important;
+    border-radius: 18px !important;
+    padding: 22px !important;
+    text-align: center !important;
+    border: 1px dashed rgba(98, 123, 255, 0.35) !important;
+    color: rgba(220, 227, 255, 0.72) !important;
+    letter-spacing: 0.04em !important;
+    font-size: 14px !important;
+}
+
+.cgtwp-latency-value.cgtwp-alert {
+    color: #ff9f68 !important;
+}
+
+.cgtwp-hidden {
+    display: none !important;
+}
+
+@media (max-width: 960px) {
+    .cgtwp-shell {
+        padding: 24px !important;
+    }
+
+    .cgtwp-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+
+    .cgtwp-header-actions {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    .cgtwp-device-select {
+        flex: 1 1 auto !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .cgtwp-shell {
+        padding: 20px !important;
+    }
+
+    .cgtwp-header-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+
+    .cgtwp-refresh-btn {
+        width: 100% !important;
+    }
+
+    .cgtwp-body {
+        flex-direction: column !important;
+    }
+}
