@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudLoadout Network Tool - Demo Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .demo-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .demo-header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-header p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .demo-header .demo-subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .demo-info {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-info h2 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+
+        .demo-info p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 16px;
+        }
+
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .demo-feature {
+            background: #f3f4f6;
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 4px solid #6366f1;
+        }
+
+        .demo-feature h3 {
+            font-size: 16px;
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .demo-feature p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .demo-usage {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-usage h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+
+        .demo-usage-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .demo-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .demo-step-number {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .demo-step-content h3 {
+            font-size: 16px;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .demo-step-content p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .demo-code {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+
+        .demo-footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.9;
+        }
+
+        .demo-footer a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .demo-header h1 {
+                font-size: 32px;
+            }
+
+            .demo-header p {
+                font-size: 16px;
+            }
+
+            .demo-info,
+            .demo-usage {
+                padding: 24px;
+            }
+
+            .demo-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Header -->
+        <div class="demo-header">
+            <h1>🎮 CloudLoadout Network Tool</h1>
+            <p>Professional Network & Latency Testing for Cloud Gaming</p>
+            <p class="demo-subtitle">Demo & Integration Guide</p>
+        </div>
+
+        <!-- Info Section -->
+        <div class="demo-info">
+            <h2>📋 About This Tool</h2>
+            <p>
+                The CloudLoadout Network & Latency Tool is a comprehensive, browser-based solution 
+                designed to help gamers test their connection quality for cloud gaming services. 
+                It measures real-time latency to 12+ major cloud gaming servers across multiple regions.
+            </p>
+            <p>
+                This tool is specifically built for <strong>CloudLoadout.com</strong> - a leading 
+                cloud gaming guide and resource hub. It's fully WordPress-compatible, mobile-responsive, 
+                and requires zero external dependencies.
+            </p>
+
+            <div class="demo-features">
+                <div class="demo-feature">
+                    <h3>⚡ Lightning Fast</h3>
+                    <p>Optimized performance with pure vanilla JavaScript</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>📱 Fully Responsive</h3>
+                    <p>Perfect experience on mobile, tablet, and desktop</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🌓 Theme Toggle</h3>
+                    <p>Dark and light modes with persistent preference</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>📤 Export Results</h3>
+                    <p>Download detailed reports in text format</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🔒 Privacy First</h3>
+                    <p>No data collection, all tests run locally</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>♿ Accessible</h3>
+                    <p>WCAG 2.1 compliant with ARIA labels</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Guide -->
+        <div class="demo-usage">
+            <h2>🚀 Quick Start - WordPress Integration</h2>
+            
+            <div class="demo-usage-steps">
+                <div class="demo-step">
+                    <div class="demo-step-number">1</div>
+                    <div class="demo-step-content">
+                        <h3>Open Your WordPress Page</h3>
+                        <p>Navigate to the page or post where you want to embed the network tool</p>
+                    </div>
+                </div>
+
+                <div class="demo-step">
+                    <div class="demo-step-number">2</div>
+                    <div class="demo-step-content">
+                        <h3>Add Custom HTML Block</h3>
+                        <p>Click the "+" button in the WordPress editor and search for "Custom HTML"</p>
+                    </div>
+                </div>
+
+                <div class="demo-step">
+                    <div class="demo-step-number">3</div>
+                    <div class="demo-step-content">
+                        <h3>Paste the Tool Code</h3>
+                        <p>Copy the entire content of <code>cloudloadout-network-latency-tool.html</code> and paste it into the HTML block</p>
+                        <div class="demo-code">
+&lt;!-- Copy everything from the HTML file --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+...entire content...
+&lt;/html&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-step">
+                    <div class="demo-step-number">4</div>
+                    <div class="demo-step-content">
+                        <h3>Publish Your Page</h3>
+                        <p>Click "Publish" or "Update" and view your page to see the tool in action!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Actual Tool -->
+        <div class="demo-info">
+            <h2>🎯 Live Demo</h2>
+            <p style="margin-bottom: 24px;">
+                Try the tool below! Click "Start Network Test" to measure your latency to various 
+                cloud gaming services. The test will take about 20-30 seconds to complete.
+            </p>
+        </div>
+
+        <!-- EMBEDDED TOOL WOULD GO HERE -->
+        <!-- In actual usage, paste the cloudloadout-network-latency-tool.html content here -->
+        
+        <div style="background: white; border-radius: 16px; padding: 48px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);">
+            <h2 style="color: #1f2937; margin-bottom: 16px;">📦 Tool Would Appear Here</h2>
+            <p style="color: #6b7280; margin-bottom: 24px;">
+                In production, you would paste the full HTML content from<br>
+                <code style="background: #f3f4f6; padding: 4px 8px; border-radius: 4px;">cloudloadout-network-latency-tool.html</code>
+                <br>at this location.
+            </p>
+            <p style="color: #6b7280; font-size: 14px;">
+                Open <strong>cloudloadout-network-latency-tool.html</strong> directly in your browser to see the live tool!
+            </p>
+        </div>
+
+        <!-- More Info -->
+        <div class="demo-usage" style="margin-top: 40px;">
+            <h2>📚 Additional Resources</h2>
+            
+            <div class="demo-usage-steps">
+                <div class="demo-step">
+                    <div class="demo-step-number">📄</div>
+                    <div class="demo-step-content">
+                        <h3>README.md</h3>
+                        <p>Comprehensive documentation including features, browser compatibility, and customization options</p>
+                    </div>
+                </div>
+
+                <div class="demo-step">
+                    <div class="demo-step-number">🔧</div>
+                    <div class="demo-step-content">
+                        <h3>WORDPRESS_INTEGRATION_GUIDE.md</h3>
+                        <p>Detailed WordPress integration guide with troubleshooting tips and advanced configurations</p>
+                    </div>
+                </div>
+
+                <div class="demo-step">
+                    <div class="demo-step-number">⚙️</div>
+                    <div class="demo-step-content">
+                        <h3>cloudloadout-network-latency-tool.html</h3>
+                        <p>The main tool file - fully self-contained with HTML, CSS, and JavaScript</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Tested -->
+        <div class="demo-info">
+            <h2>🎮 Cloud Gaming Services Tested</h2>
+            <p>The tool tests latency to the following cloud gaming platforms:</p>
+            
+            <div class="demo-features">
+                <div class="demo-feature">
+                    <h3>🎮 GeForce NOW</h3>
+                    <p>NVIDIA - US East, US West, EU Central</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🎯 Xbox Cloud Gaming</h3>
+                    <p>Microsoft - US Central, EU West</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🎲 PlayStation Plus</h3>
+                    <p>Sony - US West, Asia Pacific</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>☁️ Amazon Luna</h3>
+                    <p>Amazon - US East</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🌐 Google Stadia</h3>
+                    <p>Google - Global</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>💻 Shadow PC</h3>
+                    <p>Shadow - EU Central</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🚀 Boosteroid</h3>
+                    <p>Boosteroid - EU East</p>
+                </div>
+                <div class="demo-feature">
+                    <h3>🌪️ Vortex</h3>
+                    <p>Vortex - US Central</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="demo-footer">
+            <p>Built with ❤️ for Cloud Gamers | <a href="https://cloudloadout.com" target="_blank">CloudLoadout.com</a></p>
+            <p style="margin-top: 8px; font-size: 14px; opacity: 0.8;">
+                Professional Cloud Gaming Guides, Reviews & Tools
+            </p>
+        </div>
+    </div>
+</body>
+</html>
