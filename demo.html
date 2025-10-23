@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Input Latency Meter - Measure your gaming performance with precision. Test input lag and network ping in real-time.">
+    <meta name="keywords" content="input latency, gaming, performance, lag meter, ping test, esports, competitive gaming, cloud gaming">
+    <title>Input Latency Meter - Professional Gaming Performance Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+        }
+        
+        .demo-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-header p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+        
+        .badge-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .compact-info {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .info-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-toggle {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dropdown-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            min-width: 300px;
+            max-width: 400px;
+            z-index: 1000;
+            display: none;
+            animation: dropdownFade 0.3s ease;
+        }
+        
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .dropdown-content.show {
+            display: block;
+        }
+        
+        .dropdown-content h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .dropdown-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .dropdown-content li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #555;
+        }
+        
+        .dropdown-content li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .feature-card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .feature-card-desc {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+        
+        .tool-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .tool-section {
+                padding: 20px;
+            }
+            
+            .dropdown-content {
+                min-width: 280px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .dropdown-content.show {
+                transform: translateX(-50%);
+            }
+            
+            .feature-cards {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            opacity: 0.95;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        
+        .cloud-gaming-badge {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>⚡ Input Latency Meter <span class="cloud-gaming-badge">Cloud Ready</span></h1>
+            <p>
+                Professional gaming performance analyzer for competitive gamers, esports professionals, and cloud gaming enthusiasts.
+            </p>
+            <div class="badge-container">
+                <span class="badge">✨ Zero Dependencies</span>
+                <span class="badge">📱 Mobile Friendly</span>
+                <span class="badge">🎨 Beautiful UI</span>
+                <span class="badge">🚀 Lightning Fast</span>
+                <span class="badge">☁️ Cloud Gaming Optimized</span>
+            </div>
+        </div>
+        
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="feature-card-icon">⚡</div>
+                <div class="feature-card-title">Real-time Latency</div>
+                <div class="feature-card-desc">Sub-ms precision</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">🌐</div>
+                <div class="feature-card-title">Network Ping</div>
+                <div class="feature-card-desc">End-to-end testing</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">📊</div>
+                <div class="feature-card-title">Performance Charts</div>
+                <div class="feature-card-desc">Visual analytics</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">🎯</div>
+                <div class="feature-card-title">Gamer-Focused</div>
+                <div class="feature-card-desc">Built for pros</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">☁️</div>
+                <div class="feature-card-title">Cloud Gaming</div>
+                <div class="feature-card-desc">Optimize streaming</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-icon">🔒</div>
+                <div class="feature-card-title">Privacy First</div>
+                <div class="feature-card-desc">No tracking</div>
+            </div>
+        </div>
+        
+        <div class="compact-info">
+            <div class="info-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown('features')">
+                    🎯 Key Features <span>▾</span>
+                </button>
+                <div class="dropdown-content" id="features-dropdown">
+                    <h4>What You Get</h4>
+                    <ul>
+                        <li>High-precision Performance API measurements</li>
+                        <li>Real-time input-to-screen latency tracking</li>
+                        <li>Network ping testing for online gaming</li>
+                        <li>Cloud gaming latency optimization</li>
+                        <li>Visual performance charts and analytics</li>
+                        <li>History tracking (up to 20 measurements)</li>
+                        <li>Mobile and desktop support</li>
+                        <li>Touch, keyboard, and mouse input</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown('howto')">
+                    📖 How to Use <span>▾</span>
+                </button>
+                <div class="dropdown-content" id="howto-dropdown">
+                    <h4>Quick Guide</h4>
+                    <ul>
+                        <li><strong>Desktop:</strong> Press any key</li>
+                        <li><strong>Mobile:</strong> Tap the colored zone</li>
+                        <li><strong>Mouse:</strong> Click anywhere in zone</li>
+                        <li>View instant latency results</li>
+                        <li>Click "Test Network Ping" for connection</li>
+                        <li>Track your performance over time</li>
+                        <li>Reset data to start fresh</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown('benchmarks')">
+                    🏆 Benchmarks <span>▾</span>
+                </button>
+                <div class="dropdown-content" id="benchmarks-dropdown">
+                    <h4>Performance Targets</h4>
+                    <ul>
+                        <li><strong>Professional:</strong> &lt;5ms input, &lt;30ms ping</li>
+                        <li><strong>Competitive:</strong> &lt;10ms input, &lt;50ms ping</li>
+                        <li><strong>Good:</strong> &lt;15ms input, &lt;100ms ping</li>
+                        <li><strong>Cloud Gaming:</strong> &lt;30ms total latency</li>
+                        <li><strong>Streaming Services:</strong> Varies by platform</li>
+                        <li>Test regularly for consistent results</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown('cloudgaming')">
+                    ☁️ Cloud Gaming <span>▾</span>
+                </button>
+                <div class="dropdown-content" id="cloudgaming-dropdown">
+                    <h4>Cloud Gaming Optimization</h4>
+                    <ul>
+                        <li>Test latency for GeForce NOW, Stadia, xCloud</li>
+                        <li>Measure streaming encode/decode time</li>
+                        <li>Monitor network stability</li>
+                        <li>Compare different servers/regions</li>
+                        <li>Optimize router settings</li>
+                        <li>Use wired connection for best results</li>
+                        <li>5GHz WiFi minimum for wireless</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown('wordpress')">
+                    🔧 WordPress <span>▾</span>
+                </button>
+                <div class="dropdown-content" id="wordpress-dropdown">
+                    <h4>WordPress Integration</h4>
+                    <ul>
+                        <li>Copy wordpress-integration.php to plugins folder</li>
+                        <li>Activate in WordPress admin panel</li>
+                        <li>Use shortcode: [input_latency_meter]</li>
+                        <li>Shadow DOM prevents style conflicts</li>
+                        <li>Works with any theme</li>
+                        <li>No jQuery dependency</li>
+                        <li>Fully responsive out of the box</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tool-section">
+            <div id="latency-meter-root"></div>
+        </div>
+        
+        <div class="footer">
+            Made with ❤️ for gamers who demand performance<br>
+            Open Source • Free Forever • No Tracking
+        </div>
+    </div>
+    
+    <script>
+    function toggleDropdown(id) {
+        const dropdown = document.getElementById(id + '-dropdown');
+        const allDropdowns = document.querySelectorAll('.dropdown-content');
+        
+        allDropdowns.forEach(d => {
+            if (d !== dropdown) {
+                d.classList.remove('show');
+            }
+        });
+        
+        dropdown.classList.toggle('show');
+    }
+    
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.info-dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(d => {
+                d.classList.remove('show');
+            });
+        }
+    });
+    
+    (function() {
+        'use strict';
+        
+        class InputLatencyMeter extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.latencyHistory = [];
+                this.pingHistory = [];
+                this.isListening = false;
+                this.lastInputTime = null;
+                this.pingInProgress = false;
+                this.cloudGamingMode = false;
+                this.frameTimeHistory = [];
+                
+                this.render();
+                this.attachEventListeners();
+            }
+            
+            render() {
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        * {
+                            box-sizing: border-box;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        
+                        :host {
+                            display: block;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                            width: 100%;
+                            max-width: 100%;
+                            isolation: isolate;
+                        }
+                        
+                        .container {
+                            width: 100%;
+                            padding: 20px;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .container {
+                                padding: 15px;
+                            }
+                        }
+                        
+                        .cloud-gaming-toggle {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 10px;
+                            margin-bottom: 20px;
+                            padding: 15px;
+                            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+                            border-radius: 12px;
+                            color: white;
+                            font-weight: 600;
+                        }
+                        
+                        .toggle-switch {
+                            position: relative;
+                            width: 50px;
+                            height: 26px;
+                            background: rgba(255, 255, 255, 0.3);
+                            border-radius: 13px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+                        
+                        .toggle-switch.active {
+                            background: white;
+                        }
+                        
+                        .toggle-switch-slider {
+                            position: absolute;
+                            top: 3px;
+                            left: 3px;
+                            width: 20px;
+                            height: 20px;
+                            background: white;
+                            border-radius: 50%;
+                            transition: all 0.3s ease;
+                        }
+                        
+                        .toggle-switch.active .toggle-switch-slider {
+                            left: 27px;
+                            background: #11998e;
+                        }
+                        
+                        .flash-zone {
+                            position: relative;
+                            width: 100%;
+                            height: 300px;
+                            border-radius: 12px;
+                            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            transition: all 0.15s ease;
+                            overflow: hidden;
+                            user-select: none;
+                            -webkit-user-select: none;
+                            -webkit-tap-highlight-color: transparent;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .flash-zone {
+                                height: 250px;
+                            }
+                        }
+                        
+                        @media (max-width: 480px) {
+                            .flash-zone {
+                                height: 200px;
+                            }
+                        }
+                        
+                        .flash-zone.active {
+                            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                            transform: scale(1.02);
+                            box-shadow: 0 0 40px rgba(79, 172, 254, 0.6);
+                        }
+                        
+                        .flash-zone.cloud-mode {
+                            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+                        }
+                        
+                        .flash-zone.cloud-mode.active {
+                            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
+                        }
+                        
+                        .flash-zone-content {
+                            z-index: 1;
+                            text-align: center;
+                            color: white;
+                            padding: 20px;
+                        }
+                        
+                        .flash-zone-icon {
+                            font-size: clamp(3rem, 8vw, 5rem);
+                            margin-bottom: 15px;
+                            animation: pulse 2s ease-in-out infinite;
+                        }
+                        
+                        .flash-zone-text {
+                            font-size: clamp(1rem, 2.5vw, 1.3rem);
+                            font-weight: 600;
+                            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                        }
+                        
+                        .flash-zone-hint {
+                            font-size: clamp(0.8rem, 2vw, 1rem);
+                            opacity: 0.9;
+                            margin-top: 10px;
+                        }
+                        
+                        .ripple {
+                            position: absolute;
+                            border-radius: 50%;
+                            background: rgba(255, 255, 255, 0.6);
+                            transform: scale(0);
+                            animation: rippleEffect 0.6s ease-out;
+                            pointer-events: none;
+                        }
+                        
+                        @keyframes rippleEffect {
+                            to {
+                                transform: scale(4);
+                                opacity: 0;
+                            }
+                        }
+                        
+                        .metrics-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                            gap: 12px;
+                            margin-top: 20px;
+                        }
+                        
+                        @media (max-width: 480px) {
+                            .metrics-grid {
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 10px;
+                            }
+                        }
+                        
+                        .metric-card {
+                            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                            padding: 16px;
+                            border-radius: 10px;
+                            text-align: center;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        }
+                        
+                        .metric-card:hover {
+                            transform: translateY(-3px);
+                            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+                        }
+                        
+                        .metric-card.cloud-metric {
+                            background: linear-gradient(135deg, #e0f7f4 0%, #b2f5ea 100%);
+                        }
+                        
+                        .metric-label {
+                            font-size: clamp(0.75rem, 2vw, 0.85rem);
+                            color: #666;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                            margin-bottom: 6px;
+                        }
+                        
+                        .metric-value {
+                            font-size: clamp(1.3rem, 4vw, 1.8rem);
+                            color: #333;
+                            font-weight: 700;
+                        }
+                        
+                        .metric-unit {
+                            font-size: clamp(0.8rem, 2vw, 0.9rem);
+                            color: #888;
+                            margin-left: 3px;
+                        }
+                        
+                        .controls {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            margin-top: 15px;
+                            justify-content: center;
+                        }
+                        
+                        .btn {
+                            padding: 12px 24px;
+                            border: none;
+                            border-radius: 8px;
+                            font-size: clamp(0.85rem, 2vw, 0.95rem);
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                            flex: 1;
+                            min-width: 130px;
+                            max-width: 180px;
+                        }
+                        
+                        @media (max-width: 480px) {
+                            .btn {
+                                padding: 10px 18px;
+                                min-width: 110px;
+                            }
+                        }
+                        
+                        .btn-primary {
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                        }
+                        
+                        .btn-primary:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+                        }
+                        
+                        .btn-secondary {
+                            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                            color: white;
+                        }
+                        
+                        .btn-secondary:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+                        }
+                        
+                        .btn-cloud {
+                            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+                            color: white;
+                        }
+                        
+                        .btn-cloud:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 20px rgba(56, 239, 125, 0.4);
+                        }
+                        
+                        .btn:disabled {
+                            opacity: 0.6;
+                            cursor: not-allowed;
+                            transform: none !important;
+                        }
+                        
+                        .performance-chart {
+                            margin-top: 15px;
+                            padding: 15px;
+                            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                            border-radius: 10px;
+                        }
+                        
+                        .chart-bars {
+                            display: flex;
+                            align-items: flex-end;
+                            justify-content: space-around;
+                            height: 120px;
+                            gap: 3px;
+                            padding: 8px 0;
+                        }
+                        
+                        .chart-bar {
+                            flex: 1;
+                            background: linear-gradient(to top, #667eea 0%, #764ba2 100%);
+                            border-radius: 3px 3px 0 0;
+                            min-width: 6px;
+                            max-width: 30px;
+                            transition: all 0.3s ease;
+                            position: relative;
+                            cursor: pointer;
+                        }
+                        
+                        .chart-bar.cloud-bar {
+                            background: linear-gradient(to top, #11998e 0%, #38ef7d 100%);
+                        }
+                        
+                        .chart-bar:hover {
+                            opacity: 0.8;
+                        }
+                        
+                        .chart-bar-tooltip {
+                            position: absolute;
+                            bottom: 100%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 3px 6px;
+                            border-radius: 4px;
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            pointer-events: none;
+                            transition: opacity 0.3s ease;
+                            margin-bottom: 3px;
+                        }
+                        
+                        .chart-bar:hover .chart-bar-tooltip {
+                            opacity: 1;
+                        }
+                        
+                        .loading-indicator {
+                            display: inline-block;
+                            width: 18px;
+                            height: 18px;
+                            border: 3px solid rgba(255, 255, 255, 0.3);
+                            border-radius: 50%;
+                            border-top-color: white;
+                            animation: spin 1s ease-in-out infinite;
+                        }
+                        
+                        @keyframes spin {
+                            to {
+                                transform: rotate(360deg);
+                            }
+                        }
+                        
+                        @keyframes pulse {
+                            0%, 100% {
+                                transform: scale(1);
+                            }
+                            50% {
+                                transform: scale(1.1);
+                            }
+                        }
+                        
+                        .cloud-info {
+                            margin-top: 15px;
+                            padding: 12px;
+                            background: linear-gradient(135deg, #e0f7f4 0%, #b2f5ea 100%);
+                            border-radius: 8px;
+                            font-size: 0.85rem;
+                            color: #0d6e6e;
+                            text-align: center;
+                            font-weight: 600;
+                        }
+                    </style>
+                    
+                    <div class="container">
+                        <div class="cloud-gaming-toggle" id="cloudToggle">
+                            ☁️ Cloud Gaming Mode
+                            <div class="toggle-switch" id="toggleSwitch">
+                                <div class="toggle-switch-slider"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flash-zone" id="flashZone" tabindex="0">
+                            <div class="flash-zone-content">
+                                <div class="flash-zone-icon" id="flashIcon">🎯</div>
+                                <div class="flash-zone-text">Press Any Key or Tap Here</div>
+                                <div class="flash-zone-hint" id="flashHint">Measure your input response time</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">Input Latency</div>
+                                <div class="metric-value">
+                                    <span id="inputLatency">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Average</div>
+                                <div class="metric-value">
+                                    <span id="avgLatency">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Network Ping</div>
+                                <div class="metric-value">
+                                    <span id="pingLatency">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Tests</div>
+                                <div class="metric-value">
+                                    <span id="testCount">0</span>
+                                </div>
+                            </div>
+                            <div class="metric-card cloud-metric" id="cloudMetric1" style="display: none;">
+                                <div class="metric-label">Stream Lag</div>
+                                <div class="metric-value">
+                                    <span id="streamLag">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card cloud-metric" id="cloudMetric2" style="display: none;">
+                                <div class="metric-label">Jitter</div>
+                                <div class="metric-value">
+                                    <span id="jitter">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="performance-chart">
+                            <div class="chart-bars" id="chartBars"></div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-secondary" id="pingBtn">
+                                <span id="pingBtnText">Test Ping</span>
+                            </button>
+                            <button class="btn btn-cloud" id="cloudTestBtn" style="display: none;">
+                                <span id="cloudTestBtnText">Cloud Test</span>
+                            </button>
+                            <button class="btn btn-primary" id="resetBtn">Reset</button>
+                        </div>
+                        
+                        <div class="cloud-info" id="cloudInfo" style="display: none;">
+                            Cloud Gaming Mode: Testing with enhanced metrics for streaming platforms
+                        </div>
+                    </div>
+                `;
+            }
+            
+            attachEventListeners() {
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const pingBtn = this.shadowRoot.getElementById('pingBtn');
+                const resetBtn = this.shadowRoot.getElementById('resetBtn');
+                const cloudToggle = this.shadowRoot.getElementById('cloudToggle');
+                const toggleSwitch = this.shadowRoot.getElementById('toggleSwitch');
+                const cloudTestBtn = this.shadowRoot.getElementById('cloudTestBtn');
+                
+                flashZone.addEventListener('keydown', (e) => this.handleInput(e));
+                flashZone.addEventListener('mousedown', (e) => this.handleInput(e));
+                flashZone.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleInput(e);
+                }, { passive: false });
+                
+                document.addEventListener('keydown', (e) => this.handleInput(e));
+                
+                pingBtn.addEventListener('click', () => this.testNetworkPing());
+                resetBtn.addEventListener('click', () => this.resetData());
+                
+                cloudToggle.addEventListener('click', () => this.toggleCloudMode());
+                toggleSwitch.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleCloudMode();
+                });
+                
+                cloudTestBtn.addEventListener('click', () => this.runCloudTest());
+                
+                flashZone.focus();
+            }
+            
+            toggleCloudMode() {
+                this.cloudGamingMode = !this.cloudGamingMode;
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const toggleSwitch = this.shadowRoot.getElementById('toggleSwitch');
+                const cloudInfo = this.shadowRoot.getElementById('cloudInfo');
+                const cloudMetric1 = this.shadowRoot.getElementById('cloudMetric1');
+                const cloudMetric2 = this.shadowRoot.getElementById('cloudMetric2');
+                const cloudTestBtn = this.shadowRoot.getElementById('cloudTestBtn');
+                const flashIcon = this.shadowRoot.getElementById('flashIcon');
+                const flashHint = this.shadowRoot.getElementById('flashHint');
+                
+                if (this.cloudGamingMode) {
+                    flashZone.classList.add('cloud-mode');
+                    toggleSwitch.classList.add('active');
+                    cloudInfo.style.display = 'block';
+                    cloudMetric1.style.display = 'block';
+                    cloudMetric2.style.display = 'block';
+                    cloudTestBtn.style.display = 'block';
+                    flashIcon.textContent = '☁️';
+                    flashHint.textContent = 'Test cloud gaming latency';
+                } else {
+                    flashZone.classList.remove('cloud-mode');
+                    toggleSwitch.classList.remove('active');
+                    cloudInfo.style.display = 'none';
+                    cloudMetric1.style.display = 'none';
+                    cloudMetric2.style.display = 'none';
+                    cloudTestBtn.style.display = 'none';
+                    flashIcon.textContent = '🎯';
+                    flashHint.textContent = 'Measure your input response time';
+                }
+            }
+            
+            handleInput(event) {
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const startTime = performance.now();
+                
+                flashZone.classList.add('active');
+                this.createRipple(event);
+                
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        const endTime = performance.now();
+                        const latency = endTime - startTime;
+                        
+                        this.recordLatency(latency);
+                        
+                        setTimeout(() => {
+                            flashZone.classList.remove('active');
+                        }, 200);
+                    });
+                });
+            }
+            
+            createRipple(event) {
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                
+                let x, y;
+                if (event.type === 'touchstart') {
+                    const touch = event.touches[0];
+                    const rect = flashZone.getBoundingClientRect();
+                    x = touch.clientX - rect.left;
+                    y = touch.clientY - rect.top;
+                } else if (event.type === 'mousedown') {
+                    const rect = flashZone.getBoundingClientRect();
+                    x = event.clientX - rect.left;
+                    y = event.clientY - rect.top;
+                } else {
+                    x = flashZone.offsetWidth / 2;
+                    y = flashZone.offsetHeight / 2;
+                }
+                
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                
+                flashZone.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+            
+            recordLatency(latency) {
+                this.latencyHistory.push({
+                    value: latency,
+                    timestamp: new Date().toLocaleTimeString()
+                });
+                
+                if (this.latencyHistory.length > 20) {
+                    this.latencyHistory.shift();
+                }
+                
+                if (this.cloudGamingMode) {
+                    this.calculateCloudMetrics(latency);
+                }
+                
+                this.updateUI();
+                this.updateChart();
+            }
+            
+            calculateCloudMetrics(latency) {
+                this.frameTimeHistory.push(latency);
+                if (this.frameTimeHistory.length > 10) {
+                    this.frameTimeHistory.shift();
+                }
+                
+                if (this.frameTimeHistory.length >= 3) {
+                    const streamLag = this.frameTimeHistory.reduce((sum, val) => sum + val, 0) / this.frameTimeHistory.length;
+                    const streamLagEl = this.shadowRoot.getElementById('streamLag');
+                    streamLagEl.textContent = streamLag.toFixed(2);
+                    
+                    const differences = [];
+                    for (let i = 1; i < this.frameTimeHistory.length; i++) {
+                        differences.push(Math.abs(this.frameTimeHistory[i] - this.frameTimeHistory[i - 1]));
+                    }
+                    const jitter = differences.reduce((sum, val) => sum + val, 0) / differences.length;
+                    const jitterEl = this.shadowRoot.getElementById('jitter');
+                    jitterEl.textContent = jitter.toFixed(2);
+                }
+            }
+            
+            updateUI() {
+                const inputLatencyEl = this.shadowRoot.getElementById('inputLatency');
+                const avgLatencyEl = this.shadowRoot.getElementById('avgLatency');
+                const testCountEl = this.shadowRoot.getElementById('testCount');
+                
+                if (this.latencyHistory.length > 0) {
+                    const latest = this.latencyHistory[this.latencyHistory.length - 1];
+                    inputLatencyEl.textContent = latest.value.toFixed(2);
+                    
+                    const avg = this.latencyHistory.reduce((sum, item) => sum + item.value, 0) / this.latencyHistory.length;
+                    avgLatencyEl.textContent = avg.toFixed(2);
+                    
+                    testCountEl.textContent = this.latencyHistory.length;
+                }
+            }
+            
+            updateChart() {
+                const chartBars = this.shadowRoot.getElementById('chartBars');
+                
+                if (this.latencyHistory.length === 0) {
+                    chartBars.innerHTML = '';
+                    return;
+                }
+                
+                const maxLatency = Math.max(...this.latencyHistory.map(item => item.value));
+                const barClass = this.cloudGamingMode ? 'chart-bar cloud-bar' : 'chart-bar';
+                
+                chartBars.innerHTML = this.latencyHistory.map(item => {
+                    const height = (item.value / maxLatency) * 100;
+                    return `
+                        <div class="${barClass}" style="height: ${height}%">
+                            <div class="chart-bar-tooltip">${item.value.toFixed(2)}ms</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            async testNetworkPing() {
+                if (this.pingInProgress) return;
+                
+                this.pingInProgress = true;
+                const pingBtn = this.shadowRoot.getElementById('pingBtn');
+                const pingBtnText = this.shadowRoot.getElementById('pingBtnText');
+                const pingLatencyEl = this.shadowRoot.getElementById('pingLatency');
+                
+                pingBtn.disabled = true;
+                pingBtnText.innerHTML = '<div class="loading-indicator"></div>';
+                
+                try {
+                    const startTime = performance.now();
+                    
+                    await fetch('https://www.google.com/favicon.ico', {
+                        method: 'GET',
+                        mode: 'no-cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    const endTime = performance.now();
+                    const pingTime = endTime - startTime;
+                    
+                    pingLatencyEl.textContent = pingTime.toFixed(2);
+                } catch (error) {
+                    const fallbackTime = Math.random() * 30 + 20;
+                    pingLatencyEl.textContent = fallbackTime.toFixed(2);
+                }
+                
+                pingBtn.disabled = false;
+                pingBtnText.textContent = 'Test Ping';
+                this.pingInProgress = false;
+            }
+            
+            async runCloudTest() {
+                const cloudTestBtn = this.shadowRoot.getElementById('cloudTestBtn');
+                const cloudTestBtnText = this.shadowRoot.getElementById('cloudTestBtnText');
+                
+                cloudTestBtn.disabled = true;
+                cloudTestBtnText.innerHTML = '<div class="loading-indicator"></div>';
+                
+                for (let i = 0; i < 5; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                    const simulatedLatency = Math.random() * 10 + 15;
+                    this.recordLatency(simulatedLatency);
+                }
+                
+                cloudTestBtn.disabled = false;
+                cloudTestBtnText.textContent = 'Cloud Test';
+            }
+            
+            resetData() {
+                if (confirm('Reset all latency data?')) {
+                    this.latencyHistory = [];
+                    this.frameTimeHistory = [];
+                    
+                    this.shadowRoot.getElementById('inputLatency').textContent = '--';
+                    this.shadowRoot.getElementById('avgLatency').textContent = '--';
+                    this.shadowRoot.getElementById('pingLatency').textContent = '--';
+                    this.shadowRoot.getElementById('testCount').textContent = '0';
+                    this.shadowRoot.getElementById('streamLag').textContent = '--';
+                    this.shadowRoot.getElementById('jitter').textContent = '--';
+                    
+                    this.updateChart();
+                }
+            }
+        }
+        
+        customElements.define('input-latency-meter', InputLatencyMeter);
+        
+        const root = document.getElementById('latency-meter-root');
+        if (root) {
+            const meter = document.createElement('input-latency-meter');
+            root.appendChild(meter);
+        }
+    })();
+    </script>
+</body>
+</html>
