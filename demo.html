@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cloud Gaming Status Dashboard - Real-time monitoring for GeForce NOW, Xbox Cloud Gaming, Boosteroid, Shadow, and more cloud gaming platforms.">
+    <meta name="keywords" content="cloud gaming, status dashboard, GeForce NOW, Xbox Cloud Gaming, Boosteroid, Shadow, gaming monitor">
+    <meta name="author" content="CloudLoadout.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cloud Gaming Status Dashboard">
+    <meta property="og:description" content="Monitor all major cloud gaming platforms in real-time">
+    <meta property="og:image" content="https://cloudloadout.com/images/dashboard-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Gaming Status Dashboard">
+    <meta name="twitter:description" content="Monitor all major cloud gaming platforms in real-time">
+    
+    <title>Cloud Gaming Status & Launcher Dashboard - CloudLoadout</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☁️</text></svg>">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/cloud-gaming-dashboard.css">
+    
+    <!-- Additional Page Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .page-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 40px 20px;
+        }
+        
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .page-header .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 10px 5px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .page-footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .page-footer a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .page-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .integration-code {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .integration-code h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .integration-code pre {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: #a5d6ff;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .integration-code code {
+            color: #a5d6ff;
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>☁️ Cloud Gaming Dashboard</h1>
+        <p>Professional status monitoring & quick launcher for cloud gaming platforms</p>
+        <div>
+            <span class="badge">✓ WordPress Compatible</span>
+            <span class="badge">📱 Mobile Responsive</span>
+            <span class="badge">🎨 Dark Mode</span>
+            <span class="badge">⚡ Auto-Refresh</span>
+        </div>
+    </div>
+    
+    <!-- Dashboard Container -->
+    <div class="cloud-gaming-container" id="cloud-gaming-dashboard-demo"></div>
+    
+    <!-- Integration Instructions -->
+    <div class="integration-code">
+        <h3>🔧 WordPress Integration (Shortcode)</h3>
+        <pre><code>[cloud_gaming_combined]</code></pre>
+        
+        <h3 style="margin-top: 20px;">🔧 HTML Integration</h3>
+        <pre><code>&lt;!-- Add to your page --&gt;
+&lt;link rel="stylesheet" href="assets/css/cloud-gaming-dashboard.css"&gt;
+&lt;script src="assets/js/cloud-gaming-dashboard.js"&gt;&lt;/script&gt;
+
+&lt;div class="cloud-gaming-container" id="my-dashboard"&gt;&lt;/div&gt;</code></pre>
+    </div>
+    
+    <!-- Page Footer -->
+    <div class="page-footer">
+        <p style="font-size: 18px; margin-bottom: 10px;">
+            <strong>Made for CloudLoadout.com</strong>
+        </p>
+        <p style="font-size: 14px; opacity: 0.9; margin-bottom: 20px;">
+            Your ultimate guide to cloud gaming
+        </p>
+        <div style="margin-top: 20px;">
+            <a href="https://cloudloadout.com" target="_blank">Visit CloudLoadout.com</a>
+            <span style="margin: 0 15px; opacity: 0.5;">|</span>
+            <a href="https://github.com/cloudloadout" target="_blank">GitHub</a>
+            <span style="margin: 0 15px; opacity: 0.5;">|</span>
+            <a href="#" onclick="alert('Documentation coming soon!'); return false;">Documentation</a>
+        </div>
+        <p style="margin-top: 20px; font-size: 12px; opacity: 0.7;">
+            © 2024 CloudLoadout. Licensed under GPL-2.0
+        </p>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="assets/js/cloud-gaming-dashboard.js"></script>
+    
+    <!-- Analytics (Optional) -->
+    <script>
+        // Add your analytics code here
+        console.log('Cloud Gaming Dashboard loaded successfully!');
+    </script>
+</body>
+</html>
