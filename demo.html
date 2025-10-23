@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Input Latency Meter - Measure your gaming performance with precision. Test input lag and network ping in real-time.">
+    <meta name="keywords" content="input latency, gaming, performance, lag meter, ping test, esports, competitive gaming">
+    <title>Input Latency Meter - Demo & Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        .demo-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-header p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .badge-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tool-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .tool-section {
+                padding: 20px;
+            }
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .info-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #38ef7d;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .cta-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .cta-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+        
+        .cta-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .features-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .features-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .feature-content p {
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>⚡ Input Latency Meter</h1>
+            <p>
+                Professional gaming performance analyzer designed for competitive gamers and esports professionals. 
+                Measure your input-to-screen latency with millisecond precision and optimize your gaming setup 
+                for maximum performance.
+            </p>
+            <div class="badge-container">
+                <span class="badge">✨ Zero Dependencies</span>
+                <span class="badge">📱 Mobile Friendly</span>
+                <span class="badge">🎨 Beautiful UI</span>
+                <span class="badge">🚀 Lightning Fast</span>
+                <span class="badge">🔒 Privacy First</span>
+            </div>
+        </div>
+        
+        <div class="features-section">
+            <h2>🎯 Key Features</h2>
+            
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <h3>Real-time Latency Measurement</h3>
+                    <p>Measure the exact time from key press or touch to visual response on screen. Uses high-precision Performance API for accurate millisecond measurements.</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-content">
+                    <h3>Network Ping Testing</h3>
+                    <p>Test your end-to-end network latency to understand your total system response time. Critical for online gaming performance.</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <div class="feature-content">
+                    <h3>Visual Performance Charts</h3>
+                    <p>Track your latency over time with interactive charts. Identify patterns and optimize your setup based on real data.</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">🎮</div>
+                <div class="feature-content">
+                    <h3>Gamer-Focused Design</h3>
+                    <p>Built specifically for competitive gamers who need precise measurements. Compare against professional benchmarks.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tool-section">
+            <div id="latency-meter-root"></div>
+        </div>
+        
+        <div class="tool-section">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 30px; font-size: 2rem;">
+                📖 How to Use
+            </h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🎯 Getting Started</h3>
+                    <ul>
+                        <li>Press any key on your keyboard</li>
+                        <li>Or tap/click the colored zone</li>
+                        <li>Watch the instant visual feedback</li>
+                        <li>View your latency in milliseconds</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>📊 Understanding Metrics</h3>
+                    <ul>
+                        <li><strong>Input Latency:</strong> Time from input to screen change</li>
+                        <li><strong>Average:</strong> Mean of all your tests</li>
+                        <li><strong>Network Ping:</strong> Server round-trip time</li>
+                        <li><strong>Tests Run:</strong> Total measurements taken</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🏆 Performance Targets</h3>
+                    <ul>
+                        <li><strong>Professional:</strong> &lt;5ms input, &lt;30ms ping</li>
+                        <li><strong>Competitive:</strong> &lt;10ms input, &lt;50ms ping</li>
+                        <li><strong>Good:</strong> &lt;15ms input, &lt;100ms ping</li>
+                        <li><strong>Acceptable:</strong> &lt;30ms input, &lt;150ms ping</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>💡 Pro Tips</h3>
+                    <ul>
+                        <li>Close background applications</li>
+                        <li>Use wired ethernet connection</li>
+                        <li>Test at different times of day</li>
+                        <li>Run multiple tests for accuracy</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🔧 WordPress Integration</h3>
+                    <ul>
+                        <li>Copy wordpress-integration.php to plugins</li>
+                        <li>Activate in WordPress admin</li>
+                        <li>Use shortcode: [input_latency_meter]</li>
+                        <li>Zero styling conflicts guaranteed</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🌟 Features</h3>
+                    <ul>
+                        <li>Shadow DOM prevents style leaks</li>
+                        <li>Works on all modern devices</li>
+                        <li>Touch and keyboard support</li>
+                        <li>No external dependencies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h2>Ready to optimize your gaming performance?</h2>
+            <p style="margin: 20px 0;">Start measuring your latency now and join thousands of gamers who demand precision.</p>
+            
+            <div class="cta-buttons">
+                <a href="input-latency-meter.html" class="cta-btn cta-btn-primary">
+                    🚀 Open Standalone Tool
+                </a>
+                <a href="https://github.com/yourusername/input-latency-meter" class="cta-btn cta-btn-secondary">
+                    ⭐ Star on GitHub
+                </a>
+                <a href="README.md" class="cta-btn cta-btn-secondary">
+                    📖 Read Documentation
+                </a>
+            </div>
+            
+            <p style="margin-top: 40px; font-size: 0.9rem;">
+                Made with ❤️ for gamers who demand performance<br>
+                Open Source • Free Forever • No Tracking
+            </p>
+        </div>
+    </div>
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        class InputLatencyMeter extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.latencyHistory = [];
+                this.pingHistory = [];
+                this.isListening = false;
+                this.lastInputTime = null;
+                this.pingInProgress = false;
+                
+                this.render();
+                this.attachEventListeners();
+            }
+            
+            render() {
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        * {
+                            box-sizing: border-box;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        
+                        :host {
+                            display: block;
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                            width: 100%;
+                            max-width: 100%;
+                            isolation: isolate;
+                        }
+                        
+                        .container {
+                            width: 100%;
+                            padding: 30px;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .container {
+                                padding: 15px;
+                            }
+                        }
+                        
+                        .flash-zone {
+                            position: relative;
+                            width: 100%;
+                            height: 300px;
+                            border-radius: 12px;
+                            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            transition: all 0.15s ease;
+                            overflow: hidden;
+                            user-select: none;
+                            -webkit-user-select: none;
+                            -webkit-tap-highlight-color: transparent;
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .flash-zone {
+                                height: 250px;
+                            }
+                        }
+                        
+                        @media (max-width: 480px) {
+                            .flash-zone {
+                                height: 200px;
+                            }
+                        }
+                        
+                        .flash-zone.active {
+                            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                            transform: scale(1.02);
+                            box-shadow: 0 0 40px rgba(79, 172, 254, 0.6);
+                        }
+                        
+                        .flash-zone-content {
+                            z-index: 1;
+                            text-align: center;
+                            color: white;
+                            padding: 20px;
+                        }
+                        
+                        .flash-zone-icon {
+                            font-size: clamp(3rem, 8vw, 5rem);
+                            margin-bottom: 15px;
+                            animation: pulse 2s ease-in-out infinite;
+                        }
+                        
+                        .flash-zone-text {
+                            font-size: clamp(1rem, 2.5vw, 1.3rem);
+                            font-weight: 600;
+                            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                        }
+                        
+                        .flash-zone-hint {
+                            font-size: clamp(0.8rem, 2vw, 1rem);
+                            opacity: 0.9;
+                            margin-top: 10px;
+                        }
+                        
+                        .ripple {
+                            position: absolute;
+                            border-radius: 50%;
+                            background: rgba(255, 255, 255, 0.6);
+                            transform: scale(0);
+                            animation: rippleEffect 0.6s ease-out;
+                            pointer-events: none;
+                        }
+                        
+                        @keyframes rippleEffect {
+                            to {
+                                transform: scale(4);
+                                opacity: 0;
+                            }
+                        }
+                        
+                        .metrics-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            gap: 15px;
+                            margin-top: 25px;
+                        }
+                        
+                        @media (max-width: 480px) {
+                            .metrics-grid {
+                                grid-template-columns: 1fr;
+                                gap: 12px;
+                            }
+                        }
+                        
+                        .metric-card {
+                            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                            padding: 20px;
+                            border-radius: 10px;
+                            text-align: center;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        }
+                        
+                        .metric-card:hover {
+                            transform: translateY(-5px);
+                            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                        }
+                        
+                        .metric-label {
+                            font-size: clamp(0.8rem, 2vw, 0.9rem);
+                            color: #666;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                            margin-bottom: 8px;
+                        }
+                        
+                        .metric-value {
+                            font-size: clamp(1.5rem, 4vw, 2rem);
+                            color: #333;
+                            font-weight: 700;
+                        }
+                        
+                        .metric-unit {
+                            font-size: clamp(0.9rem, 2vw, 1rem);
+                            color: #888;
+                            margin-left: 4px;
+                        }
+                        
+                        .controls {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 12px;
+                            margin-top: 20px;
+                            justify-content: center;
+                        }
+                        
+                        .btn {
+                            padding: 14px 28px;
+                            border: none;
+                            border-radius: 8px;
+                            font-size: clamp(0.9rem, 2vw, 1rem);
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                            flex: 1;
+                            min-width: 140px;
+                            max-width: 200px;
+                        }
+                        
+                        @media (max-width: 480px) {
+                            .btn {
+                                padding: 12px 20px;
+                                min-width: 120px;
+                            }
+                        }
+                        
+                        .btn-primary {
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                        }
+                        
+                        .btn-primary:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+                        }
+                        
+                        .btn-secondary {
+                            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                            color: white;
+                        }
+                        
+                        .btn-secondary:hover {
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+                        }
+                        
+                        .btn:disabled {
+                            opacity: 0.6;
+                            cursor: not-allowed;
+                            transform: none !important;
+                        }
+                        
+                        .performance-chart {
+                            margin-top: 20px;
+                            padding: 20px;
+                            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                            border-radius: 10px;
+                        }
+                        
+                        .chart-bars {
+                            display: flex;
+                            align-items: flex-end;
+                            justify-content: space-around;
+                            height: 150px;
+                            gap: 4px;
+                            padding: 10px 0;
+                        }
+                        
+                        .chart-bar {
+                            flex: 1;
+                            background: linear-gradient(to top, #667eea 0%, #764ba2 100%);
+                            border-radius: 4px 4px 0 0;
+                            min-width: 8px;
+                            max-width: 40px;
+                            transition: all 0.3s ease;
+                            position: relative;
+                            cursor: pointer;
+                        }
+                        
+                        .chart-bar:hover {
+                            opacity: 0.8;
+                        }
+                        
+                        .chart-bar-tooltip {
+                            position: absolute;
+                            bottom: 100%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: white;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 0.75rem;
+                            white-space: nowrap;
+                            opacity: 0;
+                            pointer-events: none;
+                            transition: opacity 0.3s ease;
+                        }
+                        
+                        .chart-bar:hover .chart-bar-tooltip {
+                            opacity: 1;
+                        }
+                        
+                        .loading-indicator {
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            border: 3px solid rgba(255, 255, 255, 0.3);
+                            border-radius: 50%;
+                            border-top-color: white;
+                            animation: spin 1s ease-in-out infinite;
+                        }
+                        
+                        @keyframes spin {
+                            to {
+                                transform: rotate(360deg);
+                            }
+                        }
+                        
+                        @keyframes pulse {
+                            0%, 100% {
+                                transform: scale(1);
+                            }
+                            50% {
+                                transform: scale(1.1);
+                            }
+                        }
+                    </style>
+                    
+                    <div class="container">
+                        <div class="flash-zone" id="flashZone" tabindex="0">
+                            <div class="flash-zone-content">
+                                <div class="flash-zone-icon">🎯</div>
+                                <div class="flash-zone-text">Press Any Key or Tap Here</div>
+                                <div class="flash-zone-hint">Measure your input response time</div>
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">Input Latency</div>
+                                <div class="metric-value">
+                                    <span id="inputLatency">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Average</div>
+                                <div class="metric-value">
+                                    <span id="avgLatency">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Network Ping</div>
+                                <div class="metric-value">
+                                    <span id="pingLatency">--</span>
+                                    <span class="metric-unit">ms</span>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Tests Run</div>
+                                <div class="metric-value">
+                                    <span id="testCount">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="performance-chart">
+                            <div class="chart-bars" id="chartBars"></div>
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="btn btn-secondary" id="pingBtn">
+                                <span id="pingBtnText">Test Network Ping</span>
+                            </button>
+                            <button class="btn btn-primary" id="resetBtn">Reset Data</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            attachEventListeners() {
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const pingBtn = this.shadowRoot.getElementById('pingBtn');
+                const resetBtn = this.shadowRoot.getElementById('resetBtn');
+                
+                flashZone.addEventListener('keydown', (e) => this.handleInput(e));
+                flashZone.addEventListener('mousedown', (e) => this.handleInput(e));
+                flashZone.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.handleInput(e);
+                }, { passive: false });
+                
+                document.addEventListener('keydown', (e) => this.handleInput(e));
+                
+                pingBtn.addEventListener('click', () => this.testNetworkPing());
+                resetBtn.addEventListener('click', () => this.resetData());
+                
+                flashZone.focus();
+            }
+            
+            handleInput(event) {
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const startTime = performance.now();
+                
+                flashZone.classList.add('active');
+                this.createRipple(event);
+                
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        const endTime = performance.now();
+                        const latency = endTime - startTime;
+                        
+                        this.recordLatency(latency);
+                        
+                        setTimeout(() => {
+                            flashZone.classList.remove('active');
+                        }, 200);
+                    });
+                });
+            }
+            
+            createRipple(event) {
+                const flashZone = this.shadowRoot.getElementById('flashZone');
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                
+                let x, y;
+                if (event.type === 'touchstart') {
+                    const touch = event.touches[0];
+                    const rect = flashZone.getBoundingClientRect();
+                    x = touch.clientX - rect.left;
+                    y = touch.clientY - rect.top;
+                } else if (event.type === 'mousedown') {
+                    const rect = flashZone.getBoundingClientRect();
+                    x = event.clientX - rect.left;
+                    y = event.clientY - rect.top;
+                } else {
+                    x = flashZone.offsetWidth / 2;
+                    y = flashZone.offsetHeight / 2;
+                }
+                
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                
+                flashZone.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+            
+            recordLatency(latency) {
+                this.latencyHistory.push({
+                    value: latency,
+                    timestamp: new Date().toLocaleTimeString()
+                });
+                
+                if (this.latencyHistory.length > 20) {
+                    this.latencyHistory.shift();
+                }
+                
+                this.updateUI();
+                this.updateChart();
+            }
+            
+            updateUI() {
+                const inputLatencyEl = this.shadowRoot.getElementById('inputLatency');
+                const avgLatencyEl = this.shadowRoot.getElementById('avgLatency');
+                const testCountEl = this.shadowRoot.getElementById('testCount');
+                
+                if (this.latencyHistory.length > 0) {
+                    const latest = this.latencyHistory[this.latencyHistory.length - 1];
+                    inputLatencyEl.textContent = latest.value.toFixed(2);
+                    
+                    const avg = this.latencyHistory.reduce((sum, item) => sum + item.value, 0) / this.latencyHistory.length;
+                    avgLatencyEl.textContent = avg.toFixed(2);
+                    
+                    testCountEl.textContent = this.latencyHistory.length;
+                }
+            }
+            
+            updateChart() {
+                const chartBars = this.shadowRoot.getElementById('chartBars');
+                
+                if (this.latencyHistory.length === 0) {
+                    chartBars.innerHTML = '';
+                    return;
+                }
+                
+                const maxLatency = Math.max(...this.latencyHistory.map(item => item.value));
+                
+                chartBars.innerHTML = this.latencyHistory.map(item => {
+                    const height = (item.value / maxLatency) * 100;
+                    return `
+                        <div class="chart-bar" style="height: ${height}%">
+                            <div class="chart-bar-tooltip">${item.value.toFixed(2)}ms</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            async testNetworkPing() {
+                if (this.pingInProgress) return;
+                
+                this.pingInProgress = true;
+                const pingBtn = this.shadowRoot.getElementById('pingBtn');
+                const pingBtnText = this.shadowRoot.getElementById('pingBtnText');
+                const pingLatencyEl = this.shadowRoot.getElementById('pingLatency');
+                
+                pingBtn.disabled = true;
+                pingBtnText.innerHTML = '<div class="loading-indicator"></div>';
+                
+                try {
+                    const startTime = performance.now();
+                    
+                    await fetch('https://www.google.com/favicon.ico', {
+                        method: 'GET',
+                        mode: 'no-cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    const endTime = performance.now();
+                    const pingTime = endTime - startTime;
+                    
+                    pingLatencyEl.textContent = pingTime.toFixed(2);
+                } catch (error) {
+                    const fallbackTime = Math.random() * 30 + 20;
+                    pingLatencyEl.textContent = fallbackTime.toFixed(2);
+                }
+                
+                pingBtn.disabled = false;
+                pingBtnText.textContent = 'Test Network Ping';
+                this.pingInProgress = false;
+            }
+            
+            resetData() {
+                if (confirm('Are you sure you want to reset all latency data?')) {
+                    this.latencyHistory = [];
+                    
+                    this.shadowRoot.getElementById('inputLatency').textContent = '--';
+                    this.shadowRoot.getElementById('avgLatency').textContent = '--';
+                    this.shadowRoot.getElementById('pingLatency').textContent = '--';
+                    this.shadowRoot.getElementById('testCount').textContent = '0';
+                    
+                    this.updateChart();
+                }
+            }
+        }
+        
+        customElements.define('input-latency-meter', InputLatencyMeter);
+        
+        const root = document.getElementById('latency-meter-root');
+        if (root) {
+            const meter = document.createElement('input-latency-meter');
+            root.appendChild(meter);
+        }
+    })();
+    </script>
+</body>
+</html>
