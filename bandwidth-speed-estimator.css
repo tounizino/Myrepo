@@ -1,0 +1,1144 @@
+/**
+ * Ultimate Bandwidth Speed Estimator - Styles
+ * Scoped to .bse-main-wrapper to prevent style leakage
+ * Mobile-first responsive design with !important declarations
+ * Optimized for WordPress integration
+ */
+
+/* ============================================
+   CSS Reset & Base Styles (Scoped)
+   ============================================ */
+
+#bandwidth-speed-estimator-container.bse-main-wrapper,
+#bandwidth-speed-estimator-container.bse-main-wrapper * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#bandwidth-speed-estimator-container.bse-main-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    line-height: 1.6 !important;
+    color: #1a202c !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    padding: 20px !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* ============================================
+   Header Section
+   ============================================ */
+
+.bse-main-wrapper .bse-header {
+    text-align: center !important;
+    margin-bottom: 30px !important;
+    padding: 30px 20px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.bse-main-wrapper .bse-header-content {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+}
+
+.bse-main-wrapper .bse-title {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: #2d3748 !important;
+    margin-bottom: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    flex-wrap: wrap !important;
+}
+
+.bse-main-wrapper .bse-icon-main {
+    width: 40px !important;
+    height: 40px !important;
+    color: #667eea !important;
+    flex-shrink: 0 !important;
+}
+
+.bse-main-wrapper .bse-subtitle {
+    font-size: 16px !important;
+    color: #718096 !important;
+    font-weight: 400 !important;
+    margin-top: 8px !important;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+
+.bse-main-wrapper .bse-content {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+/* ============================================
+   Card Components
+   ============================================ */
+
+.bse-main-wrapper .bse-card {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-bottom: 25px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid rgba(102, 126, 234, 0.1) !important;
+}
+
+.bse-main-wrapper .bse-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18) !important;
+    transform: translateY(-2px) !important;
+}
+
+.bse-main-wrapper .bse-section-title {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+    margin-bottom: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.bse-main-wrapper .bse-section-icon {
+    width: 28px !important;
+    height: 28px !important;
+    color: #667eea !important;
+    flex-shrink: 0 !important;
+}
+
+/* ============================================
+   Control Panel
+   ============================================ */
+
+.bse-main-wrapper .bse-control-panel {
+    margin-bottom: 30px !important;
+}
+
+.bse-main-wrapper .bse-control-header {
+    margin-bottom: 20px !important;
+}
+
+.bse-main-wrapper .bse-test-options {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin-bottom: 25px !important;
+}
+
+.bse-main-wrapper .bse-option-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+}
+
+.bse-main-wrapper .bse-checkbox-label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    padding: 12px 18px !important;
+    background: #f7fafc !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+    border: 2px solid transparent !important;
+    flex: 1 1 auto !important;
+    min-width: 180px !important;
+}
+
+.bse-main-wrapper .bse-checkbox-label:hover {
+    background: #edf2f7 !important;
+    border-color: #667eea !important;
+}
+
+.bse-main-wrapper .bse-checkbox-label input[type="checkbox"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.bse-main-wrapper .bse-checkbox-custom {
+    width: 22px !important;
+    height: 22px !important;
+    border: 2px solid #cbd5e0 !important;
+    border-radius: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
+}
+
+.bse-main-wrapper .bse-checkbox-label input[type="checkbox"]:checked + .bse-checkbox-custom {
+    background: #667eea !important;
+    border-color: #667eea !important;
+}
+
+.bse-main-wrapper .bse-checkbox-label input[type="checkbox"]:checked + .bse-checkbox-custom::after {
+    content: '✓' !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+.bse-main-wrapper .bse-checkbox-text {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #2d3748 !important;
+}
+
+.bse-main-wrapper .bse-test-size-selector {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+.bse-main-wrapper .bse-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #4a5568 !important;
+}
+
+.bse-main-wrapper .bse-select {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #2d3748 !important;
+    background: white !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    outline: none !important;
+}
+
+.bse-main-wrapper .bse-select:hover {
+    border-color: #cbd5e0 !important;
+}
+
+.bse-main-wrapper .bse-select:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.bse-main-wrapper .bse-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-decoration: none !important;
+    outline: none !important;
+    width: 100% !important;
+}
+
+.bse-main-wrapper .bse-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+}
+
+.bse-main-wrapper .bse-btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6) !important;
+}
+
+.bse-main-wrapper .bse-btn-primary:active:not(:disabled) {
+    transform: translateY(0) !important;
+}
+
+.bse-main-wrapper .bse-btn-primary:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+}
+
+.bse-main-wrapper .bse-btn-secondary {
+    background: #edf2f7 !important;
+    color: #2d3748 !important;
+}
+
+.bse-main-wrapper .bse-btn-secondary:hover {
+    background: #e2e8f0 !important;
+}
+
+.bse-main-wrapper .bse-btn-small {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    width: auto !important;
+}
+
+.bse-main-wrapper .bse-btn-share {
+    background: #4299e1 !important;
+    color: white !important;
+    flex: 1 1 auto !important;
+    min-width: 150px !important;
+}
+
+.bse-main-wrapper .bse-btn-share:hover {
+    background: #3182ce !important;
+    transform: translateY(-2px) !important;
+}
+
+.bse-main-wrapper .bse-btn-icon {
+    width: 20px !important;
+    height: 20px !important;
+    flex-shrink: 0 !important;
+}
+
+/* ============================================
+   Progress Bar
+   ============================================ */
+
+.bse-main-wrapper .bse-progress-container {
+    margin-top: 20px !important;
+    animation: bse-fadeIn 0.3s ease !important;
+}
+
+.bse-main-wrapper .bse-progress-info {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 10px !important;
+}
+
+.bse-main-wrapper .bse-progress-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #4a5568 !important;
+}
+
+.bse-main-wrapper .bse-progress-percent {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #667eea !important;
+}
+
+.bse-main-wrapper .bse-progress-bar {
+    width: 100% !important;
+    height: 12px !important;
+    background: #e2e8f0 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.bse-main-wrapper .bse-progress-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 10px !important;
+    transition: width 0.3s ease !important;
+    width: 0% !important;
+    position: relative !important;
+}
+
+.bse-main-wrapper .bse-progress-fill::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent) !important;
+    animation: bse-shimmer 1.5s infinite !important;
+}
+
+/* ============================================
+   Results Grid
+   ============================================ */
+
+.bse-main-wrapper .bse-results-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.bse-main-wrapper .bse-result-card {
+    text-align: center !important;
+    padding: 30px 20px !important;
+}
+
+.bse-main-wrapper .bse-result-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+.bse-main-wrapper .bse-result-icon {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+}
+
+.bse-main-wrapper .bse-icon-download {
+    color: #48bb78 !important;
+}
+
+.bse-main-wrapper .bse-icon-upload {
+    color: #4299e1 !important;
+}
+
+.bse-main-wrapper .bse-icon-latency {
+    color: #ed8936 !important;
+}
+
+.bse-main-wrapper .bse-icon-jitter {
+    color: #9f7aea !important;
+}
+
+.bse-main-wrapper .bse-result-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+}
+
+.bse-main-wrapper .bse-result-value {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+}
+
+.bse-main-wrapper .bse-speed-value {
+    font-size: 48px !important;
+    font-weight: 800 !important;
+    color: #2d3748 !important;
+    line-height: 1 !important;
+}
+
+.bse-main-wrapper .bse-speed-unit {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #718096 !important;
+}
+
+.bse-main-wrapper .bse-result-details {
+    font-size: 14px !important;
+    color: #718096 !important;
+    min-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.bse-main-wrapper .bse-detail-label {
+    display: block !important;
+}
+
+.bse-main-wrapper .bse-quality-badge {
+    display: inline-block !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.bse-main-wrapper .bse-quality-excellent {
+    background: #c6f6d5 !important;
+    color: #22543d !important;
+}
+
+.bse-main-wrapper .bse-quality-good {
+    background: #bee3f8 !important;
+    color: #2c5282 !important;
+}
+
+.bse-main-wrapper .bse-quality-fair {
+    background: #feebc8 !important;
+    color: #7c2d12 !important;
+}
+
+.bse-main-wrapper .bse-quality-poor {
+    background: #fed7d7 !important;
+    color: #742a2a !important;
+}
+
+/* ============================================
+   Chart Section
+   ============================================ */
+
+.bse-main-wrapper .bse-chart-card {
+    position: relative !important;
+    min-height: 400px !important;
+}
+
+.bse-main-wrapper .bse-chart-canvas {
+    width: 100% !important;
+    height: 350px !important;
+    display: block !important;
+}
+
+.bse-main-wrapper .bse-chart-placeholder {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+    color: #a0aec0 !important;
+}
+
+.bse-main-wrapper .bse-chart-placeholder-icon {
+    width: 80px !important;
+    height: 80px !important;
+    margin: 0 auto 20px !important;
+    opacity: 0.3 !important;
+}
+
+.bse-main-wrapper .bse-chart-placeholder p {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+}
+
+/* ============================================
+   Score Section
+   ============================================ */
+
+.bse-main-wrapper .bse-score-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 30px !important;
+}
+
+.bse-main-wrapper .bse-score-circle {
+    position: relative !important;
+    width: 200px !important;
+    height: 200px !important;
+}
+
+.bse-main-wrapper .bse-score-svg {
+    width: 100% !important;
+    height: 100% !important;
+    transform: rotate(-90deg) !important;
+}
+
+.bse-main-wrapper .bse-score-bg {
+    fill: none !important;
+    stroke: #e2e8f0 !important;
+    stroke-width: 12 !important;
+}
+
+.bse-main-wrapper .bse-score-progress {
+    fill: none !important;
+    stroke: url(#bse-score-gradient) !important;
+    stroke-width: 12 !important;
+    stroke-linecap: round !important;
+    stroke-dasharray: 565.48 !important;
+    stroke-dashoffset: 565.48 !important;
+    transition: stroke-dashoffset 1s ease !important;
+}
+
+.bse-main-wrapper .bse-score-text {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+}
+
+.bse-main-wrapper .bse-score-number {
+    display: block !important;
+    font-size: 56px !important;
+    font-weight: 800 !important;
+    color: #2d3748 !important;
+    line-height: 1 !important;
+    margin-bottom: 5px !important;
+}
+
+.bse-main-wrapper .bse-score-label {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #718096 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.bse-main-wrapper .bse-score-info {
+    text-align: center !important;
+    max-width: 600px !important;
+}
+
+.bse-main-wrapper .bse-score-grade {
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    margin-bottom: 12px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.bse-main-wrapper .bse-score-description {
+    font-size: 16px !important;
+    color: #4a5568 !important;
+    line-height: 1.8 !important;
+}
+
+/* ============================================
+   Gaming Compatibility
+   ============================================ */
+
+.bse-main-wrapper .bse-gaming-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.bse-main-wrapper .bse-gaming-service {
+    padding: 20px !important;
+    background: #f7fafc !important;
+    border-radius: 12px !important;
+    border: 2px solid #e2e8f0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.bse-main-wrapper .bse-gaming-service:hover {
+    border-color: #667eea !important;
+    background: white !important;
+}
+
+.bse-main-wrapper .bse-gaming-service-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 15px !important;
+}
+
+.bse-main-wrapper .bse-gaming-service-name {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+}
+
+.bse-main-wrapper .bse-gaming-status {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.bse-main-wrapper .bse-gaming-status-icon {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+}
+
+.bse-main-wrapper .bse-status-excellent {
+    background: #c6f6d5 !important;
+    color: #22543d !important;
+}
+
+.bse-main-wrapper .bse-status-excellent .bse-gaming-status-icon {
+    background: #22543d !important;
+}
+
+.bse-main-wrapper .bse-status-good {
+    background: #bee3f8 !important;
+    color: #2c5282 !important;
+}
+
+.bse-main-wrapper .bse-status-good .bse-gaming-status-icon {
+    background: #2c5282 !important;
+}
+
+.bse-main-wrapper .bse-status-fair {
+    background: #feebc8 !important;
+    color: #7c2d12 !important;
+}
+
+.bse-main-wrapper .bse-status-fair .bse-gaming-status-icon {
+    background: #7c2d12 !important;
+}
+
+.bse-main-wrapper .bse-status-poor {
+    background: #fed7d7 !important;
+    color: #742a2a !important;
+}
+
+.bse-main-wrapper .bse-status-poor .bse-gaming-status-icon {
+    background: #742a2a !important;
+}
+
+.bse-main-wrapper .bse-gaming-service-details {
+    font-size: 14px !important;
+    color: #718096 !important;
+    line-height: 1.6 !important;
+}
+
+.bse-main-wrapper .bse-gaming-quality {
+    margin-top: 12px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #e2e8f0 !important;
+}
+
+.bse-main-wrapper .bse-gaming-quality-label {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #4a5568 !important;
+    margin-bottom: 5px !important;
+}
+
+.bse-main-wrapper .bse-gaming-quality-value {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #667eea !important;
+}
+
+/* ============================================
+   Recommendations
+   ============================================ */
+
+.bse-main-wrapper .bse-recommendations-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+}
+
+.bse-main-wrapper .bse-recommendation-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 15px !important;
+    padding: 18px !important;
+    background: #f7fafc !important;
+    border-radius: 10px !important;
+    border-left: 4px solid #667eea !important;
+}
+
+.bse-main-wrapper .bse-recommendation-icon {
+    width: 24px !important;
+    height: 24px !important;
+    flex-shrink: 0 !important;
+    color: #667eea !important;
+    margin-top: 2px !important;
+}
+
+.bse-main-wrapper .bse-recommendation-content {
+    flex: 1 !important;
+}
+
+.bse-main-wrapper .bse-recommendation-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+    margin-bottom: 5px !important;
+}
+
+.bse-main-wrapper .bse-recommendation-text {
+    font-size: 14px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+}
+
+.bse-main-wrapper .bse-recommendation-placeholder {
+    text-align: center !important;
+    padding: 40px 20px !important;
+    color: #a0aec0 !important;
+}
+
+.bse-main-wrapper .bse-recommendation-placeholder p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   Test History
+   ============================================ */
+
+.bse-main-wrapper .bse-history-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    margin-bottom: 20px !important;
+}
+
+.bse-main-wrapper .bse-history-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.bse-main-wrapper .bse-history-item {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 15px !important;
+    padding: 18px !important;
+    background: #f7fafc !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    transition: all 0.2s ease !important;
+}
+
+.bse-main-wrapper .bse-history-item:hover {
+    background: white !important;
+    border-color: #667eea !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+.bse-main-wrapper .bse-history-stat {
+    text-align: center !important;
+}
+
+.bse-main-wrapper .bse-history-label {
+    display: block !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #718096 !important;
+    margin-bottom: 5px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.bse-main-wrapper .bse-history-value {
+    display: block !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+}
+
+.bse-main-wrapper .bse-history-timestamp {
+    grid-column: 1 / -1 !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    color: #a0aec0 !important;
+    padding-top: 10px !important;
+    border-top: 1px solid #e2e8f0 !important;
+    margin-top: 5px !important;
+}
+
+.bse-main-wrapper .bse-history-placeholder {
+    text-align: center !important;
+    padding: 40px 20px !important;
+    color: #a0aec0 !important;
+}
+
+.bse-main-wrapper .bse-history-placeholder p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   Share Section
+   ============================================ */
+
+.bse-main-wrapper .bse-share-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+}
+
+/* ============================================
+   Tips Section
+   ============================================ */
+
+.bse-main-wrapper .bse-tips-list {
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.bse-main-wrapper .bse-tip-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 15px !important;
+    background: #f7fafc !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.bse-main-wrapper .bse-tip-item:hover {
+    background: #edf2f7 !important;
+    transform: translateX(5px) !important;
+}
+
+.bse-main-wrapper .bse-tip-icon {
+    width: 20px !important;
+    height: 20px !important;
+    color: #48bb78 !important;
+    flex-shrink: 0 !important;
+    margin-top: 2px !important;
+}
+
+.bse-main-wrapper .bse-tip-item span {
+    font-size: 14px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.bse-main-wrapper .bse-footer {
+    text-align: center !important;
+    margin-top: 40px !important;
+    padding: 30px 20px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+}
+
+.bse-main-wrapper .bse-footer-text {
+    font-size: 16px !important;
+    color: #2d3748 !important;
+    margin-bottom: 10px !important;
+}
+
+.bse-main-wrapper .bse-footer-note {
+    font-size: 13px !important;
+    color: #718096 !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.bse-main-wrapper .bse-hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes bse-fadeIn {
+    from {
+        opacity: 0 !important;
+        transform: translateY(10px) !important;
+    }
+    to {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+
+@keyframes bse-shimmer {
+    0% {
+        transform: translateX(-100%) !important;
+    }
+    100% {
+        transform: translateX(100%) !important;
+    }
+}
+
+@keyframes bse-pulse {
+    0%, 100% {
+        opacity: 1 !important;
+    }
+    50% {
+        opacity: 0.5 !important;
+    }
+}
+
+/* ============================================
+   Responsive Design - Tablet
+   ============================================ */
+
+@media (min-width: 768px) {
+    .bse-main-wrapper {
+        padding: 30px !important;
+    }
+
+    .bse-main-wrapper .bse-title {
+        font-size: 36px !important;
+    }
+
+    .bse-main-wrapper .bse-subtitle {
+        font-size: 18px !important;
+    }
+
+    .bse-main-wrapper .bse-card {
+        padding: 30px !important;
+    }
+
+    .bse-main-wrapper .bse-test-options {
+        flex-direction: row !important;
+        align-items: flex-end !important;
+    }
+
+    .bse-main-wrapper .bse-option-group {
+        flex: 1 !important;
+    }
+
+    .bse-main-wrapper .bse-test-size-selector {
+        min-width: 250px !important;
+    }
+
+    .bse-main-wrapper .bse-score-container {
+        flex-direction: row !important;
+        justify-content: center !important;
+    }
+
+    .bse-main-wrapper .bse-score-info {
+        text-align: left !important;
+    }
+}
+
+/* ============================================
+   Responsive Design - Desktop
+   ============================================ */
+
+@media (min-width: 1024px) {
+    .bse-main-wrapper {
+        padding: 40px !important;
+    }
+
+    .bse-main-wrapper .bse-title {
+        font-size: 42px !important;
+    }
+
+    .bse-main-wrapper .bse-icon-main {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .bse-main-wrapper .bse-results-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .bse-main-wrapper .bse-card {
+        padding: 35px !important;
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    .bse-main-wrapper {
+        background: white !important;
+        padding: 20px !important;
+    }
+
+    .bse-main-wrapper .bse-control-panel,
+    .bse-main-wrapper .bse-share-section,
+    .bse-main-wrapper .bse-chart-section {
+        display: none !important;
+    }
+
+    .bse-main-wrapper .bse-card {
+        box-shadow: none !important;
+        border: 1px solid #e2e8f0 !important;
+        page-break-inside: avoid !important;
+    }
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+.bse-main-wrapper *:focus {
+    outline: 2px solid #667eea !important;
+    outline-offset: 2px !important;
+}
+
+.bse-main-wrapper *:focus:not(:focus-visible) {
+    outline: none !important;
+}
+
+.bse-main-wrapper *:focus-visible {
+    outline: 2px solid #667eea !important;
+    outline-offset: 2px !important;
+}
+
+/* ============================================
+   Dark Mode Support (Optional)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* Users can uncomment this section for dark mode support */
+    /*
+    .bse-main-wrapper {
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%) !important;
+    }
+
+    .bse-main-wrapper .bse-card {
+        background: rgba(45, 55, 72, 0.95) !important;
+        color: #e2e8f0 !important;
+    }
+
+    .bse-main-wrapper .bse-title,
+    .bse-main-wrapper .bse-section-title,
+    .bse-main-wrapper .bse-result-title,
+    .bse-main-wrapper .bse-speed-value {
+        color: #e2e8f0 !important;
+    }
+    */
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+.bse-main-wrapper * {
+    will-change: auto !important;
+}
+
+.bse-main-wrapper .bse-progress-fill,
+.bse-main-wrapper .bse-score-progress {
+    will-change: transform, stroke-dashoffset !important;
+}
+
+/* ============================================
+   WordPress Compatibility Overrides
+   ============================================ */
+
+.bse-main-wrapper p,
+.bse-main-wrapper h1,
+.bse-main-wrapper h2,
+.bse-main-wrapper h3,
+.bse-main-wrapper ul,
+.bse-main-wrapper li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.bse-main-wrapper a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.bse-main-wrapper button {
+    background: none !important;
+    border: none !important;
+    font-family: inherit !important;
+}
+
+/* Reset applied, then re-apply our specific styles above */
