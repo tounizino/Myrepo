@@ -1,0 +1,850 @@
+/**
+ * Cloud Gaming Platforms Tool - Styles
+ * Version: 1.0.0
+ * Author: CloudLoadout.com
+ * Description: Complete styling for cloud gaming platforms comparison tool
+ * Browser Support: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+ */
+
+/* ============================================
+   SCOPED CONTAINER STYLES - PREVENT LEAKAGE
+   ============================================ */
+
+.cloud-gaming-tool-wrapper * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.cloud-gaming-tool-wrapper {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Background Pattern */
+.cloud-gaming-tool-wrapper::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+}
+
+.cloud-gaming-tool-wrapper > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.cgt-header {
+    text-align: center !important;
+    margin-bottom: 30px !important;
+    padding: 0 20px !important;
+}
+
+.cgt-header h1 {
+    color: #ffffff !important;
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 10px !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+    line-height: 1.2 !important;
+}
+
+.cgt-header p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem !important;
+    margin-top: 10px !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   STATISTICS BAR
+   ============================================ */
+
+.cgt-stats-bar {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 15px !important;
+    margin-bottom: 30px !important;
+    padding: 20px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.cgt-stat {
+    text-align: center !important;
+    padding: 15px !important;
+    border-radius: 12px !important;
+    background: rgba(102, 126, 234, 0.05) !important;
+    transition: all 0.3s ease !important;
+}
+
+.cgt-stat:hover {
+    background: rgba(102, 126, 234, 0.1) !important;
+    transform: translateY(-3px) !important;
+}
+
+.cgt-stat-number {
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    color: #667eea !important;
+    margin-bottom: 5px !important;
+    line-height: 1 !important;
+}
+
+.cgt-stat-label {
+    font-size: 0.9rem !important;
+    color: #4a5568 !important;
+    font-weight: 600 !important;
+}
+
+/* ============================================
+   CONTROLS SECTION
+   ============================================ */
+
+.cgt-controls {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+    margin-bottom: 30px !important;
+    padding: 20px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.cgt-search-box {
+    flex: 1 !important;
+    min-width: 250px !important;
+    position: relative !important;
+}
+
+.cgt-search-box input {
+    width: 100% !important;
+    padding: 15px 45px 15px 20px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px !important;
+    font-size: 1rem !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #333 !important;
+    transition: all 0.3s ease !important;
+    outline: none !important;
+}
+
+.cgt-search-box input:focus {
+    border-color: #fff !important;
+    background: #fff !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.cgt-search-box::after {
+    content: '🔍' !important;
+    position: absolute !important;
+    right: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.2rem !important;
+    pointer-events: none !important;
+}
+
+.cgt-filter-group {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    align-items: center !important;
+}
+
+.cgt-filter-btn {
+    padding: 12px 24px !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 25px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+}
+
+.cgt-filter-btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.cgt-filter-btn.active {
+    background: #fff !important;
+    color: #667eea !important;
+    border-color: #fff !important;
+}
+
+.cgt-view-toggle {
+    display: flex !important;
+    gap: 10px !important;
+    margin-left: auto !important;
+}
+
+.cgt-view-btn {
+    padding: 12px 20px !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+    font-size: 1.2rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.cgt-view-btn:hover,
+.cgt-view-btn.active {
+    background: #fff !important;
+    color: #667eea !important;
+    border-color: #fff !important;
+}
+
+/* ============================================
+   PLATFORMS GRID
+   ============================================ */
+
+.cgt-platforms-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+    gap: 25px !important;
+    margin-bottom: 30px !important;
+}
+
+.cgt-platforms-grid.list-view {
+    grid-template-columns: 1fr !important;
+}
+
+/* ============================================
+   PLATFORM CARDS
+   ============================================ */
+
+.cgt-platform-card {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: 20px !important;
+    padding: 25px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    border: 2px solid transparent !important;
+    position: relative !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+}
+
+.cgt-platform-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 5px !important;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    transform: scaleX(0) !important;
+    transform-origin: left !important;
+    transition: transform 0.4s ease !important;
+}
+
+.cgt-platform-card:hover::before {
+    transform: scaleX(1) !important;
+}
+
+.cgt-platform-card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+    border-color: #667eea !important;
+}
+
+.cgt-platform-card.favorited {
+    border-color: #ffd700 !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 255, 255, 0.98) 50%) !important;
+}
+
+.cgt-card-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin-bottom: 20px !important;
+}
+
+.cgt-platform-icon {
+    width: 70px !important;
+    height: 70px !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 2.5rem !important;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4) !important;
+    margin-bottom: 15px !important;
+}
+
+.cgt-favorite-btn {
+    background: transparent !important;
+    border: none !important;
+    font-size: 1.5rem !important;
+    cursor: pointer !important;
+    transition: transform 0.3s ease !important;
+    padding: 5px !important;
+}
+
+.cgt-favorite-btn:hover {
+    transform: scale(1.3) rotate(15deg) !important;
+}
+
+.cgt-platform-name {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #2d3748 !important;
+    margin-bottom: 8px !important;
+    line-height: 1.3 !important;
+}
+
+.cgt-platform-tagline {
+    font-size: 0.9rem !important;
+    color: #718096 !important;
+    margin-bottom: 15px !important;
+    line-height: 1.5 !important;
+}
+
+/* ============================================
+   RATING & PRICING
+   ============================================ */
+
+.cgt-rating {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 15px !important;
+}
+
+.cgt-stars {
+    color: #ffd700 !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 2px !important;
+}
+
+.cgt-rating-text {
+    color: #4a5568 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+}
+
+.cgt-price-tag {
+    display: inline-block !important;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+    color: #fff !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 3px 10px rgba(72, 187, 120, 0.3) !important;
+}
+
+.cgt-price-tag.premium {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* ============================================
+   FEATURES & DEVICES
+   ============================================ */
+
+.cgt-features-list {
+    list-style: none !important;
+    margin-bottom: 20px !important;
+}
+
+.cgt-features-list li {
+    padding: 8px 0 8px 28px !important;
+    position: relative !important;
+    color: #4a5568 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+
+.cgt-features-list li::before {
+    content: '✓' !important;
+    position: absolute !important;
+    left: 0 !important;
+    color: #48bb78 !important;
+    font-weight: bold !important;
+    font-size: 1.2rem !important;
+}
+
+.cgt-device-support {
+    display: flex !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+    flex-wrap: wrap !important;
+}
+
+.cgt-device-icon {
+    font-size: 1.5rem !important;
+    padding: 8px !important;
+    background: rgba(102, 126, 234, 0.1) !important;
+    border-radius: 10px !important;
+    transition: all 0.3s ease !important;
+    cursor: help !important;
+}
+
+.cgt-device-icon:hover {
+    background: rgba(102, 126, 234, 0.2) !important;
+    transform: scale(1.15) !important;
+}
+
+/* ============================================
+   SPECIFICATIONS
+   ============================================ */
+
+.cgt-specs {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    margin-bottom: 20px !important;
+    padding: 15px !important;
+    background: rgba(102, 126, 234, 0.05) !important;
+    border-radius: 12px !important;
+}
+
+.cgt-spec-item {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.cgt-spec-label {
+    font-size: 0.75rem !important;
+    color: #718096 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 4px !important;
+}
+
+.cgt-spec-value {
+    font-size: 0.9rem !important;
+    color: #2d3748 !important;
+    font-weight: 600 !important;
+}
+
+/* ============================================
+   PERFORMANCE BARS
+   ============================================ */
+
+.cgt-performance-bar {
+    margin-bottom: 15px !important;
+}
+
+.cgt-performance-label {
+    font-size: 0.85rem !important;
+    color: #4a5568 !important;
+    margin-bottom: 6px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.cgt-bar-container {
+    height: 8px !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+.cgt-bar-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #48bb78 0%, #38a169 100%) !important;
+    border-radius: 10px !important;
+    transition: width 0.6s ease !important;
+}
+
+/* ============================================
+   CARD ACTIONS
+   ============================================ */
+
+.cgt-card-actions {
+    display: flex !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+}
+
+.cgt-btn {
+    flex: 1 !important;
+    padding: 12px 20px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+}
+
+.cgt-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+}
+
+.cgt-btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
+}
+
+.cgt-btn-secondary {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #667eea !important;
+    border: 2px solid #667eea !important;
+}
+
+.cgt-btn-secondary:hover {
+    background: rgba(102, 126, 234, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* ============================================
+   COMPARISON SECTION
+   ============================================ */
+
+.cgt-comparison-section {
+    margin-top: 30px !important;
+    padding: 25px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.cgt-comparison-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
+}
+
+.cgt-comparison-header h2 {
+    color: #2d3748 !important;
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+}
+
+.cgt-comparison-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    overflow-x: auto !important;
+    display: block !important;
+}
+
+.cgt-comparison-table table {
+    width: 100% !important;
+    min-width: 600px !important;
+}
+
+.cgt-comparison-table th,
+.cgt-comparison-table td {
+    padding: 15px !important;
+    text-align: left !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.cgt-comparison-table th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+}
+
+.cgt-comparison-table tr:hover {
+    background: rgba(102, 126, 234, 0.05) !important;
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.cgt-modal {
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    z-index: 10000 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.cgt-modal.active {
+    display: flex !important;
+}
+
+.cgt-modal-content {
+    background: #fff !important;
+    border-radius: 20px !important;
+    padding: 30px !important;
+    max-width: 600px !important;
+    width: 100% !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    position: relative !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+.cgt-modal-close {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 2rem !important;
+    cursor: pointer !important;
+    color: #718096 !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+}
+
+.cgt-modal-close:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+    color: #2d3748 !important;
+    transform: rotate(90deg) !important;
+}
+
+/* ============================================
+   TOAST NOTIFICATION
+   ============================================ */
+
+.cgt-toast {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+    color: #fff !important;
+    padding: 15px 25px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    z-index: 10001 !important;
+    transform: translateX(400px) !important;
+    transition: transform 0.4s ease !important;
+    font-weight: 600 !important;
+}
+
+.cgt-toast.show {
+    transform: translateX(0) !important;
+}
+
+/* ============================================
+   NO RESULTS
+   ============================================ */
+
+.cgt-no-results {
+    text-align: center !important;
+    padding: 60px 20px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.cgt-no-results-icon {
+    font-size: 4rem !important;
+    margin-bottom: 20px !important;
+}
+
+.cgt-no-results h3 {
+    color: #2d3748 !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 10px !important;
+}
+
+.cgt-no-results p {
+    color: #718096 !important;
+    font-size: 1rem !important;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.cgt-footer {
+    text-align: center !important;
+    margin-top: 30px !important;
+    padding: 20px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.9rem !important;
+}
+
+.cgt-footer a {
+    color: #fff !important;
+    text-decoration: underline !important;
+    font-weight: 600 !important;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0 !important;
+        transform: translateY(30px) !important;
+    }
+    to {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+
+.cgt-platform-card {
+    animation: fadeInUp 0.6s ease forwards !important;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================ */
+
+@media (max-width: 768px) {
+    .cgt-header h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .cgt-header p {
+        font-size: 0.95rem !important;
+    }
+    
+    .cgt-controls {
+        flex-direction: column !important;
+    }
+    
+    .cgt-view-toggle {
+        margin-left: 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    
+    .cgt-platforms-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .cgt-stats-bar {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .cgt-specs {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .cgt-card-actions {
+        flex-direction: column !important;
+    }
+    
+    .cgt-toast {
+        bottom: 15px !important;
+        right: 15px !important;
+        left: 15px !important;
+        transform: translateY(200px) !important;
+    }
+    
+    .cgt-toast.show {
+        transform: translateY(0) !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+    .cloud-gaming-tool-wrapper {
+        padding: 15px !important;
+        border-radius: 15px !important;
+    }
+    
+    .cgt-header h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    .cgt-platform-icon {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 2rem !important;
+    }
+    
+    .cgt-stats-bar {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .cgt-stat-number {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .cloud-gaming-tool-wrapper {
+        box-shadow: none !important;
+        background: #fff !important;
+    }
+    
+    .cgt-controls,
+    .cgt-card-actions,
+    .cgt-favorite-btn {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Focus styles for keyboard navigation */
+.cgt-btn:focus,
+.cgt-filter-btn:focus,
+.cgt-view-btn:focus,
+.cgt-search-box input:focus {
+    outline: 3px solid #667eea !important;
+    outline-offset: 2px !important;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
