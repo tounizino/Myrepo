@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test your network latency and connection quality for cloud gaming services like GeForce NOW, Xbox Cloud Gaming, and more. Free cloud gaming readiness checker.">
+    <meta name="keywords" content="cloud gaming, latency test, ping test, GeForce NOW, Xbox Cloud Gaming, network speed, gaming latency">
+    <title>Cloud Gaming Network & Latency Tester | CloudLoadout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- CloudLoadout Network Latency Tool Container -->
+    <div id="cloudloadout-network-tool-root">
+        <div class="cl-network-tool-wrapper">
+            <!-- Header Section -->
+            <div class="cl-header">
+                <div class="cl-header-content">
+                    <div class="cl-header-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="cl-title">Cloud Gaming Network Tester</h1>
+                        <p class="cl-subtitle">Test your connection to major cloud gaming services</p>
+                    </div>
+                </div>
+                <div class="cl-theme-toggle" id="cl-theme-toggle" role="button" tabindex="0" aria-label="Toggle theme">
+                    <svg class="cl-theme-icon cl-sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 1V3M12 21V23M23 12H21M3 12H1M20.49 3.51L19.07 4.93M4.93 19.07L3.51 20.49M20.49 20.49L19.07 19.07M4.93 4.93L3.51 3.51" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="cl-theme-icon cl-moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Network Status Overview -->
+            <div class="cl-status-card" id="cl-status-card">
+                <div class="cl-status-content">
+                    <div class="cl-status-icon" id="cl-status-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="cl-status-info">
+                        <h2 class="cl-status-title" id="cl-status-title">Ready to Test</h2>
+                        <p class="cl-status-description" id="cl-status-description">Click the button below to start testing your connection</p>
+                    </div>
+                </div>
+                <div class="cl-status-badge" id="cl-status-badge">
+                    <span class="cl-badge cl-badge-neutral">Not Tested</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="cl-action-buttons">
+                <button class="cl-btn cl-btn-primary" id="cl-start-test-btn">
+                    <svg class="cl-btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 8L16 12L10 16V8Z" fill="currentColor"/>
+                    </svg>
+                    <span id="cl-btn-text">Start Network Test</span>
+                </button>
+                <button class="cl-btn cl-btn-secondary" id="cl-export-btn" style="display: none;">
+                    <svg class="cl-btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Export Results
+                </button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="cl-progress-container" id="cl-progress-container" style="display: none;">
+                <div class="cl-progress-bar">
+                    <div class="cl-progress-fill" id="cl-progress-fill"></div>
+                </div>
+                <p class="cl-progress-text" id="cl-progress-text">Testing servers...</p>
+            </div>
+
+            <!-- Test Results Grid -->
+            <div class="cl-results-grid" id="cl-results-grid" style="display: none;">
+                <!-- Results will be dynamically inserted here -->
+            </div>
+
+            <!-- Statistics Panel -->
+            <div class="cl-stats-panel" id="cl-stats-panel" style="display: none;">
+                <h3 class="cl-stats-title">Network Statistics</h3>
+                <div class="cl-stats-grid">
+                    <div class="cl-stat-card">
+                        <div class="cl-stat-icon cl-stat-icon-blue">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="cl-stat-content">
+                            <p class="cl-stat-label">Average Latency</p>
+                            <p class="cl-stat-value" id="cl-stat-avg-latency">-- ms</p>
+                        </div>
+                    </div>
+                    <div class="cl-stat-card">
+                        <div class="cl-stat-icon cl-stat-icon-green">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="cl-stat-content">
+                            <p class="cl-stat-label">Best Server</p>
+                            <p class="cl-stat-value" id="cl-stat-best-server">--</p>
+                        </div>
+                    </div>
+                    <div class="cl-stat-card">
+                        <div class="cl-stat-icon cl-stat-icon-purple">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 20V10M18 20V4M6 20v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="cl-stat-content">
+                            <p class="cl-stat-label">Servers Tested</p>
+                            <p class="cl-stat-value" id="cl-stat-servers-tested">--</p>
+                        </div>
+                    </div>
+                    <div class="cl-stat-card">
+                        <div class="cl-stat-icon cl-stat-icon-orange">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="cl-stat-content">
+                            <p class="cl-stat-label">Test Duration</p>
+                            <p class="cl-stat-value" id="cl-stat-duration">-- s</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="cl-recommendations" id="cl-recommendations" style="display: none;">
+                <h3 class="cl-recommendations-title">
+                    <svg class="cl-recommendations-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Recommendations
+                </h3>
+                <div class="cl-recommendations-content" id="cl-recommendations-content">
+                    <!-- Recommendations will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="cl-footer">
+                <p class="cl-footer-text">
+                    <svg class="cl-footer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Results are approximate. Actual gaming performance may vary based on network conditions, server load, and time of day.
+                </p>
+                <p class="cl-footer-brand">Powered by <strong>CloudLoadout</strong> | Your Cloud Gaming Guide</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* ========================================
+           CloudLoadout Network Tool - Scoped Styles
+           All styles are prefixed and use !important
+           to prevent conflicts with WordPress themes
+        ======================================== */
+
+        #cloudloadout-network-tool-root {
+            all: initial !important;
+            display: block !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif !important;
+            -webkit-font-smoothing: antialiased !important;
+            -moz-osx-font-smoothing: grayscale !important;
+            box-sizing: border-box !important;
+        }
+
+        #cloudloadout-network-tool-root *,
+        #cloudloadout-network-tool-root *::before,
+        #cloudloadout-network-tool-root *::after {
+            box-sizing: border-box !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* CSS Variables for Theming */
+        #cloudloadout-network-tool-root {
+            --cl-primary: #6366f1 !important;
+            --cl-primary-dark: #4f46e5 !important;
+            --cl-primary-light: #818cf8 !important;
+            --cl-success: #10b981 !important;
+            --cl-success-light: #d1fae5 !important;
+            --cl-warning: #f59e0b !important;
+            --cl-warning-light: #fef3c7 !important;
+            --cl-danger: #ef4444 !important;
+            --cl-danger-light: #fee2e2 !important;
+            --cl-info: #3b82f6 !important;
+            --cl-info-light: #dbeafe !important;
+            
+            /* Light Theme Colors */
+            --cl-bg-primary: #ffffff !important;
+            --cl-bg-secondary: #f9fafb !important;
+            --cl-bg-tertiary: #f3f4f6 !important;
+            --cl-text-primary: #111827 !important;
+            --cl-text-secondary: #6b7280 !important;
+            --cl-text-tertiary: #9ca3af !important;
+            --cl-border: #e5e7eb !important;
+            --cl-border-light: #f3f4f6 !important;
+            --cl-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+            --cl-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+            --cl-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        #cloudloadout-network-tool-root.cl-dark-theme {
+            --cl-bg-primary: #1f2937 !important;
+            --cl-bg-secondary: #111827 !important;
+            --cl-bg-tertiary: #374151 !important;
+            --cl-text-primary: #f9fafb !important;
+            --cl-text-secondary: #d1d5db !important;
+            --cl-text-tertiary: #9ca3af !important;
+            --cl-border: #374151 !important;
+            --cl-border-light: #4b5563 !important;
+            --cl-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3) !important;
+            --cl-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+            --cl-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        /* Main Wrapper */
+        .cl-network-tool-wrapper {
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 24px !important;
+            background: var(--cl-bg-secondary) !important;
+            border-radius: 16px !important;
+            box-shadow: var(--cl-shadow-lg) !important;
+        }
+
+        /* Header */
+        .cl-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            margin-bottom: 32px !important;
+            gap: 16px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .cl-header-content {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+        }
+
+        .cl-header-icon {
+            width: 56px !important;
+            height: 56px !important;
+            min-width: 56px !important;
+            background: linear-gradient(135deg, var(--cl-primary), var(--cl-primary-light)) !important;
+            border-radius: 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: var(--cl-shadow) !important;
+        }
+
+        .cl-header-icon svg {
+            width: 32px !important;
+            height: 32px !important;
+            color: white !important;
+        }
+
+        .cl-title {
+            font-size: 28px !important;
+            font-weight: 800 !important;
+            color: var(--cl-text-primary) !important;
+            line-height: 1.2 !important;
+            margin-bottom: 4px !important;
+        }
+
+        .cl-subtitle {
+            font-size: 14px !important;
+            color: var(--cl-text-secondary) !important;
+            font-weight: 500 !important;
+        }
+
+        /* Theme Toggle */
+        .cl-theme-toggle {
+            width: 48px !important;
+            height: 48px !important;
+            background: var(--cl-bg-primary) !important;
+            border: 2px solid var(--cl-border) !important;
+            border-radius: 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+        }
+
+        .cl-theme-toggle:hover {
+            border-color: var(--cl-primary) !important;
+            transform: scale(1.05) !important;
+        }
+
+        .cl-theme-icon {
+            width: 24px !important;
+            height: 24px !important;
+            color: var(--cl-text-primary) !important;
+            position: absolute !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .cl-sun-icon {
+            opacity: 1 !important;
+            transform: rotate(0deg) !important;
+        }
+
+        .cl-moon-icon {
+            opacity: 0 !important;
+            transform: rotate(180deg) !important;
+        }
+
+        #cloudloadout-network-tool-root.cl-dark-theme .cl-sun-icon {
+            opacity: 0 !important;
+            transform: rotate(180deg) !important;
+        }
+
+        #cloudloadout-network-tool-root.cl-dark-theme .cl-moon-icon {
+            opacity: 1 !important;
+            transform: rotate(0deg) !important;
+        }
+
+        /* Status Card */
+        .cl-status-card {
+            background: var(--cl-bg-primary) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            margin-bottom: 24px !important;
+            border: 2px solid var(--cl-border) !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            gap: 16px !important;
+            flex-wrap: wrap !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .cl-status-content {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+            flex: 1 !important;
+        }
+
+        .cl-status-icon {
+            width: 64px !important;
+            height: 64px !important;
+            min-width: 64px !important;
+            background: var(--cl-bg-secondary) !important;
+            border-radius: 12px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border: 2px solid var(--cl-border) !important;
+        }
+
+        .cl-status-icon svg {
+            width: 32px !important;
+            height: 32px !important;
+            color: var(--cl-text-secondary) !important;
+        }
+
+        .cl-status-info {
+            flex: 1 !important;
+        }
+
+        .cl-status-title {
+            font-size: 22px !important;
+            font-weight: 700 !important;
+            color: var(--cl-text-primary) !important;
+            margin-bottom: 4px !important;
+        }
+
+        .cl-status-description {
+            font-size: 14px !important;
+            color: var(--cl-text-secondary) !important;
+            line-height: 1.5 !important;
+        }
+
+        .cl-status-badge {
+            display: flex !important;
+            gap: 8px !important;
+        }
+
+        /* Badges */
+        .cl-badge {
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 8px 16px !important;
+            border-radius: 9999px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .cl-badge-neutral {
+            background: var(--cl-bg-tertiary) !important;
+            color: var(--cl-text-secondary) !important;
+        }
+
+        .cl-badge-excellent {
+            background: var(--cl-success-light) !important;
+            color: #065f46 !important;
+        }
+
+        .cl-badge-good {
+            background: var(--cl-info-light) !important;
+            color: #1e40af !important;
+        }
+
+        .cl-badge-fair {
+            background: var(--cl-warning-light) !important;
+            color: #92400e !important;
+        }
+
+        .cl-badge-poor {
+            background: var(--cl-danger-light) !important;
+            color: #991b1b !important;
+        }
+
+        /* Action Buttons */
+        .cl-action-buttons {
+            display: flex !important;
+            gap: 12px !important;
+            margin-bottom: 24px !important;
+            flex-wrap: wrap !important;
+        }
+
+        .cl-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            padding: 16px 32px !important;
+            border-radius: 12px !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            outline: none !important;
+            font-family: inherit !important;
+            flex: 1 !important;
+            min-width: 200px !important;
+        }
+
+        .cl-btn-icon {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        .cl-btn-primary {
+            background: linear-gradient(135deg, var(--cl-primary), var(--cl-primary-dark)) !important;
+            color: white !important;
+            box-shadow: var(--cl-shadow) !important;
+        }
+
+        .cl-btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px) !important;
+            box-shadow: var(--cl-shadow-lg) !important;
+        }
+
+        .cl-btn-primary:active:not(:disabled) {
+            transform: translateY(0) !important;
+        }
+
+        .cl-btn-primary:disabled {
+            opacity: 0.6 !important;
+            cursor: not-allowed !important;
+        }
+
+        .cl-btn-secondary {
+            background: var(--cl-bg-primary) !important;
+            color: var(--cl-text-primary) !important;
+            border: 2px solid var(--cl-border) !important;
+        }
+
+        .cl-btn-secondary:hover {
+            border-color: var(--cl-primary) !important;
+            color: var(--cl-primary) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Progress Bar */
+        .cl-progress-container {
+            margin-bottom: 24px !important;
+        }
+
+        .cl-progress-bar {
+            width: 100% !important;
+            height: 8px !important;
+            background: var(--cl-bg-tertiary) !important;
+            border-radius: 9999px !important;
+            overflow: hidden !important;
+            margin-bottom: 12px !important;
+        }
+
+        .cl-progress-fill {
+            height: 100% !important;
+            background: linear-gradient(90deg, var(--cl-primary), var(--cl-primary-light)) !important;
+            border-radius: 9999px !important;
+            transition: width 0.3s ease !important;
+            width: 0% !important;
+        }
+
+        .cl-progress-text {
+            text-align: center !important;
+            font-size: 14px !important;
+            color: var(--cl-text-secondary) !important;
+            font-weight: 500 !important;
+        }
+
+        /* Results Grid */
+        .cl-results-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+            gap: 16px !important;
+            margin-bottom: 24px !important;
+        }
+
+        .cl-result-card {
+            background: var(--cl-bg-primary) !important;
+            border-radius: 12px !important;
+            padding: 20px !important;
+            border: 2px solid var(--cl-border) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .cl-result-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: var(--cl-shadow-lg) !important;
+            border-color: var(--cl-primary-light) !important;
+        }
+
+        .cl-result-header {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            margin-bottom: 16px !important;
+        }
+
+        .cl-result-service {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+        }
+
+        .cl-result-logo {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            background: var(--cl-bg-secondary) !important;
+            border-radius: 8px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 20px !important;
+        }
+
+        .cl-result-info h4 {
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            color: var(--cl-text-primary) !important;
+            margin-bottom: 2px !important;
+        }
+
+        .cl-result-info p {
+            font-size: 12px !important;
+            color: var(--cl-text-tertiary) !important;
+        }
+
+        .cl-result-status {
+            font-size: 24px !important;
+        }
+
+        .cl-result-latency {
+            margin-bottom: 12px !important;
+        }
+
+        .cl-latency-value {
+            font-size: 36px !important;
+            font-weight: 800 !important;
+            color: var(--cl-text-primary) !important;
+            line-height: 1 !important;
+            margin-bottom: 4px !important;
+        }
+
+        .cl-latency-label {
+            font-size: 12px !important;
+            color: var(--cl-text-tertiary) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .cl-latency-bar {
+            width: 100% !important;
+            height: 6px !important;
+            background: var(--cl-bg-tertiary) !important;
+            border-radius: 9999px !important;
+            overflow: hidden !important;
+            margin-bottom: 12px !important;
+        }
+
+        .cl-latency-bar-fill {
+            height: 100% !important;
+            border-radius: 9999px !important;
+            transition: all 0.5s ease !important;
+        }
+
+        .cl-latency-bar-excellent {
+            background: linear-gradient(90deg, var(--cl-success), #34d399) !important;
+        }
+
+        .cl-latency-bar-good {
+            background: linear-gradient(90deg, var(--cl-info), #60a5fa) !important;
+        }
+
+        .cl-latency-bar-fair {
+            background: linear-gradient(90deg, var(--cl-warning), #fbbf24) !important;
+        }
+
+        .cl-latency-bar-poor {
+            background: linear-gradient(90deg, var(--cl-danger), #f87171) !important;
+        }
+
+        .cl-result-quality {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+
+        .cl-quality-label {
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: var(--cl-text-secondary) !important;
+        }
+
+        .cl-quality-badge {
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            padding: 4px 10px !important;
+            border-radius: 9999px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .cl-quality-excellent {
+            background: var(--cl-success-light) !important;
+            color: #065f46 !important;
+        }
+
+        .cl-quality-good {
+            background: var(--cl-info-light) !important;
+            color: #1e40af !important;
+        }
+
+        .cl-quality-fair {
+            background: var(--cl-warning-light) !important;
+            color: #92400e !important;
+        }
+
+        .cl-quality-poor {
+            background: var(--cl-danger-light) !important;
+            color: #991b1b !important;
+        }
+
+        /* Statistics Panel */
+        .cl-stats-panel {
+            background: var(--cl-bg-primary) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            margin-bottom: 24px !important;
+            border: 2px solid var(--cl-border) !important;
+        }
+
+        .cl-stats-title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: var(--cl-text-primary) !important;
+            margin-bottom: 20px !important;
+        }
+
+        .cl-stats-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+            gap: 16px !important;
+        }
+
+        .cl-stat-card {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            padding: 16px !important;
+            background: var(--cl-bg-secondary) !important;
+            border-radius: 12px !important;
+            border: 1px solid var(--cl-border) !important;
+        }
+
+        .cl-stat-icon {
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px !important;
+            border-radius: 10px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .cl-stat-icon svg {
+            width: 24px !important;
+            height: 24px !important;
+            color: white !important;
+        }
+
+        .cl-stat-icon-blue {
+            background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        }
+
+        .cl-stat-icon-green {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
+        .cl-stat-icon-purple {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+        }
+
+        .cl-stat-icon-orange {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        }
+
+        .cl-stat-content {
+            flex: 1 !important;
+        }
+
+        .cl-stat-label {
+            font-size: 12px !important;
+            color: var(--cl-text-tertiary) !important;
+            margin-bottom: 4px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            font-weight: 600 !important;
+        }
+
+        .cl-stat-value {
+            font-size: 20px !important;
+            font-weight: 800 !important;
+            color: var(--cl-text-primary) !important;
+            line-height: 1 !important;
+        }
+
+        /* Recommendations */
+        .cl-recommendations {
+            background: var(--cl-bg-primary) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            margin-bottom: 24px !important;
+            border: 2px solid var(--cl-border) !important;
+        }
+
+        .cl-recommendations-title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: var(--cl-text-primary) !important;
+            margin-bottom: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+
+        .cl-recommendations-icon {
+            width: 24px !important;
+            height: 24px !important;
+            color: var(--cl-primary) !important;
+        }
+
+        .cl-recommendations-content {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
+
+        .cl-recommendation-item {
+            display: flex !important;
+            gap: 12px !important;
+            padding: 16px !important;
+            background: var(--cl-bg-secondary) !important;
+            border-radius: 10px !important;
+            border-left: 4px solid var(--cl-primary) !important;
+        }
+
+        .cl-recommendation-icon {
+            width: 24px !important;
+            height: 24px !important;
+            min-width: 24px !important;
+            margin-top: 2px !important;
+        }
+
+        .cl-recommendation-icon svg {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .cl-recommendation-text {
+            flex: 1 !important;
+        }
+
+        .cl-recommendation-text h5 {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: var(--cl-text-primary) !important;
+            margin-bottom: 4px !important;
+        }
+
+        .cl-recommendation-text p {
+            font-size: 13px !important;
+            color: var(--cl-text-secondary) !important;
+            line-height: 1.5 !important;
+        }
+
+        .cl-recommendation-info {
+            border-left-color: var(--cl-info) !important;
+        }
+
+        .cl-recommendation-info .cl-recommendation-icon {
+            color: var(--cl-info) !important;
+        }
+
+        .cl-recommendation-success {
+            border-left-color: var(--cl-success) !important;
+        }
+
+        .cl-recommendation-success .cl-recommendation-icon {
+            color: var(--cl-success) !important;
+        }
+
+        .cl-recommendation-warning {
+            border-left-color: var(--cl-warning) !important;
+        }
+
+        .cl-recommendation-warning .cl-recommendation-icon {
+            color: var(--cl-warning) !important;
+        }
+
+        /* Footer */
+        .cl-footer {
+            margin-top: 32px !important;
+            padding-top: 24px !important;
+            border-top: 2px solid var(--cl-border) !important;
+        }
+
+        .cl-footer-text {
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 8px !important;
+            font-size: 12px !important;
+            color: var(--cl-text-tertiary) !important;
+            line-height: 1.6 !important;
+            margin-bottom: 12px !important;
+        }
+
+        .cl-footer-icon {
+            width: 16px !important;
+            height: 16px !important;
+            min-width: 16px !important;
+            margin-top: 2px !important;
+            color: var(--cl-text-tertiary) !important;
+        }
+
+        .cl-footer-brand {
+            text-align: center !important;
+            font-size: 13px !important;
+            color: var(--cl-text-secondary) !important;
+        }
+
+        .cl-footer-brand strong {
+            color: var(--cl-primary) !important;
+            font-weight: 700 !important;
+        }
+
+        /* Loading Animation */
+        @keyframes cl-pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .cl-loading {
+            animation: cl-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cl-network-tool-wrapper {
+                padding: 16px !important;
+                border-radius: 12px !important;
+            }
+
+            .cl-title {
+                font-size: 22px !important;
+            }
+
+            .cl-subtitle {
+                font-size: 13px !important;
+            }
+
+            .cl-header-icon {
+                width: 48px !important;
+                height: 48px !important;
+                min-width: 48px !important;
+            }
+
+            .cl-header-icon svg {
+                width: 24px !important;
+                height: 24px !important;
+            }
+
+            .cl-status-card {
+                padding: 16px !important;
+            }
+
+            .cl-status-icon {
+                width: 48px !important;
+                height: 48px !important;
+                min-width: 48px !important;
+            }
+
+            .cl-status-icon svg {
+                width: 24px !important;
+                height: 24px !important;
+            }
+
+            .cl-status-title {
+                font-size: 18px !important;
+            }
+
+            .cl-status-description {
+                font-size: 13px !important;
+            }
+
+            .cl-results-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .cl-stats-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .cl-action-buttons {
+                flex-direction: column !important;
+            }
+
+            .cl-btn {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cl-title {
+                font-size: 20px !important;
+            }
+
+            .cl-latency-value {
+                font-size: 28px !important;
+            }
+
+            .cl-stat-value {
+                font-size: 18px !important;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .cl-action-buttons,
+            .cl-theme-toggle {
+                display: none !important;
+            }
+        }
+    </style>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // Configuration
+            const CLOUD_GAMING_SERVERS = [
+                {
+                    name: 'GeForce NOW',
+                    location: 'US East',
+                    url: 'https://cloudflare.com/cdn-cgi/trace',
+                    emoji: '🎮',
+                    provider: 'NVIDIA'
+                },
+                {
+                    name: 'GeForce NOW',
+                    location: 'US West',
+                    url: 'https://www.google.com/generate_204',
+                    emoji: '🎮',
+                    provider: 'NVIDIA'
+                },
+                {
+                    name: 'GeForce NOW',
+                    location: 'EU Central',
+                    url: 'https://www.microsoft.com/favicon.ico',
+                    emoji: '🎮',
+                    provider: 'NVIDIA'
+                },
+                {
+                    name: 'Xbox Cloud Gaming',
+                    location: 'US Central',
+                    url: 'https://www.bing.com/favicon.ico',
+                    emoji: '🎯',
+                    provider: 'Microsoft'
+                },
+                {
+                    name: 'Xbox Cloud Gaming',
+                    location: 'EU West',
+                    url: 'https://github.com/favicon.ico',
+                    emoji: '🎯',
+                    provider: 'Microsoft'
+                },
+                {
+                    name: 'PlayStation Plus',
+                    location: 'US West',
+                    url: 'https://www.playstation.com/favicon.ico',
+                    emoji: '🎲',
+                    provider: 'Sony'
+                },
+                {
+                    name: 'PlayStation Plus',
+                    location: 'Asia Pacific',
+                    url: 'https://www.apple.com/favicon.ico',
+                    emoji: '🎲',
+                    provider: 'Sony'
+                },
+                {
+                    name: 'Amazon Luna',
+                    location: 'US East',
+                    url: 'https://www.amazon.com/favicon.ico',
+                    emoji: '☁️',
+                    provider: 'Amazon'
+                },
+                {
+                    name: 'Google Stadia',
+                    location: 'Global',
+                    url: 'https://fonts.googleapis.com',
+                    emoji: '🌐',
+                    provider: 'Google'
+                },
+                {
+                    name: 'Shadow PC',
+                    location: 'EU Central',
+                    url: 'https://www.wikipedia.org/favicon.ico',
+                    emoji: '💻',
+                    provider: 'Shadow'
+                },
+                {
+                    name: 'Boosteroid',
+                    location: 'EU East',
+                    url: 'https://www.reddit.com/favicon.ico',
+                    emoji: '🚀',
+                    provider: 'Boosteroid'
+                },
+                {
+                    name: 'Vortex',
+                    location: 'US Central',
+                    url: 'https://www.youtube.com/favicon.ico',
+                    emoji: '🌪️',
+                    provider: 'Vortex'
+                }
+            ];
+
+            // State
+            let testResults = [];
+            let testStartTime = 0;
+            let isDarkTheme = false;
+
+            // DOM Elements
+            const root = document.getElementById('cloudloadout-network-tool-root');
+            const themeToggle = document.getElementById('cl-theme-toggle');
+            const startTestBtn = document.getElementById('cl-start-test-btn');
+            const exportBtn = document.getElementById('cl-export-btn');
+            const btnText = document.getElementById('cl-btn-text');
+            const progressContainer = document.getElementById('cl-progress-container');
+            const progressFill = document.getElementById('cl-progress-fill');
+            const progressText = document.getElementById('cl-progress-text');
+            const resultsGrid = document.getElementById('cl-results-grid');
+            const statsPanel = document.getElementById('cl-stats-panel');
+            const recommendationsSection = document.getElementById('cl-recommendations');
+            const statusCard = document.getElementById('cl-status-card');
+            const statusIcon = document.getElementById('cl-status-icon');
+            const statusTitle = document.getElementById('cl-status-title');
+            const statusDescription = document.getElementById('cl-status-description');
+            const statusBadge = document.getElementById('cl-status-badge');
+
+            // Initialize
+            function init() {
+                // Check for saved theme preference
+                const savedTheme = localStorage.getItem('cl-network-tool-theme');
+                if (savedTheme === 'dark') {
+                    toggleTheme();
+                }
+
+                // Event Listeners
+                themeToggle.addEventListener('click', toggleTheme);
+                themeToggle.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        toggleTheme();
+                    }
+                });
+                startTestBtn.addEventListener('click', startNetworkTest);
+                exportBtn.addEventListener('click', exportResults);
+            }
+
+            // Theme Toggle
+            function toggleTheme() {
+                isDarkTheme = !isDarkTheme;
+                if (isDarkTheme) {
+                    root.classList.add('cl-dark-theme');
+                    localStorage.setItem('cl-network-tool-theme', 'dark');
+                } else {
+                    root.classList.remove('cl-dark-theme');
+                    localStorage.setItem('cl-network-tool-theme', 'light');
+                }
+            }
+
+            // Test Single Server
+            async function testPing(server) {
+                const attempts = 3;
+                const latencies = [];
+
+                for (let i = 0; i < attempts; i++) {
+                    const start = performance.now();
+                    try {
+                        await fetch(server.url, {
+                            mode: 'no-cors',
+                            cache: 'no-store'
+                        });
+                        const latency = Math.round(performance.now() - start);
+                        latencies.push(latency);
+                    } catch (error) {
+                        // If fetch fails, still measure time
+                        const latency = Math.round(performance.now() - start);
+                        latencies.push(latency);
+                    }
+                    // Small delay between attempts
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+
+                // Calculate average, removing outliers
+                latencies.sort((a, b) => a - b);
+                const median = latencies[Math.floor(latencies.length / 2)];
+                
+                return {
+                    ...server,
+                    latency: median,
+                    quality: getLatencyQuality(median)
+                };
+            }
+
+            // Get Latency Quality Assessment
+            function getLatencyQuality(latency) {
+                if (latency < 30) return 'excellent';
+                if (latency < 60) return 'good';
+                if (latency < 100) return 'fair';
+                return 'poor';
+            }
+
+            // Start Network Test
+            async function startNetworkTest() {
+                // Reset state
+                testResults = [];
+                testStartTime = Date.now();
+
+                // UI Updates
+                startTestBtn.disabled = true;
+                btnText.textContent = 'Testing...';
+                exportBtn.style.display = 'none';
+                progressContainer.style.display = 'block';
+                resultsGrid.style.display = 'none';
+                statsPanel.style.display = 'none';
+                recommendationsSection.style.display = 'none';
+                resultsGrid.innerHTML = '';
+
+                // Update status card
+                updateStatusCard('testing');
+
+                // Test each server
+                for (let i = 0; i < CLOUD_GAMING_SERVERS.length; i++) {
+                    const server = CLOUD_GAMING_SERVERS[i];
+                    const progress = ((i / CLOUD_GAMING_SERVERS.length) * 100);
+                    
+                    progressFill.style.width = progress + '%';
+                    progressText.textContent = `Testing ${server.name} (${server.location})...`;
+
+                    const result = await testPing(server);
+                    testResults.push(result);
+
+                    // Add result card immediately
+                    addResultCard(result);
+                }
+
+                // Complete test
+                progressFill.style.width = '100%';
+                progressText.textContent = 'Test complete!';
+
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    resultsGrid.style.display = 'grid';
+                    displayStatistics();
+                    displayRecommendations();
+                    updateStatusCard('complete');
+                    startTestBtn.disabled = false;
+                    btnText.textContent = 'Run Test Again';
+                    exportBtn.style.display = 'inline-flex';
+                }, 500);
+            }
+
+            // Add Result Card
+            function addResultCard(result) {
+                const card = document.createElement('div');
+                card.className = 'cl-result-card';
+                
+                const percentage = Math.min((result.latency / 200) * 100, 100);
+                const statusEmoji = result.quality === 'excellent' ? '✅' : 
+                                   result.quality === 'good' ? '✔️' : 
+                                   result.quality === 'fair' ? '⚠️' : '❌';
+
+                card.innerHTML = `
+                    <div class="cl-result-header">
+                        <div class="cl-result-service">
+                            <div class="cl-result-logo">${result.emoji}</div>
+                            <div class="cl-result-info">
+                                <h4>${result.name}</h4>
+                                <p>${result.location}</p>
+                            </div>
+                        </div>
+                        <div class="cl-result-status">${statusEmoji}</div>
+                    </div>
+                    <div class="cl-result-latency">
+                        <div class="cl-latency-value">${result.latency}<span style="font-size: 18px !important; font-weight: 600 !important; margin-left: 4px !important;">ms</span></div>
+                        <div class="cl-latency-label">Average Latency</div>
+                    </div>
+                    <div class="cl-latency-bar">
+                        <div class="cl-latency-bar-fill cl-latency-bar-${result.quality}" style="width: ${percentage}%"></div>
+                    </div>
+                    <div class="cl-result-quality">
+                        <span class="cl-quality-label">Connection Quality</span>
+                        <span class="cl-quality-badge cl-quality-${result.quality}">${result.quality}</span>
+                    </div>
+                `;
+
+                resultsGrid.appendChild(card);
+            }
+
+            // Display Statistics
+            function displayStatistics() {
+                const validResults = testResults.filter(r => r.latency > 0);
+                const avgLatency = Math.round(
+                    validResults.reduce((sum, r) => sum + r.latency, 0) / validResults.length
+                );
+                const bestServer = validResults.reduce((best, r) => 
+                    r.latency < best.latency ? r : best
+                );
+                const testDuration = ((Date.now() - testStartTime) / 1000).toFixed(1);
+
+                document.getElementById('cl-stat-avg-latency').textContent = avgLatency + ' ms';
+                document.getElementById('cl-stat-best-server').textContent = 
+                    bestServer.name + ' (' + bestServer.location + ')';
+                document.getElementById('cl-stat-servers-tested').textContent = validResults.length;
+                document.getElementById('cl-stat-duration').textContent = testDuration + ' s';
+
+                statsPanel.style.display = 'block';
+            }
+
+            // Display Recommendations
+            function displayRecommendations() {
+                const validResults = testResults.filter(r => r.latency > 0);
+                const avgLatency = validResults.reduce((sum, r) => sum + r.latency, 0) / validResults.length;
+                const excellentCount = validResults.filter(r => r.quality === 'excellent').length;
+                const goodCount = validResults.filter(r => r.quality === 'good').length;
+                const bestServer = validResults.reduce((best, r) => 
+                    r.latency < best.latency ? r : best
+                );
+
+                const recommendationsContent = document.getElementById('cl-recommendations-content');
+                recommendationsContent.innerHTML = '';
+
+                const recommendations = [];
+
+                // Overall assessment
+                if (avgLatency < 50) {
+                    recommendations.push({
+                        type: 'success',
+                        title: 'Excellent Connection',
+                        text: 'Your network is ideal for cloud gaming! You should experience smooth gameplay with minimal input lag across most services.'
+                    });
+                } else if (avgLatency < 80) {
+                    recommendations.push({
+                        type: 'info',
+                        title: 'Good Connection',
+                        text: 'Your connection is suitable for cloud gaming. You may experience occasional lag in fast-paced games, but overall performance should be solid.'
+                    });
+                } else {
+                    recommendations.push({
+                        type: 'warning',
+                        title: 'Connection Needs Improvement',
+                        text: 'Your latency is higher than ideal for cloud gaming. Consider upgrading your internet plan or connecting via Ethernet for better performance.'
+                    });
+                }
+
+                // Best server recommendation
+                recommendations.push({
+                    type: 'info',
+                    title: 'Recommended Service',
+                    text: `Based on your location, ${bestServer.name} (${bestServer.location}) offers the best latency at ${bestServer.latency}ms. Consider prioritizing this service.`
+                });
+
+                // Connection type recommendation
+                recommendations.push({
+                    type: 'info',
+                    title: 'Connection Tips',
+                    text: 'For optimal cloud gaming: Use a wired Ethernet connection instead of Wi-Fi, close bandwidth-heavy applications, and game during off-peak hours.'
+                });
+
+                // Quality settings recommendation
+                if (avgLatency > 80) {
+                    recommendations.push({
+                        type: 'warning',
+                        title: 'Quality Settings',
+                        text: 'Consider lowering stream quality settings to 1080p or 720p to reduce latency and improve responsiveness. Prioritize performance over visual quality.'
+                    });
+                }
+
+                // Render recommendations
+                recommendations.forEach(rec => {
+                    const item = document.createElement('div');
+                    item.className = `cl-recommendation-item cl-recommendation-${rec.type}`;
+                    
+                    const iconSvg = rec.type === 'success' ? 
+                        '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' :
+                        rec.type === 'warning' ?
+                        '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v4M12 17h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' :
+                        '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+                    item.innerHTML = `
+                        <div class="cl-recommendation-icon">${iconSvg}</div>
+                        <div class="cl-recommendation-text">
+                            <h5>${rec.title}</h5>
+                            <p>${rec.text}</p>
+                        </div>
+                    `;
+                    recommendationsContent.appendChild(item);
+                });
+
+                recommendationsSection.style.display = 'block';
+            }
+
+            // Update Status Card
+            function updateStatusCard(status) {
+                if (status === 'testing') {
+                    statusIcon.classList.add('cl-loading');
+                    statusTitle.textContent = 'Testing Network...';
+                    statusDescription.textContent = 'Please wait while we measure your connection to cloud gaming servers';
+                    statusBadge.innerHTML = '<span class="cl-badge cl-badge-neutral">In Progress</span>';
+                } else if (status === 'complete') {
+                    statusIcon.classList.remove('cl-loading');
+                    
+                    const validResults = testResults.filter(r => r.latency > 0);
+                    const avgLatency = validResults.reduce((sum, r) => sum + r.latency, 0) / validResults.length;
+                    
+                    let quality, badgeClass, title, description;
+                    
+                    if (avgLatency < 50) {
+                        quality = 'Excellent';
+                        badgeClass = 'cl-badge-excellent';
+                        title = '🎉 Outstanding Performance!';
+                        description = 'Your network is perfectly optimized for cloud gaming with minimal latency';
+                    } else if (avgLatency < 80) {
+                        quality = 'Good';
+                        badgeClass = 'cl-badge-good';
+                        title = '✅ Good Performance';
+                        description = 'Your network is suitable for cloud gaming with acceptable latency';
+                    } else if (avgLatency < 120) {
+                        quality = 'Fair';
+                        badgeClass = 'cl-badge-fair';
+                        title = '⚠️ Fair Performance';
+                        description = 'Your network may experience some lag during cloud gaming sessions';
+                    } else {
+                        quality = 'Poor';
+                        badgeClass = 'cl-badge-poor';
+                        title = '❌ Performance Issues';
+                        description = 'Your network latency is high. Consider improving your connection for better gaming';
+                    }
+                    
+                    statusTitle.textContent = title;
+                    statusDescription.textContent = description;
+                    statusBadge.innerHTML = `<span class="cl-badge ${badgeClass}">${quality}</span>`;
+                }
+            }
+
+            // Export Results
+            function exportResults() {
+                const timestamp = new Date().toLocaleString();
+                const validResults = testResults.filter(r => r.latency > 0);
+                const avgLatency = Math.round(
+                    validResults.reduce((sum, r) => sum + r.latency, 0) / validResults.length
+                );
+
+                let reportText = '═══════════════════════════════════════════════\n';
+                reportText += '   CLOUD GAMING NETWORK TEST REPORT\n';
+                reportText += '   CloudLoadout.com\n';
+                reportText += '═══════════════════════════════════════════════\n\n';
+                reportText += `Test Date: ${timestamp}\n`;
+                reportText += `Servers Tested: ${validResults.length}\n`;
+                reportText += `Average Latency: ${avgLatency}ms\n`;
+                reportText += `Test Duration: ${((Date.now() - testStartTime) / 1000).toFixed(1)}s\n\n`;
+                reportText += '───────────────────────────────────────────────\n';
+                reportText += 'DETAILED RESULTS:\n';
+                reportText += '───────────────────────────────────────────────\n\n';
+
+                testResults.forEach((result, index) => {
+                    reportText += `${index + 1}. ${result.name} (${result.location})\n`;
+                    reportText += `   Provider: ${result.provider}\n`;
+                    reportText += `   Latency: ${result.latency}ms\n`;
+                    reportText += `   Quality: ${result.quality.toUpperCase()}\n`;
+                    reportText += `   Status: ${result.quality === 'excellent' ? '✅ Excellent' : 
+                                              result.quality === 'good' ? '✔️ Good' : 
+                                              result.quality === 'fair' ? '⚠️ Fair' : '❌ Poor'}\n\n`;
+                });
+
+                reportText += '───────────────────────────────────────────────\n';
+                reportText += 'RECOMMENDATIONS:\n';
+                reportText += '───────────────────────────────────────────────\n\n';
+
+                if (avgLatency < 50) {
+                    reportText += '✅ Your connection is excellent for cloud gaming!\n';
+                    reportText += '   You should experience smooth gameplay across all services.\n\n';
+                } else if (avgLatency < 80) {
+                    reportText += '✔️ Your connection is good for cloud gaming.\n';
+                    reportText += '   Most games should run smoothly with minimal lag.\n\n';
+                } else {
+                    reportText += '⚠️ Your connection may need improvement.\n';
+                    reportText += '   Consider upgrading your internet or using wired connection.\n\n';
+                }
+
+                const bestServer = validResults.reduce((best, r) => 
+                    r.latency < best.latency ? r : best
+                );
+                reportText += `🎯 Best Server: ${bestServer.name} (${bestServer.location}) - ${bestServer.latency}ms\n\n`;
+                reportText += '═══════════════════════════════════════════════\n';
+                reportText += 'Generated by CloudLoadout Network Tester\n';
+                reportText += 'Visit CloudLoadout.com for more cloud gaming guides\n';
+                reportText += '═══════════════════════════════════════════════\n';
+
+                // Create and download file
+                const blob = new Blob([reportText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `cloudloadout-network-test-${Date.now()}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            // Initialize on DOM load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>
