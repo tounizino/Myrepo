@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compare top cloud gaming platforms including GeForce NOW, Boosteroid, Xbox Cloud Gaming, Shadow PC, and Parsec. Find the best cloud gaming service for your needs.">
+    <meta name="keywords" content="cloud gaming, GeForce NOW, Boosteroid, Xbox Cloud Gaming, Shadow PC, Parsec, game streaming, cloud gaming comparison">
+    <title>Cloud Gaming Platforms & Launchers Comparison Tool | CloudLoadout</title>
+    
+    <!-- Schema.org markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Cloud Gaming Platforms Comparison Tool",
+      "applicationCategory": "WebApplication",
+      "description": "Interactive tool to compare and explore cloud gaming platforms and launchers",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <style>
+        /* Scoped Container Styles - All styles wrapped with !important to prevent leakage */
+        .cloud-gaming-tool-wrapper * {
+            box-sizing: border-box !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .cloud-gaming-tool-wrapper {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 20px !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        
+        .cloud-gaming-tool-wrapper::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+        }
+        
+        .cloud-gaming-tool-wrapper > * {
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        
+        .cgt-header {
+            text-align: center !important;
+            margin-bottom: 30px !important;
+            padding: 0 20px !important;
+        }
+        
+        .cgt-header h1 {
+            color: #ffffff !important;
+            font-size: 2.5rem !important;
+            font-weight: 800 !important;
+            margin-bottom: 10px !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+            line-height: 1.2 !important;
+        }
+        
+        .cgt-header p {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1.1rem !important;
+            margin-top: 10px !important;
+            line-height: 1.6 !important;
+        }
+        
+        .cgt-controls {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 15px !important;
+            margin-bottom: 30px !important;
+            padding: 20px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 15px !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .cgt-search-box {
+            flex: 1 !important;
+            min-width: 250px !important;
+            position: relative !important;
+        }
+        
+        .cgt-search-box input {
+            width: 100% !important;
+            padding: 15px 45px 15px 20px !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 12px !important;
+            font-size: 1rem !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            color: #333 !important;
+            transition: all 0.3s ease !important;
+            outline: none !important;
+        }
+        
+        .cgt-search-box input:focus {
+            border-color: #fff !important;
+            background: #fff !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .cgt-search-box::after {
+            content: '🔍' !important;
+            position: absolute !important;
+            right: 15px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            font-size: 1.2rem !important;
+            pointer-events: none !important;
+        }
+        
+        .cgt-filter-group {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+            align-items: center !important;
+        }
+        
+        .cgt-filter-btn {
+            padding: 12px 24px !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: 25px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: #fff !important;
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            white-space: nowrap !important;
+        }
+        
+        .cgt-filter-btn:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .cgt-filter-btn.active {
+            background: #fff !important;
+            color: #667eea !important;
+            border-color: #fff !important;
+        }
+        
+        .cgt-view-toggle {
+            display: flex !important;
+            gap: 10px !important;
+            margin-left: auto !important;
+        }
+        
+        .cgt-view-btn {
+            padding: 12px 20px !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: 12px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: #fff !important;
+            font-size: 1.2rem !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .cgt-view-btn:hover,
+        .cgt-view-btn.active {
+            background: #fff !important;
+            color: #667eea !important;
+            border-color: #fff !important;
+        }
+        
+        .cgt-platforms-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+            gap: 25px !important;
+            margin-bottom: 30px !important;
+        }
+        
+        .cgt-platforms-grid.list-view {
+            grid-template-columns: 1fr !important;
+        }
+        
+        .cgt-platform-card {
+            background: rgba(255, 255, 255, 0.98) !important;
+            border-radius: 20px !important;
+            padding: 25px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            border: 2px solid transparent !important;
+            position: relative !important;
+            overflow: hidden !important;
+            cursor: pointer !important;
+        }
+        
+        .cgt-platform-card::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 5px !important;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+            transform: scaleX(0) !important;
+            transform-origin: left !important;
+            transition: transform 0.4s ease !important;
+        }
+        
+        .cgt-platform-card:hover::before {
+            transform: scaleX(1) !important;
+        }
+        
+        .cgt-platform-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+            border-color: #667eea !important;
+        }
+        
+        .cgt-platform-card.favorited {
+            border-color: #ffd700 !important;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 255, 255, 0.98) 50%) !important;
+        }
+        
+        .cgt-card-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: flex-start !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .cgt-platform-icon {
+            width: 70px !important;
+            height: 70px !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border-radius: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 2.5rem !important;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4) !important;
+            margin-bottom: 15px !important;
+        }
+        
+        .cgt-favorite-btn {
+            background: transparent !important;
+            border: none !important;
+            font-size: 1.5rem !important;
+            cursor: pointer !important;
+            transition: transform 0.3s ease !important;
+            padding: 5px !important;
+        }
+        
+        .cgt-favorite-btn:hover {
+            transform: scale(1.3) rotate(15deg) !important;
+        }
+        
+        .cgt-platform-name {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            color: #2d3748 !important;
+            margin-bottom: 8px !important;
+            line-height: 1.3 !important;
+        }
+        
+        .cgt-platform-tagline {
+            font-size: 0.9rem !important;
+            color: #718096 !important;
+            margin-bottom: 15px !important;
+            line-height: 1.5 !important;
+        }
+        
+        .cgt-rating {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-bottom: 15px !important;
+        }
+        
+        .cgt-stars {
+            color: #ffd700 !important;
+            font-size: 1.1rem !important;
+            letter-spacing: 2px !important;
+        }
+        
+        .cgt-rating-text {
+            color: #4a5568 !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
+        }
+        
+        .cgt-price-tag {
+            display: inline-block !important;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+            color: #fff !important;
+            padding: 6px 14px !important;
+            border-radius: 20px !important;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            margin-bottom: 15px !important;
+            box-shadow: 0 3px 10px rgba(72, 187, 120, 0.3) !important;
+        }
+        
+        .cgt-price-tag.premium {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3) !important;
+        }
+        
+        .cgt-features-list {
+            list-style: none !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .cgt-features-list li {
+            padding: 8px 0 8px 28px !important;
+            position: relative !important;
+            color: #4a5568 !important;
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        .cgt-features-list li::before {
+            content: '✓' !important;
+            position: absolute !important;
+            left: 0 !important;
+            color: #48bb78 !important;
+            font-weight: bold !important;
+            font-size: 1.2rem !important;
+        }
+        
+        .cgt-device-support {
+            display: flex !important;
+            gap: 10px !important;
+            margin-bottom: 20px !important;
+            flex-wrap: wrap !important;
+        }
+        
+        .cgt-device-icon {
+            font-size: 1.5rem !important;
+            padding: 8px !important;
+            background: rgba(102, 126, 234, 0.1) !important;
+            border-radius: 10px !important;
+            transition: all 0.3s ease !important;
+            cursor: help !important;
+        }
+        
+        .cgt-device-icon:hover {
+            background: rgba(102, 126, 234, 0.2) !important;
+            transform: scale(1.15) !important;
+        }
+        
+        .cgt-specs {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+            margin-bottom: 20px !important;
+            padding: 15px !important;
+            background: rgba(102, 126, 234, 0.05) !important;
+            border-radius: 12px !important;
+        }
+        
+        .cgt-spec-item {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        
+        .cgt-spec-label {
+            font-size: 0.75rem !important;
+            color: #718096 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            margin-bottom: 4px !important;
+        }
+        
+        .cgt-spec-value {
+            font-size: 0.9rem !important;
+            color: #2d3748 !important;
+            font-weight: 600 !important;
+        }
+        
+        .cgt-performance-bar {
+            margin-bottom: 15px !important;
+        }
+        
+        .cgt-performance-label {
+            font-size: 0.85rem !important;
+            color: #4a5568 !important;
+            margin-bottom: 6px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+        }
+        
+        .cgt-bar-container {
+            height: 8px !important;
+            background: rgba(0, 0, 0, 0.1) !important;
+            border-radius: 10px !important;
+            overflow: hidden !important;
+        }
+        
+        .cgt-bar-fill {
+            height: 100% !important;
+            background: linear-gradient(90deg, #48bb78 0%, #38a169 100%) !important;
+            border-radius: 10px !important;
+            transition: width 0.6s ease !important;
+        }
+        
+        .cgt-card-actions {
+            display: flex !important;
+            gap: 10px !important;
+            margin-top: 20px !important;
+        }
+        
+        .cgt-btn {
+            flex: 1 !important;
+            padding: 12px 20px !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            text-align: center !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+        }
+        
+        .cgt-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+        }
+        
+        .cgt-btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5) !important;
+        }
+        
+        .cgt-btn-secondary {
+            background: rgba(102, 126, 234, 0.1) !important;
+            color: #667eea !important;
+            border: 2px solid #667eea !important;
+        }
+        
+        .cgt-btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .cgt-comparison-section {
+            margin-top: 30px !important;
+            padding: 25px !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .cgt-comparison-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            margin-bottom: 20px !important;
+            flex-wrap: wrap !important;
+            gap: 15px !important;
+        }
+        
+        .cgt-comparison-header h2 {
+            color: #2d3748 !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+        }
+        
+        .cgt-comparison-table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            overflow-x: auto !important;
+            display: block !important;
+        }
+        
+        .cgt-comparison-table table {
+            width: 100% !important;
+            min-width: 600px !important;
+        }
+        
+        .cgt-comparison-table th,
+        .cgt-comparison-table td {
+            padding: 15px !important;
+            text-align: left !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .cgt-comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: #fff !important;
+            font-weight: 600 !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+        }
+        
+        .cgt-comparison-table tr:hover {
+            background: rgba(102, 126, 234, 0.05) !important;
+        }
+        
+        .cgt-footer {
+            text-align: center !important;
+            margin-top: 30px !important;
+            padding: 20px !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .cgt-footer a {
+            color: #fff !important;
+            text-decoration: underline !important;
+            font-weight: 600 !important;
+        }
+        
+        .cgt-stats-bar {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+            gap: 15px !important;
+            margin-bottom: 30px !important;
+            padding: 20px !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 15px !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .cgt-stat {
+            text-align: center !important;
+            padding: 15px !important;
+            border-radius: 12px !important;
+            background: rgba(102, 126, 234, 0.05) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .cgt-stat:hover {
+            background: rgba(102, 126, 234, 0.1) !important;
+            transform: translateY(-3px) !important;
+        }
+        
+        .cgt-stat-number {
+            font-size: 2rem !important;
+            font-weight: 800 !important;
+            color: #667eea !important;
+            margin-bottom: 5px !important;
+            line-height: 1 !important;
+        }
+        
+        .cgt-stat-label {
+            font-size: 0.9rem !important;
+            color: #4a5568 !important;
+            font-weight: 600 !important;
+        }
+        
+        .cgt-modal {
+            display: none !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+            z-index: 10000 !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 20px !important;
+            backdrop-filter: blur(5px) !important;
+        }
+        
+        .cgt-modal.active {
+            display: flex !important;
+        }
+        
+        .cgt-modal-content {
+            background: #fff !important;
+            border-radius: 20px !important;
+            padding: 30px !important;
+            max-width: 600px !important;
+            width: 100% !important;
+            max-height: 90vh !important;
+            overflow-y: auto !important;
+            position: relative !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        .cgt-modal-close {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            background: transparent !important;
+            border: none !important;
+            font-size: 2rem !important;
+            cursor: pointer !important;
+            color: #718096 !important;
+            width: 40px !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .cgt-modal-close:hover {
+            background: rgba(0, 0, 0, 0.1) !important;
+            color: #2d3748 !important;
+            transform: rotate(90deg) !important;
+        }
+        
+        .cgt-toast {
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%) !important;
+            color: #fff !important;
+            padding: 15px 25px !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+            z-index: 10001 !important;
+            transform: translateX(400px) !important;
+            transition: transform 0.4s ease !important;
+            font-weight: 600 !important;
+        }
+        
+        .cgt-toast.show {
+            transform: translateX(0) !important;
+        }
+        
+        .cgt-no-results {
+            text-align: center !important;
+            padding: 60px 20px !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .cgt-no-results-icon {
+            font-size: 4rem !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .cgt-no-results h3 {
+            color: #2d3748 !important;
+            font-size: 1.5rem !important;
+            margin-bottom: 10px !important;
+        }
+        
+        .cgt-no-results p {
+            color: #718096 !important;
+            font-size: 1rem !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cgt-header h1 {
+                font-size: 1.8rem !important;
+            }
+            
+            .cgt-header p {
+                font-size: 0.95rem !important;
+            }
+            
+            .cgt-controls {
+                flex-direction: column !important;
+            }
+            
+            .cgt-view-toggle {
+                margin-left: 0 !important;
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            
+            .cgt-platforms-grid {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            
+            .cgt-stats-bar {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .cgt-specs {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .cgt-card-actions {
+                flex-direction: column !important;
+            }
+            
+            .cgt-toast {
+                bottom: 15px !important;
+                right: 15px !important;
+                left: 15px !important;
+                transform: translateY(200px) !important;
+            }
+            
+            .cgt-toast.show {
+                transform: translateY(0) !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cloud-gaming-tool-wrapper {
+                padding: 15px !important;
+                border-radius: 15px !important;
+            }
+            
+            .cgt-header h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            .cgt-platform-icon {
+                width: 60px !important;
+                height: 60px !important;
+                font-size: 2rem !important;
+            }
+            
+            .cgt-stats-bar {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .cgt-stat-number {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0 !important;
+                transform: translateY(30px) !important;
+            }
+            to {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        }
+        
+        .cgt-platform-card {
+            animation: fadeInUp 0.6s ease forwards !important;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .cloud-gaming-tool-wrapper {
+                box-shadow: none !important;
+                background: #fff !important;
+            }
+            
+            .cgt-controls,
+            .cgt-card-actions,
+            .cgt-favorite-btn {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cloud-gaming-tool-wrapper" id="cloudGamingTool">
+        <!-- Header -->
+        <header class="cgt-header">
+            <h1>☁️ Cloud Gaming Platforms & Launchers</h1>
+            <p>Compare and discover the best cloud gaming services to optimize your gaming experience</p>
+        </header>
+        
+        <!-- Statistics Bar -->
+        <div class="cgt-stats-bar">
+            <div class="cgt-stat">
+                <div class="cgt-stat-number" id="totalPlatforms">5</div>
+                <div class="cgt-stat-label">Platforms</div>
+            </div>
+            <div class="cgt-stat">
+                <div class="cgt-stat-number" id="avgRating">4.6</div>
+                <div class="cgt-stat-label">Avg Rating</div>
+            </div>
+            <div class="cgt-stat">
+                <div class="cgt-stat-number" id="favoriteCount">0</div>
+                <div class="cgt-stat-label">Favorites</div>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="cgt-controls">
+            <div class="cgt-search-box">
+                <input type="search" 
+                       id="platformSearch" 
+                       placeholder="Search platforms..."
+                       aria-label="Search cloud gaming platforms">
+            </div>
+            
+            <div class="cgt-filter-group">
+                <button class="cgt-filter-btn active" data-filter="all">All Platforms</button>
+                <button class="cgt-filter-btn" data-filter="free">Free Tier</button>
+                <button class="cgt-filter-btn" data-filter="premium">Premium</button>
+                <button class="cgt-filter-btn" data-filter="low-latency">Low Latency</button>
+            </div>
+            
+            <div class="cgt-view-toggle">
+                <button class="cgt-view-btn active" data-view="grid" aria-label="Grid view">⊞</button>
+                <button class="cgt-view-btn" data-view="list" aria-label="List view">☰</button>
+            </div>
+        </div>
+        
+        <!-- Platforms Grid -->
+        <div class="cgt-platforms-grid" id="platformsGrid">
+            <!-- Platforms will be dynamically inserted here -->
+        </div>
+        
+        <!-- Comparison Section -->
+        <div class="cgt-comparison-section">
+            <div class="cgt-comparison-header">
+                <h2>Platform Comparison</h2>
+                <button class="cgt-btn cgt-btn-secondary" id="exportBtn">📊 Export Comparison</button>
+            </div>
+            <div class="cgt-comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Price</th>
+                            <th>Latency</th>
+                            <th>Resolution</th>
+                            <th>FPS</th>
+                            <th>Game Library</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonTableBody">
+                        <!-- Table rows will be dynamically inserted -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="cgt-footer">
+            <p>🎮 Powered by <a href="https://cloudloadout.com" target="_blank" rel="noopener">CloudLoadout.com</a> | Your Ultimate Cloud Gaming Guide</p>
+        </footer>
+        
+        <!-- Modal -->
+        <div class="cgt-modal" id="detailsModal">
+            <div class="cgt-modal-content">
+                <button class="cgt-modal-close" id="modalClose">×</button>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+        
+        <!-- Toast Notification -->
+        <div class="cgt-toast" id="toast"></div>
+    </div>
+    
+    <script>
+        // Platform Data
+        const platforms = [
+            {
+                id: 1,
+                name: "GeForce NOW",
+                icon: "🎮",
+                tagline: "High-quality streaming with your own game library",
+                description: "NVIDIA's GeForce NOW is a premium cloud gaming service that lets you play games you already own from stores like Steam, Epic Games, and more. With RTX support and high-quality streaming, it's perfect for competitive gamers.",
+                rating: 4.7,
+                reviews: 15420,
+                price: "Free - $19.99/mo",
+                priceType: "premium",
+                features: [
+                    "RTX graphics support",
+                    "Up to 1440p 120fps on Ultimate",
+                    "Bring your own games from Steam, Epic, etc.",
+                    "Priority access with paid tiers",
+                    "Ray tracing enabled"
+                ],
+                devices: ["💻", "📱", "🖥️", "📺", "🎮"],
+                specs: {
+                    latency: "Low",
+                    resolution: "1440p",
+                    fps: "120",
+                    library: "1500+"
+                },
+                performance: {
+                    quality: 95,
+                    latency: 90,
+                    reliability: 92
+                },
+                tags: ["premium", "low-latency", "high-quality"],
+                url: "https://www.nvidia.com/en-us/geforce-now/",
+                color: "#76b900"
+            },
+            {
+                id: 2,
+                name: "Boosteroid",
+                icon: "🚀",
+                tagline: "Browser-based cloud gaming with wide game support",
+                description: "Boosteroid offers easy browser-based access to a vast library of games without downloads. Great for casual gamers who want instant access to popular titles across all devices.",
+                rating: 4.4,
+                reviews: 8750,
+                price: "$7.49 - $9.89/mo",
+                priceType: "premium",
+                features: [
+                    "Browser-based, no download needed",
+                    "1080p 60fps streaming",
+                    "Over 500 games available",
+                    "Cross-platform support",
+                    "Affordable pricing"
+                ],
+                devices: ["💻", "📱", "🖥️", "📺"],
+                specs: {
+                    latency: "Medium",
+                    resolution: "1080p",
+                    fps: "60",
+                    library: "500+"
+                },
+                performance: {
+                    quality: 85,
+                    latency: 75,
+                    reliability: 82
+                },
+                tags: ["premium", "browser"],
+                url: "https://boosteroid.com/",
+                color: "#ff6b35"
+            },
+            {
+                id: 3,
+                name: "Xbox Cloud Gaming",
+                icon: "🎯",
+                tagline: "Great controller support and mobile optimization",
+                description: "Part of Xbox Game Pass Ultimate, this service offers seamless integration with Xbox ecosystem. Perfect for Xbox players who want to continue their games on mobile or PC.",
+                rating: 4.6,
+                reviews: 23100,
+                price: "$16.99/mo (Game Pass Ultimate)",
+                priceType: "premium",
+                features: [
+                    "Included with Game Pass Ultimate",
+                    "Xbox exclusive titles",
+                    "Touch controls on mobile",
+                    "Cloud saves sync across devices",
+                    "400+ games in library"
+                ],
+                devices: ["💻", "📱", "🎮", "📺"],
+                specs: {
+                    latency: "Low",
+                    resolution: "1080p",
+                    fps: "60",
+                    library: "400+"
+                },
+                performance: {
+                    quality: 88,
+                    latency: 85,
+                    reliability: 90
+                },
+                tags: ["premium", "low-latency", "console"],
+                url: "https://www.xbox.com/play",
+                color: "#107c10"
+            },
+            {
+                id: 4,
+                name: "Shadow PC",
+                icon: "☁️",
+                tagline: "Full Windows PC in the cloud; customizable",
+                description: "Shadow provides a complete Windows 10 PC in the cloud with dedicated high-end hardware. Perfect for power users who want full control and the ability to install any software.",
+                rating: 4.5,
+                reviews: 6890,
+                price: "$29.99/mo",
+                priceType: "premium",
+                features: [
+                    "Full Windows 10 PC access",
+                    "Dedicated high-end hardware",
+                    "Install any software/game",
+                    "Up to 4K 144Hz support",
+                    "Storage upgrade options"
+                ],
+                devices: ["💻", "📱", "🖥️", "📺", "🎮"],
+                specs: {
+                    latency: "Low",
+                    resolution: "4K",
+                    fps: "144",
+                    library: "Unlimited"
+                },
+                performance: {
+                    quality: 98,
+                    latency: 88,
+                    reliability: 95
+                },
+                tags: ["premium", "low-latency", "high-quality", "customizable"],
+                url: "https://shadow.tech/",
+                color: "#ff6200"
+            },
+            {
+                id: 5,
+                name: "Parsec",
+                icon: "⚡",
+                tagline: "Low-latency remote desktop for gaming",
+                description: "Parsec specializes in ultra-low latency streaming, perfect for streaming games from your own PC or connecting to a cloud PC. Popular among developers and streamers.",
+                rating: 4.8,
+                reviews: 12340,
+                price: "Free - $30/mo",
+                priceType: "free",
+                features: [
+                    "Ultra-low latency (<10ms)",
+                    "Stream from your own PC",
+                    "4:4:4 color accuracy",
+                    "Co-op gaming support",
+                    "Free tier available"
+                ],
+                devices: ["💻", "📱", "🖥️", "🎮"],
+                specs: {
+                    latency: "Ultra Low",
+                    resolution: "4K",
+                    fps: "240",
+                    library: "Own PC"
+                },
+                performance: {
+                    quality: 97,
+                    latency: 98,
+                    reliability: 93
+                },
+                tags: ["free", "low-latency", "high-quality", "streaming"],
+                url: "https://parsec.app/",
+                color: "#6b46c1"
+            }
+        ];
+        
+        // State Management
+        let favorites = JSON.parse(localStorage.getItem('cgFavorites')) || [];
+        let currentFilter = 'all';
+        let currentView = 'grid';
+        let searchQuery = '';
+        
+        // DOM Elements
+        const platformsGrid = document.getElementById('platformsGrid');
+        const searchInput = document.getElementById('platformSearch');
+        const filterBtns = document.querySelectorAll('.cgt-filter-btn');
+        const viewBtns = document.querySelectorAll('.cgt-view-btn');
+        const comparisonTableBody = document.getElementById('comparisonTableBody');
+        const modal = document.getElementById('detailsModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+        const toast = document.getElementById('toast');
+        const exportBtn = document.getElementById('exportBtn');
+        
+        // Initialize
+        function init() {
+            renderPlatforms();
+            renderComparisonTable();
+            updateStats();
+            attachEventListeners();
+        }
+        
+        // Render Platforms
+        function renderPlatforms() {
+            const filteredPlatforms = filterPlatforms();
+            
+            if (filteredPlatforms.length === 0) {
+                platformsGrid.innerHTML = `
+                    <div class="cgt-no-results">
+                        <div class="cgt-no-results-icon">🔍</div>
+                        <h3>No platforms found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            platformsGrid.innerHTML = filteredPlatforms.map((platform, index) => `
+                <article class="cgt-platform-card ${favorites.includes(platform.id) ? 'favorited' : ''}" 
+                         data-id="${platform.id}"
+                         style="animation-delay: ${index * 0.1}s">
+                    <div class="cgt-card-header">
+                        <div>
+                            <div class="cgt-platform-icon">${platform.icon}</div>
+                            <h3 class="cgt-platform-name">${platform.name}</h3>
+                        </div>
+                        <button class="cgt-favorite-btn" 
+                                data-id="${platform.id}"
+                                aria-label="Toggle favorite"
+                                title="${favorites.includes(platform.id) ? 'Remove from favorites' : 'Add to favorites'}">
+                            ${favorites.includes(platform.id) ? '⭐' : '☆'}
+                        </button>
+                    </div>
+                    
+                    <p class="cgt-platform-tagline">${platform.tagline}</p>
+                    
+                    <div class="cgt-rating" title="${platform.reviews.toLocaleString()} reviews">
+                        <span class="cgt-stars">${getStars(platform.rating)}</span>
+                        <span class="cgt-rating-text">${platform.rating} (${formatNumber(platform.reviews)})</span>
+                    </div>
+                    
+                    <div class="cgt-price-tag ${platform.priceType}">${platform.price}</div>
+                    
+                    <ul class="cgt-features-list">
+                        ${platform.features.slice(0, 4).map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                    
+                    <div class="cgt-device-support" title="Supported devices">
+                        ${platform.devices.map(device => `<span class="cgt-device-icon">${device}</span>`).join('')}
+                    </div>
+                    
+                    <div class="cgt-specs">
+                        <div class="cgt-spec-item">
+                            <span class="cgt-spec-label">Latency</span>
+                            <span class="cgt-spec-value">${platform.specs.latency}</span>
+                        </div>
+                        <div class="cgt-spec-item">
+                            <span class="cgt-spec-label">Resolution</span>
+                            <span class="cgt-spec-value">${platform.specs.resolution}</span>
+                        </div>
+                        <div class="cgt-spec-item">
+                            <span class="cgt-spec-label">FPS</span>
+                            <span class="cgt-spec-value">${platform.specs.fps}</span>
+                        </div>
+                        <div class="cgt-spec-item">
+                            <span class="cgt-spec-label">Games</span>
+                            <span class="cgt-spec-value">${platform.specs.library}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cgt-performance-bar">
+                        <div class="cgt-performance-label">
+                            <span>Quality</span>
+                            <span>${platform.performance.quality}%</span>
+                        </div>
+                        <div class="cgt-bar-container">
+                            <div class="cgt-bar-fill" style="width: ${platform.performance.quality}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="cgt-performance-bar">
+                        <div class="cgt-performance-label">
+                            <span>Latency</span>
+                            <span>${platform.performance.latency}%</span>
+                        </div>
+                        <div class="cgt-bar-container">
+                            <div class="cgt-bar-fill" style="width: ${platform.performance.latency}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="cgt-card-actions">
+                        <a href="${platform.url}" 
+                           class="cgt-btn cgt-btn-primary" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="Visit ${platform.name}">
+                            Visit Platform
+                        </a>
+                        <button class="cgt-btn cgt-btn-secondary cgt-details-btn" 
+                                data-id="${platform.id}"
+                                aria-label="View details for ${platform.name}">
+                            Details
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+            
+            // Attach card event listeners
+            attachCardListeners();
+        }
+        
+        // Filter Platforms
+        function filterPlatforms() {
+            return platforms.filter(platform => {
+                // Search filter
+                const matchesSearch = platform.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    platform.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    platform.description.toLowerCase().includes(searchQuery.toLowerCase());
+                
+                // Category filter
+                const matchesFilter = currentFilter === 'all' || 
+                                    platform.tags.includes(currentFilter);
+                
+                return matchesSearch && matchesFilter;
+            });
+        }
+        
+        // Render Comparison Table
+        function renderComparisonTable() {
+            comparisonTableBody.innerHTML = platforms.map(platform => `
+                <tr>
+                    <td><strong>${platform.icon} ${platform.name}</strong></td>
+                    <td>${platform.price}</td>
+                    <td>${platform.specs.latency}</td>
+                    <td>${platform.specs.resolution}</td>
+                    <td>${platform.specs.fps}</td>
+                    <td>${platform.specs.library}</td>
+                </tr>
+            `).join('');
+        }
+        
+        // Update Stats
+        function updateStats() {
+            document.getElementById('totalPlatforms').textContent = platforms.length;
+            document.getElementById('favoriteCount').textContent = favorites.length;
+            
+            const avgRating = (platforms.reduce((sum, p) => sum + p.rating, 0) / platforms.length).toFixed(1);
+            document.getElementById('avgRating').textContent = avgRating;
+        }
+        
+        // Attach Event Listeners
+        function attachEventListeners() {
+            // Search
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderPlatforms();
+            });
+            
+            // Filters
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    renderPlatforms();
+                });
+            });
+            
+            // View Toggle
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentView = btn.dataset.view;
+                    platformsGrid.classList.toggle('list-view', currentView === 'list');
+                });
+            });
+            
+            // Modal
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            
+            // Export
+            exportBtn.addEventListener('click', exportComparison);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+        
+        // Attach Card Listeners
+        function attachCardListeners() {
+            // Favorite buttons
+            document.querySelectorAll('.cgt-favorite-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleFavorite(parseInt(btn.dataset.id));
+                });
+            });
+            
+            // Details buttons
+            document.querySelectorAll('.cgt-details-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showDetails(parseInt(btn.dataset.id));
+                });
+            });
+        }
+        
+        // Toggle Favorite
+        function toggleFavorite(id) {
+            const index = favorites.indexOf(id);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showToast('Removed from favorites');
+            } else {
+                favorites.push(id);
+                showToast('Added to favorites ⭐');
+            }
+            localStorage.setItem('cgFavorites', JSON.stringify(favorites));
+            renderPlatforms();
+            updateStats();
+        }
+        
+        // Show Details Modal
+        function showDetails(id) {
+            const platform = platforms.find(p => p.id === id);
+            if (!platform) return;
+            
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div class="cgt-platform-icon" style="margin: 0 auto 15px;">${platform.icon}</div>
+                    <h2 style="color: #2d3748; font-size: 2rem; margin-bottom: 10px;">${platform.name}</h2>
+                    <p style="color: #718096; font-size: 1.1rem; margin-bottom: 15px;">${platform.tagline}</p>
+                    <div class="cgt-rating" style="justify-content: center;">
+                        <span class="cgt-stars">${getStars(platform.rating)}</span>
+                        <span class="cgt-rating-text">${platform.rating} (${formatNumber(platform.reviews)} reviews)</span>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(102, 126, 234, 0.05); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                    <p style="color: #4a5568; font-size: 1rem; line-height: 1.6;">${platform.description}</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2d3748; font-size: 1.3rem; margin-bottom: 15px;">💰 Pricing</h3>
+                    <p style="color: #667eea; font-size: 1.3rem; font-weight: 700;">${platform.price}</p>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2d3748; font-size: 1.3rem; margin-bottom: 15px;">✨ Key Features</h3>
+                    <ul style="list-style: none;">
+                        ${platform.features.map(feature => `
+                            <li style="padding: 8px 0 8px 28px; position: relative; color: #4a5568; font-size: 0.95rem; line-height: 1.5;">
+                                <span style="position: absolute; left: 0; color: #48bb78; font-weight: bold; font-size: 1.2rem;">✓</span>
+                                ${feature}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2d3748; font-size: 1.3rem; margin-bottom: 15px;">📊 Performance Metrics</h3>
+                    <div style="display: grid; gap: 15px;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span style="color: #4a5568;">Quality</span>
+                                <span style="color: #2d3748; font-weight: 600;">${platform.performance.quality}%</span>
+                            </div>
+                            <div style="height: 10px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                                <div style="height: 100%; width: ${platform.performance.quality}%; background: linear-gradient(90deg, #48bb78 0%, #38a169 100%); border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span style="color: #4a5568;">Latency</span>
+                                <span style="color: #2d3748; font-weight: 600;">${platform.performance.latency}%</span>
+                            </div>
+                            <div style="height: 10px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                                <div style="height: 100%; width: ${platform.performance.latency}%; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span style="color: #4a5568;">Reliability</span>
+                                <span style="color: #2d3748; font-weight: 600;">${platform.performance.reliability}%</span>
+                            </div>
+                            <div style="height: 10px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                                <div style="height: 100%; width: ${platform.performance.reliability}%; background: linear-gradient(90deg, #ed8936 0%, #dd6b20 100%); border-radius: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #2d3748; font-size: 1.3rem; margin-bottom: 15px;">📱 Supported Devices</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        ${platform.devices.map(device => `
+                            <span style="font-size: 2rem; padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">${device}</span>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <a href="${platform.url}" 
+                   class="cgt-btn cgt-btn-primary" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   style="width: 100%; display: block; text-align: center; margin-top: 20px; padding: 15px;">
+                    Visit ${platform.name} →
+                </a>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close Modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Show Toast
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Export Comparison
+        function exportComparison() {
+            const csv = [
+                ['Platform', 'Price', 'Latency', 'Resolution', 'FPS', 'Library', 'Rating'],
+                ...platforms.map(p => [
+                    p.name,
+                    p.price,
+                    p.specs.latency,
+                    p.specs.resolution,
+                    p.specs.fps,
+                    p.specs.library,
+                    p.rating
+                ])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cloud-gaming-platforms-comparison.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            showToast('Comparison exported! 📊');
+        }
+        
+        // Helper Functions
+        function getStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '★'.repeat(fullStars);
+            if (hasHalfStar) stars += '½';
+            stars += '☆'.repeat(5 - Math.ceil(rating));
+            return stars;
+        }
+        
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'k';
+            }
+            return num.toString();
+        }
+        
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
