@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Input Latency Meter</title>
+</head>
+<body>
+    <!-- Input Latency Meter Container - WordPress Ready -->
+    <div id="input-latency-meter-root">
+        <style>
+            /* Scoped styles to prevent leakage */
+            #input-latency-meter-root {
+                all: initial;
+                display: block;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            #input-latency-meter-root * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            .ilm-container {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 24px;
+                padding: 40px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                color: #ffffff;
+                position: relative;
+                overflow: hidden;
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            .ilm-container::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+                animation: ilm-pulse 15s ease-in-out infinite;
+                pointer-events: none;
+            }
+
+            @keyframes ilm-pulse {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                50% { transform: translate(10%, 10%) scale(1.1); }
+            }
+
+            .ilm-header {
+                text-align: center;
+                margin-bottom: 40px;
+                position: relative;
+                z-index: 1;
+                padding: 0 20px;
+            }
+
+            .ilm-title {
+                font-size: 36px;
+                font-weight: 800;
+                margin-bottom: 15px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                letter-spacing: -0.5px;
+                line-height: 1.2;
+            }
+
+            .ilm-subtitle {
+                font-size: 17px;
+                opacity: 0.95;
+                font-weight: 400;
+                line-height: 1.5;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .ilm-tabs {
+                display: flex;
+                gap: 12px;
+                margin-bottom: 35px;
+                flex-wrap: wrap;
+                position: relative;
+                z-index: 1;
+            }
+
+            .ilm-tab {
+                flex: 1;
+                min-width: 140px;
+                padding: 15px 24px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                border-radius: 14px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 15px;
+                font-weight: 600;
+                text-align: center;
+                backdrop-filter: blur(10px);
+            }
+
+            .ilm-tab:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+
+            .ilm-tab.active {
+                background: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.5);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .ilm-content {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 18px;
+                padding: 40px;
+                color: #333;
+                position: relative;
+                z-index: 1;
+                min-height: 450px;
+            }
+
+            .ilm-test-area {
+                display: none;
+            }
+
+            .ilm-test-area.active {
+                display: block;
+                animation: ilm-fadeIn 0.4s ease;
+            }
+
+            @keyframes ilm-fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .ilm-test-zone {
+                min-height: 320px;
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 50px 40px;
+                margin-bottom: 30px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 3px dashed transparent;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .ilm-test-zone.active {
+                background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+                border-color: #f39c12;
+                animation: ilm-glow 1s ease-in-out infinite;
+            }
+
+            .ilm-test-zone.success {
+                background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+                animation: ilm-success 0.5s ease;
+            }
+
+            @keyframes ilm-glow {
+                0%, 100% { box-shadow: 0 0 20px rgba(243, 156, 18, 0.5); }
+                50% { box-shadow: 0 0 40px rgba(243, 156, 18, 0.8); }
+            }
+
+            @keyframes ilm-success {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+
+            .ilm-test-icon {
+                font-size: 72px;
+                margin-bottom: 25px;
+                animation: ilm-bounce 2s ease-in-out infinite;
+            }
+
+            @keyframes ilm-bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+
+            .ilm-test-zone.active .ilm-test-icon {
+                animation: ilm-spin 1s linear infinite;
+            }
+
+            @keyframes ilm-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            .ilm-test-text {
+                font-size: 28px;
+                font-weight: 700;
+                margin-bottom: 12px;
+                color: #2d3436;
+                line-height: 1.3;
+            }
+
+            .ilm-test-subtext {
+                font-size: 15px;
+                color: #636e72;
+                line-height: 1.5;
+                max-width: 500px;
+                text-align: center;
+            }
+
+            .ilm-controls {
+                display: flex;
+                gap: 16px;
+                margin-bottom: 30px;
+                margin-top: 10px;
+                flex-wrap: wrap;
+            }
+
+            .ilm-button {
+                flex: 1;
+                min-width: 140px;
+                padding: 16px 32px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+
+            .ilm-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            }
+
+            .ilm-button:active {
+                transform: translateY(0);
+            }
+
+            .ilm-button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .ilm-button.secondary {
+                background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            }
+
+            .ilm-button.danger {
+                background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+            }
+
+            .ilm-stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 18px;
+                margin-bottom: 30px;
+                margin-top: 10px;
+            }
+
+            .ilm-stat-card {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 24px 20px;
+                border-radius: 14px;
+                text-align: center;
+                color: white;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                animation: ilm-slideUp 0.5s ease;
+            }
+
+            @keyframes ilm-slideUp {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .ilm-stat-label {
+                font-size: 13px;
+                opacity: 0.9;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                font-weight: 500;
+            }
+
+            .ilm-stat-value {
+                font-size: 32px;
+                font-weight: 800;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                line-height: 1.2;
+            }
+
+            .ilm-stat-unit {
+                font-size: 16px;
+                opacity: 0.85;
+                margin-left: 3px;
+            }
+
+            .ilm-chart-container {
+                background: white;
+                padding: 28px;
+                border-radius: 14px;
+                margin-bottom: 30px;
+                margin-top: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .ilm-chart-title {
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                color: #2d3436;
+            }
+
+            .ilm-histogram {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-around;
+                height: 220px;
+                gap: 6px;
+                padding: 15px 10px;
+            }
+
+            .ilm-histogram-bar {
+                flex: 1;
+                background: linear-gradient(to top, #667eea 0%, #764ba2 100%);
+                border-radius: 4px 4px 0 0;
+                position: relative;
+                transition: all 0.3s ease;
+                min-width: 8px;
+                animation: ilm-barGrow 0.6s ease;
+            }
+
+            @keyframes ilm-barGrow {
+                from { transform: scaleY(0); }
+                to { transform: scaleY(1); }
+            }
+
+            .ilm-histogram-bar:hover {
+                opacity: 0.8;
+                transform: scaleY(1.05);
+            }
+
+            .ilm-histogram-label {
+                position: absolute;
+                bottom: -25px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 10px;
+                color: #636e72;
+                white-space: nowrap;
+            }
+
+            .ilm-results-list {
+                max-height: 320px;
+                overflow-y: auto;
+                background: #f8f9fa;
+                padding: 18px;
+                border-radius: 14px;
+                margin-bottom: 30px;
+                margin-top: 10px;
+            }
+
+            .ilm-result-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 18px;
+                background: white;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                animation: ilm-slideIn 0.3s ease;
+            }
+
+            @keyframes ilm-slideIn {
+                from { opacity: 0; transform: translateX(-20px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            .ilm-result-number {
+                font-weight: 700;
+                color: #667eea;
+                margin-right: 10px;
+            }
+
+            .ilm-result-value {
+                font-size: 18px;
+                font-weight: 600;
+                color: #2d3436;
+            }
+
+            .ilm-result-rating {
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .ilm-rating-excellent {
+                background: #55efc4;
+                color: #00b894;
+            }
+
+            .ilm-rating-good {
+                background: #74b9ff;
+                color: #0984e3;
+            }
+
+            .ilm-rating-average {
+                background: #ffeaa7;
+                color: #f39c12;
+            }
+
+            .ilm-rating-poor {
+                background: #ff7675;
+                color: #d63031;
+            }
+
+            .ilm-info-box {
+                background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+                padding: 24px 28px;
+                border-radius: 14px;
+                margin-bottom: 28px;
+                color: white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .ilm-info-title {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 12px;
+            }
+
+            .ilm-info-text {
+                font-size: 15px;
+                line-height: 1.7;
+                opacity: 0.96;
+            }
+
+            .ilm-progress-bar {
+                width: 100%;
+                height: 10px;
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+                margin: 20px 0;
+            }
+
+            .ilm-progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+                border-radius: 10px;
+                transition: width 0.3s ease;
+            }
+
+            .ilm-countdown {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 120px;
+                font-weight: 900;
+                color: rgba(255, 255, 255, 0.9);
+                text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+                animation: ilm-countdownPulse 1s ease;
+            }
+
+            @keyframes ilm-countdownPulse {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                50% { transform: translate(-50%, -50%) scale(1.2); }
+                100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            }
+
+            .ilm-latency-indicator {
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                margin-right: 8px;
+                animation: ilm-blink 2s ease-in-out infinite;
+            }
+
+            @keyframes ilm-blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+
+            .ilm-settings-panel {
+                background: #f8f9fa;
+                padding: 24px 28px;
+                border-radius: 14px;
+                margin-bottom: 28px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .ilm-setting-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 18px;
+            }
+
+            .ilm-setting-label {
+                font-weight: 600;
+                color: #2d3436;
+                font-size: 15px;
+            }
+
+            .ilm-input {
+                padding: 10px 18px;
+                border: 2px solid #dfe6e9;
+                border-radius: 10px;
+                font-size: 15px;
+                width: 110px;
+                transition: border-color 0.3s ease;
+            }
+
+            .ilm-input:focus {
+                outline: none;
+                border-color: #667eea;
+            }
+
+            .ilm-export-buttons {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                margin-top: 10px;
+            }
+
+            .ilm-export-button {
+                flex: 1;
+                min-width: 120px;
+                padding: 14px 24px;
+                background: #2d3436;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .ilm-export-button:hover {
+                background: #636e72;
+                transform: translateY(-2px);
+            }
+
+            .ilm-loading {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                border-top-color: white;
+                border-radius: 50%;
+                animation: ilm-rotate 1s linear infinite;
+            }
+
+            @keyframes ilm-rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            @media (max-width: 768px) {
+                #input-latency-meter-root {
+                    padding: 15px;
+                }
+
+                .ilm-container {
+                    padding: 25px;
+                    border-radius: 20px;
+                }
+
+                .ilm-header {
+                    margin-bottom: 30px;
+                    padding: 0 10px;
+                }
+
+                .ilm-title {
+                    font-size: 26px;
+                    margin-bottom: 12px;
+                }
+
+                .ilm-subtitle {
+                    font-size: 15px;
+                }
+
+                .ilm-tabs {
+                    flex-direction: column;
+                    gap: 10px;
+                    margin-bottom: 25px;
+                }
+
+                .ilm-tab {
+                    min-width: 100%;
+                    padding: 14px 20px;
+                }
+
+                .ilm-content {
+                    padding: 25px;
+                    min-height: 400px;
+                }
+
+                .ilm-test-zone {
+                    min-height: 280px;
+                    padding: 40px 25px;
+                    margin-bottom: 25px;
+                }
+
+                .ilm-test-icon {
+                    font-size: 56px;
+                    margin-bottom: 20px;
+                }
+
+                .ilm-test-text {
+                    font-size: 22px;
+                }
+
+                .ilm-test-subtext {
+                    font-size: 14px;
+                }
+
+                .ilm-button {
+                    padding: 14px 24px;
+                    font-size: 15px;
+                }
+
+                .ilm-stats-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
+
+                .ilm-stat-card {
+                    padding: 20px 16px;
+                }
+
+                .ilm-stat-value {
+                    font-size: 28px;
+                }
+
+                .ilm-chart-container {
+                    padding: 20px;
+                }
+
+                .ilm-histogram {
+                    height: 180px;
+                    padding: 12px 8px;
+                }
+
+                .ilm-info-box {
+                    padding: 20px 22px;
+                }
+
+                .ilm-results-list {
+                    padding: 15px;
+                }
+
+                .ilm-result-item {
+                    padding: 12px 15px;
+                }
+
+                .ilm-settings-panel {
+                    padding: 20px 22px;
+                }
+
+                .ilm-countdown {
+                    font-size: 90px;
+                }
+            }
+        </style>
+
+        <div class="ilm-container">
+            <div class="ilm-header">
+                <h1 class="ilm-title">🎮 Ultimate Input Latency Meter</h1>
+                <p class="ilm-subtitle">Professional-grade input latency testing for cloud gaming</p>
+            </div>
+
+            <div class="ilm-tabs">
+                <div class="ilm-tab active" data-tab="reaction">⚡ Reaction Test</div>
+                <div class="ilm-tab" data-tab="sustained">🔥 Sustained Input</div>
+                <div class="ilm-tab" data-tab="keyboard">⌨️ Keyboard Test</div>
+                <div class="ilm-tab" data-tab="results">📊 Results</div>
+                <div class="ilm-tab" data-tab="info">ℹ️ Info</div>
+            </div>
+
+            <div class="ilm-content">
+                <!-- Reaction Test -->
+                <div class="ilm-test-area active" id="ilm-reaction-test">
+                    <div class="ilm-info-box">
+                        <div class="ilm-info-title">Reaction Time Test</div>
+                        <div class="ilm-info-text">
+                            Measures the time between stimulus appearance and your click response. Lower is better. 
+                            Professional gamers typically score 150-200ms.
+                        </div>
+                    </div>
+
+                    <div class="ilm-test-zone" id="ilm-reaction-zone">
+                        <div class="ilm-test-icon">🎯</div>
+                        <div class="ilm-test-text">Click to Start</div>
+                        <div class="ilm-test-subtext">Wait for the zone to change color, then click as fast as possible</div>
+                    </div>
+
+                    <div class="ilm-controls">
+                        <button class="ilm-button" id="ilm-reaction-start">Start Test</button>
+                        <button class="ilm-button secondary" id="ilm-reaction-reset">Reset</button>
+                    </div>
+
+                    <div id="ilm-reaction-stats" style="display: none;">
+                        <div class="ilm-stats-grid">
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Current</div>
+                                <div class="ilm-stat-value"><span id="ilm-stat-current">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Average</div>
+                                <div class="ilm-stat-value"><span id="ilm-stat-avg">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Best</div>
+                                <div class="ilm-stat-value"><span id="ilm-stat-best">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Worst</div>
+                                <div class="ilm-stat-value"><span id="ilm-stat-worst">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                        </div>
+
+                        <div class="ilm-progress-bar">
+                            <div class="ilm-progress-fill" id="ilm-reaction-progress"></div>
+                        </div>
+
+                        <div class="ilm-results-list" id="ilm-reaction-results"></div>
+                    </div>
+                </div>
+
+                <!-- Sustained Input Test -->
+                <div class="ilm-test-area" id="ilm-sustained-test">
+                    <div class="ilm-info-box">
+                        <div class="ilm-info-title">Sustained Input Test</div>
+                        <div class="ilm-info-text">
+                            Measures input latency over continuous interactions. Tests system stability and consistency.
+                            Ideal for testing cloud gaming performance under load.
+                        </div>
+                    </div>
+
+                    <div class="ilm-test-zone" id="ilm-sustained-zone">
+                        <div class="ilm-test-icon">🔥</div>
+                        <div class="ilm-test-text">Click Rapidly!</div>
+                        <div class="ilm-test-subtext">Click as many times as possible in the test duration</div>
+                    </div>
+
+                    <div class="ilm-settings-panel">
+                        <div class="ilm-setting-row">
+                            <span class="ilm-setting-label">Test Duration (seconds):</span>
+                            <input type="number" class="ilm-input" id="ilm-sustained-duration" value="10" min="5" max="60">
+                        </div>
+                    </div>
+
+                    <div class="ilm-controls">
+                        <button class="ilm-button" id="ilm-sustained-start">Start Test</button>
+                        <button class="ilm-button secondary" id="ilm-sustained-reset">Reset</button>
+                    </div>
+
+                    <div id="ilm-sustained-stats" style="display: none;">
+                        <div class="ilm-stats-grid">
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Clicks</div>
+                                <div class="ilm-stat-value"><span id="ilm-sustained-clicks">0</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Avg Latency</div>
+                                <div class="ilm-stat-value"><span id="ilm-sustained-avg">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">CPS</div>
+                                <div class="ilm-stat-value"><span id="ilm-sustained-cps">0</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Std Dev</div>
+                                <div class="ilm-stat-value"><span id="ilm-sustained-stddev">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keyboard Test -->
+                <div class="ilm-test-area" id="ilm-keyboard-test">
+                    <div class="ilm-info-box">
+                        <div class="ilm-info-title">Keyboard Latency Test</div>
+                        <div class="ilm-info-text">
+                            Measures keyboard input responsiveness. Press the spacebar when prompted to test keyboard latency.
+                            Critical for FPS and competitive gaming.
+                        </div>
+                    </div>
+
+                    <div class="ilm-test-zone" id="ilm-keyboard-zone">
+                        <div class="ilm-test-icon">⌨️</div>
+                        <div class="ilm-test-text">Press SPACE to Start</div>
+                        <div class="ilm-test-subtext">Wait for the prompt, then press SPACE as fast as possible</div>
+                    </div>
+
+                    <div class="ilm-controls">
+                        <button class="ilm-button" id="ilm-keyboard-start">Start Test</button>
+                        <button class="ilm-button secondary" id="ilm-keyboard-reset">Reset</button>
+                    </div>
+
+                    <div id="ilm-keyboard-stats" style="display: none;">
+                        <div class="ilm-stats-grid">
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Current</div>
+                                <div class="ilm-stat-value"><span id="ilm-keyboard-current">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Average</div>
+                                <div class="ilm-stat-value"><span id="ilm-keyboard-avg">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Best</div>
+                                <div class="ilm-stat-value"><span id="ilm-keyboard-best">0</span><span class="ilm-stat-unit">ms</span></div>
+                            </div>
+                            <div class="ilm-stat-card">
+                                <div class="ilm-stat-label">Consistency</div>
+                                <div class="ilm-stat-value"><span id="ilm-keyboard-consistency">0</span><span class="ilm-stat-unit">%</span></div>
+                            </div>
+                        </div>
+
+                        <div class="ilm-progress-bar">
+                            <div class="ilm-progress-fill" id="ilm-keyboard-progress"></div>
+                        </div>
+
+                        <div class="ilm-results-list" id="ilm-keyboard-results"></div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="ilm-test-area" id="ilm-results-view">
+                    <div class="ilm-chart-container">
+                        <div class="ilm-chart-title">Latency Distribution</div>
+                        <div class="ilm-histogram" id="ilm-histogram"></div>
+                    </div>
+
+                    <div class="ilm-stats-grid">
+                        <div class="ilm-stat-card">
+                            <div class="ilm-stat-label">Total Tests</div>
+                            <div class="ilm-stat-value"><span id="ilm-total-tests">0</span></div>
+                        </div>
+                        <div class="ilm-stat-card">
+                            <div class="ilm-stat-label">Overall Avg</div>
+                            <div class="ilm-stat-value"><span id="ilm-overall-avg">0</span><span class="ilm-stat-unit">ms</span></div>
+                        </div>
+                        <div class="ilm-stat-card">
+                            <div class="ilm-stat-label">Global Best</div>
+                            <div class="ilm-stat-value"><span id="ilm-global-best">0</span><span class="ilm-stat-unit">ms</span></div>
+                        </div>
+                        <div class="ilm-stat-card">
+                            <div class="ilm-stat-label">Performance</div>
+                            <div class="ilm-stat-value" id="ilm-performance-rating">-</div>
+                        </div>
+                    </div>
+
+                    <div class="ilm-info-box">
+                        <div class="ilm-info-title">Performance Rating Guide</div>
+                        <div class="ilm-info-text">
+                            <span class="ilm-latency-indicator" style="background: #55efc4;"></span><strong>Excellent:</strong> &lt;150ms (Pro level)<br>
+                            <span class="ilm-latency-indicator" style="background: #74b9ff;"></span><strong>Good:</strong> 150-250ms (Competitive)<br>
+                            <span class="ilm-latency-indicator" style="background: #ffeaa7;"></span><strong>Average:</strong> 250-350ms (Casual)<br>
+                            <span class="ilm-latency-indicator" style="background: #ff7675;"></span><strong>Poor:</strong> &gt;350ms (Needs improvement)
+                        </div>
+                    </div>
+
+                    <div class="ilm-export-buttons">
+                        <button class="ilm-export-button" id="ilm-export-json">📥 Export JSON</button>
+                        <button class="ilm-export-button" id="ilm-export-csv">📥 Export CSV</button>
+                        <button class="ilm-export-button" id="ilm-copy-results">📋 Copy to Clipboard</button>
+                        <button class="ilm-export-button" id="ilm-clear-all">🗑️ Clear All Data</button>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="ilm-test-area" id="ilm-info-view">
+                    <div class="ilm-info-box">
+                        <div class="ilm-info-title">What is Input Latency?</div>
+                        <div class="ilm-info-text">
+                            Input latency is the delay between performing an action (clicking, pressing a key) and seeing 
+                            the result on screen. In cloud gaming, this includes network latency, processing time, and 
+                            display lag. Lower latency provides a more responsive and enjoyable gaming experience.
+                        </div>
+                    </div>
+
+                    <div class="ilm-info-box" style="background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);">
+                        <div class="ilm-info-title">Why Test Input Latency?</div>
+                        <div class="ilm-info-text">
+                            • <strong>Performance Monitoring:</strong> Track your system's responsiveness<br>
+                            • <strong>Cloud Gaming:</strong> Essential for streaming services like GeForce NOW, Stadia<br>
+                            • <strong>Competitive Edge:</strong> Lower latency = faster reactions<br>
+                            • <strong>Hardware Testing:</strong> Compare mice, keyboards, monitors<br>
+                            • <strong>Network Quality:</strong> Identify connection issues
+                        </div>
+                    </div>
+
+                    <div class="ilm-info-box" style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);">
+                        <div class="ilm-info-title">Tips for Better Results</div>
+                        <div class="ilm-info-text">
+                            • Use a wired mouse and keyboard for best accuracy<br>
+                            • Close background applications to reduce system load<br>
+                            • Use a high refresh rate monitor (144Hz+)<br>
+                            • Test at different times to measure consistency<br>
+                            • For cloud gaming: test during different network conditions<br>
+                            • Run multiple tests for statistical significance
+                        </div>
+                    </div>
+
+                    <div class="ilm-info-box" style="background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);">
+                        <div class="ilm-info-title">Technical Details</div>
+                        <div class="ilm-info-text">
+                            This tool uses high-precision JavaScript performance APIs (Performance.now()) for accurate 
+                            millisecond measurements. Results include reaction time, system processing time, and 
+                            total input-to-display latency. All measurements are performed client-side with no external 
+                            dependencies, ensuring privacy and accuracy.
+                        </div>
+                    </div>
+
+                    <div class="ilm-info-box" style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);">
+                        <div class="ilm-info-title">WordPress Integration</div>
+                        <div class="ilm-info-text">
+                            This tool is fully self-contained and WordPress-ready. Simply copy the HTML code and paste 
+                            it into any WordPress post or page using the HTML block or custom HTML widget. All styles 
+                            are scoped to prevent conflicts with your theme.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function() {
+                'use strict';
+
+                // Data storage
+                const testData = {
+                    reaction: [],
+                    sustained: [],
+                    keyboard: [],
+                };
+
+                // State management
+                let currentTab = 'reaction';
+                let reactionTestActive = false;
+                let reactionStartTime = 0;
+                let reactionTimeout = null;
+                let reactionAttempts = 0;
+                const maxReactionAttempts = 10;
+
+                let sustainedTestActive = false;
+                let sustainedStartTime = 0;
+                let sustainedClicks = [];
+
+                let keyboardTestActive = false;
+                let keyboardStartTime = 0;
+                let keyboardTimeout = null;
+                let keyboardAttempts = 0;
+                const maxKeyboardAttempts = 10;
+
+                // DOM Elements
+                const tabs = document.querySelectorAll('.ilm-tab');
+                const testAreas = document.querySelectorAll('.ilm-test-area');
+
+                // Reaction Test Elements
+                const reactionZone = document.getElementById('ilm-reaction-zone');
+                const reactionStartBtn = document.getElementById('ilm-reaction-start');
+                const reactionResetBtn = document.getElementById('ilm-reaction-reset');
+                const reactionStats = document.getElementById('ilm-reaction-stats');
+                const reactionResults = document.getElementById('ilm-reaction-results');
+                const reactionProgress = document.getElementById('ilm-reaction-progress');
+
+                // Sustained Test Elements
+                const sustainedZone = document.getElementById('ilm-sustained-zone');
+                const sustainedStartBtn = document.getElementById('ilm-sustained-start');
+                const sustainedResetBtn = document.getElementById('ilm-sustained-reset');
+                const sustainedStats = document.getElementById('ilm-sustained-stats');
+                const sustainedDuration = document.getElementById('ilm-sustained-duration');
+
+                // Keyboard Test Elements
+                const keyboardZone = document.getElementById('ilm-keyboard-zone');
+                const keyboardStartBtn = document.getElementById('ilm-keyboard-start');
+                const keyboardResetBtn = document.getElementById('ilm-keyboard-reset');
+                const keyboardStats = document.getElementById('ilm-keyboard-stats');
+                const keyboardResults = document.getElementById('ilm-keyboard-results');
+                const keyboardProgress = document.getElementById('ilm-keyboard-progress');
+
+                // Results Elements
+                const histogram = document.getElementById('ilm-histogram');
+
+                // Tab Switching
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const targetTab = tab.getAttribute('data-tab');
+                        switchTab(targetTab);
+                    });
+                });
+
+                function switchTab(tabName) {
+                    currentTab = tabName;
+                    tabs.forEach(tab => {
+                        if (tab.getAttribute('data-tab') === tabName) {
+                            tab.classList.add('active');
+                        } else {
+                            tab.classList.remove('active');
+                        }
+                    });
+
+                    testAreas.forEach(area => {
+                        area.classList.remove('active');
+                    });
+
+                    document.getElementById(`ilm-${tabName}-${tabName === 'results' || tabName === 'info' ? 'view' : 'test'}`).classList.add('active');
+
+                    if (tabName === 'results') {
+                        updateResultsView();
+                    }
+                }
+
+                // Reaction Test
+                reactionStartBtn.addEventListener('click', startReactionTest);
+                reactionResetBtn.addEventListener('click', resetReactionTest);
+                reactionZone.addEventListener('click', handleReactionClick);
+
+                function startReactionTest() {
+                    if (reactionTestActive) return;
+
+                    reactionAttempts = 0;
+                    reactionTestActive = true;
+                    reactionStartBtn.disabled = true;
+                    reactionStats.style.display = 'block';
+                    reactionResults.innerHTML = '';
+                    
+                    scheduleReactionStimulus();
+                }
+
+                function scheduleReactionStimulus() {
+                    if (reactionAttempts >= maxReactionAttempts) {
+                        endReactionTest();
+                        return;
+                    }
+
+                    reactionZone.classList.remove('active', 'success');
+                    reactionZone.innerHTML = `
+                        <div class="ilm-test-icon">⏳</div>
+                        <div class="ilm-test-text">Wait...</div>
+                        <div class="ilm-test-subtext">Get ready to click when the zone changes!</div>
+                    `;
+
+                    const delay = 2000 + Math.random() * 3000;
+                    reactionTimeout = setTimeout(() => {
+                        showReactionStimulus();
+                    }, delay);
+                }
+
+                function showReactionStimulus() {
+                    reactionZone.classList.add('active');
+                    reactionZone.innerHTML = `
+                        <div class="ilm-test-icon">⚡</div>
+                        <div class="ilm-test-text">CLICK NOW!</div>
+                        <div class="ilm-test-subtext">Click as fast as you can!</div>
+                    `;
+                    reactionStartTime = performance.now();
+                }
+
+                function handleReactionClick() {
+                    if (!reactionTestActive) return;
+
+                    if (reactionStartTime === 0) {
+                        reactionZone.classList.add('success');
+                        reactionZone.innerHTML = `
+                            <div class="ilm-test-icon">❌</div>
+                            <div class="ilm-test-text">Too Early!</div>
+                            <div class="ilm-test-subtext">Wait for the prompt!</div>
+                        `;
+                        clearTimeout(reactionTimeout);
+                        setTimeout(() => scheduleReactionStimulus(), 1500);
+                        return;
+                    }
+
+                    const reactionTime = performance.now() - reactionStartTime;
+                    reactionStartTime = 0;
+                    reactionAttempts++;
+
+                    testData.reaction.push({
+                        value: reactionTime,
+                        timestamp: Date.now(),
+                        type: 'reaction'
+                    });
+
+                    reactionZone.classList.remove('active');
+                    reactionZone.classList.add('success');
+                    reactionZone.innerHTML = `
+                        <div class="ilm-test-icon">✅</div>
+                        <div class="ilm-test-text">${Math.round(reactionTime)}ms</div>
+                        <div class="ilm-test-subtext">${getRating(reactionTime)}</div>
+                    `;
+
+                    updateReactionStats();
+                    addReactionResult(reactionTime, reactionAttempts);
+
+                    setTimeout(() => scheduleReactionStimulus(), 1500);
+                }
+
+                function updateReactionStats() {
+                    const values = testData.reaction.map(d => d.value);
+                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                    const best = Math.min(...values);
+                    const worst = Math.max(...values);
+                    const current = values[values.length - 1];
+
+                    document.getElementById('ilm-stat-current').textContent = Math.round(current);
+                    document.getElementById('ilm-stat-avg').textContent = Math.round(avg);
+                    document.getElementById('ilm-stat-best').textContent = Math.round(best);
+                    document.getElementById('ilm-stat-worst').textContent = Math.round(worst);
+
+                    const progress = (reactionAttempts / maxReactionAttempts) * 100;
+                    reactionProgress.style.width = progress + '%';
+                }
+
+                function addReactionResult(time, attempt) {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'ilm-result-item';
+                    resultItem.innerHTML = `
+                        <div>
+                            <span class="ilm-result-number">#${attempt}</span>
+                            <span class="ilm-result-value">${Math.round(time)}ms</span>
+                        </div>
+                        <div class="ilm-result-rating ${getRatingClass(time)}">${getRating(time)}</div>
+                    `;
+                    reactionResults.insertBefore(resultItem, reactionResults.firstChild);
+                }
+
+                function endReactionTest() {
+                    reactionTestActive = false;
+                    reactionStartBtn.disabled = false;
+                    reactionZone.classList.remove('active');
+                    reactionZone.innerHTML = `
+                        <div class="ilm-test-icon">🎉</div>
+                        <div class="ilm-test-text">Test Complete!</div>
+                        <div class="ilm-test-subtext">Check the Results tab for detailed analysis</div>
+                    `;
+                }
+
+                function resetReactionTest() {
+                    clearTimeout(reactionTimeout);
+                    reactionTestActive = false;
+                    reactionStartTime = 0;
+                    reactionAttempts = 0;
+                    reactionStartBtn.disabled = false;
+                    reactionStats.style.display = 'none';
+                    testData.reaction = [];
+                    reactionZone.classList.remove('active', 'success');
+                    reactionZone.innerHTML = `
+                        <div class="ilm-test-icon">🎯</div>
+                        <div class="ilm-test-text">Click to Start</div>
+                        <div class="ilm-test-subtext">Wait for the zone to change color, then click as fast as possible</div>
+                    `;
+                }
+
+                // Sustained Test
+                sustainedStartBtn.addEventListener('click', startSustainedTest);
+                sustainedResetBtn.addEventListener('click', resetSustainedTest);
+                sustainedZone.addEventListener('click', handleSustainedClick);
+
+                function startSustainedTest() {
+                    if (sustainedTestActive) return;
+
+                    sustainedTestActive = true;
+                    sustainedClicks = [];
+                    sustainedStartTime = performance.now();
+                    sustainedStartBtn.disabled = true;
+                    sustainedStats.style.display = 'block';
+
+                    sustainedZone.classList.add('active');
+                    sustainedZone.innerHTML = `
+                        <div class="ilm-test-icon">🔥</div>
+                        <div class="ilm-test-text">CLICK NOW!</div>
+                        <div class="ilm-test-subtext">Click as fast as you can!</div>
+                    `;
+
+                    const duration = parseInt(sustainedDuration.value) * 1000;
+                    
+                    const countdownInterval = setInterval(() => {
+                        const elapsed = performance.now() - sustainedStartTime;
+                        const remaining = Math.ceil((duration - elapsed) / 1000);
+                        
+                        if (remaining > 0) {
+                            sustainedZone.innerHTML = `
+                                <div class="ilm-countdown">${remaining}</div>
+                            `;
+                        }
+                    }, 100);
+
+                    setTimeout(() => {
+                        clearInterval(countdownInterval);
+                        endSustainedTest();
+                    }, duration);
+                }
+
+                function handleSustainedClick(e) {
+                    if (!sustainedTestActive) return;
+
+                    const clickTime = performance.now();
+                    const latency = clickTime - sustainedStartTime - (sustainedClicks.length > 0 ? sustainedClicks[sustainedClicks.length - 1].time : 0);
+                    
+                    sustainedClicks.push({
+                        time: clickTime - sustainedStartTime,
+                        latency: Math.max(0, latency)
+                    });
+
+                    updateSustainedStats();
+                }
+
+                function updateSustainedStats() {
+                    const clicks = sustainedClicks.length;
+                    const latencies = sustainedClicks.map(c => c.latency).filter(l => l > 0 && l < 1000);
+                    const avg = latencies.length > 0 ? latencies.reduce((a, b) => a + b, 0) / latencies.length : 0;
+                    const elapsed = (performance.now() - sustainedStartTime) / 1000;
+                    const cps = elapsed > 0 ? (clicks / elapsed).toFixed(1) : 0;
+                    const stdDev = calculateStdDev(latencies);
+
+                    document.getElementById('ilm-sustained-clicks').textContent = clicks;
+                    document.getElementById('ilm-sustained-avg').textContent = Math.round(avg);
+                    document.getElementById('ilm-sustained-cps').textContent = cps;
+                    document.getElementById('ilm-sustained-stddev').textContent = Math.round(stdDev);
+                }
+
+                function endSustainedTest() {
+                    sustainedTestActive = false;
+                    sustainedStartBtn.disabled = false;
+                    sustainedZone.classList.remove('active');
+                    sustainedZone.classList.add('success');
+
+                    const latencies = sustainedClicks.map(c => c.latency).filter(l => l > 0 && l < 1000);
+                    latencies.forEach(latency => {
+                        testData.sustained.push({
+                            value: latency,
+                            timestamp: Date.now(),
+                            type: 'sustained'
+                        });
+                    });
+
+                    sustainedZone.innerHTML = `
+                        <div class="ilm-test-icon">🎉</div>
+                        <div class="ilm-test-text">Test Complete!</div>
+                        <div class="ilm-test-subtext">Recorded ${sustainedClicks.length} clicks</div>
+                    `;
+                }
+
+                function resetSustainedTest() {
+                    sustainedTestActive = false;
+                    sustainedClicks = [];
+                    sustainedStartBtn.disabled = false;
+                    sustainedStats.style.display = 'none';
+                    testData.sustained = [];
+                    sustainedZone.classList.remove('active', 'success');
+                    sustainedZone.innerHTML = `
+                        <div class="ilm-test-icon">🔥</div>
+                        <div class="ilm-test-text">Click Rapidly!</div>
+                        <div class="ilm-test-subtext">Click as many times as possible in the test duration</div>
+                    `;
+                }
+
+                // Keyboard Test
+                keyboardStartBtn.addEventListener('click', startKeyboardTest);
+                keyboardResetBtn.addEventListener('click', resetKeyboardTest);
+
+                function startKeyboardTest() {
+                    if (keyboardTestActive) return;
+
+                    keyboardAttempts = 0;
+                    keyboardTestActive = true;
+                    keyboardStartBtn.disabled = true;
+                    keyboardStats.style.display = 'block';
+                    keyboardResults.innerHTML = '';
+                    
+                    scheduleKeyboardStimulus();
+                }
+
+                function scheduleKeyboardStimulus() {
+                    if (keyboardAttempts >= maxKeyboardAttempts) {
+                        endKeyboardTest();
+                        return;
+                    }
+
+                    keyboardZone.classList.remove('active', 'success');
+                    keyboardZone.innerHTML = `
+                        <div class="ilm-test-icon">⏳</div>
+                        <div class="ilm-test-text">Wait...</div>
+                        <div class="ilm-test-subtext">Get ready to press SPACE!</div>
+                    `;
+
+                    const delay = 2000 + Math.random() * 3000;
+                    keyboardTimeout = setTimeout(() => {
+                        showKeyboardStimulus();
+                    }, delay);
+                }
+
+                function showKeyboardStimulus() {
+                    keyboardZone.classList.add('active');
+                    keyboardZone.innerHTML = `
+                        <div class="ilm-test-icon">⚡</div>
+                        <div class="ilm-test-text">PRESS SPACE!</div>
+                        <div class="ilm-test-subtext">Press the spacebar as fast as you can!</div>
+                    `;
+                    keyboardStartTime = performance.now();
+                }
+
+                document.addEventListener('keydown', function(e) {
+                    if (!keyboardTestActive) return;
+                    if (e.code !== 'Space') return;
+                    
+                    e.preventDefault();
+
+                    if (keyboardStartTime === 0) {
+                        keyboardZone.classList.add('success');
+                        keyboardZone.innerHTML = `
+                            <div class="ilm-test-icon">❌</div>
+                            <div class="ilm-test-text">Too Early!</div>
+                            <div class="ilm-test-subtext">Wait for the prompt!</div>
+                        `;
+                        clearTimeout(keyboardTimeout);
+                        setTimeout(() => scheduleKeyboardStimulus(), 1500);
+                        return;
+                    }
+
+                    const reactionTime = performance.now() - keyboardStartTime;
+                    keyboardStartTime = 0;
+                    keyboardAttempts++;
+
+                    testData.keyboard.push({
+                        value: reactionTime,
+                        timestamp: Date.now(),
+                        type: 'keyboard'
+                    });
+
+                    keyboardZone.classList.remove('active');
+                    keyboardZone.classList.add('success');
+                    keyboardZone.innerHTML = `
+                        <div class="ilm-test-icon">✅</div>
+                        <div class="ilm-test-text">${Math.round(reactionTime)}ms</div>
+                        <div class="ilm-test-subtext">${getRating(reactionTime)}</div>
+                    `;
+
+                    updateKeyboardStats();
+                    addKeyboardResult(reactionTime, keyboardAttempts);
+
+                    setTimeout(() => scheduleKeyboardStimulus(), 1500);
+                });
+
+                function updateKeyboardStats() {
+                    const values = testData.keyboard.map(d => d.value);
+                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                    const best = Math.min(...values);
+                    const current = values[values.length - 1];
+                    const stdDev = calculateStdDev(values);
+                    const consistency = stdDev > 0 ? Math.max(0, 100 - (stdDev / avg * 100)).toFixed(0) : 100;
+
+                    document.getElementById('ilm-keyboard-current').textContent = Math.round(current);
+                    document.getElementById('ilm-keyboard-avg').textContent = Math.round(avg);
+                    document.getElementById('ilm-keyboard-best').textContent = Math.round(best);
+                    document.getElementById('ilm-keyboard-consistency').textContent = consistency;
+
+                    const progress = (keyboardAttempts / maxKeyboardAttempts) * 100;
+                    keyboardProgress.style.width = progress + '%';
+                }
+
+                function addKeyboardResult(time, attempt) {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'ilm-result-item';
+                    resultItem.innerHTML = `
+                        <div>
+                            <span class="ilm-result-number">#${attempt}</span>
+                            <span class="ilm-result-value">${Math.round(time)}ms</span>
+                        </div>
+                        <div class="ilm-result-rating ${getRatingClass(time)}">${getRating(time)}</div>
+                    `;
+                    keyboardResults.insertBefore(resultItem, keyboardResults.firstChild);
+                }
+
+                function endKeyboardTest() {
+                    keyboardTestActive = false;
+                    keyboardStartBtn.disabled = false;
+                    keyboardZone.classList.remove('active');
+                    keyboardZone.innerHTML = `
+                        <div class="ilm-test-icon">🎉</div>
+                        <div class="ilm-test-text">Test Complete!</div>
+                        <div class="ilm-test-subtext">Check the Results tab for detailed analysis</div>
+                    `;
+                }
+
+                function resetKeyboardTest() {
+                    clearTimeout(keyboardTimeout);
+                    keyboardTestActive = false;
+                    keyboardStartTime = 0;
+                    keyboardAttempts = 0;
+                    keyboardStartBtn.disabled = false;
+                    keyboardStats.style.display = 'none';
+                    testData.keyboard = [];
+                    keyboardZone.classList.remove('active', 'success');
+                    keyboardZone.innerHTML = `
+                        <div class="ilm-test-icon">⌨️</div>
+                        <div class="ilm-test-text">Press SPACE to Start</div>
+                        <div class="ilm-test-subtext">Wait for the prompt, then press SPACE as fast as possible</div>
+                    `;
+                }
+
+                // Results View
+                function updateResultsView() {
+                    const allData = [
+                        ...testData.reaction,
+                        ...testData.sustained,
+                        ...testData.keyboard
+                    ];
+
+                    if (allData.length === 0) {
+                        histogram.innerHTML = '<div style="text-align: center; color: #636e72; padding: 40px;">No data yet. Run some tests first!</div>';
+                        return;
+                    }
+
+                    const values = allData.map(d => d.value);
+                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                    const best = Math.min(...values);
+
+                    document.getElementById('ilm-total-tests').textContent = values.length;
+                    document.getElementById('ilm-overall-avg').textContent = Math.round(avg);
+                    document.getElementById('ilm-global-best').textContent = Math.round(best);
+                    document.getElementById('ilm-performance-rating').textContent = getRating(avg);
+
+                    drawHistogram(values);
+                }
+
+                function drawHistogram(values) {
+                    const min = Math.min(...values);
+                    const max = Math.max(...values);
+                    const bucketCount = 10;
+                    const bucketSize = (max - min) / bucketCount;
+                    
+                    const buckets = new Array(bucketCount).fill(0);
+                    values.forEach(v => {
+                        const bucketIndex = Math.min(Math.floor((v - min) / bucketSize), bucketCount - 1);
+                        buckets[bucketIndex]++;
+                    });
+
+                    const maxBucket = Math.max(...buckets);
+                    
+                    histogram.innerHTML = '';
+                    buckets.forEach((count, i) => {
+                        const height = maxBucket > 0 ? (count / maxBucket * 100) : 0;
+                        const bar = document.createElement('div');
+                        bar.className = 'ilm-histogram-bar';
+                        bar.style.height = height + '%';
+                        
+                        const label = document.createElement('div');
+                        label.className = 'ilm-histogram-label';
+                        const bucketStart = Math.round(min + i * bucketSize);
+                        label.textContent = `${bucketStart}ms`;
+                        
+                        bar.appendChild(label);
+                        bar.title = `${count} measurements`;
+                        histogram.appendChild(bar);
+                    });
+                }
+
+                // Export Functions
+                document.getElementById('ilm-export-json').addEventListener('click', exportJSON);
+                document.getElementById('ilm-export-csv').addEventListener('click', exportCSV);
+                document.getElementById('ilm-copy-results').addEventListener('click', copyResults);
+                document.getElementById('ilm-clear-all').addEventListener('click', clearAllData);
+
+                function exportJSON() {
+                    const data = {
+                        exportDate: new Date().toISOString(),
+                        results: testData,
+                        summary: getSummary()
+                    };
+                    
+                    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    downloadFile(blob, 'input-latency-results.json');
+                }
+
+                function exportCSV() {
+                    const allData = [
+                        ...testData.reaction.map(d => ({ ...d, test: 'Reaction' })),
+                        ...testData.sustained.map(d => ({ ...d, test: 'Sustained' })),
+                        ...testData.keyboard.map(d => ({ ...d, test: 'Keyboard' }))
+                    ];
+
+                    let csv = 'Test Type,Latency (ms),Timestamp,Rating\n';
+                    allData.forEach(d => {
+                        csv += `${d.test},${d.value.toFixed(2)},${new Date(d.timestamp).toISOString()},${getRating(d.value)}\n`;
+                    });
+
+                    const blob = new Blob([csv], { type: 'text/csv' });
+                    downloadFile(blob, 'input-latency-results.csv');
+                }
+
+                function copyResults() {
+                    const summary = getSummary();
+                    let text = '🎮 Input Latency Test Results\n\n';
+                    text += `Total Tests: ${summary.totalTests}\n`;
+                    text += `Overall Average: ${summary.overallAvg}ms\n`;
+                    text += `Global Best: ${summary.globalBest}ms\n`;
+                    text += `Performance Rating: ${summary.rating}\n\n`;
+                    
+                    if (testData.reaction.length > 0) {
+                        text += `⚡ Reaction Test: ${testData.reaction.length} tests, Avg: ${Math.round(testData.reaction.reduce((a, b) => a + b.value, 0) / testData.reaction.length)}ms\n`;
+                    }
+                    if (testData.sustained.length > 0) {
+                        text += `🔥 Sustained Input: ${testData.sustained.length} clicks, Avg: ${Math.round(testData.sustained.reduce((a, b) => a + b.value, 0) / testData.sustained.length)}ms\n`;
+                    }
+                    if (testData.keyboard.length > 0) {
+                        text += `⌨️ Keyboard Test: ${testData.keyboard.length} tests, Avg: ${Math.round(testData.keyboard.reduce((a, b) => a + b.value, 0) / testData.keyboard.length)}ms\n`;
+                    }
+
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('Results copied to clipboard!');
+                    });
+                }
+
+                function clearAllData() {
+                    if (confirm('Are you sure you want to clear all test data? This cannot be undone.')) {
+                        testData.reaction = [];
+                        testData.sustained = [];
+                        testData.keyboard = [];
+                        updateResultsView();
+                        alert('All data cleared successfully!');
+                    }
+                }
+
+                function getSummary() {
+                    const allData = [
+                        ...testData.reaction,
+                        ...testData.sustained,
+                        ...testData.keyboard
+                    ];
+
+                    if (allData.length === 0) {
+                        return {
+                            totalTests: 0,
+                            overallAvg: 0,
+                            globalBest: 0,
+                            rating: 'N/A'
+                        };
+                    }
+
+                    const values = allData.map(d => d.value);
+                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                    const best = Math.min(...values);
+
+                    return {
+                        totalTests: values.length,
+                        overallAvg: Math.round(avg),
+                        globalBest: Math.round(best),
+                        rating: getRating(avg)
+                    };
+                }
+
+                function downloadFile(blob, filename) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }
+
+                // Utility Functions
+                function getRating(latency) {
+                    if (latency < 150) return 'Excellent';
+                    if (latency < 250) return 'Good';
+                    if (latency < 350) return 'Average';
+                    return 'Poor';
+                }
+
+                function getRatingClass(latency) {
+                    if (latency < 150) return 'ilm-rating-excellent';
+                    if (latency < 250) return 'ilm-rating-good';
+                    if (latency < 350) return 'ilm-rating-average';
+                    return 'ilm-rating-poor';
+                }
+
+                function calculateStdDev(values) {
+                    if (values.length === 0) return 0;
+                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                    const squareDiffs = values.map(value => Math.pow(value - avg, 2));
+                    const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
+                    return Math.sqrt(avgSquareDiff);
+                }
+
+                // Initialize
+                console.log('🎮 Input Latency Meter loaded successfully!');
+            })();
+        </script>
+    </div>
+</body>
+</html>
