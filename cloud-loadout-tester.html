@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout: Gamepad + Keyboard Tester</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ====================================== -->
+<!-- CLOUD LOADOUT: GAMEPAD + KEYBOARD TESTER -->
+<!-- Production-Ready WordPress Embed Widget -->
+<!-- ====================================== -->
+
+<div id="cl-game-input-tester">
+    <div class="cl-container">
+        <!-- Header Section -->
+        <header class="cl-header">
+            <div class="cl-logo">
+                <svg viewBox="0 0 48 48" class="cl-logo-icon">
+                    <path d="M24 4L8 14v20l16 10 16-10V14z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="24" cy="24" r="6" fill="currentColor"/>
+                </svg>
+                <h1>Cloud Loadout<span class="cl-subtitle">Input Analysis System</span></h1>
+            </div>
+            <div class="cl-status">
+                <span class="cl-status-indicator" id="cl-status-dot"></span>
+                <span id="cl-status-text">Awaiting Input</span>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="cl-main-grid">
+            <!-- Left Panel: Gamepad Visualization -->
+            <section class="cl-panel cl-gamepad-panel">
+                <h2>Gamepad Status</h2>
+                <div id="cl-gamepad-status" class="cl-no-device">
+                    <svg viewBox="0 0 24 24" class="cl-icon-plug">
+                        <path d="M7 2v7h10V2M7 11v2a5 5 0 0 0 5 5 5 5 0 0 0 5-5v-2m-5 11v3" stroke="currentColor" fill="none" stroke-width="2"/>
+                    </svg>
+                    <p>Connect a gamepad to begin</p>
+                </div>
+                <div id="cl-gamepad-viz" class="cl-hidden">
+                    <!-- SVG Controller Silhouette -->
+                    <svg viewBox="0 0 400 200" class="cl-controller-svg">
+                        <!-- Controller Body -->
+                        <path d="M50,100 Q50,50 100,50 L140,50 Q150,40 160,40 L240,40 Q250,40 260,50 L300,50 Q350,50 350,100 Q350,120 340,140 L320,160 Q310,170 290,170 L260,170 Q250,170 245,160 L230,140 Q225,135 200,135 Q175,135 170,140 L155,160 Q150,170 140,170 L110,170 Q90,170 80,160 L60,140 Q50,120 50,100" 
+                              fill="url(#cl-controller-gradient)" stroke="#3BC6FF" stroke-width="2" opacity="0.3"/>
+                        
+                        <!-- Left Stick Base -->
+                        <circle cx="120" cy="110" r="28" fill="#1a1a2e" stroke="#3BC6FF" stroke-width="1.5" opacity="0.5"/>
+                        <circle id="cl-left-stick" cx="120" cy="110" r="18" fill="url(#cl-stick-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                        
+                        <!-- Right Stick Base -->
+                        <circle cx="280" cy="110" r="28" fill="#1a1a2e" stroke="#A56CFF" stroke-width="1.5" opacity="0.5"/>
+                        <circle id="cl-right-stick" cx="280" cy="110" r="18" fill="url(#cl-stick-gradient)" stroke="#A56CFF" stroke-width="2"/>
+                        
+                        <!-- D-Pad -->
+                        <g id="cl-dpad" transform="translate(90, 80)">
+                            <path id="cl-dpad-up" d="M15,0 L20,5 L10,5 Z" fill="#2a2a3e" stroke="#C6FF3B" stroke-width="1"/>
+                            <path id="cl-dpad-down" d="M15,20 L20,15 L10,15 Z" fill="#2a2a3e" stroke="#C6FF3B" stroke-width="1"/>
+                            <path id="cl-dpad-left" d="M0,15 L5,20 L5,10 Z" fill="#2a2a3e" stroke="#C6FF3B" stroke-width="1"/>
+                            <path id="cl-dpad-right" d="M30,15 L25,20 L25,10 Z" fill="#2a2a3e" stroke="#C6FF3B" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Face Buttons -->
+                        <g id="cl-face-buttons" transform="translate(310, 80)">
+                            <circle id="cl-btn-0" cx="15" cy="0" r="8" fill="#2a2a3e" stroke="#C6FF3B" stroke-width="1.5"/>
+                            <circle id="cl-btn-1" cx="30" cy="15" r="8" fill="#2a2a3e" stroke="#3BC6FF" stroke-width="1.5"/>
+                            <circle id="cl-btn-2" cx="0" cy="15" r="8" fill="#2a2a3e" stroke="#A56CFF" stroke-width="1.5"/>
+                            <circle id="cl-btn-3" cx="15" cy="30" r="8" fill="#2a2a3e" stroke="#FF6B9D" stroke-width="1.5"/>
+                        </g>
+                        
+                        <!-- Shoulder Buttons -->
+                        <rect id="cl-btn-4" x="80" y="35" width="60" height="8" rx="4" fill="#2a2a3e" stroke="#3BC6FF" stroke-width="1.5"/>
+                        <rect id="cl-btn-5" x="260" y="35" width="60" height="8" rx="4" fill="#2a2a3e" stroke="#A56CFF" stroke-width="1.5"/>
+                        
+                        <!-- Triggers (L2/R2) -->
+                        <rect id="cl-btn-6" x="70" y="20" width="70" height="6" rx="3" fill="#2a2a3e" stroke="#3BC6FF" stroke-width="1"/>
+                        <rect id="cl-trigger-left-fill" x="70" y="20" width="0" height="6" rx="3" fill="#3BC6FF" opacity="0.6"/>
+                        <rect id="cl-btn-7" x="260" y="20" width="70" height="6" rx="3" fill="#2a2a3e" stroke="#A56CFF" stroke-width="1"/>
+                        <rect id="cl-trigger-right-fill" x="260" y="20" width="0" height="6" rx="3" fill="#A56CFF" opacity="0.6"/>
+                        
+                        <!-- Center Buttons -->
+                        <circle id="cl-btn-8" cx="180" cy="65" r="5" fill="#2a2a3e" stroke="#888" stroke-width="1"/>
+                        <circle id="cl-btn-9" cx="220" cy="65" r="5" fill="#2a2a3e" stroke="#888" stroke-width="1"/>
+                        
+                        <!-- Gradients -->
+                        <defs>
+                            <linearGradient id="cl-controller-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3BC6FF;stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:#A56CFF;stop-opacity:0.2" />
+                            </linearGradient>
+                            <radialGradient id="cl-stick-gradient">
+                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#3BC6FF;stop-opacity:0.6" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                    
+                    <!-- Gamepad Info -->
+                    <div class="cl-gamepad-info">
+                        <div class="cl-info-item">
+                            <span class="cl-label">Device:</span>
+                            <span id="cl-gamepad-name">N/A</span>
+                        </div>
+                        <div class="cl-info-item">
+                            <span class="cl-label">Buttons:</span>
+                            <span id="cl-gamepad-buttons">0</span>
+                        </div>
+                        <div class="cl-info-item">
+                            <span class="cl-label">Axes:</span>
+                            <span id="cl-gamepad-axes">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Keyboard Visualization -->
+            <section class="cl-panel cl-keyboard-panel">
+                <h2>Keyboard Status</h2>
+                <div class="cl-keyboard-viz">
+                    <!-- SVG Keyboard Visualization -->
+                    <svg viewBox="0 0 600 280" class="cl-keyboard-svg" id="cl-keyboard-svg">
+                        <defs>
+                            <linearGradient id="cl-key-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3a3a4e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2a2a3e;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="cl-key-glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Keyboard Base -->
+                        <rect x="10" y="10" width="580" height="260" rx="12" fill="#1a1a2e" stroke="#3BC6FF" stroke-width="2" opacity="0.3"/>
+                        
+                        <!-- Number Row -->
+                        <g class="cl-key-row" transform="translate(30, 30)">
+                            <rect class="cl-svg-key" data-key="Digit1" x="0" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="15" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">1</text>
+                            <rect class="cl-svg-key" data-key="Digit2" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">2</text>
+                            <rect class="cl-svg-key" data-key="Digit3" x="76" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="91" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">3</text>
+                            <rect class="cl-svg-key" data-key="Digit4" x="114" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="129" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">4</text>
+                        </g>
+                        
+                        <!-- QWERTY Row -->
+                        <g class="cl-key-row" transform="translate(30, 72)">
+                            <rect class="cl-svg-key" data-key="KeyQ" x="0" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="15" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">Q</text>
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyW" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">W</text>
+                            <rect class="cl-svg-key" data-key="KeyE" x="76" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="91" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">E</text>
+                            <rect class="cl-svg-key" data-key="KeyR" x="114" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="129" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">R</text>
+                            <rect class="cl-svg-key" data-key="KeyT" x="152" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="167" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">T</text>
+                        </g>
+                        
+                        <!-- ASDF Row (Home Row) -->
+                        <g class="cl-key-row" transform="translate(30, 114)">
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyA" x="0" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="15" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">A</text>
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyS" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">S</text>
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyD" x="76" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="91" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">D</text>
+                            <rect class="cl-svg-key" data-key="KeyF" x="114" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="129" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">F</text>
+                            <rect class="cl-svg-key" data-key="KeyG" x="152" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="167" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">G</text>
+                        </g>
+                        
+                        <!-- ZXCV Row -->
+                        <g class="cl-key-row" transform="translate(30, 156)">
+                            <rect class="cl-svg-key" data-key="ShiftLeft" x="0" y="0" width="50" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#A56CFF" stroke-width="2"/>
+                            <text x="25" y="20" text-anchor="middle" fill="#A56CFF" font-size="12" font-weight="700">SHIFT</text>
+                            <rect class="cl-svg-key" data-key="KeyZ" x="58" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="73" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">Z</text>
+                            <rect class="cl-svg-key" data-key="KeyX" x="96" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="111" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">X</text>
+                            <rect class="cl-svg-key" data-key="KeyC" x="134" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="149" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">C</text>
+                        </g>
+                        
+                        <!-- Space Bar -->
+                        <g class="cl-key-row" transform="translate(30, 198)">
+                            <rect class="cl-svg-key" data-key="ControlLeft" x="0" y="0" width="40" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="20" y="20" text-anchor="middle" fill="#b0b0c0" font-size="11" font-weight="600">CTRL</text>
+                            <rect class="cl-svg-key" data-key="AltLeft" x="48" y="0" width="40" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="68" y="20" text-anchor="middle" fill="#b0b0c0" font-size="11" font-weight="600">ALT</text>
+                            <rect class="cl-svg-key" data-key="Space" x="96" y="0" width="140" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="166" y="20" text-anchor="middle" fill="#C6FF3B" font-size="12" font-weight="700">SPACE</text>
+                        </g>
+                        
+                        <!-- Arrow Keys (Right Side) -->
+                        <g class="cl-key-row cl-arrow-cluster" transform="translate(450, 156)">
+                            <!-- Up Arrow -->
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowUp" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">↑</text>
+                            
+                            <!-- Left, Down, Right Arrows -->
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowLeft" x="0" y="42" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="15" y="62" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">←</text>
+                            
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowDown" x="38" y="42" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="53" y="62" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">↓</text>
+                            
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowRight" x="76" y="42" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="91" y="62" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">→</text>
+                        </g>
+                        
+                        <!-- Labels -->
+                        <text x="70" y="250" fill="#3BC6FF" font-size="11" font-weight="600" opacity="0.7">WASD</text>
+                        <text x="490" y="250" fill="#C6FF3B" font-size="11" font-weight="600" opacity="0.7">ARROWS</text>
+                    </svg>
+                    
+                    <!-- Active Keys Display -->
+                    <div class="cl-active-keys">
+                        <h3>Active Keys</h3>
+                        <div id="cl-active-keys-list" class="cl-keys-list">
+                            <span class="cl-placeholder">Press any key...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Rollover Detection -->
+                    <div class="cl-rollover-info">
+                        <div class="cl-stat-box">
+                            <span class="cl-stat-label">Simultaneous</span>
+                            <span id="cl-simultaneous-keys" class="cl-stat-value">0</span>
+                        </div>
+                        <div class="cl-stat-box">
+                            <span class="cl-stat-label">Max Rollover</span>
+                            <span id="cl-max-rollover" class="cl-stat-value">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Analytics Section -->
+        <section class="cl-panel cl-analytics-panel">
+            <h2>Performance Analytics</h2>
+            <div class="cl-analytics-grid">
+                <!-- Latency Metrics -->
+                <div class="cl-metric-card">
+                    <h3>Latency</h3>
+                    <div class="cl-metric-value">
+                        <span id="cl-latency-avg" class="cl-big-number">0.0</span>
+                        <span class="cl-unit">ms</span>
+                    </div>
+                    <div class="cl-sparkline">
+                        <svg id="cl-latency-sparkline" viewBox="0 0 200 40" preserveAspectRatio="none">
+                            <polyline id="cl-latency-line" fill="none" stroke="#3BC6FF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="cl-sub-metrics">
+                        <div><span class="cl-label">Jitter:</span> <span id="cl-jitter">0.0</span>ms</div>
+                        <div><span class="cl-label">P95:</span> <span id="cl-p95">0.0</span>ms</div>
+                    </div>
+                </div>
+
+                <!-- Stick Circularity -->
+                <div class="cl-metric-card">
+                    <h3>Stick Circularity</h3>
+                    <div class="cl-polar-chart">
+                        <svg id="cl-polar-chart" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="50" fill="none" stroke="#3BC6FF20" stroke-width="1"/>
+                            <circle cx="60" cy="60" r="35" fill="none" stroke="#3BC6FF20" stroke-width="1"/>
+                            <circle cx="60" cy="60" r="20" fill="none" stroke="#3BC6FF20" stroke-width="1"/>
+                            <path id="cl-left-stick-path" d="" fill="none" stroke="#3BC6FF" stroke-width="2"/>
+                            <path id="cl-right-stick-path" d="" fill="none" stroke="#A56CFF" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="cl-sub-metrics">
+                        <div><span style="color:#3BC6FF">●</span> Left Stick</div>
+                        <div><span style="color:#A56CFF">●</span> Right Stick</div>
+                    </div>
+                </div>
+
+                <!-- Button Usage -->
+                <div class="cl-metric-card">
+                    <h3>Button Usage</h3>
+                    <div class="cl-button-bars">
+                        <div class="cl-bar-item">
+                            <span class="cl-bar-label">Face</span>
+                            <div class="cl-bar-track">
+                                <div id="cl-bar-face" class="cl-bar-fill" style="width:0%; background:#C6FF3B"></div>
+                            </div>
+                            <span id="cl-count-face" class="cl-bar-count">0</span>
+                        </div>
+                        <div class="cl-bar-item">
+                            <span class="cl-bar-label">Shoulder</span>
+                            <div class="cl-bar-track">
+                                <div id="cl-bar-shoulder" class="cl-bar-fill" style="width:0%; background:#3BC6FF"></div>
+                            </div>
+                            <span id="cl-count-shoulder" class="cl-bar-count">0</span>
+                        </div>
+                        <div class="cl-bar-item">
+                            <span class="cl-bar-label">Trigger</span>
+                            <div class="cl-bar-track">
+                                <div id="cl-bar-trigger" class="cl-bar-fill" style="width:0%; background:#A56CFF"></div>
+                            </div>
+                            <span id="cl-count-trigger" class="cl-bar-count">0</span>
+                        </div>
+                        <div class="cl-bar-item">
+                            <span class="cl-bar-label">Keys</span>
+                            <div class="cl-bar-track">
+                                <div id="cl-bar-keys" class="cl-bar-fill" style="width:0%; background:#FF6B9D"></div>
+                            </div>
+                            <span id="cl-count-keys" class="cl-bar-count">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consistency Score -->
+                <div class="cl-metric-card cl-score-card">
+                    <h3>Consistency Score</h3>
+                    <div class="cl-score-display">
+                        <div class="cl-score-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="#2a2a3e" stroke-width="8"/>
+                                <circle id="cl-score-circle" cx="50" cy="50" r="45" fill="none" stroke="url(#cl-score-gradient)" 
+                                        stroke-width="8" stroke-dasharray="283" stroke-dashoffset="283" 
+                                        transform="rotate(-90 50 50)" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="cl-score-gradient">
+                                        <stop offset="0%" style="stop-color:#C6FF3B"/>
+                                        <stop offset="100%" style="stop-color:#3BC6FF"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="cl-score-text">
+                                <span id="cl-score-value" class="cl-score-number">0</span>
+                                <span class="cl-score-max">/100</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cl-badge" class="cl-badge"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actions -->
+        <footer class="cl-footer">
+            <button id="cl-copy-report" class="cl-btn cl-btn-primary">
+                <svg viewBox="0 0 24 24" class="cl-btn-icon">
+                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" fill="none" stroke-width="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" fill="none" stroke-width="2"/>
+                </svg>
+                Copy Report
+            </button>
+            <button id="cl-reset" class="cl-btn cl-btn-secondary">
+                <svg viewBox="0 0 24 24" class="cl-btn-icon">
+                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" stroke="currentColor" fill="none" stroke-width="2"/>
+                    <path d="M21 3v5h-5" stroke="currentColor" fill="none" stroke-width="2"/>
+                </svg>
+                Reset
+            </button>
+        </footer>
+    </div>
+</div>
+
+<!-- ====================================== -->
+<!-- INLINE STYLES -->
+<!-- ====================================== -->
+
+<style>
+/* Reset & Scoped Namespace */
+#cl-game-input-tester {
+    --cl-bg-primary: #0f0f1e;
+    --cl-bg-secondary: #1a1a2e;
+    --cl-bg-tertiary: #2a2a3e;
+    --cl-azure: #3BC6FF;
+    --cl-purple: #A56CFF;
+    --cl-lime: #C6FF3B;
+    --cl-pink: #FF6B9D;
+    --cl-text-primary: #ffffff;
+    --cl-text-secondary: #b0b0c0;
+    --cl-text-muted: #707080;
+    --cl-border: #3a3a4e;
+    --cl-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --cl-shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.6);
+    --cl-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+    
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--cl-text-primary);
+    background: var(--cl-bg-primary);
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#cl-game-input-tester *,
+#cl-game-input-tester *::before,
+#cl-game-input-tester *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.cl-container {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    border-radius: 20px;
+    box-shadow: var(--cl-shadow-lg), 0 0 100px rgba(59, 198, 255, 0.1);
+}
+
+/* Header */
+.cl-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--cl-border);
+}
+
+.cl-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cl-logo-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--cl-azure);
+    animation: cl-pulse 3s ease-in-out infinite;
+}
+
+.cl-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--cl-azure) 0%, var(--cl-purple) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.cl-subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.7;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    -webkit-text-fill-color: var(--cl-text-secondary);
+}
+
+.cl-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--cl-bg-secondary);
+    border-radius: 24px;
+    border: 1px solid var(--cl-border);
+}
+
+.cl-status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cl-text-muted);
+    animation: cl-pulse 2s ease-in-out infinite;
+}
+
+.cl-status-indicator.cl-active {
+    background: var(--cl-lime);
+    box-shadow: 0 0 12px var(--cl-lime);
+}
+
+/* Main Grid */
+.cl-main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Panel */
+.cl-panel {
+    background: var(--cl-bg-secondary);
+    border: 1px solid var(--cl-border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--cl-shadow);
+    transition: all 0.3s var(--cl-easing);
+}
+
+.cl-panel:hover {
+    border-color: var(--cl-azure);
+    box-shadow: 0 8px 32px rgba(59, 198, 255, 0.2);
+}
+
+.cl-panel h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--cl-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cl-panel h2::before {
+    content: '';
+    width: 4px;
+    height: 1rem;
+    background: linear-gradient(135deg, var(--cl-azure), var(--cl-purple));
+    border-radius: 2px;
+}
+
+/* Gamepad Panel */
+.cl-no-device {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    color: var(--cl-text-muted);
+    text-align: center;
+}
+
+.cl-icon-plug {
+    width: 64px;
+    height: 64px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+    animation: cl-float 3s ease-in-out infinite;
+}
+
+.cl-hidden {
+    display: none !important;
+}
+
+.cl-controller-svg {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    margin: 0 auto 1rem;
+    display: block;
+}
+
+.cl-gamepad-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+}
+
+.cl-info-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    background: var(--cl-bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--cl-border);
+}
+
+.cl-label {
+    font-size: 0.75rem;
+    color: var(--cl-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.cl-info-item span:last-child {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cl-azure);
+}
+
+/* Keyboard Panel */
+.cl-keyboard-svg {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    display: block;
+}
+
+.cl-svg-key {
+    transition: all 0.2s var(--cl-easing);
+    cursor: pointer;
+}
+
+.cl-svg-key.cl-key-pressed {
+    filter: url(#cl-key-glow);
+}
+
+.cl-svg-key.cl-key-pressed[data-key*="Key"] {
+    fill: var(--cl-azure) !important;
+    stroke: var(--cl-azure) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key.cl-key-pressed[data-key*="Arrow"] {
+    fill: var(--cl-lime) !important;
+    stroke: var(--cl-lime) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key.cl-key-pressed[data-key="Space"] {
+    fill: var(--cl-lime) !important;
+    stroke: var(--cl-lime) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key.cl-key-pressed[data-key="ShiftLeft"] {
+    fill: var(--cl-purple) !important;
+    stroke: var(--cl-purple) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key + text {
+    transition: fill 0.2s var(--cl-easing);
+    pointer-events: none;
+}
+
+.cl-key-wasd:hover,
+.cl-key-arrow:hover {
+    opacity: 0.8;
+}
+
+/* Legacy keyboard support (for backward compatibility) */
+.cl-keyboard-grid {
+    display: none;
+}
+
+.cl-key-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.cl-key {
+    min-width: 48px;
+    padding: 0.75rem;
+    background: var(--cl-bg-tertiary);
+    border: 2px solid var(--cl-border);
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.15s var(--cl-easing);
+    cursor: default;
+    user-select: none;
+}
+
+.cl-key.cl-pressed {
+    background: var(--cl-azure);
+    border-color: var(--cl-azure);
+    box-shadow: 0 0 16px var(--cl-azure);
+    transform: scale(0.95);
+    color: var(--cl-bg-primary);
+}
+
+.cl-active-keys {
+    margin-bottom: 1rem;
+}
+
+.cl-active-keys h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--cl-text-secondary);
+}
+
+.cl-keys-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem;
+    background: var(--cl-bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--cl-border);
+}
+
+.cl-keys-list span {
+    padding: 0.25rem 0.75rem;
+    background: var(--cl-azure);
+    color: var(--cl-bg-primary);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    animation: cl-fade-in 0.2s var(--cl-easing);
+}
+
+.cl-placeholder {
+    color: var(--cl-text-muted) !important;
+    background: transparent !important;
+    font-style: italic;
+}
+
+.cl-rollover-info {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.cl-stat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    background: var(--cl-bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--cl-border);
+    text-align: center;
+}
+
+.cl-stat-label {
+    font-size: 0.75rem;
+    color: var(--cl-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.cl-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cl-lime);
+}
+
+/* Analytics Panel */
+.cl-analytics-panel {
+    grid-column: 1 / -1;
+}
+
+.cl-analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.cl-metric-card {
+    background: var(--cl-bg-tertiary);
+    border: 1px solid var(--cl-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s var(--cl-easing);
+}
+
+.cl-metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(59, 198, 255, 0.15);
+}
+
+.cl-metric-card h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--cl-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cl-metric-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.cl-big-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--cl-azure);
+    line-height: 1;
+}
+
+.cl-unit {
+    font-size: 1rem;
+    color: var(--cl-text-muted);
+}
+
+.cl-sparkline {
+    height: 40px;
+    margin-bottom: 0.75rem;
+    background: var(--cl-bg-primary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cl-sub-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--cl-text-secondary);
+}
+
+/* Polar Chart */
+.cl-polar-chart {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.cl-polar-chart svg {
+    width: 120px;
+    height: 120px;
+}
+
+/* Button Bars */
+.cl-button-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cl-bar-item {
+    display: grid;
+    grid-template-columns: 60px 1fr 40px;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.cl-bar-label {
+    color: var(--cl-text-secondary);
+    font-weight: 600;
+}
+
+.cl-bar-track {
+    height: 8px;
+    background: var(--cl-bg-primary);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cl-bar-fill {
+    height: 100%;
+    transition: width 0.5s var(--cl-easing);
+    border-radius: 4px;
+}
+
+.cl-bar-count {
+    text-align: right;
+    color: var(--cl-text-primary);
+    font-weight: 700;
+}
+
+/* Score Card */
+.cl-score-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cl-score-display {
+    margin-bottom: 1rem;
+}
+
+.cl-score-ring {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.cl-score-ring svg {
+    width: 100%;
+    height: 100%;
+}
+
+#cl-score-circle {
+    transition: stroke-dashoffset 1s var(--cl-easing);
+}
+
+.cl-score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.cl-score-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cl-lime);
+    line-height: 1;
+}
+
+.cl-score-max {
+    font-size: 1rem;
+    color: var(--cl-text-muted);
+}
+
+.cl-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 24px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cl-badge.gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1a1a2e;
+}
+
+.cl-badge.silver {
+    background: linear-gradient(135deg, #C0C0C0, #808080);
+    color: #1a1a2e;
+}
+
+.cl-badge.bronze {
+    background: linear-gradient(135deg, #CD7F32, #8B4513);
+    color: #ffffff;
+}
+
+/* Footer */
+.cl-footer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    border-top: 2px solid var(--cl-border);
+}
+
+.cl-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s var(--cl-easing);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.cl-btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.cl-btn-primary {
+    background: var(--cl-azure);
+    border-color: var(--cl-azure);
+    color: var(--cl-bg-primary);
+}
+
+.cl-btn-primary:hover {
+    background: transparent;
+    color: var(--cl-azure);
+    box-shadow: 0 0 16px var(--cl-azure);
+}
+
+.cl-btn-secondary {
+    background: transparent;
+    border-color: var(--cl-border);
+    color: var(--cl-text-primary);
+}
+
+.cl-btn-secondary:hover {
+    border-color: var(--cl-purple);
+    color: var(--cl-purple);
+    box-shadow: 0 0 16px rgba(165, 108, 255, 0.3);
+}
+
+.cl-btn:active {
+    transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes cl-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes cl-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes cl-fade-in {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    #cl-game-input-tester * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    #cl-game-input-tester {
+        --cl-azure: #00BFFF;
+        --cl-purple: #BA55D3;
+        --cl-lime: #ADFF2F;
+        --cl-border: #ffffff;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .cl-container {
+        padding: 1.5rem;
+    }
+    
+    .cl-header {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .cl-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .cl-main-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .cl-panel {
+        padding: 1.5rem;
+    }
+    
+    .cl-analytics-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cl-keyboard-svg {
+        max-width: 100%;
+    }
+    
+    .cl-footer {
+        flex-direction: column;
+    }
+    
+    .cl-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .cl-keyboard-grid {
+        justify-content: center;
+    }
+    
+    .cl-key {
+        min-width: 40px;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Focus States */
+.cl-btn:focus-visible {
+    outline: 2px solid var(--cl-azure);
+    outline-offset: 2px;
+}
+</style>
+
+<!-- ====================================== -->
+<!-- INLINE JAVASCRIPT -->
+<!-- ====================================== -->
+
+<script>
+(function() {
+    'use strict';
+    
+    // ====================================
+    // STATE MANAGEMENT
+    // ====================================
+    const state = {
+        gamepad: null,
+        keyboard: new Set(),
+        latencyHistory: [],
+        buttonPresses: {
+            face: 0,
+            shoulder: 0,
+            trigger: 0,
+            keys: 0
+        },
+        leftStickPath: [],
+        rightStickPath: [],
+        maxRollover: 0,
+        lastInputTime: 0,
+        startTime: Date.now()
+    };
+    
+    // ====================================
+    // DOM REFERENCES
+    // ====================================
+    const elements = {
+        statusDot: document.getElementById('cl-status-dot'),
+        statusText: document.getElementById('cl-status-text'),
+        gamepadStatus: document.getElementById('cl-gamepad-status'),
+        gamepadViz: document.getElementById('cl-gamepad-viz'),
+        gamepadName: document.getElementById('cl-gamepad-name'),
+        gamepadButtons: document.getElementById('cl-gamepad-buttons'),
+        gamepadAxes: document.getElementById('cl-gamepad-axes'),
+        leftStick: document.getElementById('cl-left-stick'),
+        rightStick: document.getElementById('cl-right-stick'),
+        triggerLeftFill: document.getElementById('cl-trigger-left-fill'),
+        triggerRightFill: document.getElementById('cl-trigger-right-fill'),
+        activeKeysList: document.getElementById('cl-active-keys-list'),
+        simultaneousKeys: document.getElementById('cl-simultaneous-keys'),
+        maxRollover: document.getElementById('cl-max-rollover'),
+        latencyAvg: document.getElementById('cl-latency-avg'),
+        jitter: document.getElementById('cl-jitter'),
+        p95: document.getElementById('cl-p95'),
+        latencyLine: document.getElementById('cl-latency-line'),
+        leftStickPath: document.getElementById('cl-left-stick-path'),
+        rightStickPath: document.getElementById('cl-right-stick-path'),
+        barFace: document.getElementById('cl-bar-face'),
+        barShoulder: document.getElementById('cl-bar-shoulder'),
+        barTrigger: document.getElementById('cl-bar-trigger'),
+        barKeys: document.getElementById('cl-bar-keys'),
+        countFace: document.getElementById('cl-count-face'),
+        countShoulder: document.getElementById('cl-count-shoulder'),
+        countTrigger: document.getElementById('cl-count-trigger'),
+        countKeys: document.getElementById('cl-count-keys'),
+        scoreCircle: document.getElementById('cl-score-circle'),
+        scoreValue: document.getElementById('cl-score-value'),
+        badge: document.getElementById('cl-badge'),
+        copyReportBtn: document.getElementById('cl-copy-report'),
+        resetBtn: document.getElementById('cl-reset')
+    };
+    
+    // ====================================
+    // GAMEPAD DETECTION & HANDLING
+    // ====================================
+    function onGamepadConnected(event) {
+        state.gamepad = event.gamepad;
+        elements.gamepadStatus.classList.add('cl-hidden');
+        elements.gamepadViz.classList.remove('cl-hidden');
+        elements.gamepadName.textContent = event.gamepad.id;
+        elements.gamepadButtons.textContent = event.gamepad.buttons.length;
+        elements.gamepadAxes.textContent = event.gamepad.axes.length;
+        updateStatus('Active', true);
+    }
+    
+    function onGamepadDisconnected() {
+        state.gamepad = null;
+        elements.gamepadStatus.classList.remove('cl-hidden');
+        elements.gamepadViz.classList.add('cl-hidden');
+        if (state.keyboard.size === 0) {
+            updateStatus('Awaiting Input', false);
+        }
+    }
+    
+    function updateGamepad() {
+        const gamepads = navigator.getGamepads();
+        if (!gamepads) return;
+        
+        for (let i = 0; i < gamepads.length; i++) {
+            if (gamepads[i]) {
+                state.gamepad = gamepads[i];
+                break;
+            }
+        }
+        
+        if (!state.gamepad) return;
+        
+        const gp = state.gamepad;
+        
+        // Update buttons
+        gp.buttons.forEach((button, index) => {
+            const btnElement = document.getElementById(`cl-btn-${index}`);
+            if (btnElement) {
+                if (button.pressed) {
+                    btnElement.style.fill = getButtonColor(index);
+                    btnElement.style.opacity = '1';
+                    
+                    // Track button category
+                    if (index <= 3) state.buttonPresses.face++;
+                    else if (index >= 4 && index <= 5) state.buttonPresses.shoulder++;
+                    else if (index >= 6 && index <= 7) state.buttonPresses.trigger++;
+                    
+                    recordLatency();
+                } else {
+                    btnElement.style.fill = '#2a2a3e';
+                    btnElement.style.opacity = '1';
+                }
+            }
+            
+            // Handle D-pad (buttons 12-15 typically)
+            if (index >= 12 && index <= 15) {
+                const dpadParts = ['up', 'down', 'left', 'right'];
+                const dpadElement = document.getElementById(`cl-dpad-${dpadParts[index - 12]}`);
+                if (dpadElement) {
+                    dpadElement.style.fill = button.pressed ? '#C6FF3B' : '#2a2a3e';
+                }
+            }
+        });
+        
+        // Update triggers (L2/R2)
+        if (gp.buttons[6]) {
+            const triggerValue = gp.buttons[6].value;
+            elements.triggerLeftFill.setAttribute('width', triggerValue * 70);
+        }
+        if (gp.buttons[7]) {
+            const triggerValue = gp.buttons[7].value;
+            elements.triggerRightFill.setAttribute('width', triggerValue * 70);
+        }
+        
+        // Update analog sticks
+        if (gp.axes.length >= 2) {
+            const leftX = gp.axes[0] * 28;
+            const leftY = gp.axes[1] * 28;
+            elements.leftStick.setAttribute('cx', 120 + leftX);
+            elements.leftStick.setAttribute('cy', 110 + leftY);
+            
+            // Record path for circularity
+            if (Math.abs(leftX) > 5 || Math.abs(leftY) > 5) {
+                state.leftStickPath.push({ x: leftX, y: leftY });
+                if (state.leftStickPath.length > 100) state.leftStickPath.shift();
+            }
+        }
+        
+        if (gp.axes.length >= 4) {
+            const rightX = gp.axes[2] * 28;
+            const rightY = gp.axes[3] * 28;
+            elements.rightStick.setAttribute('cx', 280 + rightX);
+            elements.rightStick.setAttribute('cy', 110 + rightY);
+            
+            // Record path for circularity
+            if (Math.abs(rightX) > 5 || Math.abs(rightY) > 5) {
+                state.rightStickPath.push({ x: rightX, y: rightY });
+                if (state.rightStickPath.length > 100) state.rightStickPath.shift();
+            }
+        }
+    }
+    
+    function getButtonColor(index) {
+        if (index <= 3) return '#C6FF3B';
+        if (index === 4 || index === 6) return '#3BC6FF';
+        if (index === 5 || index === 7) return '#A56CFF';
+        return '#888';
+    }
+    
+    // ====================================
+    // KEYBOARD HANDLING
+    // ====================================
+    function onKeyDown(event) {
+        if (!state.keyboard.has(event.code)) {
+            state.keyboard.add(event.code);
+            state.buttonPresses.keys++;
+            recordLatency();
+            updateStatus('Active', true);
+            
+            // Update max rollover
+            if (state.keyboard.size > state.maxRollover) {
+                state.maxRollover = state.keyboard.size;
+                elements.maxRollover.textContent = state.maxRollover;
+            }
+            
+            // Highlight key if visible (legacy HTML keys)
+            const keyElement = document.querySelector(`.cl-key[data-key="${event.code}"]`);
+            if (keyElement) {
+                keyElement.classList.add('cl-pressed');
+            }
+            
+            // Highlight SVG key
+            const svgKeyElement = document.querySelector(`.cl-svg-key[data-key="${event.code}"]`);
+            if (svgKeyElement) {
+                svgKeyElement.classList.add('cl-key-pressed');
+            }
+            
+            updateActiveKeys();
+        }
+    }
+    
+    function onKeyUp(event) {
+        state.keyboard.delete(event.code);
+        
+        // Remove highlight from legacy HTML key
+        const keyElement = document.querySelector(`.cl-key[data-key="${event.code}"]`);
+        if (keyElement) {
+            keyElement.classList.remove('cl-pressed');
+        }
+        
+        // Remove highlight from SVG key
+        const svgKeyElement = document.querySelector(`.cl-svg-key[data-key="${event.code}"]`);
+        if (svgKeyElement) {
+            svgKeyElement.classList.remove('cl-key-pressed');
+        }
+        
+        updateActiveKeys();
+    }
+    
+    function updateActiveKeys() {
+        elements.simultaneousKeys.textContent = state.keyboard.size;
+        
+        if (state.keyboard.size === 0) {
+            elements.activeKeysList.innerHTML = '<span class="cl-placeholder">Press any key...</span>';
+            if (!state.gamepad) {
+                updateStatus('Awaiting Input', false);
+            }
+        } else {
+            elements.activeKeysList.innerHTML = '';
+            state.keyboard.forEach(code => {
+                const span = document.createElement('span');
+                span.textContent = code.replace(/^(Key|Digit|Arrow)/, '');
+                elements.activeKeysList.appendChild(span);
+            });
+        }
+    }
+    
+    // ====================================
+    // LATENCY TRACKING
+    // ====================================
+    function recordLatency() {
+        const now = performance.now();
+        if (state.lastInputTime > 0) {
+            const latency = now - state.lastInputTime;
+            state.latencyHistory.push(latency);
+            if (state.latencyHistory.length > 100) state.latencyHistory.shift();
+        }
+        state.lastInputTime = now;
+    }
+    
+    function calculateLatencyMetrics() {
+        if (state.latencyHistory.length === 0) {
+            return { avg: 0, jitter: 0, p95: 0 };
+        }
+        
+        const sorted = [...state.latencyHistory].sort((a, b) => a - b);
+        const avg = sorted.reduce((a, b) => a + b, 0) / sorted.length;
+        
+        // Calculate jitter (standard deviation)
+        const variance = sorted.reduce((sum, val) => sum + Math.pow(val - avg, 2), 0) / sorted.length;
+        const jitter = Math.sqrt(variance);
+        
+        // Calculate p95
+        const p95Index = Math.floor(sorted.length * 0.95);
+        const p95 = sorted[p95Index] || sorted[sorted.length - 1];
+        
+        return { avg, jitter, p95 };
+    }
+    
+    // ====================================
+    // ANALYTICS UPDATES
+    // ====================================
+    function updateAnalytics() {
+        // Latency metrics
+        const metrics = calculateLatencyMetrics();
+        elements.latencyAvg.textContent = metrics.avg.toFixed(1);
+        elements.jitter.textContent = metrics.jitter.toFixed(1);
+        elements.p95.textContent = metrics.p95.toFixed(1);
+        
+        // Sparkline
+        updateSparkline();
+        
+        // Polar chart (stick circularity)
+        updatePolarChart();
+        
+        // Button usage bars
+        const maxPresses = Math.max(
+            state.buttonPresses.face,
+            state.buttonPresses.shoulder,
+            state.buttonPresses.trigger,
+            state.buttonPresses.keys,
+            1
+        );
+        
+        elements.barFace.style.width = `${(state.buttonPresses.face / maxPresses) * 100}%`;
+        elements.barShoulder.style.width = `${(state.buttonPresses.shoulder / maxPresses) * 100}%`;
+        elements.barTrigger.style.width = `${(state.buttonPresses.trigger / maxPresses) * 100}%`;
+        elements.barKeys.style.width = `${(state.buttonPresses.keys / maxPresses) * 100}%`;
+        
+        elements.countFace.textContent = state.buttonPresses.face;
+        elements.countShoulder.textContent = state.buttonPresses.shoulder;
+        elements.countTrigger.textContent = state.buttonPresses.trigger;
+        elements.countKeys.textContent = state.buttonPresses.keys;
+        
+        // Consistency score
+        updateConsistencyScore(metrics);
+    }
+    
+    function updateSparkline() {
+        if (state.latencyHistory.length < 2) return;
+        
+        const width = 200;
+        const height = 40;
+        const maxLatency = Math.max(...state.latencyHistory);
+        
+        const points = state.latencyHistory.map((latency, index) => {
+            const x = (index / (state.latencyHistory.length - 1)) * width;
+            const y = height - (latency / maxLatency) * height;
+            return `${x},${y}`;
+        }).join(' ');
+        
+        elements.latencyLine.setAttribute('points', points);
+    }
+    
+    function updatePolarChart() {
+        // Left stick path
+        if (state.leftStickPath.length > 1) {
+            const leftPath = state.leftStickPath.map((point, index) => {
+                const x = 60 + point.x * 1.5;
+                const y = 60 + point.y * 1.5;
+                return index === 0 ? `M${x},${y}` : `L${x},${y}`;
+            }).join(' ');
+            elements.leftStickPath.setAttribute('d', leftPath);
+        }
+        
+        // Right stick path
+        if (state.rightStickPath.length > 1) {
+            const rightPath = state.rightStickPath.map((point, index) => {
+                const x = 60 + point.x * 1.5;
+                const y = 60 + point.y * 1.5;
+                return index === 0 ? `M${x},${y}` : `L${x},${y}`;
+            }).join(' ');
+            elements.rightStickPath.setAttribute('d', rightPath);
+        }
+    }
+    
+    function updateConsistencyScore(metrics) {
+        // Calculate score based on latency stability, button diversity, and rollover
+        let score = 100;
+        
+        // Penalize high jitter
+        if (metrics.jitter > 50) score -= 30;
+        else if (metrics.jitter > 25) score -= 15;
+        else if (metrics.jitter > 10) score -= 5;
+        
+        // Reward input diversity
+        const totalPresses = Object.values(state.buttonPresses).reduce((a, b) => a + b, 0);
+        if (totalPresses > 100) score = Math.min(100, score + 10);
+        
+        // Reward high rollover
+        if (state.maxRollover >= 10) score = Math.min(100, score + 10);
+        else if (state.maxRollover >= 6) score = Math.min(100, score + 5);
+        
+        score = Math.max(0, score);
+        
+        // Update ring
+        const circumference = 283;
+        const offset = circumference - (score / 100) * circumference;
+        elements.scoreCircle.style.strokeDashoffset = offset;
+        elements.scoreValue.textContent = Math.round(score);
+        
+        // Update badge
+        elements.badge.className = 'cl-badge';
+        if (score >= 90) {
+            elements.badge.classList.add('gold');
+            elements.badge.textContent = '🏆 Gold';
+        } else if (score >= 75) {
+            elements.badge.classList.add('silver');
+            elements.badge.textContent = '🥈 Silver';
+        } else if (score >= 60) {
+            elements.badge.classList.add('bronze');
+            elements.badge.textContent = '🥉 Bronze';
+        } else {
+            elements.badge.textContent = '';
+        }
+    }
+    
+    function updateStatus(text, active) {
+        elements.statusText.textContent = text;
+        if (active) {
+            elements.statusDot.classList.add('cl-active');
+        } else {
+            elements.statusDot.classList.remove('cl-active');
+        }
+    }
+    
+    // ====================================
+    // REPORT GENERATION
+    // ====================================
+    function generateReport() {
+        const metrics = calculateLatencyMetrics();
+        const uptime = Math.round((Date.now() - state.startTime) / 1000);
+        
+        const report = {
+            timestamp: new Date().toISOString(),
+            uptime: `${uptime}s`,
+            gamepad: state.gamepad ? {
+                name: state.gamepad.id,
+                buttons: state.gamepad.buttons.length,
+                axes: state.gamepad.axes.length
+            } : null,
+            keyboard: {
+                maxRollover: state.maxRollover,
+                totalKeyPresses: state.buttonPresses.keys
+            },
+            latency: {
+                average: `${metrics.avg.toFixed(2)}ms`,
+                jitter: `${metrics.jitter.toFixed(2)}ms`,
+                p95: `${metrics.p95.toFixed(2)}ms`
+            },
+            buttonPresses: state.buttonPresses,
+            consistencyScore: parseInt(elements.scoreValue.textContent)
+        };
+        
+        const humanReadable = `
+═══════════════════════════════════════════════
+  CLOUD LOADOUT - INPUT ANALYSIS REPORT
+═══════════════════════════════════════════════
+
+📅 Timestamp: ${new Date().toLocaleString()}
+⏱️  Session Duration: ${uptime}s
+
+🎮 GAMEPAD
+   Device: ${report.gamepad ? report.gamepad.name : 'Not connected'}
+   Buttons: ${report.gamepad ? report.gamepad.buttons : 'N/A'}
+   Axes: ${report.gamepad ? report.gamepad.axes : 'N/A'}
+
+⌨️  KEYBOARD
+   Max Rollover: ${report.keyboard.maxRollover} keys
+   Total Presses: ${report.keyboard.totalKeyPresses}
+
+⚡ LATENCY
+   Average: ${report.latency.average}
+   Jitter: ${report.latency.jitter}
+   P95: ${report.latency.p95}
+
+📊 BUTTON USAGE
+   Face Buttons: ${report.buttonPresses.face}
+   Shoulder: ${report.buttonPresses.shoulder}
+   Triggers: ${report.buttonPresses.trigger}
+   Keys: ${report.buttonPresses.keys}
+
+🏆 CONSISTENCY SCORE: ${report.consistencyScore}/100
+
+═══════════════════════════════════════════════
+        `.trim();
+        
+        return {
+            json: JSON.stringify(report, null, 2),
+            human: humanReadable,
+            combined: `${humanReadable}\n\n${JSON.stringify(report, null, 2)}`
+        };
+    }
+    
+    function copyReport() {
+        const report = generateReport();
+        
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(report.combined).then(() => {
+                showNotification('Report copied to clipboard!');
+            }).catch(() => {
+                fallbackCopy(report.combined);
+            });
+        } else {
+            fallbackCopy(report.combined);
+        }
+    }
+    
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showNotification('Report copied to clipboard!');
+        } catch (err) {
+            showNotification('Failed to copy report', true);
+        }
+        document.body.removeChild(textarea);
+    }
+    
+    function showNotification(message, isError = false) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: ${isError ? '#ff4444' : '#3BC6FF'};
+            color: ${isError ? '#ffffff' : '#0f0f1e'};
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 10000;
+            animation: cl-fade-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateY(-20px)';
+            notification.style.transition = 'all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            setTimeout(() => document.body.removeChild(notification), 300);
+        }, 3000);
+    }
+    
+    function reset() {
+        state.latencyHistory = [];
+        state.buttonPresses = { face: 0, shoulder: 0, trigger: 0, keys: 0 };
+        state.leftStickPath = [];
+        state.rightStickPath = [];
+        state.maxRollover = 0;
+        state.lastInputTime = 0;
+        state.startTime = Date.now();
+        
+        elements.maxRollover.textContent = '0';
+        elements.latencyAvg.textContent = '0.0';
+        elements.jitter.textContent = '0.0';
+        elements.p95.textContent = '0.0';
+        elements.latencyLine.setAttribute('points', '');
+        elements.leftStickPath.setAttribute('d', '');
+        elements.rightStickPath.setAttribute('d', '');
+        
+        updateAnalytics();
+        showNotification('Analytics reset');
+    }
+    
+    // ====================================
+    // MAIN LOOP
+    // ====================================
+    function mainLoop() {
+        updateGamepad();
+        updateAnalytics();
+        requestAnimationFrame(mainLoop);
+    }
+    
+    // ====================================
+    // INITIALIZATION
+    // ====================================
+    function init() {
+        // Gamepad events
+        window.addEventListener('gamepadconnected', onGamepadConnected);
+        window.addEventListener('gamepaddisconnected', onGamepadDisconnected);
+        
+        // Keyboard events
+        window.addEventListener('keydown', onKeyDown);
+        window.addEventListener('keyup', onKeyUp);
+        
+        // Button events
+        elements.copyReportBtn.addEventListener('click', copyReport);
+        elements.resetBtn.addEventListener('click', reset);
+        
+        // Start main loop
+        mainLoop();
+        
+        console.log('%c🎮 Cloud Loadout: Gamepad + Keyboard Tester Initialized', 
+                    'background: #3BC6FF; color: #0f0f1e; padding: 8px 16px; font-weight: bold; border-radius: 4px;');
+    }
+    
+    // Auto-initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
+
+</body>
+</html>
