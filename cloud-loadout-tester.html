@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud Loadout: Gamepad + Keyboard Tester</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            background: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
 </head>
 <body>
 
@@ -120,24 +131,108 @@
             <section class="cl-panel cl-keyboard-panel">
                 <h2>Keyboard Status</h2>
                 <div class="cl-keyboard-viz">
-                    <div id="cl-keyboard-display" class="cl-keyboard-grid">
-                        <div class="cl-key-group">
-                            <div class="cl-key" data-key="KeyW">W</div>
-                            <div class="cl-key" data-key="KeyA">A</div>
-                            <div class="cl-key" data-key="KeyS">S</div>
-                            <div class="cl-key" data-key="KeyD">D</div>
-                        </div>
-                        <div class="cl-key-group">
-                            <div class="cl-key" data-key="Space">SPACE</div>
-                            <div class="cl-key" data-key="ShiftLeft">SHIFT</div>
-                        </div>
-                        <div class="cl-key-group">
-                            <div class="cl-key" data-key="ArrowUp">↑</div>
-                            <div class="cl-key" data-key="ArrowLeft">←</div>
-                            <div class="cl-key" data-key="ArrowDown">↓</div>
-                            <div class="cl-key" data-key="ArrowRight">→</div>
-                        </div>
-                    </div>
+                    <!-- SVG Keyboard Visualization -->
+                    <svg viewBox="0 0 600 280" class="cl-keyboard-svg" id="cl-keyboard-svg">
+                        <defs>
+                            <linearGradient id="cl-key-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3a3a4e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2a2a3e;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="cl-key-glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Keyboard Base -->
+                        <rect x="10" y="10" width="580" height="260" rx="12" fill="#1a1a2e" stroke="#3BC6FF" stroke-width="2" opacity="0.3"/>
+                        
+                        <!-- Number Row -->
+                        <g class="cl-key-row" transform="translate(30, 30)">
+                            <rect class="cl-svg-key" data-key="Digit1" x="0" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="15" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">1</text>
+                            <rect class="cl-svg-key" data-key="Digit2" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">2</text>
+                            <rect class="cl-svg-key" data-key="Digit3" x="76" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="91" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">3</text>
+                            <rect class="cl-svg-key" data-key="Digit4" x="114" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="129" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">4</text>
+                        </g>
+                        
+                        <!-- QWERTY Row -->
+                        <g class="cl-key-row" transform="translate(30, 72)">
+                            <rect class="cl-svg-key" data-key="KeyQ" x="0" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="15" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">Q</text>
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyW" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">W</text>
+                            <rect class="cl-svg-key" data-key="KeyE" x="76" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="91" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">E</text>
+                            <rect class="cl-svg-key" data-key="KeyR" x="114" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="129" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">R</text>
+                            <rect class="cl-svg-key" data-key="KeyT" x="152" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="167" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">T</text>
+                        </g>
+                        
+                        <!-- ASDF Row (Home Row) -->
+                        <g class="cl-key-row" transform="translate(30, 114)">
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyA" x="0" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="15" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">A</text>
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyS" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">S</text>
+                            <rect class="cl-svg-key cl-key-wasd" data-key="KeyD" x="76" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3BC6FF" stroke-width="2"/>
+                            <text x="91" y="20" text-anchor="middle" fill="#3BC6FF" font-size="14" font-weight="700">D</text>
+                            <rect class="cl-svg-key" data-key="KeyF" x="114" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="129" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">F</text>
+                            <rect class="cl-svg-key" data-key="KeyG" x="152" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="167" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">G</text>
+                        </g>
+                        
+                        <!-- ZXCV Row -->
+                        <g class="cl-key-row" transform="translate(30, 156)">
+                            <rect class="cl-svg-key" data-key="ShiftLeft" x="0" y="0" width="50" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#A56CFF" stroke-width="2"/>
+                            <text x="25" y="20" text-anchor="middle" fill="#A56CFF" font-size="12" font-weight="700">SHIFT</text>
+                            <rect class="cl-svg-key" data-key="KeyZ" x="58" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="73" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">Z</text>
+                            <rect class="cl-svg-key" data-key="KeyX" x="96" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="111" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">X</text>
+                            <rect class="cl-svg-key" data-key="KeyC" x="134" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="149" y="20" text-anchor="middle" fill="#b0b0c0" font-size="14" font-weight="600">C</text>
+                        </g>
+                        
+                        <!-- Space Bar -->
+                        <g class="cl-key-row" transform="translate(30, 198)">
+                            <rect class="cl-svg-key" data-key="ControlLeft" x="0" y="0" width="40" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="20" y="20" text-anchor="middle" fill="#b0b0c0" font-size="11" font-weight="600">CTRL</text>
+                            <rect class="cl-svg-key" data-key="AltLeft" x="48" y="0" width="40" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#3a3a4e" stroke-width="1.5"/>
+                            <text x="68" y="20" text-anchor="middle" fill="#b0b0c0" font-size="11" font-weight="600">ALT</text>
+                            <rect class="cl-svg-key" data-key="Space" x="96" y="0" width="140" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="166" y="20" text-anchor="middle" fill="#C6FF3B" font-size="12" font-weight="700">SPACE</text>
+                        </g>
+                        
+                        <!-- Arrow Keys (Right Side) -->
+                        <g class="cl-key-row cl-arrow-cluster" transform="translate(450, 156)">
+                            <!-- Up Arrow -->
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowUp" x="38" y="0" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="53" y="20" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">↑</text>
+                            
+                            <!-- Left, Down, Right Arrows -->
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowLeft" x="0" y="42" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="15" y="62" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">←</text>
+                            
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowDown" x="38" y="42" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="53" y="62" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">↓</text>
+                            
+                            <rect class="cl-svg-key cl-key-arrow" data-key="ArrowRight" x="76" y="42" width="30" height="30" rx="4" fill="url(#cl-key-gradient)" stroke="#C6FF3B" stroke-width="2"/>
+                            <text x="91" y="62" text-anchor="middle" fill="#C6FF3B" font-size="16" font-weight="700">→</text>
+                        </g>
+                        
+                        <!-- Labels -->
+                        <text x="70" y="250" fill="#3BC6FF" font-size="11" font-weight="600" opacity="0.7">WASD</text>
+                        <text x="490" y="250" fill="#C6FF3B" font-size="11" font-weight="600" opacity="0.7">ARROWS</text>
+                    </svg>
                     
                     <!-- Active Keys Display -->
                     <div class="cl-active-keys">
@@ -327,12 +422,13 @@
 
 /* Container */
 .cl-container {
-    max-width: 1400px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 3rem;
     background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-    border-radius: 16px;
-    box-shadow: var(--cl-shadow-lg);
+    border-radius: 20px;
+    box-shadow: var(--cl-shadow-lg), 0 0 100px rgba(59, 198, 255, 0.1);
 }
 
 /* Header */
@@ -340,9 +436,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--cl-border);
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--cl-border);
 }
 
 .cl-logo {
@@ -405,17 +501,17 @@
 /* Main Grid */
 .cl-main-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 /* Panel */
 .cl-panel {
     background: var(--cl-bg-secondary);
     border: 1px solid var(--cl-border);
-    border-radius: 12px;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 2rem;
     box-shadow: var(--cl-shadow);
     transition: all 0.3s var(--cl-easing);
 }
@@ -506,11 +602,60 @@
 }
 
 /* Keyboard Panel */
+.cl-keyboard-svg {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    display: block;
+}
+
+.cl-svg-key {
+    transition: all 0.2s var(--cl-easing);
+    cursor: pointer;
+}
+
+.cl-svg-key.cl-key-pressed {
+    filter: url(#cl-key-glow);
+}
+
+.cl-svg-key.cl-key-pressed[data-key*="Key"] {
+    fill: var(--cl-azure) !important;
+    stroke: var(--cl-azure) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key.cl-key-pressed[data-key*="Arrow"] {
+    fill: var(--cl-lime) !important;
+    stroke: var(--cl-lime) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key.cl-key-pressed[data-key="Space"] {
+    fill: var(--cl-lime) !important;
+    stroke: var(--cl-lime) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key.cl-key-pressed[data-key="ShiftLeft"] {
+    fill: var(--cl-purple) !important;
+    stroke: var(--cl-purple) !important;
+    stroke-width: 3;
+}
+
+.cl-svg-key + text {
+    transition: fill 0.2s var(--cl-easing);
+    pointer-events: none;
+}
+
+.cl-key-wasd:hover,
+.cl-key-arrow:hover {
+    opacity: 0.8;
+}
+
+/* Legacy keyboard support (for backward compatibility) */
 .cl-keyboard-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    display: none;
 }
 
 .cl-key-group {
@@ -616,15 +761,15 @@
 
 .cl-analytics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
 }
 
 .cl-metric-card {
     background: var(--cl-bg-tertiary);
     border: 1px solid var(--cl-border);
-    border-radius: 8px;
-    padding: 1rem;
+    border-radius: 12px;
+    padding: 1.5rem;
     transition: all 0.3s var(--cl-easing);
 }
 
@@ -802,9 +947,10 @@
 .cl-footer {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--cl-border);
+    gap: 1.5rem;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    border-top: 2px solid var(--cl-border);
 }
 
 .cl-btn {
@@ -891,14 +1037,19 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .cl-container {
+    body {
         padding: 1rem;
+    }
+    
+    .cl-container {
+        padding: 1.5rem;
     }
     
     .cl-header {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
         text-align: center;
+        margin-bottom: 2rem;
     }
     
     .cl-header h1 {
@@ -907,10 +1058,20 @@
     
     .cl-main-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .cl-panel {
+        padding: 1.5rem;
     }
     
     .cl-analytics-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cl-keyboard-svg {
+        max-width: 100%;
     }
     
     .cl-footer {
@@ -1137,10 +1298,16 @@
                 elements.maxRollover.textContent = state.maxRollover;
             }
             
-            // Highlight key if visible
+            // Highlight key if visible (legacy HTML keys)
             const keyElement = document.querySelector(`.cl-key[data-key="${event.code}"]`);
             if (keyElement) {
                 keyElement.classList.add('cl-pressed');
+            }
+            
+            // Highlight SVG key
+            const svgKeyElement = document.querySelector(`.cl-svg-key[data-key="${event.code}"]`);
+            if (svgKeyElement) {
+                svgKeyElement.classList.add('cl-key-pressed');
             }
             
             updateActiveKeys();
@@ -1150,9 +1317,16 @@
     function onKeyUp(event) {
         state.keyboard.delete(event.code);
         
+        // Remove highlight from legacy HTML key
         const keyElement = document.querySelector(`.cl-key[data-key="${event.code}"]`);
         if (keyElement) {
             keyElement.classList.remove('cl-pressed');
+        }
+        
+        // Remove highlight from SVG key
+        const svgKeyElement = document.querySelector(`.cl-svg-key[data-key="${event.code}"]`);
+        if (svgKeyElement) {
+            svgKeyElement.classList.remove('cl-key-pressed');
         }
         
         updateActiveKeys();
