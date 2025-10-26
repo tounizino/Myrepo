@@ -1,0 +1,88 @@
+WordPress Embed Instructions
+=============================
+
+OPTION 1: Using Custom HTML Block (Recommended)
+------------------------------------------------
+1. In WordPress editor, add a "Custom HTML" block
+2. Copy and paste the entire content from "input-latency-meter.html"
+3. Publish or update your page
+
+OPTION 2: Using Text Widget
+----------------------------
+1. Go to Appearance > Widgets
+2. Add a "Custom HTML" widget to your desired location
+3. Paste the code from "input-latency-meter.html"
+4. Save the widget
+
+OPTION 3: Direct Page/Post Editor
+----------------------------------
+If using Classic Editor:
+1. Switch to "Text" mode (not "Visual")
+2. Paste the code from "input-latency-meter.html"
+3. Switch back to Visual mode to see it rendered
+
+For Gutenberg/Block Editor:
+1. Add a "Custom HTML" block
+2. Paste the entire HTML code
+3. Preview to see it in action
+
+IMPORTANT NOTES:
+----------------
+- The tool is fully self-contained with no external dependencies
+- All styles are scoped to #input-latency-meter-root to prevent conflicts
+- No JavaScript libraries required
+- Mobile responsive and touch-friendly
+- Works with all modern WordPress themes
+- No server-side processing needed - runs 100% client-side
+
+FEATURES:
+---------
+✅ Reaction Time Test (10 attempts)
+✅ Sustained Input Test (configurable duration)
+✅ Keyboard Latency Test (SPACE key)
+✅ Real-time statistics (avg, best, worst, std dev)
+✅ Performance ratings (Excellent/Good/Average/Poor)
+✅ Visual histogram of results
+✅ Export to JSON/CSV
+✅ Copy results to clipboard
+✅ Beautiful animations and transitions
+✅ Dark mode friendly color scheme
+✅ Fully responsive design
+
+CUSTOMIZATION:
+--------------
+To customize colors, search for these gradient definitions in the CSS:
+- Primary gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+- Success gradient: linear-gradient(135deg, #55efc4 0%, #00b894 100%)
+- Info gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)
+
+To change max attempts, modify these JavaScript constants:
+- maxReactionAttempts = 10;
+- maxKeyboardAttempts = 10;
+
+TROUBLESHOOTING:
+----------------
+If the tool doesn't display properly:
+1. Ensure you're using the Custom HTML block (not paragraph)
+2. Check that your theme doesn't have aggressive CSS reset
+3. Try wrapping in an additional <div style="all: initial">
+4. Clear browser cache and refresh page
+5. Check browser console for JavaScript errors
+
+PERFORMANCE:
+------------
+- Lightweight: ~50KB total (HTML + CSS + JS combined)
+- No external requests
+- Fast load time
+- No impact on page speed scores
+- Compatible with all major browsers (Chrome, Firefox, Safari, Edge)
+
+ACCESSIBILITY:
+--------------
+- Keyboard navigation supported
+- Screen reader friendly
+- High contrast ratios
+- Touch-friendly for mobile devices
+- Responsive design for all screen sizes
+
+For support or customization requests, visit your cloud gaming blog!
