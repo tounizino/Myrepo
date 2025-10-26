@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Gamepad Tester - PS5 & Xbox Compatible</title>
+    <style>
+        * {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .gamepad-tester-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            max-width: 1400px !important;
+            margin: 20px auto !important;
+            padding: 30px !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .gamepad-tester-header {
+            text-align: center !important;
+            margin-bottom: 30px !important;
+            color: #ffffff !important;
+        }
+
+        .gamepad-tester-title {
+            font-size: 2.5em !important;
+            font-weight: bold !important;
+            margin-bottom: 10px !important;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+            color: #ffffff !important;
+        }
+
+        .gamepad-tester-subtitle {
+            font-size: 1.2em !important;
+            opacity: 0.9 !important;
+            color: #ffffff !important;
+        }
+
+        .gamepad-status {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 15px !important;
+            padding: 20px !important;
+            margin-bottom: 25px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .status-indicator {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 15px !important;
+            font-size: 1.3em !important;
+            font-weight: 600 !important;
+            margin-bottom: 15px !important;
+            color: #333333 !important;
+        }
+
+        .status-dot {
+            width: 20px !important;
+            height: 20px !important;
+            border-radius: 50% !important;
+            background: #ff4444 !important;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.5) !important;
+            animation: pulse 2s infinite !important;
+        }
+
+        .status-dot.connected {
+            background: #44ff44 !important;
+            box-shadow: 0 0 20px rgba(68, 255, 68, 0.5) !important;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1) !important;
+                opacity: 1 !important;
+            }
+            50% {
+                transform: scale(1.2) !important;
+                opacity: 0.7 !important;
+            }
+        }
+
+        .controller-info {
+            text-align: center !important;
+            color: #666666 !important;
+            font-size: 1.1em !important;
+        }
+
+        .controller-name {
+            font-weight: bold !important;
+            color: #333333 !important;
+            font-size: 1.2em !important;
+            margin-top: 10px !important;
+        }
+
+        .gamepad-layout {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 30px !important;
+            margin-bottom: 30px !important;
+        }
+
+        @media (max-width: 768px) {
+            .gamepad-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .controller-section {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 15px !important;
+            padding: 25px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .section-title {
+            font-size: 1.5em !important;
+            font-weight: bold !important;
+            margin-bottom: 20px !important;
+            color: #333333 !important;
+            text-align: center !important;
+            padding-bottom: 10px !important;
+            border-bottom: 3px solid #667eea !important;
+        }
+
+        .buttons-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+            gap: 15px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .button-display {
+            background: linear-gradient(145deg, #f0f0f0, #ffffff) !important;
+            border: 3px solid #e0e0e0 !important;
+            border-radius: 12px !important;
+            padding: 15px 10px !important;
+            text-align: center !important;
+            transition: all 0.1s ease !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .button-display.pressed {
+            background: linear-gradient(145deg, #667eea, #764ba2) !important;
+            border-color: #667eea !important;
+            color: #ffffff !important;
+            transform: scale(0.95) !important;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5) inset !important;
+        }
+
+        .button-label {
+            font-weight: bold !important;
+            font-size: 0.9em !important;
+            margin-bottom: 5px !important;
+            color: inherit !important;
+        }
+
+        .button-value {
+            font-size: 0.85em !important;
+            opacity: 0.7 !important;
+            color: inherit !important;
+        }
+
+        .axes-container {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+            gap: 20px !important;
+        }
+
+        .axis-display {
+            background: #f8f9fa !important;
+            border-radius: 12px !important;
+            padding: 15px !important;
+            border: 2px solid #e0e0e0 !important;
+        }
+
+        .axis-label {
+            font-weight: bold !important;
+            margin-bottom: 10px !important;
+            color: #333333 !important;
+            text-align: center !important;
+        }
+
+        .axis-value {
+            text-align: center !important;
+            font-size: 1.1em !important;
+            color: #667eea !important;
+            font-weight: 600 !important;
+            margin-bottom: 10px !important;
+        }
+
+        .axis-bar {
+            width: 100% !important;
+            height: 30px !important;
+            background: #e0e0e0 !important;
+            border-radius: 15px !important;
+            overflow: hidden !important;
+            position: relative !important;
+        }
+
+        .axis-bar-fill {
+            height: 100% !important;
+            background: linear-gradient(90deg, #667eea, #764ba2) !important;
+            transition: width 0.05s ease !important;
+            border-radius: 15px !important;
+        }
+
+        .axis-bar-center {
+            position: absolute !important;
+            left: 50% !important;
+            top: 0 !important;
+            width: 2px !important;
+            height: 100% !important;
+            background: #ff4444 !important;
+            z-index: 1 !important;
+        }
+
+        .stick-visualizer {
+            width: 180px !important;
+            height: 180px !important;
+            background: #f0f0f0 !important;
+            border: 3px solid #e0e0e0 !important;
+            border-radius: 50% !important;
+            position: relative !important;
+            margin: 15px auto !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) inset !important;
+        }
+
+        .stick-cross-h, .stick-cross-v {
+            position: absolute !important;
+            background: #d0d0d0 !important;
+        }
+
+        .stick-cross-h {
+            width: 100% !important;
+            height: 2px !important;
+            top: 50% !important;
+            left: 0 !important;
+            transform: translateY(-50%) !important;
+        }
+
+        .stick-cross-v {
+            width: 2px !important;
+            height: 100% !important;
+            left: 50% !important;
+            top: 0 !important;
+            transform: translateX(-50%) !important;
+        }
+
+        .stick-pointer {
+            width: 30px !important;
+            height: 30px !important;
+            background: linear-gradient(145deg, #667eea, #764ba2) !important;
+            border: 3px solid #ffffff !important;
+            border-radius: 50% !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+            transition: all 0.05s ease !important;
+        }
+
+        .triggers-section {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 20px !important;
+            margin-top: 20px !important;
+        }
+
+        .trigger-display {
+            background: #f8f9fa !important;
+            border-radius: 12px !important;
+            padding: 20px !important;
+            border: 2px solid #e0e0e0 !important;
+        }
+
+        .trigger-label {
+            font-weight: bold !important;
+            text-align: center !important;
+            margin-bottom: 10px !important;
+            color: #333333 !important;
+            font-size: 1.1em !important;
+        }
+
+        .trigger-value {
+            text-align: center !important;
+            font-size: 1.3em !important;
+            color: #667eea !important;
+            font-weight: bold !important;
+            margin-bottom: 10px !important;
+        }
+
+        .trigger-bar {
+            width: 100% !important;
+            height: 40px !important;
+            background: #e0e0e0 !important;
+            border-radius: 20px !important;
+            overflow: hidden !important;
+            position: relative !important;
+        }
+
+        .trigger-bar-fill {
+            height: 100% !important;
+            background: linear-gradient(90deg, #44ff44, #00cc00) !important;
+            transition: width 0.05s ease !important;
+            border-radius: 20px !important;
+            box-shadow: 0 0 10px rgba(68, 255, 68, 0.5) !important;
+        }
+
+        .dpad-visualizer {
+            width: 150px !important;
+            height: 150px !important;
+            margin: 20px auto !important;
+            position: relative !important;
+            background: #f0f0f0 !important;
+            border-radius: 10px !important;
+        }
+
+        .dpad-button {
+            position: absolute !important;
+            background: #e0e0e0 !important;
+            border: 2px solid #c0c0c0 !important;
+            transition: all 0.1s ease !important;
+        }
+
+        .dpad-button.pressed {
+            background: linear-gradient(145deg, #667eea, #764ba2) !important;
+            border-color: #667eea !important;
+            transform: scale(0.9) !important;
+        }
+
+        .dpad-up, .dpad-down {
+            width: 40px !important;
+            height: 50px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            border-radius: 8px 8px 0 0 !important;
+        }
+
+        .dpad-up {
+            top: 0 !important;
+        }
+
+        .dpad-down {
+            bottom: 0 !important;
+            border-radius: 0 0 8px 8px !important;
+        }
+
+        .dpad-left, .dpad-right {
+            width: 50px !important;
+            height: 40px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            border-radius: 8px 0 0 8px !important;
+        }
+
+        .dpad-left {
+            left: 0 !important;
+        }
+
+        .dpad-right {
+            right: 0 !important;
+            border-radius: 0 8px 8px 0 !important;
+        }
+
+        .dpad-center {
+            position: absolute !important;
+            width: 40px !important;
+            height: 40px !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            background: #d0d0d0 !important;
+            border-radius: 50% !important;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 15px !important;
+            padding: 20px !important;
+            text-align: center !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .instructions h3 {
+            color: #333333 !important;
+            margin-bottom: 10px !important;
+            font-size: 1.3em !important;
+        }
+
+        .instructions p {
+            color: #666666 !important;
+            line-height: 1.6 !important;
+            margin-bottom: 8px !important;
+        }
+
+        .controller-icon {
+            font-size: 3em !important;
+            margin: 10px 0 !important;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .vibration-controls {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 15px !important;
+            padding: 20px !important;
+            margin-top: 20px !important;
+            text-align: center !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .vibration-button {
+            background: linear-gradient(145deg, #667eea, #764ba2) !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 12px 30px !important;
+            font-size: 1.1em !important;
+            font-weight: bold !important;
+            border-radius: 25px !important;
+            cursor: pointer !important;
+            margin: 5px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
+        }
+
+        .vibration-button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+        }
+
+        .vibration-button:active {
+            transform: translateY(0) !important;
+        }
+
+        .vibration-button:disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="gamepad-tester-container">
+        <div class="gamepad-tester-header">
+            <h1 class="gamepad-tester-title">🎮 Professional Gamepad Tester</h1>
+            <p class="gamepad-tester-subtitle">Test PS5, Xbox, and all compatible game controllers</p>
+        </div>
+
+        <div class="gamepad-status">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">No Controller Connected</span>
+            </div>
+            <div class="controller-info" id="controllerInfo">
+                <p>Please connect your gamepad and press any button</p>
+                <div class="controller-icon">🎮</div>
+            </div>
+        </div>
+
+        <div id="gamepadContent" class="hidden">
+            <div class="gamepad-layout">
+                <div class="controller-section">
+                    <h2 class="section-title">Face Buttons</h2>
+                    <div class="buttons-grid" id="faceButtons"></div>
+                    
+                    <h2 class="section-title" style="margin-top: 20px !important;">Shoulder Buttons</h2>
+                    <div class="buttons-grid" id="shoulderButtons"></div>
+                    
+                    <h2 class="section-title" style="margin-top: 20px !important;">System Buttons</h2>
+                    <div class="buttons-grid" id="systemButtons"></div>
+                </div>
+
+                <div class="controller-section">
+                    <h2 class="section-title">D-Pad</h2>
+                    <div class="dpad-visualizer">
+                        <div class="dpad-button dpad-up" id="dpadUp"></div>
+                        <div class="dpad-button dpad-down" id="dpadDown"></div>
+                        <div class="dpad-button dpad-left" id="dpadLeft"></div>
+                        <div class="dpad-button dpad-right" id="dpadRight"></div>
+                        <div class="dpad-center"></div>
+                    </div>
+                    <div class="buttons-grid" id="dpadButtons"></div>
+                </div>
+            </div>
+
+            <div class="gamepad-layout">
+                <div class="controller-section">
+                    <h2 class="section-title">Left Analog Stick</h2>
+                    <div class="stick-visualizer">
+                        <div class="stick-cross-h"></div>
+                        <div class="stick-cross-v"></div>
+                        <div class="stick-pointer" id="leftStickPointer"></div>
+                    </div>
+                    <div class="axis-display">
+                        <div class="axis-label">Horizontal (X)</div>
+                        <div class="axis-value" id="leftStickX">0.00</div>
+                        <div class="axis-bar">
+                            <div class="axis-bar-center"></div>
+                            <div class="axis-bar-fill" id="leftStickXBar"></div>
+                        </div>
+                    </div>
+                    <div class="axis-display" style="margin-top: 15px !important;">
+                        <div class="axis-label">Vertical (Y)</div>
+                        <div class="axis-value" id="leftStickY">0.00</div>
+                        <div class="axis-bar">
+                            <div class="axis-bar-center"></div>
+                            <div class="axis-bar-fill" id="leftStickYBar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controller-section">
+                    <h2 class="section-title">Right Analog Stick</h2>
+                    <div class="stick-visualizer">
+                        <div class="stick-cross-h"></div>
+                        <div class="stick-cross-v"></div>
+                        <div class="stick-pointer" id="rightStickPointer"></div>
+                    </div>
+                    <div class="axis-display">
+                        <div class="axis-label">Horizontal (X)</div>
+                        <div class="axis-value" id="rightStickX">0.00</div>
+                        <div class="axis-bar">
+                            <div class="axis-bar-center"></div>
+                            <div class="axis-bar-fill" id="rightStickXBar"></div>
+                        </div>
+                    </div>
+                    <div class="axis-display" style="margin-top: 15px !important;">
+                        <div class="axis-label">Vertical (Y)</div>
+                        <div class="axis-value" id="rightStickY">0.00</div>
+                        <div class="axis-bar">
+                            <div class="axis-bar-center"></div>
+                            <div class="axis-bar-fill" id="rightStickYBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controller-section">
+                <h2 class="section-title">Triggers</h2>
+                <div class="triggers-section">
+                    <div class="trigger-display">
+                        <div class="trigger-label">Left Trigger (L2/LT)</div>
+                        <div class="trigger-value" id="leftTriggerValue">0.00</div>
+                        <div class="trigger-bar">
+                            <div class="trigger-bar-fill" id="leftTriggerBar"></div>
+                        </div>
+                    </div>
+                    <div class="trigger-display">
+                        <div class="trigger-label">Right Trigger (R2/RT)</div>
+                        <div class="trigger-value" id="rightTriggerValue">0.00</div>
+                        <div class="trigger-bar">
+                            <div class="trigger-bar-fill" id="rightTriggerBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vibration-controls">
+                <h3 style="margin-bottom: 15px !important; color: #333333 !important;">Controller Vibration Test</h3>
+                <button class="vibration-button" onclick="testVibration('weak')">Weak Vibration</button>
+                <button class="vibration-button" onclick="testVibration('strong')">Strong Vibration</button>
+                <button class="vibration-button" onclick="testVibration('pulse')">Pulse Pattern</button>
+            </div>
+        </div>
+
+        <div class="instructions" id="instructions">
+            <h3>How to Use This Tester</h3>
+            <p>✅ Connect your PS5, Xbox, or any compatible gamepad to your device</p>
+            <p>✅ Press any button on your controller to activate</p>
+            <p>✅ Test all buttons, triggers, analog sticks, and D-pad</p>
+            <p>✅ Try the vibration test features</p>
+            <p>✅ Works with Chrome, Edge, Firefox, and modern browsers</p>
+        </div>
+    </div>
+
+    <script>
+        let gamepadIndex = null;
+        let animationId = null;
+
+        const buttonMappings = {
+            standard: [
+                { index: 0, name: 'A / Cross (×)', type: 'face' },
+                { index: 1, name: 'B / Circle (○)', type: 'face' },
+                { index: 2, name: 'X / Square (□)', type: 'face' },
+                { index: 3, name: 'Y / Triangle (△)', type: 'face' },
+                { index: 4, name: 'L1 / LB', type: 'shoulder' },
+                { index: 5, name: 'R1 / RB', type: 'shoulder' },
+                { index: 6, name: 'L2 / LT', type: 'shoulder' },
+                { index: 7, name: 'R2 / RT', type: 'shoulder' },
+                { index: 8, name: 'Select / Share', type: 'system' },
+                { index: 9, name: 'Start / Options', type: 'system' },
+                { index: 10, name: 'L3 (Left Stick)', type: 'system' },
+                { index: 11, name: 'R3 (Right Stick)', type: 'system' },
+                { index: 12, name: 'D-Pad Up', type: 'dpad' },
+                { index: 13, name: 'D-Pad Down', type: 'dpad' },
+                { index: 14, name: 'D-Pad Left', type: 'dpad' },
+                { index: 15, name: 'D-Pad Right', type: 'dpad' },
+                { index: 16, name: 'Home / PS / Xbox', type: 'system' }
+            ]
+        };
+
+        function initGamepadTester() {
+            window.addEventListener('gamepadconnected', (e) => {
+                gamepadIndex = e.gamepad.index;
+                onGamepadConnected(e.gamepad);
+            });
+
+            window.addEventListener('gamepaddisconnected', (e) => {
+                gamepadIndex = null;
+                onGamepadDisconnected();
+            });
+
+            checkExistingGamepads();
+        }
+
+        function checkExistingGamepads() {
+            const gamepads = navigator.getGamepads();
+            for (let i = 0; i < gamepads.length; i++) {
+                if (gamepads[i]) {
+                    gamepadIndex = i;
+                    onGamepadConnected(gamepads[i]);
+                    break;
+                }
+            }
+        }
+
+        function onGamepadConnected(gamepad) {
+            document.getElementById('statusDot').classList.add('connected');
+            document.getElementById('statusText').textContent = 'Controller Connected';
+            document.getElementById('controllerInfo').innerHTML = `
+                <p class="controller-name">${gamepad.id}</p>
+                <p style="margin-top: 5px !important;">Buttons: ${gamepad.buttons.length} | Axes: ${gamepad.axes.length}</p>
+            `;
+            document.getElementById('gamepadContent').classList.remove('hidden');
+            document.getElementById('instructions').classList.add('hidden');
+
+            initializeButtons(gamepad.buttons.length);
+            startPolling();
+        }
+
+        function onGamepadDisconnected() {
+            document.getElementById('statusDot').classList.remove('connected');
+            document.getElementById('statusText').textContent = 'No Controller Connected';
+            document.getElementById('controllerInfo').innerHTML = `
+                <p>Please connect your gamepad and press any button</p>
+                <div class="controller-icon">🎮</div>
+            `;
+            document.getElementById('gamepadContent').classList.add('hidden');
+            document.getElementById('instructions').classList.remove('hidden');
+            
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        function initializeButtons(buttonCount) {
+            const faceButtons = document.getElementById('faceButtons');
+            const shoulderButtons = document.getElementById('shoulderButtons');
+            const systemButtons = document.getElementById('systemButtons');
+            const dpadButtons = document.getElementById('dpadButtons');
+
+            faceButtons.innerHTML = '';
+            shoulderButtons.innerHTML = '';
+            systemButtons.innerHTML = '';
+            dpadButtons.innerHTML = '';
+
+            buttonMappings.standard.forEach(btn => {
+                if (btn.index < buttonCount) {
+                    const buttonEl = document.createElement('div');
+                    buttonEl.className = 'button-display';
+                    buttonEl.id = `button-${btn.index}`;
+                    buttonEl.innerHTML = `
+                        <div class="button-label">${btn.name}</div>
+                        <div class="button-value" id="value-${btn.index}">0.00</div>
+                    `;
+
+                    if (btn.type === 'face') {
+                        faceButtons.appendChild(buttonEl);
+                    } else if (btn.type === 'shoulder') {
+                        shoulderButtons.appendChild(buttonEl);
+                    } else if (btn.type === 'system') {
+                        systemButtons.appendChild(buttonEl);
+                    } else if (btn.type === 'dpad') {
+                        dpadButtons.appendChild(buttonEl);
+                    }
+                }
+            });
+        }
+
+        function startPolling() {
+            function poll() {
+                const gamepads = navigator.getGamepads();
+                if (gamepads[gamepadIndex]) {
+                    updateGamepadState(gamepads[gamepadIndex]);
+                }
+                animationId = requestAnimationFrame(poll);
+            }
+            poll();
+        }
+
+        function updateGamepadState(gamepad) {
+            gamepad.buttons.forEach((button, index) => {
+                const buttonEl = document.getElementById(`button-${index}`);
+                const valueEl = document.getElementById(`value-${index}`);
+                
+                if (buttonEl) {
+                    if (button.pressed) {
+                        buttonEl.classList.add('pressed');
+                    } else {
+                        buttonEl.classList.remove('pressed');
+                    }
+                }
+                
+                if (valueEl) {
+                    valueEl.textContent = button.value.toFixed(2);
+                }
+
+                if (index === 12) updateDpad('dpadUp', button.pressed);
+                if (index === 13) updateDpad('dpadDown', button.pressed);
+                if (index === 14) updateDpad('dpadLeft', button.pressed);
+                if (index === 15) updateDpad('dpadRight', button.pressed);
+            });
+
+            if (gamepad.axes.length >= 2) {
+                updateStick('left', gamepad.axes[0], gamepad.axes[1]);
+            }
+
+            if (gamepad.axes.length >= 4) {
+                updateStick('right', gamepad.axes[2], gamepad.axes[3]);
+            }
+
+            if (gamepad.buttons.length > 6) {
+                updateTrigger('left', gamepad.buttons[6].value);
+            }
+            if (gamepad.buttons.length > 7) {
+                updateTrigger('right', gamepad.buttons[7].value);
+            }
+        }
+
+        function updateDpad(id, pressed) {
+            const element = document.getElementById(id);
+            if (element) {
+                if (pressed) {
+                    element.classList.add('pressed');
+                } else {
+                    element.classList.remove('pressed');
+                }
+            }
+        }
+
+        function updateStick(side, x, y) {
+            const pointer = document.getElementById(`${side}StickPointer`);
+            const xValue = document.getElementById(`${side}StickX`);
+            const yValue = document.getElementById(`${side}StickY`);
+            const xBar = document.getElementById(`${side}StickXBar`);
+            const yBar = document.getElementById(`${side}StickYBar`);
+
+            if (pointer) {
+                const maxOffset = 75;
+                const xOffset = x * maxOffset;
+                const yOffset = y * maxOffset;
+                pointer.style.transform = `translate(calc(-50% + ${xOffset}px), calc(-50% + ${yOffset}px))`;
+            }
+
+            if (xValue) xValue.textContent = x.toFixed(2);
+            if (yValue) yValue.textContent = y.toFixed(2);
+
+            if (xBar) {
+                const xPercent = ((x + 1) / 2) * 100;
+                xBar.style.width = `${xPercent}%`;
+            }
+
+            if (yBar) {
+                const yPercent = ((y + 1) / 2) * 100;
+                yBar.style.width = `${yPercent}%`;
+            }
+        }
+
+        function updateTrigger(side, value) {
+            const valueEl = document.getElementById(`${side}TriggerValue`);
+            const bar = document.getElementById(`${side}TriggerBar`);
+
+            if (valueEl) valueEl.textContent = value.toFixed(2);
+            if (bar) bar.style.width = `${value * 100}%`;
+        }
+
+        function testVibration(type) {
+            const gamepads = navigator.getGamepads();
+            if (!gamepads[gamepadIndex] || !gamepads[gamepadIndex].vibrationActuator) {
+                alert('Vibration not supported on this controller or browser');
+                return;
+            }
+
+            const actuator = gamepads[gamepadIndex].vibrationActuator;
+
+            switch(type) {
+                case 'weak':
+                    actuator.playEffect('dual-rumble', {
+                        duration: 500,
+                        weakMagnitude: 0.5,
+                        strongMagnitude: 0
+                    });
+                    break;
+                case 'strong':
+                    actuator.playEffect('dual-rumble', {
+                        duration: 500,
+                        weakMagnitude: 0,
+                        strongMagnitude: 1.0
+                    });
+                    break;
+                case 'pulse':
+                    let intensity = 0;
+                    let increasing = true;
+                    const pulseInterval = setInterval(() => {
+                        actuator.playEffect('dual-rumble', {
+                            duration: 100,
+                            weakMagnitude: intensity,
+                            strongMagnitude: intensity
+                        });
+                        
+                        if (increasing) {
+                            intensity += 0.2;
+                            if (intensity >= 1.0) increasing = false;
+                        } else {
+                            intensity -= 0.2;
+                            if (intensity <= 0) clearInterval(pulseInterval);
+                        }
+                    }, 100);
+                    break;
+            }
+        }
+
+        initGamepadTester();
+    </script>
+</body>
+</html>
