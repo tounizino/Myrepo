@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout Widget Test Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .demo-header {
+            text-align: center;
+            color: #3BC6FF;
+            margin-bottom: 2rem;
+        }
+        .demo-instructions {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 1.5rem;
+            background: #1a1a2e;
+            border-radius: 12px;
+            color: #b0b0c0;
+            border: 1px solid #3a3a4e;
+        }
+        .demo-instructions h3 {
+            color: #3BC6FF;
+            margin-top: 0;
+        }
+        .demo-instructions ul {
+            line-height: 1.8;
+        }
+        .demo-instructions strong {
+            color: #C6FF3B;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-header">
+        <h1>🎮 Cloud Loadout Widget Test Demo</h1>
+        <p>Test the gamepad and keyboard detection below</p>
+    </div>
+
+    <div class="demo-instructions">
+        <h3>Quick Test Instructions</h3>
+        <ul>
+            <li><strong>Gamepad:</strong> Plug in a controller and press any button to start</li>
+            <li><strong>Keyboard:</strong> Click in the widget area and press WASD, arrows, space, or shift</li>
+            <li><strong>Analytics:</strong> Watch the metrics update in real-time</li>
+            <li><strong>Report:</strong> Click "Copy Report" to export your results</li>
+        </ul>
+        <p><strong>Note:</strong> This is the full standalone version. For WordPress, use <code>wordpress-embed.html</code></p>
+    </div>
+
+    <!-- Load the widget -->
+    <script>
+        fetch('cloud-loadout-tester.html')
+            .then(response => response.text())
+            .then(html => {
+                // Extract just the widget content (everything between <body> and </body>)
+                const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+                if (bodyMatch) {
+                    document.body.innerHTML += bodyMatch[1];
+                } else {
+                    // Fallback: inject the entire file
+                    const container = document.createElement('div');
+                    container.innerHTML = html;
+                    document.body.appendChild(container);
+                }
+            })
+            .catch(error => {
+                console.error('Error loading widget:', error);
+                document.body.innerHTML += '<div style="color: red; text-align: center; padding: 2rem;">Error loading widget. Please open cloud-loadout-tester.html directly.</div>';
+            });
+    </script>
+</body>
+</html>
