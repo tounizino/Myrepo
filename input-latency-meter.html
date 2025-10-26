@@ -14,9 +14,10 @@
                 all: initial;
                 display: block;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0;
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+                padding: 20px;
                 box-sizing: border-box;
             }
 
@@ -28,12 +29,14 @@
 
             .ilm-container {
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                border-radius: 20px;
-                padding: 30px;
+                border-radius: 24px;
+                padding: 40px;
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
                 color: #ffffff;
                 position: relative;
                 overflow: hidden;
+                max-width: 1400px;
+                margin: 0 auto;
             }
 
             .ilm-container::before {
@@ -55,29 +58,34 @@
 
             .ilm-header {
                 text-align: center;
-                margin-bottom: 30px;
+                margin-bottom: 40px;
                 position: relative;
                 z-index: 1;
+                padding: 0 20px;
             }
 
             .ilm-title {
-                font-size: 32px;
+                font-size: 36px;
                 font-weight: 800;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
                 letter-spacing: -0.5px;
+                line-height: 1.2;
             }
 
             .ilm-subtitle {
-                font-size: 16px;
-                opacity: 0.9;
+                font-size: 17px;
+                opacity: 0.95;
                 font-weight: 400;
+                line-height: 1.5;
+                max-width: 600px;
+                margin: 0 auto;
             }
 
             .ilm-tabs {
                 display: flex;
-                gap: 10px;
-                margin-bottom: 25px;
+                gap: 12px;
+                margin-bottom: 35px;
                 flex-wrap: wrap;
                 position: relative;
                 z-index: 1;
@@ -86,13 +94,13 @@
             .ilm-tab {
                 flex: 1;
                 min-width: 140px;
-                padding: 12px 20px;
+                padding: 15px 24px;
                 background: rgba(255, 255, 255, 0.1);
                 border: 2px solid rgba(255, 255, 255, 0.2);
-                border-radius: 12px;
+                border-radius: 14px;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                font-size: 14px;
+                font-size: 15px;
                 font-weight: 600;
                 text-align: center;
                 backdrop-filter: blur(10px);
@@ -111,12 +119,12 @@
 
             .ilm-content {
                 background: rgba(255, 255, 255, 0.95);
-                border-radius: 15px;
-                padding: 30px;
+                border-radius: 18px;
+                padding: 40px;
                 color: #333;
                 position: relative;
                 z-index: 1;
-                min-height: 400px;
+                min-height: 450px;
             }
 
             .ilm-test-area {
@@ -134,15 +142,15 @@
             }
 
             .ilm-test-zone {
-                min-height: 300px;
+                min-height: 320px;
                 background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-                border-radius: 12px;
+                border-radius: 16px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                padding: 40px;
-                margin-bottom: 20px;
+                padding: 50px 40px;
+                margin-bottom: 30px;
                 cursor: pointer;
                 transition: all 0.3s ease;
                 border: 3px dashed transparent;
@@ -173,8 +181,8 @@
             }
 
             .ilm-test-icon {
-                font-size: 64px;
-                margin-bottom: 20px;
+                font-size: 72px;
+                margin-bottom: 25px;
                 animation: ilm-bounce 2s ease-in-out infinite;
             }
 
@@ -193,32 +201,37 @@
             }
 
             .ilm-test-text {
-                font-size: 24px;
+                font-size: 28px;
                 font-weight: 700;
-                margin-bottom: 10px;
+                margin-bottom: 12px;
                 color: #2d3436;
+                line-height: 1.3;
             }
 
             .ilm-test-subtext {
-                font-size: 14px;
+                font-size: 15px;
                 color: #636e72;
+                line-height: 1.5;
+                max-width: 500px;
+                text-align: center;
             }
 
             .ilm-controls {
                 display: flex;
-                gap: 15px;
-                margin-bottom: 20px;
+                gap: 16px;
+                margin-bottom: 30px;
+                margin-top: 10px;
                 flex-wrap: wrap;
             }
 
             .ilm-button {
                 flex: 1;
-                min-width: 120px;
-                padding: 14px 28px;
+                min-width: 140px;
+                padding: 16px 32px;
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 color: white;
                 border: none;
-                border-radius: 10px;
+                border-radius: 12px;
                 font-size: 16px;
                 font-weight: 600;
                 cursor: pointer;
@@ -251,15 +264,16 @@
 
             .ilm-stats-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 15px;
-                margin-bottom: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 18px;
+                margin-bottom: 30px;
+                margin-top: 10px;
             }
 
             .ilm-stat-card {
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                padding: 20px;
-                border-radius: 12px;
+                padding: 24px 20px;
+                border-radius: 14px;
                 text-align: center;
                 color: white;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -272,37 +286,40 @@
             }
 
             .ilm-stat-label {
-                font-size: 12px;
+                font-size: 13px;
                 opacity: 0.9;
-                margin-bottom: 8px;
+                margin-bottom: 10px;
                 text-transform: uppercase;
-                letter-spacing: 0.5px;
+                letter-spacing: 0.8px;
+                font-weight: 500;
             }
 
             .ilm-stat-value {
-                font-size: 28px;
+                font-size: 32px;
                 font-weight: 800;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                line-height: 1.2;
             }
 
             .ilm-stat-unit {
-                font-size: 14px;
-                opacity: 0.8;
-                margin-left: 2px;
+                font-size: 16px;
+                opacity: 0.85;
+                margin-left: 3px;
             }
 
             .ilm-chart-container {
                 background: white;
-                padding: 20px;
-                border-radius: 12px;
-                margin-bottom: 20px;
+                padding: 28px;
+                border-radius: 14px;
+                margin-bottom: 30px;
+                margin-top: 10px;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             }
 
             .ilm-chart-title {
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: 700;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
                 color: #2d3436;
             }
 
@@ -310,9 +327,9 @@
                 display: flex;
                 align-items: flex-end;
                 justify-content: space-around;
-                height: 200px;
-                gap: 4px;
-                padding: 10px;
+                height: 220px;
+                gap: 6px;
+                padding: 15px 10px;
             }
 
             .ilm-histogram-bar {
@@ -346,22 +363,23 @@
             }
 
             .ilm-results-list {
-                max-height: 300px;
+                max-height: 320px;
                 overflow-y: auto;
                 background: #f8f9fa;
-                padding: 15px;
-                border-radius: 12px;
-                margin-bottom: 20px;
+                padding: 18px;
+                border-radius: 14px;
+                margin-bottom: 30px;
+                margin-top: 10px;
             }
 
             .ilm-result-item {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 12px;
+                padding: 15px 18px;
                 background: white;
-                border-radius: 8px;
-                margin-bottom: 8px;
+                border-radius: 10px;
+                margin-bottom: 10px;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
                 animation: ilm-slideIn 0.3s ease;
             }
@@ -412,31 +430,32 @@
 
             .ilm-info-box {
                 background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-                padding: 20px;
-                border-radius: 12px;
-                margin-bottom: 20px;
+                padding: 24px 28px;
+                border-radius: 14px;
+                margin-bottom: 28px;
                 color: white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
 
             .ilm-info-title {
-                font-size: 16px;
+                font-size: 18px;
                 font-weight: 700;
-                margin-bottom: 10px;
+                margin-bottom: 12px;
             }
 
             .ilm-info-text {
-                font-size: 14px;
-                line-height: 1.6;
-                opacity: 0.95;
+                font-size: 15px;
+                line-height: 1.7;
+                opacity: 0.96;
             }
 
             .ilm-progress-bar {
                 width: 100%;
-                height: 8px;
+                height: 10px;
                 background: rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 overflow: hidden;
-                margin: 15px 0;
+                margin: 20px 0;
             }
 
             .ilm-progress-fill {
@@ -480,29 +499,31 @@
 
             .ilm-settings-panel {
                 background: #f8f9fa;
-                padding: 20px;
-                border-radius: 12px;
-                margin-bottom: 20px;
+                padding: 24px 28px;
+                border-radius: 14px;
+                margin-bottom: 28px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             }
 
             .ilm-setting-row {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-bottom: 15px;
+                margin-bottom: 18px;
             }
 
             .ilm-setting-label {
                 font-weight: 600;
                 color: #2d3436;
+                font-size: 15px;
             }
 
             .ilm-input {
-                padding: 8px 15px;
+                padding: 10px 18px;
                 border: 2px solid #dfe6e9;
-                border-radius: 8px;
-                font-size: 14px;
-                width: 100px;
+                border-radius: 10px;
+                font-size: 15px;
+                width: 110px;
                 transition: border-color 0.3s ease;
             }
 
@@ -513,19 +534,20 @@
 
             .ilm-export-buttons {
                 display: flex;
-                gap: 10px;
+                gap: 12px;
                 flex-wrap: wrap;
+                margin-top: 10px;
             }
 
             .ilm-export-button {
                 flex: 1;
-                min-width: 100px;
-                padding: 10px 20px;
+                min-width: 120px;
+                padding: 14px 24px;
                 background: #2d3436;
                 color: white;
                 border: none;
-                border-radius: 8px;
-                font-size: 14px;
+                border-radius: 10px;
+                font-size: 15px;
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.3s ease;
@@ -552,45 +574,109 @@
             }
 
             @media (max-width: 768px) {
+                #input-latency-meter-root {
+                    padding: 15px;
+                }
+
                 .ilm-container {
-                    padding: 20px;
+                    padding: 25px;
+                    border-radius: 20px;
+                }
+
+                .ilm-header {
+                    margin-bottom: 30px;
+                    padding: 0 10px;
                 }
 
                 .ilm-title {
-                    font-size: 24px;
+                    font-size: 26px;
+                    margin-bottom: 12px;
+                }
+
+                .ilm-subtitle {
+                    font-size: 15px;
                 }
 
                 .ilm-tabs {
                     flex-direction: column;
+                    gap: 10px;
+                    margin-bottom: 25px;
                 }
 
                 .ilm-tab {
                     min-width: 100%;
+                    padding: 14px 20px;
                 }
 
                 .ilm-content {
-                    padding: 20px;
+                    padding: 25px;
+                    min-height: 400px;
                 }
 
                 .ilm-test-zone {
-                    min-height: 250px;
-                    padding: 20px;
+                    min-height: 280px;
+                    padding: 40px 25px;
+                    margin-bottom: 25px;
                 }
 
                 .ilm-test-icon {
-                    font-size: 48px;
+                    font-size: 56px;
+                    margin-bottom: 20px;
                 }
 
                 .ilm-test-text {
-                    font-size: 18px;
+                    font-size: 22px;
+                }
+
+                .ilm-test-subtext {
+                    font-size: 14px;
+                }
+
+                .ilm-button {
+                    padding: 14px 24px;
+                    font-size: 15px;
                 }
 
                 .ilm-stats-grid {
                     grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
+
+                .ilm-stat-card {
+                    padding: 20px 16px;
+                }
+
+                .ilm-stat-value {
+                    font-size: 28px;
+                }
+
+                .ilm-chart-container {
+                    padding: 20px;
+                }
+
+                .ilm-histogram {
+                    height: 180px;
+                    padding: 12px 8px;
+                }
+
+                .ilm-info-box {
+                    padding: 20px 22px;
+                }
+
+                .ilm-results-list {
+                    padding: 15px;
+                }
+
+                .ilm-result-item {
+                    padding: 12px 15px;
+                }
+
+                .ilm-settings-panel {
+                    padding: 20px 22px;
                 }
 
                 .ilm-countdown {
-                    font-size: 80px;
+                    font-size: 90px;
                 }
             }
         </style>

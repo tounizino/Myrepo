@@ -2,6 +2,8 @@
 
 A professional-grade, self-contained input latency testing tool designed for cloud gaming blogs and performance testing websites. This tool provides comprehensive latency measurements with beautiful animations, detailed statistics, and WordPress-ready embedding.
 
+> **🆕 Version 1.1.0** - Now with enhanced spacing, full-width layout support, and improved user experience! See [STYLING_IMPROVEMENTS.md](STYLING_IMPROVEMENTS.md) for details.
+
 ## 🌟 Features
 
 ### Core Testing Modes
@@ -371,6 +373,7 @@ Created for cloud gaming enthusiasts and performance testers worldwide.
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: 2024  
-**Status**: Production Ready ✅
+**Version**: 1.1.0  
+**Last Updated**: October 26, 2024  
+**Status**: Production Ready ✅  
+**What's New**: Enhanced spacing & full-width layout support
