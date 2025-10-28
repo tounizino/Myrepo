@@ -1,0 +1,109 @@
+WordPress Embed Code - Responsive NAT Gaming Table
+==================================================
+
+To embed this table in WordPress, use the HTML block and paste this code:
+
+<!-- NAT Table Responsive Embed - Start -->
+<style>
+    .nat-table-embed{width:100%;max-width:900px;margin:24px auto;padding:0 16px;}
+    .nat-table-embed__title{font-size:1.75rem;font-weight:700;text-align:center;margin-bottom:20px;color:#1f2937;}
+    .nat-table-embed__scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,0.08);}
+    .nat-table-embed__table{width:100%;border-collapse:collapse;min-width:500px;}
+    .nat-table-embed__table thead{background:linear-gradient(135deg,#4b6cb7 0%,#182848 100%);color:#fff;}
+    .nat-table-embed__table th,.nat-table-embed__table td{padding:18px;text-align:left;}
+    .nat-table-embed__table th{font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;}
+    .nat-table-embed__table tbody tr{border-bottom:1px solid #e5e7eb;transition:background-color 0.2s ease;}
+    .nat-table-embed__table tbody tr:hover{background-color:#f9fafb;}
+    .nat-table-embed__table tbody tr:last-child{border-bottom:none;}
+    .nat-table-embed__table td{font-size:1rem;}
+    .nat-table-embed__badge{display:inline-flex;align-items:center;gap:6px;font-weight:600;}
+    .nat-table-embed__badge--open{color:#10b981;}
+    .nat-table-embed__badge--moderate{color:#f59e0b;}
+    .nat-table-embed__badge--strict{color:#ef4444;}
+    .nat-table-embed__badge-dot{width:10px;height:10px;border-radius:999px;display:inline-block;}
+    .nat-table-embed__badge--open .nat-table-embed__badge-dot{background:#10b981;box-shadow:0 0 0 4px rgba(16,185,129,0.15);}
+    .nat-table-embed__badge--moderate .nat-table-embed__badge-dot{background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,0.15);}
+    .nat-table-embed__badge--strict .nat-table-embed__badge-dot{background:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,0.15);}
+    .nat-table-embed__source{margin-top:16px;padding:14px 18px;background:#eef2ff;border-left:4px solid #4b6cb7;border-radius:6px;font-size:0.95rem;color:#374151;}
+    .nat-table-embed__source strong{font-weight:600;}
+    @media (max-width:768px){
+        .nat-table-embed__title{font-size:1.5rem;}
+        .nat-table-embed__table th,.nat-table-embed__table td{padding:14px 16px;}
+    }
+    @media (max-width:480px){
+        .nat-table-embed{padding:0 12px;}
+        .nat-table-embed__title{font-size:1.3rem;margin-bottom:16px;}
+        .nat-table-embed__table th,.nat-table-embed__table td{padding:12px;font-size:0.95rem;}
+        .nat-table-embed__source{font-size:0.85rem;padding:12px 14px;}
+    }
+</style>
+<div class="nat-table-embed">
+    <h2 class="nat-table-embed__title">NAT Type Effect on Online Gaming</h2>
+    <div class="nat-table-embed__scroll">
+        <table class="nat-table-embed__table">
+            <thead>
+                <tr>
+                    <th>NAT Type</th>
+                    <th>Avg. Latency (ms)</th>
+                    <th>Avg. Throughput (Mbps)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="nat-table-embed__badge nat-table-embed__badge--open">
+                            <span class="nat-table-embed__badge-dot" aria-hidden="true"></span>
+                            Open
+                        </span>
+                    </td>
+                    <td>21</td>
+                    <td>112</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="nat-table-embed__badge nat-table-embed__badge--moderate">
+                            <span class="nat-table-embed__badge-dot" aria-hidden="true"></span>
+                            Moderate
+                        </span>
+                    </td>
+                    <td>105</td>
+                    <td>45</td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="nat-table-embed__badge nat-table-embed__badge--strict">
+                            <span class="nat-table-embed__badge-dot" aria-hidden="true"></span>
+                            Strict
+                        </span>
+                    </td>
+                    <td>189</td>
+                    <td>12</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="nat-table-embed__source"><strong>Source:</strong> M-Labs 2022; improved stability and faster ping drive real gaming success rates.</p>
+</div>
+<!-- NAT Table Responsive Embed - End -->
+
+
+HOW TO USE IN WORDPRESS:
+========================
+
+1. Go to your WordPress post/page editor
+2. Click the "+" button to add a block
+3. Search for "HTML" or "Custom HTML" block
+4. Paste the entire code above (between the comments)
+5. Preview or publish your page
+
+Features:
+---------
+✓ Fully responsive design
+✓ Mobile-friendly (optimized for all screen sizes)
+✓ Color-coded NAT types (Green=Open, Orange=Moderate, Red=Strict)
+✓ Smooth hover effects on desktop
+✓ Horizontal scroll on small screens
+✓ Touch-friendly scrolling for mobile devices
+✓ Professional gradient header
+✓ Source citation included
+✓ Works with any WordPress theme
