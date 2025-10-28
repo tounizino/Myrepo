@@ -4,8 +4,8 @@ This repository provides copy-and-paste HTML snippets that render a polished, Wo
 
 ## Available Templates
 
-- **`wordpress-step-by-step-embed.html`** – A feature-rich layout with hover effects and responsive styling for premium presentation.
-- **`wordpress-step-template-minimal.html`** – A lightweight alternative with simplified styling while retaining the numbered step format.
+- **`wordpress-step-by-step-embed.html`** – A feature-rich layout with hover effects, responsive styling, and separated CSS for easy customization.
+- **`wordpress-step-template-minimal.html`** – A lightweight alternative with simplified styling, numbered steps, red link styling, and separated CSS for easy editing.
 
 ## Usage
 
