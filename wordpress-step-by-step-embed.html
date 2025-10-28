@@ -1,0 +1,177 @@
+<!-- WordPress Embed-Ready Step-by-Step Guide -->
+<!-- Simply copy and paste this into a WordPress HTML block or Custom HTML widget -->
+
+<style>
+.wp-step-by-step-container {
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.wp-step-by-step-container h2 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 15px;
+}
+
+.wp-step-by-step-container h3 {
+    color: #34495e;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.wp-step-item {
+    background: #ffffff;
+    border-left: 4px solid #3498db;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.wp-step-item.final-step {
+    border-left: 4px solid #27ae60;
+    margin-bottom: 0;
+}
+
+.wp-step-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.wp-step-flex {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+}
+
+.wp-step-number {
+    flex-shrink: 0;
+    width: 35px;
+    height: 35px;
+    background: #3498db;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.wp-step-number.final {
+    background: #27ae60;
+}
+
+.wp-step-content {
+    flex: 1;
+    padding-top: 5px;
+}
+
+.wp-step-content p {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.wp-step-content code {
+    background: #ecf0f1;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #e74c3c;
+}
+
+.wp-step-content a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.wp-step-content a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .wp-step-by-step-container {
+        padding: 20px 15px;
+        margin: 15px 10px;
+    }
+    
+    .wp-step-item {
+        padding: 15px;
+    }
+}
+</style>
+
+<div class="wp-step-by-step-container">
+    
+    <h2>Router Setup Guide</h2>
+    
+    <h3>Step-by-Step:</h3>
+    
+    <div class="wp-step-item">
+        <div class="wp-step-flex">
+            <div class="wp-step-number">1</div>
+            <div class="wp-step-content">
+                <p>Access your router's admin interface (e.g., <code>192.168.0.1</code> or <code>tplinkwifi.net</code>).</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wp-step-item">
+        <div class="wp-step-flex">
+            <div class="wp-step-number">2</div>
+            <div class="wp-step-content">
+                <p>Log in with your credentials.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wp-step-item">
+        <div class="wp-step-flex">
+            <div class="wp-step-number">3</div>
+            <div class="wp-step-content">
+                <p>Navigate to <strong>NAT Forwarding > UPnP</strong>. Enable UPnP for automated port management.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wp-step-item">
+        <div class="wp-step-flex">
+            <div class="wp-step-number">4</div>
+            <div class="wp-step-content">
+                <p>Alternatively, go to <strong>Virtual Servers/Port Forwarding</strong> to set manual rules based on game and platform (see below for port lists).</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wp-step-item">
+        <div class="wp-step-flex">
+            <div class="wp-step-number">5</div>
+            <div class="wp-step-content">
+                <p>Assign a static IP to your gaming device for consistency.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="wp-step-item final-step">
+        <div class="wp-step-flex">
+            <div class="wp-step-number final">✓</div>
+            <div class="wp-step-content">
+                <p>Save and reboot router and device as needed.</p>
+            </div>
+        </div>
+    </div>
+    
+</div>
