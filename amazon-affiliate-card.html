@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Affiliate Product Card</title>
+    <style>
+        .amazon-product-card {
+            max-width: 400px;
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid #e3e6e8;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            transition: box-shadow 0.3s ease;
+            margin: 20px auto;
+        }
+
+        .amazon-product-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .amazon-product-card__image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            background: #f7f8fa;
+            overflow: hidden;
+        }
+
+        .amazon-product-card__image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+        }
+
+        .amazon-product-card__content {
+            padding: 20px;
+        }
+
+        .amazon-product-card__title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0F1111;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .amazon-product-card__description {
+            font-size: 14px;
+            color: #565959;
+            line-height: 1.6;
+            margin: 0 0 16px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .amazon-product-card__price-container {
+            display: flex;
+            align-items: baseline;
+            margin: 0 0 16px 0;
+            gap: 8px;
+        }
+
+        .amazon-product-card__price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #B12704;
+            margin: 0;
+        }
+
+        .amazon-product-card__original-price {
+            font-size: 16px;
+            color: #565959;
+            text-decoration: line-through;
+            margin: 0;
+        }
+
+        .amazon-product-card__button {
+            display: block;
+            width: 100%;
+            padding: 12px 24px;
+            background: #FF9900;
+            color: #0F1111;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .amazon-product-card__button:hover {
+            background: #FFA724;
+        }
+
+        .amazon-product-card__button:active {
+            background: #E88B00;
+        }
+
+        .amazon-product-card__badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #CC0C39;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .amazon-product-card__rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 12px 0;
+            font-size: 14px;
+        }
+
+        .amazon-product-card__stars {
+            color: #FFA41C;
+            letter-spacing: 2px;
+        }
+
+        .amazon-product-card__review-count {
+            color: #007185;
+            cursor: pointer;
+        }
+
+        .amazon-product-card__loading {
+            padding: 40px;
+            text-align: center;
+            color: #565959;
+        }
+
+        .amazon-product-card__error {
+            padding: 40px;
+            text-align: center;
+            color: #B12704;
+        }
+
+        @media (max-width: 480px) {
+            .amazon-product-card {
+                max-width: 100%;
+                margin: 10px 0;
+                border-radius: 0;
+            }
+
+            .amazon-product-card__content {
+                padding: 16px;
+            }
+
+            .amazon-product-card__title {
+                font-size: 16px;
+            }
+
+            .amazon-product-card__price {
+                font-size: 20px;
+            }
+
+            .amazon-product-card__button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .amazon-product-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="amazon-affiliate-product"></div>
+
+    <script>
+        class AmazonProductCard {
+            constructor(containerId, config) {
+                this.container = document.getElementById(containerId);
+                this.config = {
+                    apiUrl: config.apiUrl || '',
+                    productId: config.productId || '',
+                    affiliateTag: config.affiliateTag || '',
+                    ...config
+                };
+                this.init();
+            }
+
+            async init() {
+                this.showLoading();
+                try {
+                    const productData = await this.fetchProductData();
+                    this.render(productData);
+                } catch (error) {
+                    this.showError(error.message);
+                }
+            }
+
+            showLoading() {
+                this.container.innerHTML = `
+                    <div class="amazon-product-card">
+                        <div class="amazon-product-card__loading">
+                            Loading product...
+                        </div>
+                    </div>
+                `;
+            }
+
+            showError(message) {
+                this.container.innerHTML = `
+                    <div class="amazon-product-card">
+                        <div class="amazon-product-card__error">
+                            ${message}
+                        </div>
+                    </div>
+                `;
+            }
+
+            async fetchProductData() {
+                if (this.config.staticData) {
+                    return this.config.staticData;
+                }
+
+                const url = `${this.config.apiUrl}?productId=${this.config.productId}`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch product data');
+                }
+
+                return await response.json();
+            }
+
+            buildAffiliateUrl(productUrl, asin) {
+                if (!productUrl) {
+                    productUrl = `https://www.amazon.com/dp/${asin}`;
+                }
+                
+                const url = new URL(productUrl);
+                if (this.config.affiliateTag) {
+                    url.searchParams.set('tag', this.config.affiliateTag);
+                }
+                return url.toString();
+            }
+
+            generateStars(rating) {
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+                const emptyStars = 5 - fullStars - halfStar;
+                
+                let stars = '★'.repeat(fullStars);
+                if (halfStar) stars += '⯨';
+                stars += '☆'.repeat(emptyStars);
+                
+                return stars;
+            }
+
+            render(product) {
+                const affiliateUrl = this.buildAffiliateUrl(product.url, product.asin);
+                const hasDiscount = product.originalPrice && product.originalPrice > product.price;
+                
+                this.container.innerHTML = `
+                    <div class="amazon-product-card">
+                        <div class="amazon-product-card__image-container">
+                            ${product.badge ? `<div class="amazon-product-card__badge">${product.badge}</div>` : ''}
+                            <img 
+                                class="amazon-product-card__image" 
+                                src="${product.image}" 
+                                alt="${this.escapeHtml(product.title)}"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="amazon-product-card__content">
+                            <h3 class="amazon-product-card__title">${this.escapeHtml(product.title)}</h3>
+                            
+                            ${product.rating ? `
+                                <div class="amazon-product-card__rating">
+                                    <span class="amazon-product-card__stars">${this.generateStars(product.rating)}</span>
+                                    <span>${product.rating}</span>
+                                    ${product.reviewCount ? `<span class="amazon-product-card__review-count">(${product.reviewCount})</span>` : ''}
+                                </div>
+                            ` : ''}
+                            
+                            <p class="amazon-product-card__description">${this.escapeHtml(product.description)}</p>
+                            
+                            <div class="amazon-product-card__price-container">
+                                <span class="amazon-product-card__price">$${product.price.toFixed(2)}</span>
+                                ${hasDiscount ? `<span class="amazon-product-card__original-price">$${product.originalPrice.toFixed(2)}</span>` : ''}
+                            </div>
+                            
+                            <a 
+                                href="${affiliateUrl}" 
+                                class="amazon-product-card__button"
+                                target="_blank"
+                                rel="nofollow noopener sponsored"
+                            >
+                                ${product.buttonText || 'View on Amazon'}
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Example usage with static data
+        new AmazonProductCard('amazon-affiliate-product', {
+            affiliateTag: 'YOUR-AFFILIATE-TAG-20',
+            staticData: {
+                asin: 'B07ZPKN6YR',
+                title: 'Amazon Echo Dot (4th Gen) Smart speaker with Alexa',
+                description: 'Meet Echo Dot - Our most popular smart speaker with Alexa. The sleek, compact design delivers crisp vocals and balanced bass for full sound.',
+                image: 'https://m.media-amazon.com/images/I/714Rq4k05UL._AC_SL1000_.jpg',
+                price: 49.99,
+                originalPrice: 59.99,
+                rating: 4.7,
+                reviewCount: '234,567',
+                badge: 'Best Seller',
+                url: 'https://www.amazon.com/dp/B07ZPKN6YR',
+                buttonText: 'Buy Now on Amazon'
+            }
+        });
+
+        // Alternative: Usage with API
+        // new AmazonProductCard('amazon-affiliate-product', {
+        //     apiUrl: 'https://your-api-endpoint.com/product',
+        //     productId: 'B07ZPKN6YR',
+        //     affiliateTag: 'YOUR-AFFILIATE-TAG-20'
+        // });
+    </script>
+</body>
+</html>
