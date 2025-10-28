@@ -22,17 +22,19 @@ class AAPD_Settings {
     }
 
     public function add_admin_menu() {
-        add_options_page(
+        add_menu_page(
             __('Amazon Affiliate Product Displays Pro', 'amazon-affiliate-displays'),
             __('Amazon Displays', 'amazon-affiliate-displays'),
             'manage_options',
             'aapd-settings',
-            array($this, 'render_settings_page')
+            array($this, 'render_settings_page'),
+            'dashicons-store',
+            26
         );
     }
 
     public function enqueue_admin_assets($hook) {
-        if ($hook !== 'settings_page_aapd-settings') {
+        if (strpos($hook, 'aapd-settings') === false) {
             return;
         }
 
@@ -166,6 +168,7 @@ class AAPD_Settings {
         $sanitized['show_prime_badge'] = !empty($input['show_prime_badge']) ? 1 : 0;
         $sanitized['show_review_count'] = !empty($input['show_review_count']) ? 1 : 0;
         $sanitized['show_discount_badge'] = !empty($input['show_discount_badge']) ? 1 : 0;
+        $sanitized['show_price'] = !empty($input['show_price']) ? 1 : 0;
         $sanitized['enable_animations'] = !empty($input['enable_animations']) ? 1 : 0;
         $sanitized['dark_mode'] = !empty($input['dark_mode']) ? 1 : 0;
 
@@ -306,8 +309,9 @@ class AAPD_Settings {
                                     <th scope="row"><?php esc_html_e('Display Elements', 'amazon-affiliate-displays'); ?></th>
                                     <td>
                                         <fieldset>
+                                            <label><input type="checkbox" name="aapd_settings[show_price]" value="1" <?php checked($settings['show_price'], 1); ?> /> <?php esc_html_e('Show product price', 'amazon-affiliate-displays'); ?></label><br />
                                             <label><input type="checkbox" name="aapd_settings[show_prime_badge]" value="1" <?php checked($settings['show_prime_badge'], 1); ?> /> <?php esc_html_e('Show Prime badge', 'amazon-affiliate-displays'); ?></label><br />
-                                            <label><input type="checkbox" name="aapd_settings[show_review_count]" value="1" <?php checked($settings['show_review_count'], 1); ?> /> <?php esc_html_e('Show review count', 'amazon-affiliate-displays'); ?></label><br />
+                                            <label><input type="checkbox" name="aapd_settings[show_review_count]" value="1" <?php checked($settings['show_review_count'], 1); ?> /> <?php esc_html_e('Show star ratings & reviews', 'amazon-affiliate-displays'); ?></label><br />
                                             <label><input type="checkbox" name="aapd_settings[show_discount_badge]" value="1" <?php checked($settings['show_discount_badge'], 1); ?> /> <?php esc_html_e('Show discount badge when available', 'amazon-affiliate-displays'); ?></label><br />
                                             <label><input type="checkbox" name="aapd_settings[enable_animations]" value="1" <?php checked($settings['enable_animations'], 1); ?> /> <?php esc_html_e('Enable hover & entrance animations', 'amazon-affiliate-displays'); ?></label><br />
                                             <label><input type="checkbox" name="aapd_settings[dark_mode]" value="1" <?php checked($settings['dark_mode'], 1); ?> /> <?php esc_html_e('Enable dark mode styling', 'amazon-affiliate-displays'); ?></label>
@@ -430,6 +434,7 @@ class AAPD_Settings {
             'show_prime_badge' => 1,
             'show_review_count' => 1,
             'show_discount_badge' => 1,
+            'show_price' => 1,
             'enable_animations' => 1,
             'dark_mode' => 0,
             'theme_preset' => 'amazon_classic',

@@ -211,22 +211,42 @@ class AAPD_API_Client {
         $host    = parse_url($endpoint, PHP_URL_HOST);
         $uri     = parse_url($endpoint, PHP_URL_PATH);
 
-        $timestamp = gmdate('Ymd\THis\Z');
-        $date      = gmdate('Ymd');
+        if (empty($uri)) {
+            $uri = '/';
+        }
 
-        $canonical_headers = "content-encoding:amz-1.0\n"
-            . "content-type:application/json; charset=utf-8\n"
-            . "host:{$host}\n"
-            . "x-amz-date:{$timestamp}\n"
-            . "x-amz-target:com.amazon.paapi5.v1.ProductAdvertisingAPIv1.{$operation}\n";
+        $timestamp    = gmdate('Ymd\THis\Z');
+        $date         = gmdate('Ymd');
+        $payload_hash = hash('sha256', $payload);
 
-        $signed_headers   = 'content-encoding;content-type;host;x-amz-date;x-amz-target';
-        $payload_hash     = hash('sha256', $payload);
-        $canonical_request = "{$method}\n{$uri}\n\n{$canonical_headers}\n{$signed_headers}\n{$payload_hash}";
+        $canonical_headers = implode("\n", array(
+            'content-encoding:amz-1.0',
+            'content-type:application/json; charset=utf-8',
+            'host:' . $host,
+            'x-amz-content-sha256:' . $payload_hash,
+            'x-amz-date:' . $timestamp,
+            'x-amz-target:com.amazon.paapi5.v1.ProductAdvertisingAPIv1.' . $operation,
+        ));
 
-        $algorithm       = 'AWS4-HMAC-SHA256';
+        $signed_headers    = 'content-encoding;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target';
+        $canonical_request = implode("\n", array(
+            $method,
+            $uri,
+            '',
+            $canonical_headers,
+            '',
+            $signed_headers,
+            $payload_hash,
+        ));
+
+        $algorithm        = 'AWS4-HMAC-SHA256';
         $credential_scope = "{$date}/{$this->region}/{$service}/aws4_request";
-        $string_to_sign   = "{$algorithm}\n{$timestamp}\n{$credential_scope}\n" . hash('sha256', $canonical_request);
+        $string_to_sign   = implode("\n", array(
+            $algorithm,
+            $timestamp,
+            $credential_scope,
+            hash('sha256', $canonical_request),
+        ));
 
         $k_date    = hash_hmac('sha256', $date, 'AWS4' . $this->secret_key, true);
         $k_region  = hash_hmac('sha256', $this->region, $k_date, true);
@@ -244,12 +264,14 @@ class AAPD_API_Client {
         );
 
         return array(
-            'Content-Encoding' => 'amz-1.0',
-            'Content-Type'     => 'application/json; charset=utf-8',
-            'Host'             => $host,
-            'X-Amz-Date'       => $timestamp,
-            'X-Amz-Target'     => "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.{$operation}",
-            'Authorization'    => $authorization,
+            'Accept'            => 'application/json',
+            'Content-Encoding'  => 'amz-1.0',
+            'Content-Type'      => 'application/json; charset=utf-8',
+            'Host'              => $host,
+            'X-Amz-Content-Sha256' => $payload_hash,
+            'X-Amz-Date'        => $timestamp,
+            'X-Amz-Target'      => "com.amazon.paapi5.v1.ProductAdvertisingAPIv1.{$operation}",
+            'Authorization'     => $authorization,
         );
     }
 
