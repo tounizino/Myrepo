@@ -1,0 +1,108 @@
+.aapd-settings-wrap h1 {
+    margin-bottom: 1.5rem;
+}
+
+.aapd-settings-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.aapd-settings-card {
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 18, 25, 0.08);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.aapd-settings-card h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.aapd-settings-card .form-table th {
+    width: 220px;
+}
+
+.aapd-settings-card .form-table td {
+    padding: 12px 0;
+}
+
+.aapd-settings-card .form-table input[type="text"],
+.aapd-settings-card .form-table input[type="password"],
+.aapd-settings-card .form-table input[type="number"],
+.aapd-settings-card .form-table select {
+    width: 100%;
+    max-width: 320px;
+}
+
+.aapd-settings-card .form-table .aapd-color-picker {
+    width: 160px;
+}
+
+.aapd-settings-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.aapd-sidebar-card {
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 18, 25, 0.08);
+    padding: 1.25rem 1.5rem;
+}
+
+.aapd-sidebar-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.aapd-shortcode-example {
+    background: #f7fafc;
+    border: 1px dashed #d0d8e5;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.aapd-shortcode-example code {
+    font-family: "JetBrains Mono", Consolas, Monaco, monospace;
+    font-size: 0.85rem;
+    display: block;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.aapd-preview-wrapper {
+    border-radius: 16px;
+    padding: 1.25rem;
+    background: linear-gradient(145deg, rgba(100, 116, 139, 0.08), rgba(226, 232, 240, 0.45));
+}
+
+.aapd-preview-layout {
+    margin: 0;
+}
+
+.aapd-preview-layout .aapd-product-card {
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.aapd-google-font-field {
+    margin-top: 0.75rem;
+}
+
+.aapd-google-font-field input[type="text"] {
+    max-width: 340px;
+}
+
+@media (max-width: 1024px) {
+    .aapd-settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
