@@ -1,0 +1,341 @@
+<!-- Amazon Affiliate Product Card - WordPress Embed Code -->
+<!-- 
+    Instructions:
+    1. Copy this entire code block
+    2. In WordPress editor, add a "Custom HTML" block
+    3. Paste this code into the block
+    4. Replace `{UNIQUE_ID}` with a unique identifier (e.g., `product1`)
+    5. Update the configuration section below with your affiliate tag and product data
+    6. Save and preview your post
+-->
+
+<div id="amazon-affiliate-product-{UNIQUE_ID}"></div>
+
+<style>
+.amazon-product-card {
+    max-width: 400px;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e3e6e8;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    transition: box-shadow 0.3s ease;
+    margin: 20px auto;
+}
+
+.amazon-product-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.amazon-product-card__image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    background: #f7f8fa;
+    overflow: hidden;
+}
+
+.amazon-product-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.amazon-product-card__content {
+    padding: 20px;
+}
+
+.amazon-product-card__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0F1111;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.amazon-product-card__description {
+    font-size: 14px;
+    color: #565959;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.amazon-product-card__price-container {
+    display: flex;
+    align-items: baseline;
+    margin: 0 0 16px 0;
+    gap: 8px;
+}
+
+.amazon-product-card__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #B12704;
+    margin: 0;
+}
+
+.amazon-product-card__original-price {
+    font-size: 16px;
+    color: #565959;
+    text-decoration: line-through;
+    margin: 0;
+}
+
+.amazon-product-card__button {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    background: #FF9900;
+    color: #0F1111;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.amazon-product-card__button:hover {
+    background: #FFA724;
+}
+
+.amazon-product-card__button:active {
+    background: #E88B00;
+}
+
+.amazon-product-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #CC0C39;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.amazon-product-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px 0;
+    font-size: 14px;
+}
+
+.amazon-product-card__stars {
+    color: #FFA41C;
+    letter-spacing: 2px;
+}
+
+.amazon-product-card__review-count {
+    color: #007185;
+    cursor: pointer;
+}
+
+.amazon-product-card__loading {
+    padding: 40px;
+    text-align: center;
+    color: #565959;
+}
+
+.amazon-product-card__error {
+    padding: 40px;
+    text-align: center;
+    color: #B12704;
+}
+
+@media (max-width: 480px) {
+    .amazon-product-card {
+        max-width: 100%;
+        margin: 10px 0;
+        border-radius: 0;
+    }
+
+    .amazon-product-card__content {
+        padding: 16px;
+    }
+
+    .amazon-product-card__title {
+        font-size: 16px;
+    }
+
+    .amazon-product-card__price {
+        font-size: 20px;
+    }
+
+    .amazon-product-card__button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .amazon-product-card {
+        max-width: 100%;
+    }
+}
+</style>
+
+<script>
+(function() {
+    // ============================================
+    // CONFIGURATION - UPDATE THESE VALUES
+    // ============================================
+    
+    var config = {
+        // Your Amazon Affiliate Tag (required)
+        affiliateTag: 'YOUR-AFFILIATE-TAG-20',
+        
+        // Option 1: Use API endpoint
+        apiUrl: 'https://your-api-endpoint.com/product',
+        productId: 'B07ZPKN6YR',
+        
+        // Option 2: Use static data (comment out apiUrl if using this)
+        // staticData: {
+        //     asin: 'B07ZPKN6YR',
+        //     title: 'Amazon Echo Dot (4th Gen) Smart speaker with Alexa',
+        //     description: 'Meet Echo Dot - Our most popular smart speaker with Alexa. The sleek, compact design delivers crisp vocals and balanced bass for full sound.',
+        //     image: 'https://m.media-amazon.com/images/I/714Rq4k05UL._AC_SL1000_.jpg',
+        //     price: 49.99,
+        //     originalPrice: 59.99,
+        //     rating: 4.7,
+        //     reviewCount: '234,567',
+        //     badge: 'Best Seller',
+        //     url: 'https://www.amazon.com/dp/B07ZPKN6YR',
+        //     buttonText: 'Buy Now on Amazon'
+        // }
+    };
+    
+    // ============================================
+    // DO NOT EDIT BELOW THIS LINE
+    // ============================================
+    
+    var AmazonProductCard = function(containerId, config) {
+        this.container = document.getElementById(containerId);
+        this.config = config;
+        this.init();
+    };
+
+    AmazonProductCard.prototype.init = function() {
+        this.showLoading();
+        var self = this;
+        this.fetchProductData()
+            .then(function(data) {
+                self.render(data);
+            })
+            .catch(function(error) {
+                self.showError(error.message);
+            });
+    };
+
+    AmazonProductCard.prototype.showLoading = function() {
+        this.container.innerHTML = '<div class="amazon-product-card"><div class="amazon-product-card__loading">Loading product...</div></div>';
+    };
+
+    AmazonProductCard.prototype.showError = function(message) {
+        this.container.innerHTML = '<div class="amazon-product-card"><div class="amazon-product-card__error">' + message + '</div></div>';
+    };
+
+    AmazonProductCard.prototype.fetchProductData = function() {
+        if (this.config.staticData) {
+            return Promise.resolve(this.config.staticData);
+        }
+
+        var url = this.config.apiUrl + '?productId=' + this.config.productId;
+        return fetch(url)
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch product data');
+                }
+                return response.json();
+            });
+    };
+
+    AmazonProductCard.prototype.buildAffiliateUrl = function(productUrl, asin) {
+        if (!productUrl) {
+            productUrl = 'https://www.amazon.com/dp/' + asin;
+        }
+        
+        var url = new URL(productUrl);
+        if (this.config.affiliateTag) {
+            url.searchParams.set('tag', this.config.affiliateTag);
+        }
+        return url.toString();
+    };
+
+    AmazonProductCard.prototype.generateStars = function(rating) {
+        var fullStars = Math.floor(rating);
+        var halfStar = rating % 1 >= 0.5 ? 1 : 0;
+        var emptyStars = 5 - fullStars - halfStar;
+        
+        var stars = '★'.repeat(fullStars);
+        if (halfStar) stars += '⯨';
+        stars += '☆'.repeat(emptyStars);
+        
+        return stars;
+    };
+
+    AmazonProductCard.prototype.escapeHtml = function(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    };
+
+    AmazonProductCard.prototype.render = function(product) {
+        var affiliateUrl = this.buildAffiliateUrl(product.url, product.asin);
+        var hasDiscount = product.originalPrice && product.originalPrice > product.price;
+        
+        var badge = product.badge ? '<div class="amazon-product-card__badge">' + product.badge + '</div>' : '';
+        var rating = product.rating ? 
+            '<div class="amazon-product-card__rating">' +
+                '<span class="amazon-product-card__stars">' + this.generateStars(product.rating) + '</span>' +
+                '<span>' + product.rating + '</span>' +
+                (product.reviewCount ? '<span class="amazon-product-card__review-count">(' + product.reviewCount + ')</span>' : '') +
+            '</div>' : '';
+        var originalPrice = hasDiscount ? '<span class="amazon-product-card__original-price">$' + product.originalPrice.toFixed(2) + '</span>' : '';
+        
+        this.container.innerHTML = 
+            '<div class="amazon-product-card">' +
+                '<div class="amazon-product-card__image-container">' +
+                    badge +
+                    '<img class="amazon-product-card__image" src="' + product.image + '" alt="' + this.escapeHtml(product.title) + '" loading="lazy" />' +
+                '</div>' +
+                '<div class="amazon-product-card__content">' +
+                    '<h3 class="amazon-product-card__title">' + this.escapeHtml(product.title) + '</h3>' +
+                    rating +
+                    '<p class="amazon-product-card__description">' + this.escapeHtml(product.description) + '</p>' +
+                    '<div class="amazon-product-card__price-container">' +
+                        '<span class="amazon-product-card__price">$' + product.price.toFixed(2) + '</span>' +
+                        originalPrice +
+                    '</div>' +
+                    '<a href="' + affiliateUrl + '" class="amazon-product-card__button" target="_blank" rel="nofollow noopener sponsored">' +
+                        (product.buttonText || 'View on Amazon') +
+                    '</a>' +
+                '</div>' +
+            '</div>';
+    };
+
+    // Initialize the card
+    new AmazonProductCard('amazon-affiliate-product-{UNIQUE_ID}', config);
+})();
+</script>
