@@ -354,36 +354,6 @@
                         <strong>Open NAT</strong> is best for gaming, <strong>Moderate</strong> works for most games, 
                         and <strong>Strict NAT</strong> can cause connection problems.
                     </p>
-                    <figure class="mt-4 bg-white border border-blue-100 rounded-lg p-4 shadow-sm mx-auto max-w-xl" aria-labelledby="nat-diagram-caption">
-                        <svg class="w-full h-32" viewBox="0 0 400 160" role="img" aria-describedby="nat-diagram-caption">
-                            <rect x="20" y="50" width="100" height="60" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"></rect>
-                            <text x="70" y="85" text-anchor="middle" fill="#1d4ed8" font-size="14" font-weight="600">Console/PC</text>
-                            <rect x="150" y="30" width="100" height="100" rx="12" fill="#ede9fe" stroke="#6d28d9" stroke-width="2"></rect>
-                            <text x="200" y="70" text-anchor="middle" fill="#6d28d9" font-size="14" font-weight="600">Router</text>
-                            <text x="200" y="95" text-anchor="middle" fill="#6d28d9" font-size="12">NAT Policy</text>
-                            <path d="M120 80 L150 80" stroke="#2563eb" stroke-width="4" marker-end="url(#arrowBlue)"></path>
-                            <path d="M250 80 L280 60" stroke="#f87171" stroke-width="3" stroke-dasharray="6 6" marker-end="url(#arrowRed)"></path>
-                            <path d="M250 80 L280 100" stroke="#10b981" stroke-width="4" marker-end="url(#arrowGreen)"></path>
-                            <rect x="290" y="45" width="100" height="40" rx="10" fill="#fee2e2" stroke="#ef4444" stroke-width="2"></rect>
-                            <text x="340" y="70" text-anchor="middle" fill="#991b1b" font-size="13" font-weight="600">Strict Connections</text>
-                            <rect x="290" y="95" width="100" height="40" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"></rect>
-                            <text x="340" y="120" text-anchor="middle" fill="#166534" font-size="13" font-weight="600">Open Paths</text>
-                            <defs>
-                                <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
-                                    <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"></path>
-                                </marker>
-                                <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
-                                    <path d="M0,0 L10,5 L0,10 z" fill="#ef4444"></path>
-                                </marker>
-                                <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
-                                    <path d="M0,0 L10,5 L0,10 z" fill="#10b981"></path>
-                                </marker>
-                            </defs>
-                        </svg>
-                        <figcaption id="nat-diagram-caption" class="text-xs text-gray-500 mt-2">
-                            NAT flow diagram: traffic from your device passes through router policies to reach game services.
-                        </figcaption>
-                    </figure>
                 </div>
 
                 <button id="checkNatBtn" class="btn btn-primary w-full md:w-auto" aria-label="Start NAT type detection">
@@ -465,33 +435,6 @@
                         Check if gaming ports are open and reachable. For the most accurate results, 
                         use our optional server-side verification (see README for backend setup).
                     </p>
-
-                    <figure class="mb-6 bg-white border border-green-100 rounded-lg p-4 shadow-sm mx-auto max-w-xl" aria-labelledby="port-diagram-caption">
-                        <svg class="w-full h-32" viewBox="0 0 400 160" role="img" aria-describedby="port-diagram-caption">
-                            <rect x="20" y="60" width="80" height="40" rx="8" fill="#dcfce7" stroke="#047857" stroke-width="2"></rect>
-                            <text x="60" y="85" text-anchor="middle" fill="#065f46" font-size="13" font-weight="600">Client</text>
-                            <rect x="140" y="35" width="120" height="90" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"></rect>
-                            <text x="200" y="70" text-anchor="middle" fill="#b45309" font-size="13" font-weight="600">Router Firewall</text>
-                            <text x="200" y="95" text-anchor="middle" fill="#b45309" font-size="11">Port Rules</text>
-                            <rect x="300" y="30" width="80" height="100" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"></rect>
-                            <text x="340" y="70" text-anchor="middle" fill="#1d4ed8" font-size="13" font-weight="600">Game</text>
-                            <text x="340" y="95" text-anchor="middle" fill="#1d4ed8" font-size="11">Server</text>
-                            <path d="M100 80 C130 50, 170 50, 200 80" stroke="#10b981" stroke-width="4" marker-end="url(#arrowPortOpen)"></path>
-                            <path d="M100 80 C130 110, 170 110, 200 80" stroke="#fbbf24" stroke-width="4" stroke-dasharray="6 6" marker-end="url(#arrowPortClosed)"></path>
-                            <path d="M260 80 L300 80" stroke="#2563eb" stroke-width="4" marker-end="url(#arrowPortOpen)"></path>
-                            <defs>
-                                <marker id="arrowPortOpen" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
-                                    <path d="M0,0 L10,5 L0,10 z" fill="#10b981"></path>
-                                </marker>
-                                <marker id="arrowPortClosed" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
-                                    <path d="M0,0 L10,5 L0,10 z" fill="#fbbf24"></path>
-                                </marker>
-                            </defs>
-                        </svg>
-                        <figcaption id="port-diagram-caption" class="text-xs text-gray-500 mt-2">
-                            Port flow diagram: green arrows represent open ports, dashed yellow arrows highlight blocked routes.
-                        </figcaption>
-                    </figure>
 
                     <!-- Port Presets -->
                     <div class="mb-4">
@@ -600,133 +543,149 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <!-- TP-Link -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="tplink">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="tplink" aria-expanded="false" aria-controls="tplink">
                             <span>🔵 TP-Link</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="tplink" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.0.1</code> or <code>192.168.1.1</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code> or printed on router</p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → NAT Forwarding → Virtual Servers</p>
+                        <div id="tplink" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.0.1</code> or <code>192.168.1.1</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code> or printed on router</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → NAT Forwarding → Virtual Servers</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Netgear -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="netgear">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="netgear" aria-expanded="false" aria-controls="netgear">
                             <span>🟡 Netgear</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="netgear" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>routerlogin.net</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> <code>password</code> or printed on router</p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → Advanced Setup → Port Forwarding/Port Triggering</p>
+                        <div id="netgear" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>routerlogin.net</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>password</code> or printed on router</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → Advanced Setup → Port Forwarding/Port Triggering</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Asus -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="asus">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="asus" aria-expanded="false" aria-controls="asus">
                             <span>🔴 Asus</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="asus" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>router.asus.com</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code></p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: WAN → Virtual Server/Port Forwarding</p>
+                        <div id="asus" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>router.asus.com</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code></p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: WAN → Virtual Server/Port Forwarding</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Linksys -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="linksys">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="linksys" aria-expanded="false" aria-controls="linksys">
                             <span>🔵 Linksys</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="linksys" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>myrouter.local</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> (blank) or <code>admin</code></p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code></p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: Security → Apps and Gaming → Single Port Forwarding</p>
+                        <div id="linksys" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>myrouter.local</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> (blank) or <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code></p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Security → Apps and Gaming → Single Port Forwarding</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- D-Link -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="dlink">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="dlink" aria-expanded="false" aria-controls="dlink">
                             <span>🟢 D-Link</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="dlink" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.0.1</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> (blank) or <code>admin</code></p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → Port Forwarding</p>
+                        <div id="dlink" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.0.1</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> (blank) or <code>admin</code></p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → Port Forwarding</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Huawei -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="huawei">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="huawei" aria-expanded="false" aria-controls="huawei">
                             <span>🔴 Huawei</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="huawei" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>192.168.8.1</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code> or printed on router</p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code> or printed on router</p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → NAT → Port Mapping</p>
+                        <div id="huawei" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>192.168.8.1</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code> or printed on router</p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code> or printed on router</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → NAT → Port Mapping</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Xiaomi -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="xiaomi">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="xiaomi" aria-expanded="false" aria-controls="xiaomi">
                             <span>🟠 Xiaomi</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="xiaomi" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.31.1</code> or <code>miwifi.com</code></p>
-                            <p class="text-sm mb-2"><strong>Default Username:</strong> (not required initially)</p>
-                            <p class="text-sm mb-2"><strong>Default Password:</strong> Set during initial setup</p>
-                            <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced Settings → Port Forwarding</p>
+                        <div id="xiaomi" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.31.1</code> or <code>miwifi.com</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> (not required initially)</p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> Set during initial setup</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced Settings → Port Forwarding</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Generic -->
                     <div class="border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="generic">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="generic" aria-expanded="false" aria-controls="generic">
                             <span>⚪ Other/Unknown Router</span>
                             <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div id="generic" class="collapsible-content px-4 py-3 bg-white">
-                            <p class="text-sm mb-2"><strong>Common URLs to try:</strong></p>
-                            <ul class="text-sm list-disc list-inside space-y-1 mb-3">
-                                <li><code>192.168.0.1</code></li>
-                                <li><code>192.168.1.1</code></li>
-                                <li><code>192.168.1.254</code></li>
-                                <li><code>10.0.0.1</code></li>
-                            </ul>
-                            <p class="text-xs text-gray-600">Check router label, manual, or ISP documentation for specific credentials.</p>
+                        <div id="generic" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Common URLs to try:</strong></p>
+                                <ul class="text-sm list-disc list-inside space-y-1 mb-3">
+                                    <li><code>192.168.0.1</code></li>
+                                    <li><code>192.168.1.1</code></li>
+                                    <li><code>192.168.1.254</code></li>
+                                    <li><code>10.0.0.1</code></li>
+                                </ul>
+                                <p class="text-xs text-gray-600">Check router label, manual, or ISP documentation for specific credentials.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1542,14 +1501,22 @@
                     const target = document.getElementById(targetId);
                     const arrow = btn.querySelector('svg');
 
+                    if (!target) return;
+
                     if (target.classList.contains('open')) {
                         target.classList.remove('open');
-                        arrow.style.transform = 'rotate(0deg)';
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(0deg)';
+                        }
                         btn.setAttribute('aria-expanded', 'false');
+                        target.setAttribute('aria-hidden', 'true');
                     } else {
                         target.classList.add('open');
-                        arrow.style.transform = 'rotate(180deg)';
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(180deg)';
+                        }
                         btn.setAttribute('aria-expanded', 'true');
+                        target.setAttribute('aria-hidden', 'false');
                     }
                 });
             });
