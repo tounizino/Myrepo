@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Cloud Gaming Connectivity Tool - Test NAT Type, Check Ports & Fix Connection Issues</title>
+    <meta name="description" content="Free cloud gaming connectivity diagnostic tool. Check NAT type, test gaming ports, get router configuration guides, and fix multiplayer connection issues for Xbox, PlayStation, PC gaming and GeForce NOW.">
+    <meta name="keywords" content="cloud gaming, NAT type checker, port checker, gaming connectivity, port forwarding, router configuration, multiplayer gaming, network diagnostics">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yoursite.com/cloud-gaming-connectivity-tool">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Cloud Gaming Connectivity Tool - Fix Your Gaming Network">
+    <meta property="og:description" content="Diagnose and fix cloud gaming connection issues with our free NAT checker, port tester, and router configuration guides.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yoursite.com/cloud-gaming-connectivity-tool">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cloud Gaming Connectivity Tool">
+    <meta name="twitter:description" content="Free tool to diagnose NAT type, check ports, and optimize your cloud gaming connection.">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* CSS Variables for Easy Theme Customization */
+        :root {
+            --color-primary: #3b82f6;
+            --color-primary-dark: #2563eb;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --color-info: #06b6d4;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f9fafb;
+            --color-text: #1f2937;
+            --color-text-secondary: #6b7280;
+            --color-border: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text);
+        }
+
+        .card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-open { background-color: #d1fae5; color: #065f46; }
+        .status-openresponsive { background-color: #d1fae5; color: #065f46; }
+        .status-closed { background-color: #fee2e2; color: #991b1b; }
+        .status-filtered { background-color: #fef3c7; color: #92400e; }
+        .status-closedfiltered { background-color: #fef3c7; color: #92400e; }
+        .status-closedblocked { background-color: #fee2e2; color: #991b1b; }
+        .status-filteredtimeout { background-color: #fde68a; color: #92400e; }
+        .status-unknown { background-color: #e5e7eb; color: #374151; }
+        .status-unknownnoresponse { background-color: #e5e7eb; color: #374151; }
+        .status-error { background-color: #fee2e2; color: #991b1b; }
+        .status-moderate { background-color: #dbeafe; color: #1e40af; }
+        .status-strict { background-color: #fecaca; color: #991b1b; }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.open {
+            max-height: 5000px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
+            height: 4px;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        code {
+            background-color: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        pre {
+            background-color: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        *:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+
+    <!-- Schema.org JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Cloud Gaming Connectivity Tool",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free cloud gaming connectivity diagnostic tool to check NAT type, test ports, and fix multiplayer connection issues.",
+        "featureList": [
+            "NAT Type Detection",
+            "Port Connectivity Checker",
+            "Router Configuration Guides",
+            "Port Forwarding Tutorials"
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Fix Cloud Gaming Connection Issues",
+        "description": "Step-by-step guide to diagnose and fix NAT and port forwarding issues for cloud gaming",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Check NAT Type",
+                "text": "Use the NAT Type Checker to determine if your router is using Open, Moderate, or Strict NAT",
+                "position": 1
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Test Gaming Ports",
+                "text": "Check if required gaming ports are open and accessible from the internet",
+                "position": 2
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Configure Port Forwarding",
+                "text": "Access your router and set up port forwarding rules for your gaming platform",
+                "position": 3
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 py-4 md:py-6 max-w-6xl">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900" data-i18n="header.title">
+                        🎮 Cloud Gaming Connectivity Tool
+                    </h1>
+                    <p class="text-sm md:text-base text-gray-600 mt-1" data-i18n="header.subtitle">
+                        Diagnose NAT, test ports & optimize your multiplayer gaming connection
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        
+        <!-- Hero Section -->
+        <section class="mb-12 text-center">
+            <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3">
+                Having trouble connecting to multiplayer games or cloud gaming services?
+            </h2>
+            <p class="text-gray-600 max-w-3xl mx-auto mb-4">
+                This free diagnostic tool helps you identify and fix connection problems by checking your NAT type, 
+                testing port accessibility, and providing step-by-step router configuration guides.
+            </p>
+            <div class="inline-flex items-center gap-2 text-sm text-gray-500">
+                <span>✓ No signup required</span>
+                <span>•</span>
+                <span>✓ Privacy-first</span>
+                <span>•</span>
+                <span>✓ Works in browser</span>
+            </div>
+        </section>
+
+        <!-- Privacy Notice -->
+        <div class="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="flex-1">
+                    <h3 class="font-semibold text-blue-900 mb-1">Privacy & Data Collection</h3>
+                    <p class="text-sm text-blue-800 mb-2">
+                        All tests run in your browser. We don't store your IP address or port information. 
+                        Network diagnostics use public STUN servers to detect NAT type.
+                    </p>
+                    <label class="flex items-center gap-2 text-sm cursor-pointer">
+                        <input type="checkbox" id="consentOptIn" class="rounded border-gray-300" aria-label="Opt in to send anonymous diagnostics">
+                        <span class="text-blue-800">
+                            <strong>Optional:</strong> Send anonymous diagnostic results to help us improve this tool
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAT Type Checker -->
+        <section id="nat-checker" class="mb-12 scroll-mt-20">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                    </svg>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">NAT Type Checker</h2>
+                        <p class="text-sm text-gray-600">Detect your router's NAT configuration</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-gray-700 mb-3">
+                        NAT (Network Address Translation) type affects your ability to connect to other players. 
+                        <strong>Open NAT</strong> is best for gaming, <strong>Moderate</strong> works for most games, 
+                        and <strong>Strict NAT</strong> can cause connection problems.
+                    </p>
+                </div>
+
+                <button id="checkNatBtn" class="btn btn-primary w-full md:w-auto" aria-label="Start NAT type detection">
+                    <span id="natBtnText">Start NAT Detection</span>
+                    <div id="natSpinner" class="spinner hidden"></div>
+                </button>
+
+                <div id="natResults" class="mt-6 hidden">
+                    <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                            <div class="mb-2 md:mb-0">
+                                <span class="text-sm text-gray-600">NAT Type:</span>
+                                <span id="natTypeDisplay" class="ml-2 text-xl font-bold"></span>
+                            </div>
+                            <span id="natBadge" class="status-badge"></span>
+                        </div>
+                        <div class="mb-3">
+                            <span class="text-sm text-gray-600">Public IP:</span>
+                            <code id="publicIpDisplay" class="ml-2"></code>
+                        </div>
+                        <div id="natConfidence" class="text-sm text-gray-600 mb-2"></div>
+                        <div id="natExplanation" class="text-sm text-gray-700 p-3 bg-white rounded border"></div>
+                    </div>
+
+                    <button id="toggleNatRemediation" class="mt-4 text-blue-600 hover:text-blue-800 font-semibold text-sm flex items-center gap-2" aria-expanded="false">
+                        <span>Show Fix Recommendations</span>
+                        <svg class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div id="natRemediation" class="collapsible-content mt-4">
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <h3 class="font-semibold text-yellow-900 mb-3">How to Improve Your NAT Type:</h3>
+                            <ol class="space-y-2 text-sm text-yellow-900 list-decimal list-inside">
+                                <li><strong>Enable UPnP:</strong> In your router settings, enable Universal Plug and Play (easiest method)</li>
+                                <li><strong>Port Forwarding:</strong> Manually forward gaming ports to your device (see Port Forwarding section below)</li>
+                                <li><strong>DMZ (Advanced):</strong> Place your gaming device in DMZ zone for fully open NAT (less secure)</li>
+                                <li><strong>Static IP:</strong> Assign a static local IP to your gaming device for consistent port forwarding</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <button id="toggleNatTechnical" class="mt-4 text-blue-600 hover:text-blue-800 font-semibold text-sm flex items-center gap-2" aria-expanded="false">
+                        <span>Show Technical Details</span>
+                        <svg class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div id="natTechnical" class="collapsible-content mt-4">
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                            <h4 class="font-semibold mb-2">ICE Candidates Detected:</h4>
+                            <pre id="natCandidates" class="text-xs"></pre>
+                            <p class="text-gray-600 mt-3 text-xs">
+                                <strong>Note:</strong> Detection uses WebRTC STUN servers. Results may vary based on your network configuration and browser settings.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Port Checker -->
+        <section id="port-checker" class="mb-12 scroll-mt-20">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Gaming Port Checker</h2>
+                        <p class="text-sm text-gray-600">Test if specific ports are accessible</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-gray-700 mb-4">
+                        Check if gaming ports are open and reachable. For the most accurate results, 
+                        use our optional server-side verification (see README for backend setup).
+                    </p>
+
+                    <!-- Port Presets -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Quick Presets:</label>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="port-preset px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded text-sm font-medium" data-ports="3074" data-protocol="UDP">Xbox Live (3074 UDP)</button>
+                            <button class="port-preset px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded text-sm font-medium" data-ports="3478,3479,3658" data-protocol="TCP/UDP">PlayStation (Multiple)</button>
+                            <button class="port-preset px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded text-sm font-medium" data-ports="27015-27030" data-protocol="TCP/UDP">Steam (27015-27030)</button>
+                            <button class="port-preset px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded text-sm font-medium" data-ports="3074,88,500,3544,4500" data-protocol="UDP">Call of Duty</button>
+                            <button class="port-preset px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded text-sm font-medium" data-ports="47984-47989" data-protocol="TCP/UDP">GeForce NOW</button>
+                            <button class="port-preset px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded text-sm font-medium" data-ports="3074" data-protocol="TCP/UDP">Fortnite</button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Port Input -->
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="portInput" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Port(s) to Check:
+                            </label>
+                            <input 
+                                type="text" 
+                                id="portInput" 
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                                placeholder="e.g., 3074 or 3074,3075 or 27015-27030"
+                                aria-label="Enter port numbers to check"
+                            >
+                            <p class="text-xs text-gray-500 mt-1">Separate multiple ports with commas or use ranges (e.g., 8000-8010)</p>
+                        </div>
+                        <div>
+                            <label for="protocolSelect" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Protocol:
+                            </label>
+                            <select id="protocolSelect" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" aria-label="Select protocol type">
+                                <option value="TCP/UDP">TCP/UDP (Both)</option>
+                                <option value="TCP">TCP Only</option>
+                                <option value="UDP">UDP Only</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <button id="checkPortBtn" class="btn btn-primary" aria-label="Start port check">
+                        <span id="portBtnText">Check Ports</span>
+                        <div id="portSpinner" class="spinner hidden"></div>
+                    </button>
+                    <span id="portCooldown" class="text-sm text-gray-500 hidden"></span>
+                </div>
+
+                <div id="portResults" class="mt-6 hidden">
+                    <h3 class="font-semibold text-gray-900 mb-3">Port Check Results:</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Port</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Protocol</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Confidence</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portResultsTable" class="bg-white divide-y divide-gray-200">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm text-blue-900">
+                        <strong>Understanding Results:</strong>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li><strong>Open:</strong> Port is accessible from the internet</li>
+                            <li><strong>Closed:</strong> Port is not accessible (may need port forwarding)</li>
+                            <li><strong>Filtered:</strong> Connection attempt blocked by firewall</li>
+                            <li><strong>Unknown:</strong> Browser-based test inconclusive (server-side check recommended)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Router Login Info -->
+        <section id="router-info" class="mb-12 scroll-mt-20">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
+                    </svg>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Common Router Login Info</h2>
+                        <p class="text-sm text-gray-600">Access your router to configure port forwarding</p>
+                    </div>
+                </div>
+
+                <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div class="flex gap-2">
+                        <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        <div class="text-sm text-red-900">
+                            <strong>Security Warning:</strong> Always change default router passwords immediately after first login. 
+                            Default credentials are publicly known and pose a serious security risk.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- TP-Link -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="tplink" aria-expanded="false" aria-controls="tplink">
+                            <span>🔵 TP-Link</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="tplink" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.0.1</code> or <code>192.168.1.1</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code> or printed on router</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → NAT Forwarding → Virtual Servers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Netgear -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="netgear" aria-expanded="false" aria-controls="netgear">
+                            <span>🟡 Netgear</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="netgear" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>routerlogin.net</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>password</code> or printed on router</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → Advanced Setup → Port Forwarding/Port Triggering</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Asus -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="asus" aria-expanded="false" aria-controls="asus">
+                            <span>🔴 Asus</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="asus" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>router.asus.com</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code></p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: WAN → Virtual Server/Port Forwarding</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Linksys -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="linksys" aria-expanded="false" aria-controls="linksys">
+                            <span>🔵 Linksys</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="linksys" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>myrouter.local</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> (blank) or <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code></p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Security → Apps and Gaming → Single Port Forwarding</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- D-Link -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="dlink" aria-expanded="false" aria-controls="dlink">
+                            <span>🟢 D-Link</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="dlink" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.0.1</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code></p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> (blank) or <code>admin</code></p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → Port Forwarding</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Huawei -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="huawei" aria-expanded="false" aria-controls="huawei">
+                            <span>🔴 Huawei</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="huawei" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.1.1</code> or <code>192.168.8.1</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> <code>admin</code> or printed on router</p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> <code>admin</code> or printed on router</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced → NAT → Port Mapping</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Xiaomi -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="xiaomi" aria-expanded="false" aria-controls="xiaomi">
+                            <span>🟠 Xiaomi</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="xiaomi" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Login URL:</strong> <code>192.168.31.1</code> or <code>miwifi.com</code></p>
+                                <p class="text-sm mb-2"><strong>Default Username:</strong> (not required initially)</p>
+                                <p class="text-sm mb-2"><strong>Default Password:</strong> Set during initial setup</p>
+                                <p class="text-xs text-gray-600 mt-2">Port Forwarding: Advanced Settings → Port Forwarding</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generic -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="router-toggle w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 text-left font-semibold flex items-center justify-between" data-target="generic" aria-expanded="false" aria-controls="generic">
+                            <span>⚪ Other/Unknown Router</span>
+                            <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="generic" class="collapsible-content" role="region" aria-hidden="true">
+                            <div class="px-4 py-3 bg-white border-t border-gray-200">
+                                <p class="text-sm mb-2"><strong>Common URLs to try:</strong></p>
+                                <ul class="text-sm list-disc list-inside space-y-1 mb-3">
+                                    <li><code>192.168.0.1</code></li>
+                                    <li><code>192.168.1.1</code></li>
+                                    <li><code>192.168.1.254</code></li>
+                                    <li><code>10.0.0.1</code></li>
+                                </ul>
+                                <p class="text-xs text-gray-600">Check router label, manual, or ISP documentation for specific credentials.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Port Forwarding Tutorial -->
+        <section id="port-forwarding-tutorial" class="mb-12 scroll-mt-20">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">How to Port Forward</h2>
+                        <p class="text-sm text-gray-600">Step-by-step guides for all skill levels</p>
+                    </div>
+                </div>
+
+                <!-- Beginner: UPnP -->
+                <div class="mb-6 border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="tutorial-toggle w-full px-4 py-3 bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 text-left font-semibold flex items-center justify-between" data-target="tutorial-upnp">
+                        <span>🟢 Beginner: Enable UPnP (Easiest Method)</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="tutorial-upnp" class="collapsible-content px-4 py-4 bg-white">
+                        <p class="text-sm text-gray-700 mb-3">
+                            UPnP (Universal Plug and Play) automatically opens ports when games need them. This is the easiest method and works for most games.
+                        </p>
+                        <ol class="space-y-2 text-sm list-decimal list-inside">
+                            <li>Log in to your router using the credentials above</li>
+                            <li>Navigate to <strong>Advanced Settings</strong> or <strong>NAT</strong> section</li>
+                            <li>Look for <strong>UPnP</strong> option</li>
+                            <li>Enable UPnP and save settings</li>
+                            <li>Restart your router and gaming device</li>
+                            <li>Launch your game and test connection</li>
+                        </ol>
+                        <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-900">
+                            <strong>Note:</strong> Some security-conscious users disable UPnP. For maximum control, use manual port forwarding below.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intermediate: Manual Port Forwarding -->
+                <div class="mb-6 border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="tutorial-toggle w-full px-4 py-3 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 text-left font-semibold flex items-center justify-between" data-target="tutorial-manual">
+                        <span>🔵 Intermediate: Manual Port Forwarding</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="tutorial-manual" class="collapsible-content px-4 py-4 bg-white">
+                        <p class="text-sm text-gray-700 mb-3">
+                            Manual port forwarding gives you precise control over which ports are open.
+                        </p>
+                        
+                        <h4 class="font-semibold text-gray-900 mb-2">Step 1: Find Your Local IP Address</h4>
+                        <div class="bg-gray-50 p-3 rounded mb-4 text-sm">
+                            <p class="font-semibold mb-2">Windows:</p>
+                            <pre class="bg-gray-800 text-white p-2 rounded text-xs mb-2">ipconfig</pre>
+                            <p class="text-gray-600 mb-3">Look for "IPv4 Address" under your active connection</p>
+                            
+                            <p class="font-semibold mb-2">Mac/Linux:</p>
+                            <pre class="bg-gray-800 text-white p-2 rounded text-xs mb-2">ifconfig</pre>
+                            <p class="text-gray-600">Look for "inet" address</p>
+                        </div>
+
+                        <h4 class="font-semibold text-gray-900 mb-2">Step 2: Set Static IP (Recommended)</h4>
+                        <ol class="space-y-2 text-sm list-decimal list-inside mb-4">
+                            <li>In router settings, find <strong>DHCP</strong> or <strong>LAN Settings</strong></li>
+                            <li>Add a <strong>DHCP Reservation</strong> or <strong>Static IP</strong> for your device</li>
+                            <li>Use your device's MAC address to bind it to a specific IP</li>
+                        </ol>
+
+                        <h4 class="font-semibold text-gray-900 mb-2">Step 3: Create Port Forwarding Rule</h4>
+                        <ol class="space-y-2 text-sm list-decimal list-inside mb-4">
+                            <li>Navigate to <strong>Port Forwarding</strong> section in router</li>
+                            <li>Click <strong>Add New Rule</strong> or <strong>Create</strong></li>
+                            <li>Enter rule details:
+                                <ul class="ml-6 mt-2 space-y-1 list-disc">
+                                    <li><strong>Service Name:</strong> Any name (e.g., "Xbox Live")</li>
+                                    <li><strong>Port Range:</strong> Start and end port (e.g., 3074-3074)</li>
+                                    <li><strong>Local IP:</strong> Your device's static IP</li>
+                                    <li><strong>Protocol:</strong> TCP, UDP, or Both</li>
+                                </ul>
+                            </li>
+                            <li>Save and enable the rule</li>
+                            <li>Restart router if needed</li>
+                        </ol>
+
+                        <div class="p-3 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900">
+                            <strong>Example for Xbox:</strong> Forward port 3074 UDP to your Xbox's IP address (e.g., 192.168.1.100)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced: DMZ & Firewall -->
+                <div class="mb-6 border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="tutorial-toggle w-full px-4 py-3 bg-gradient-to-r from-red-50 to-red-100 hover:from-red-100 hover:to-red-200 text-left font-semibold flex items-center justify-between" data-target="tutorial-advanced">
+                        <span>🔴 Advanced: DMZ & Firewall Configuration</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="tutorial-advanced" class="collapsible-content px-4 py-4 bg-white">
+                        <div class="p-3 bg-red-50 border border-red-200 rounded text-sm text-red-900 mb-4">
+                            <strong>⚠️ Security Warning:</strong> DMZ exposes your device to all incoming traffic. Only use for dedicated gaming devices, never for PCs with sensitive data.
+                        </div>
+
+                        <h4 class="font-semibold text-gray-900 mb-2">DMZ Configuration:</h4>
+                        <ol class="space-y-2 text-sm list-decimal list-inside mb-4">
+                            <li>Log in to router settings</li>
+                            <li>Navigate to <strong>Advanced → DMZ</strong></li>
+                            <li>Enable DMZ and enter your gaming device's static IP</li>
+                            <li>Save and restart router</li>
+                        </ol>
+
+                        <h4 class="font-semibold text-gray-900 mb-2">Windows Firewall (If using PC):</h4>
+                        <ol class="space-y-2 text-sm list-decimal list-inside mb-4">
+                            <li>Open <strong>Windows Defender Firewall</strong></li>
+                            <li>Click <strong>Advanced Settings</strong></li>
+                            <li>Select <strong>Inbound Rules → New Rule</strong></li>
+                            <li>Choose <strong>Port</strong>, select protocol, enter port number</li>
+                            <li>Allow the connection and name the rule</li>
+                        </ol>
+
+                        <h4 class="font-semibold text-gray-900 mb-2">Additional Tips:</h4>
+                        <ul class="space-y-2 text-sm list-disc list-inside">
+                            <li>Consider using a separate VLAN for gaming devices</li>
+                            <li>Enable QoS (Quality of Service) to prioritize gaming traffic</li>
+                            <li>Test NAT hairpinning if you host game servers</li>
+                            <li>Document all firewall rules for future reference</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Tools (Placeholders) -->
+        <section id="advanced-tools" class="mb-12 scroll-mt-20">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center gap-3 mb-4">
+                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Advanced Network Tools</h2>
+                        <p class="text-sm text-gray-600">Coming soon - extensible diagnostic modules</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- Latency Test -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+                        <h3 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                            <span>⚡</span> Latency & Packet Loss Test
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-3">
+                            Test ping to gaming servers and measure packet loss
+                        </p>
+                        <button class="btn btn-primary opacity-50 cursor-not-allowed" disabled>
+                            Coming Soon
+                        </button>
+                        <div class="mt-3 text-xs text-gray-500">
+                            <strong>Extension Point:</strong> <code>startLatencyTest()</code>
+                        </div>
+                    </div>
+
+                    <!-- IPv6 Check -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+                        <h3 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                            <span>🌐</span> IPv6 Connectivity Check
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-3">
+                            Verify IPv6 support and dual-stack configuration
+                        </p>
+                        <button class="btn btn-primary opacity-50 cursor-not-allowed" disabled>
+                            Coming Soon
+                        </button>
+                        <div class="mt-3 text-xs text-gray-500">
+                            <strong>Extension Point:</strong> <code>checkIPv6()</code>
+                        </div>
+                    </div>
+
+                    <!-- VPN Detection -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+                        <h3 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                            <span>🔒</span> VPN/Proxy Detection
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-3">
+                            Detect if VPN or proxy is interfering with gaming
+                        </p>
+                        <button class="btn btn-primary opacity-50 cursor-not-allowed" disabled>
+                            Coming Soon
+                        </button>
+                        <div class="mt-3 text-xs text-gray-500">
+                            <strong>Extension Point:</strong> <code>detectVPN()</code>
+                        </div>
+                    </div>
+
+                    <!-- Router Detection -->
+                    <div class="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+                        <h3 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                            <span>📡</span> Router Model Detection
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-3">
+                            Automatically identify router model and suggest settings
+                        </p>
+                        <button class="btn btn-primary opacity-50 cursor-not-allowed" disabled>
+                            Coming Soon
+                        </button>
+                        <div class="mt-3 text-xs text-gray-500">
+                            <strong>Extension Point:</strong> <code>detectRouter()</code><br>
+                            <em>Note: Limited by browser security; best with backend support</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg text-sm text-indigo-900">
+                    <h4 class="font-semibold mb-2">🚀 Modular Architecture</h4>
+                    <p>
+                        This tool is designed to be extensible. Each advanced feature has a designated placeholder function 
+                        that can be implemented as needed. See the JavaScript source code for integration points.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section with Schema -->
+        <section id="faq" class="mb-12 scroll-mt-20">
+            <div class="card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+
+                <div class="space-y-4">
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">What is NAT type and why does it matter for gaming?</h3>
+                        <p class="text-sm text-gray-700">
+                            NAT (Network Address Translation) type determines how easily your gaming device can connect to others. 
+                            Open NAT allows all connections, Moderate NAT restricts some, and Strict NAT can prevent you from 
+                            joining certain multiplayer games or parties.
+                        </p>
+                    </div>
+
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Why do some port checks show "Unknown"?</h3>
+                        <p class="text-sm text-gray-700">
+                            Browser-based port checking has limitations due to security restrictions. For most accurate results, 
+                            especially for UDP ports, we recommend using the optional server-side verification endpoint (see README).
+                        </p>
+                    </div>
+
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Is port forwarding safe?</h3>
+                        <p class="text-sm text-gray-700">
+                            Port forwarding is generally safe when done correctly for gaming. Only forward the specific ports needed 
+                            by your games, use a static IP, and keep your gaming device's software updated. Avoid using DMZ unless 
+                            necessary, and never use it on devices with sensitive personal data.
+                        </p>
+                    </div>
+
+                    <div class="border-b border-gray-200 pb-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Will enabling UPnP compromise my network security?</h3>
+                        <p class="text-sm text-gray-700">
+                            UPnP can pose minor security risks if exploited, but modern routers have safeguards. For gaming, 
+                            UPnP is usually safe and convenient. If you're very security-conscious, use manual port forwarding instead.
+                        </p>
+                    </div>
+
+                    <div class="pb-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">What if my router isn't listed?</h3>
+                        <p class="text-sm text-gray-700">
+                            Check your router's physical label for login URL and credentials, or search online for 
+                            "[your router model] default login". Most routers use 192.168.1.1 or 192.168.0.1 as default gateway.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center">
+                <p class="text-sm mb-2">
+                    Cloud Gaming Connectivity Tool - Free diagnostic tool for gamers
+                </p>
+                <p class="text-xs text-gray-500">
+                    No data is stored. All tests run locally in your browser. 
+                    <a href="#" class="text-blue-400 hover:text-blue-300 underline">Privacy Policy</a> · 
+                    <a href="#" class="text-blue-400 hover:text-blue-300 underline">Terms</a>
+                </p>
+                <div class="mt-4 text-xs text-gray-600">
+                    <p>Made with 💙 for the gaming community</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FAQ Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is NAT type and why does it matter for gaming?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "NAT (Network Address Translation) type determines how easily your gaming device can connect to others. Open NAT allows all connections, Moderate NAT restricts some, and Strict NAT can prevent you from joining certain multiplayer games or parties."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Why do some port checks show Unknown?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Browser-based port checking has limitations due to security restrictions. For most accurate results, especially for UDP ports, we recommend using the optional server-side verification endpoint."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is port forwarding safe?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Port forwarding is generally safe when done correctly for gaming. Only forward the specific ports needed by your games, use a static IP, and keep your gaming device's software updated. Avoid using DMZ unless necessary."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Will enabling UPnP compromise my network security?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "UPnP can pose minor security risks if exploited, but modern routers have safeguards. For gaming, UPnP is usually safe and convenient. If you're very security-conscious, use manual port forwarding instead."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Main JavaScript -->
+    <script>
+        // =================================================================
+        // CONFIGURATION & CONSTANTS
+        // =================================================================
+
+        // Multiple STUN servers for redundancy
+        const STUN_SERVERS = [
+            'stun:stun.l.google.com:19302',
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun.services.mozilla.com:3478'
+        ];
+
+        // Optional backend endpoint for server-side port checking
+        // Set to your backend URL if available, or null for client-side only
+        const BACKEND_PORT_CHECK_URL = null; // e.g., 'https://your-backend.com/api/port-check'
+
+        // Rate limiting for port checks (cooldown in seconds)
+        const PORT_CHECK_COOLDOWN = 10;
+        let lastPortCheck = 0;
+
+        // =================================================================
+        // NAT TYPE DETECTION
+        // =================================================================
+
+        class NATTypeDetector {
+            constructor() {
+                this.candidates = [];
+                this.publicIP = null;
+            }
+
+            async detect() {
+                try {
+                    // Create RTCPeerConnection with multiple STUN servers
+                    const configuration = {
+                        iceServers: STUN_SERVERS.map(url => ({ urls: url }))
+                    };
+
+                    const pc = new RTCPeerConnection(configuration);
+
+                    // Create a data channel to trigger ICE candidate gathering
+                    pc.createDataChannel('test');
+
+                    // Listen for ICE candidates
+                    return new Promise((resolve, reject) => {
+                        pc.onicecandidate = (event) => {
+                            if (event.candidate) {
+                                this.candidates.push(event.candidate);
+                                this.parseCandidate(event.candidate);
+                            } else {
+                                // ICE gathering complete
+                                const result = this.analyzeNAT();
+                                pc.close();
+                                resolve(result);
+                            }
+                        };
+
+                        pc.onicegatheringstatechange = () => {
+                            if (pc.iceGatheringState === 'complete') {
+                                const result = this.analyzeNAT();
+                                pc.close();
+                                resolve(result);
+                            }
+                        };
+
+                        // Create and set local description to start gathering
+                        pc.createOffer()
+                            .then(offer => pc.setLocalDescription(offer))
+                            .catch(reject);
+
+                        // Timeout after 10 seconds
+                        setTimeout(() => {
+                            if (this.candidates.length === 0) {
+                                pc.close();
+                                reject(new Error('Timeout: No ICE candidates found. WebRTC may be blocked.'));
+                            }
+                        }, 10000);
+                    });
+                } catch (error) {
+                    throw new Error(`NAT detection failed: ${error.message}`);
+                }
+            }
+
+            parseCandidate(candidate) {
+                // Extract IP from candidate string
+                const match = candidate.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
+                if (match && !this.isPrivateIP(match[1])) {
+                    this.publicIP = match[1];
+                }
+            }
+
+            isPrivateIP(ip) {
+                // Check if IP is in private range
+                const parts = ip.split('.').map(Number);
+                return (
+                    parts[0] === 10 ||
+                    (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) ||
+                    (parts[0] === 192 && parts[1] === 168)
+                );
+            }
+
+            analyzeNAT() {
+                // Count different types of candidates
+                const hostCandidates = this.candidates.filter(c => c.type === 'host');
+                const srflxCandidates = this.candidates.filter(c => c.type === 'srflx'); // Server reflexive
+                const relayCandidates = this.candidates.filter(c => c.type === 'relay');
+
+                let natType = 'Unknown';
+                let explanation = '';
+                let confidence = 0;
+
+                if (srflxCandidates.length === 0 && hostCandidates.length > 0) {
+                    // No server reflexive candidates - likely behind symmetric NAT or no STUN response
+                    natType = 'Strict NAT (Type 3)';
+                    explanation = 'Your router is using Symmetric NAT or is blocking STUN requests. This can cause connection issues with some multiplayer games.';
+                    confidence = 70;
+                } else if (srflxCandidates.length > 0 && this.publicIP) {
+                    // Check if we have direct internet access or NAT
+                    const hasPublicHost = hostCandidates.some(c => {
+                        const match = c.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
+                        return match && !this.isPrivateIP(match[1]);
+                    });
+
+                    if (hasPublicHost) {
+                        natType = 'Open NAT (Type 1)';
+                        explanation = 'Your device has direct internet access or uses Full Cone NAT. This is ideal for gaming and multiplayer connectivity.';
+                        confidence = 90;
+                    } else {
+                        // Behind NAT but getting reflexive candidates
+                        natType = 'Moderate NAT (Type 2)';
+                        explanation = 'Your router uses Address-Restricted Cone NAT. Most games will work, but you may have issues connecting to players with Strict NAT.';
+                        confidence = 80;
+                    }
+                } else if (relayCandidates.length > 0) {
+                    natType = 'Strict NAT (Type 3)';
+                    explanation = 'Only TURN relay candidates available. Your NAT is very restrictive and will cause connection problems in many games.';
+                    confidence = 85;
+                } else {
+                    natType = 'Unknown';
+                    explanation = 'Unable to determine NAT type. This could be due to firewall restrictions, browser limitations, or network configuration.';
+                    confidence = 30;
+                }
+
+                return {
+                    natType,
+                    explanation,
+                    confidence,
+                    publicIP: this.publicIP || 'Not detected',
+                    candidates: this.candidates
+                };
+            }
+        }
+
+        // NAT Check Button Handler
+        document.getElementById('checkNatBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('checkNatBtn');
+            const btnText = document.getElementById('natBtnText');
+            const spinner = document.getElementById('natSpinner');
+            const results = document.getElementById('natResults');
+
+            // Disable button and show spinner
+            btn.disabled = true;
+            btnText.textContent = 'Detecting NAT Type...';
+            spinner.classList.remove('hidden');
+            results.classList.add('hidden');
+
+            try {
+                const detector = new NATTypeDetector();
+                const result = await detector.detect();
+
+                // Display results
+                document.getElementById('natTypeDisplay').textContent = result.natType;
+                document.getElementById('publicIpDisplay').textContent = result.publicIP;
+                document.getElementById('natConfidence').textContent = `Confidence: ${result.confidence}%`;
+                document.getElementById('natExplanation').textContent = result.explanation;
+                document.getElementById('natCandidates').textContent = JSON.stringify(result.candidates, null, 2);
+
+                // Set badge color
+                const badge = document.getElementById('natBadge');
+                badge.textContent = result.natType;
+                if (result.natType.includes('Open')) {
+                    badge.className = 'status-badge status-open';
+                } else if (result.natType.includes('Moderate')) {
+                    badge.className = 'status-badge status-moderate';
+                } else if (result.natType.includes('Strict')) {
+                    badge.className = 'status-badge status-strict';
+                } else {
+                    badge.className = 'status-badge status-unknown';
+                }
+
+                results.classList.remove('hidden');
+
+                // Send anonymous diagnostics if opted in
+                if (document.getElementById('consentOptIn').checked) {
+                    sendDiagnostics('nat_check', result);
+                }
+            } catch (error) {
+                alert(`NAT detection error: ${error.message}\n\nPlease ensure WebRTC is enabled in your browser.`);
+            } finally {
+                // Re-enable button
+                btn.disabled = false;
+                btnText.textContent = 'Re-run NAT Detection';
+                spinner.classList.add('hidden');
+            }
+        });
+
+        // =================================================================
+        // PORT CHECKER
+        // =================================================================
+
+        class PortChecker {
+            constructor() {
+                this.results = [];
+            }
+
+            async checkPorts(ports, protocol) {
+                this.results = [];
+
+                for (const port of ports) {
+                    const result = await this.checkSinglePort(port, protocol);
+                    this.results.push(result);
+                }
+
+                return this.results;
+            }
+
+            async checkSinglePort(port, protocol) {
+                // If backend is available, use it for accurate checking
+                if (BACKEND_PORT_CHECK_URL) {
+                    return await this.checkPortBackend(port, protocol);
+                }
+
+                // Otherwise use client-side heuristics
+                return await this.checkPortClient(port, protocol);
+            }
+
+            async checkPortBackend(port, protocol) {
+                try {
+                    const response = await fetch(BACKEND_PORT_CHECK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ port, protocol })
+                    });
+
+                    const data = await response.json();
+                    return {
+                        port,
+                        protocol,
+                        status: data.status,
+                        confidence: data.confidence,
+                        notes: data.notes
+                    };
+                } catch (error) {
+                    return {
+                        port,
+                        protocol,
+                        status: 'Error',
+                        confidence: 0,
+                        notes: `Backend check failed: ${error.message}`
+                    };
+                }
+            }
+
+            async checkPortClient(port, protocol) {
+                // Browser-based port checking is limited
+                // We can attempt WebSocket for TCP, but UDP is not directly testable
+
+                if (protocol.includes('TCP')) {
+                    try {
+                        // Attempt WebSocket connection (will fail if port is closed)
+                        const status = await this.testTCP(port);
+                        return {
+                            port,
+                            protocol: 'TCP',
+                            status,
+                            confidence: status === 'Unknown' ? 40 : 60,
+                            notes: 'Browser-based TCP test (limited accuracy)'
+                        };
+                    } catch (error) {
+                        return {
+                            port,
+                            protocol: 'TCP',
+                            status: 'Unknown',
+                            confidence: 30,
+                            notes: 'Client-side test inconclusive'
+                        };
+                    }
+                }
+
+                if (protocol.includes('UDP')) {
+                    // UDP cannot be directly tested in browser without WebRTC
+                    // This is a limitation of web security
+                    return {
+                        port,
+                        protocol: 'UDP',
+                        status: 'Unknown',
+                        confidence: 20,
+                        notes: 'UDP testing requires server-side verification'
+                    };
+                }
+
+                return {
+                    port,
+                    protocol,
+                    status: 'Unknown',
+                    confidence: 0,
+                    notes: 'Unknown protocol'
+                };
+            }
+
+            async testTCP(port) {
+                // Note: This is a very limited test and may not work for most ports
+                // due to CORS and browser security restrictions
+                return new Promise((resolve) => {
+                    const timeout = setTimeout(() => {
+                        resolve('Unknown');
+                    }, 3000);
+
+                    try {
+                        // Attempt to create connection
+                        const ws = new WebSocket(`ws://localhost:${port}`);
+                        
+                        ws.onopen = () => {
+                            clearTimeout(timeout);
+                            ws.close();
+                            resolve('Open');
+                        };
+
+                        ws.onerror = () => {
+                            clearTimeout(timeout);
+                            resolve('Closed/Filtered');
+                        };
+                    } catch (error) {
+                        clearTimeout(timeout);
+                        resolve('Unknown');
+                    }
+                });
+            }
+        }
+
+        // Parse port input (handles ranges and comma-separated values)
+        function parsePorts(input) {
+            const ports = [];
+            const parts = input.split(',').map(p => p.trim());
+
+            for (const part of parts) {
+                if (part.includes('-')) {
+                    // Range
+                    const [start, end] = part.split('-').map(p => parseInt(p.trim()));
+                    if (start && end && start <= end) {
+                        for (let i = start; i <= end; i++) {
+                            if (ports.length < 20) { // Limit to 20 ports
+                                ports.push(i);
+                            }
+                        }
+                    }
+                } else {
+                    // Single port
+                    const port = parseInt(part);
+                    if (port && ports.length < 20) {
+                        ports.push(port);
+                    }
+                }
+            }
+
+            return ports;
+        }
+
+        // Port preset buttons
+        document.querySelectorAll('.port-preset').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('portInput').value = btn.dataset.ports;
+                document.getElementById('protocolSelect').value = btn.dataset.protocol;
+            });
+        });
+
+        // Port Check Button Handler
+        document.getElementById('checkPortBtn').addEventListener('click', async () => {
+            // Rate limiting
+            const now = Date.now();
+            if (now - lastPortCheck < PORT_CHECK_COOLDOWN * 1000) {
+                const remaining = Math.ceil((PORT_CHECK_COOLDOWN * 1000 - (now - lastPortCheck)) / 1000);
+                alert(`Please wait ${remaining} seconds before checking again.`);
+                return;
+            }
+
+            const portInput = document.getElementById('portInput').value.trim();
+            if (!portInput) {
+                alert('Please enter at least one port number.');
+                return;
+            }
+
+            const ports = parsePorts(portInput);
+            if (ports.length === 0) {
+                alert('Invalid port format. Use single ports, comma-separated, or ranges (e.g., 3074 or 8000-8010).');
+                return;
+            }
+
+            if (ports.length > 20) {
+                alert('Maximum 20 ports per check. Please reduce the range.');
+                return;
+            }
+
+            const protocol = document.getElementById('protocolSelect').value;
+
+            const btn = document.getElementById('checkPortBtn');
+            const btnText = document.getElementById('portBtnText');
+            const spinner = document.getElementById('portSpinner');
+            const results = document.getElementById('portResults');
+            const tableBody = document.getElementById('portResultsTable');
+
+            // Disable button and show spinner
+            btn.disabled = true;
+            btnText.textContent = 'Checking Ports...';
+            spinner.classList.remove('hidden');
+            tableBody.innerHTML = '';
+            results.classList.add('hidden');
+
+            try {
+                const checker = new PortChecker();
+                const checkResults = await checker.checkPorts(ports, protocol);
+
+                // Display results
+                tableBody.innerHTML = checkResults.map(result => {
+                    const statusClass = result.status.toLowerCase().replace(/[^a-z]/g, '');
+                    return `
+                        <tr>
+                            <td class="px-4 py-2 font-mono font-semibold">${result.port}</td>
+                            <td class="px-4 py-2">${result.protocol}</td>
+                            <td class="px-4 py-2">
+                                <span class="status-badge status-${statusClass}">${result.status}</span>
+                            </td>
+                            <td class="px-4 py-2">${result.confidence}%</td>
+                            <td class="px-4 py-2 text-sm text-gray-600">${result.notes}</td>
+                        </tr>
+                    `;
+                }).join('');
+
+                results.classList.remove('hidden');
+
+                // Update last check time
+                lastPortCheck = Date.now();
+
+                // Send anonymous diagnostics if opted in
+                if (document.getElementById('consentOptIn').checked) {
+                    sendDiagnostics('port_check', { ports, protocol, results: checkResults });
+                }
+            } catch (error) {
+                alert(`Port check error: ${error.message}`);
+            } finally {
+                // Re-enable button
+                btn.disabled = false;
+                btnText.textContent = 'Check Ports';
+                spinner.classList.add('hidden');
+            }
+        });
+
+        // =================================================================
+        // COLLAPSIBLE SECTIONS
+        // =================================================================
+
+        // Generic collapsible toggle handler
+        function setupCollapsibles(selector) {
+            document.querySelectorAll(selector).forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.dataset.target;
+                    const target = document.getElementById(targetId);
+                    const arrow = btn.querySelector('svg');
+
+                    if (!target) return;
+
+                    if (target.classList.contains('open')) {
+                        target.classList.remove('open');
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(0deg)';
+                        }
+                        btn.setAttribute('aria-expanded', 'false');
+                        target.setAttribute('aria-hidden', 'true');
+                    } else {
+                        target.classList.add('open');
+                        if (arrow) {
+                            arrow.style.transform = 'rotate(180deg)';
+                        }
+                        btn.setAttribute('aria-expanded', 'true');
+                        target.setAttribute('aria-hidden', 'false');
+                    }
+                });
+            });
+        }
+
+        setupCollapsibles('.router-toggle');
+        setupCollapsibles('.tutorial-toggle');
+
+        // NAT-specific collapsibles
+        document.getElementById('toggleNatRemediation').addEventListener('click', function() {
+            const target = document.getElementById('natRemediation');
+            const arrow = this.querySelector('svg');
+            if (target.classList.contains('open')) {
+                target.classList.remove('open');
+                arrow.style.transform = 'rotate(0deg)';
+                this.setAttribute('aria-expanded', 'false');
+            } else {
+                target.classList.add('open');
+                arrow.style.transform = 'rotate(180deg)';
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        document.getElementById('toggleNatTechnical').addEventListener('click', function() {
+            const target = document.getElementById('natTechnical');
+            const arrow = this.querySelector('svg');
+            if (target.classList.contains('open')) {
+                target.classList.remove('open');
+                arrow.style.transform = 'rotate(0deg)';
+                this.setAttribute('aria-expanded', 'false');
+            } else {
+                target.classList.add('open');
+                arrow.style.transform = 'rotate(180deg)';
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // =================================================================
+        // ANALYTICS & DIAGNOSTICS (OPTIONAL)
+        // =================================================================
+
+        function sendDiagnostics(eventName, data) {
+            // This function would send anonymous usage data to your backend
+            // Only called if user has opted in via checkbox
+            console.log('[Diagnostics]', eventName, data);
+
+            // Example: Send to your analytics endpoint
+            // fetch('/api/analytics', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ event: eventName, data, timestamp: Date.now() })
+            // }).catch(err => console.error('Analytics error:', err));
+        }
+
+        // =================================================================
+        // EXTENSION POINTS FOR FUTURE FEATURES
+        // =================================================================
+
+        // Placeholder functions for advanced features
+        // These can be implemented later and called from the UI
+
+        function startLatencyTest() {
+            // TODO: Implement latency test using multiple ping targets
+            // Consider using WebRTC data channels or server endpoints
+            console.log('[Extension Point] Latency test not yet implemented');
+        }
+
+        function checkIPv6() {
+            // TODO: Implement IPv6 connectivity check
+            // Test both IPv4 and IPv6 endpoints
+            console.log('[Extension Point] IPv6 check not yet implemented');
+        }
+
+        function detectVPN() {
+            // TODO: Implement VPN/proxy detection
+            // Compare IP geolocation, DNS leaks, WebRTC leaks
+            console.log('[Extension Point] VPN detection not yet implemented');
+        }
+
+        function detectRouter() {
+            // TODO: Implement router model detection
+            // This is challenging from browser; best done with backend SNMP or fingerprinting
+            console.log('[Extension Point] Router detection not yet implemented');
+        }
+
+        // =================================================================
+        // PROGRESSIVE ENHANCEMENT & FALLBACKS
+        // =================================================================
+
+        // Check if WebRTC is available
+        if (!window.RTCPeerConnection) {
+            document.getElementById('checkNatBtn').disabled = true;
+            document.getElementById('natBtnText').textContent = 'WebRTC Not Supported';
+            console.warn('WebRTC not available - NAT detection disabled');
+        }
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // Close any open collapsibles
+                document.querySelectorAll('.collapsible-content.open').forEach(el => {
+                    el.classList.remove('open');
+                });
+            }
+        });
+
+        // =================================================================
+        // INITIALIZATION
+        // =================================================================
+
+        console.log('Cloud Gaming Connectivity Tool loaded successfully');
+        console.log('STUN servers configured:', STUN_SERVERS);
+        console.log('Backend port check:', BACKEND_PORT_CHECK_URL || 'Client-side only');
+    </script>
+</body>
+</html>
