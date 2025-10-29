@@ -1,0 +1,187 @@
+<!-- ========================================================================
+     CLOUD GAMING CONNECTIVITY TOOL - IFRAME EMBED CODE
+     ======================================================================== 
+     
+     Copy and paste this into your WordPress post (HTML view) or any webpage.
+     Adjust the height based on how much content you want visible.
+     
+     Recommended heights:
+     - Full tool: height="2500px"
+     - Compact (single section): height="800px"
+     - Mobile optimized: Use responsive container below
+     ======================================================================== -->
+
+<!-- Option 1: Simple iframe (adjust path to your uploaded file) -->
+<iframe 
+    src="/path/to/cloud-gaming-connectivity-tool.html" 
+    width="100%" 
+    height="2500px" 
+    frameborder="0" 
+    style="border:none; max-width: 1200px; margin: 0 auto; display: block; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
+    title="Cloud Gaming Connectivity Tool"
+    loading="lazy"
+    allowfullscreen>
+</iframe>
+
+<!-- ======================================================================== -->
+
+<!-- Option 2: Responsive iframe with aspect ratio container -->
+<div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 150%; /* Adjust based on content height */">
+        <iframe 
+            src="/path/to/cloud-gaming-connectivity-tool.html" 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
+            title="Cloud Gaming Connectivity Tool"
+            loading="lazy"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<!-- ======================================================================== -->
+
+<!-- Option 3: iframe with custom styling and fallback -->
+<div class="gaming-tool-container" style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+    <iframe 
+        src="/path/to/cloud-gaming-connectivity-tool.html" 
+        width="100%" 
+        height="2500px" 
+        frameborder="0" 
+        style="border: 2px solid #e5e7eb; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: #f9fafb;"
+        title="Cloud Gaming Connectivity Tool - Test NAT Type and Check Ports"
+        loading="lazy"
+        allowfullscreen>
+        <p>Your browser does not support iframes. 
+        <a href="/path/to/cloud-gaming-connectivity-tool.html" target="_blank">
+            Click here to open the tool in a new tab
+        </a>.</p>
+    </iframe>
+</div>
+
+<!-- ======================================================================== -->
+
+<!-- Option 4: Full-width responsive with mobile optimization -->
+<style>
+    .responsive-gaming-tool {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .responsive-gaming-tool iframe {
+        width: 100%;
+        height: 2500px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 768px) {
+        .responsive-gaming-tool iframe {
+            height: 3500px; /* Taller on mobile due to stacked layout */
+        }
+    }
+</style>
+
+<div class="responsive-gaming-tool">
+    <iframe 
+        src="/path/to/cloud-gaming-connectivity-tool.html" 
+        title="Cloud Gaming Connectivity Tool"
+        loading="lazy"
+        allowfullscreen>
+    </iframe>
+</div>
+
+<!-- ======================================================================== -->
+
+<!-- Option 5: WordPress Gutenberg HTML block ready -->
+<!-- 
+     1. Add a "Custom HTML" block in Gutenberg editor
+     2. Paste this code
+     3. Preview and publish
+-->
+<div style="max-width: 1200px; margin: 2rem auto;">
+    <iframe 
+        src="/wp-content/uploads/tools/cloud-gaming-connectivity-tool.html" 
+        width="100%" 
+        height="2500" 
+        frameborder="0" 
+        style="border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+        title="Cloud Gaming Connectivity Tool"
+        loading="lazy">
+    </iframe>
+</div>
+
+<!-- ======================================================================== -->
+
+<!-- Option 6: External hosting (if uploaded to separate domain/CDN) -->
+<iframe 
+    src="https://tools.yourdomain.com/gaming-connectivity-tool.html" 
+    width="100%" 
+    height="2500px" 
+    frameborder="0" 
+    style="border: none; max-width: 1200px; margin: 0 auto; display: block;"
+    title="Cloud Gaming Connectivity Tool"
+    loading="lazy"
+    sandbox="allow-scripts allow-same-origin allow-forms"
+    allowfullscreen>
+</iframe>
+
+<!-- ======================================================================== 
+     WORDPRESS SHORTCODE IMPLEMENTATION
+     ========================================================================
+     
+     Add this to your theme's functions.php file:
+     ------------------------------------------------------------------------ -->
+
+<?php
+/*
+function cloud_gaming_tool_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'height' => '2500',
+        'width' => '100%',
+    ), $atts);
+    
+    $tool_url = get_stylesheet_directory_uri() . '/tools/cloud-gaming-connectivity-tool.html';
+    
+    $output = '<div style="max-width: 1200px; margin: 2rem auto;">';
+    $output .= '<iframe src="' . esc_url($tool_url) . '" ';
+    $output .= 'width="' . esc_attr($atts['width']) . '" ';
+    $output .= 'height="' . esc_attr($atts['height']) . '" ';
+    $output .= 'frameborder="0" ';
+    $output .= 'style="border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" ';
+    $output .= 'title="Cloud Gaming Connectivity Tool" ';
+    $output .= 'loading="lazy"></iframe>';
+    $output .= '</div>';
+    
+    return $output;
+}
+add_shortcode('gaming_tool', 'cloud_gaming_tool_shortcode');
+*/
+?>
+
+<!-- Then use in posts/pages with: [gaming_tool] -->
+<!-- Or with custom height: [gaming_tool height="3000"] -->
+
+<!-- ======================================================================== 
+     TROUBLESHOOTING
+     ========================================================================
+     
+     Issue: iframe doesn't load
+     Solution: Check that the file path is correct and file is uploaded
+     
+     Issue: Content is cut off
+     Solution: Increase the height attribute
+     
+     Issue: Doesn't work on mobile
+     Solution: Use Option 4 with responsive CSS
+     
+     Issue: X-Frame-Options error
+     Solution: Add to .htaccess or server config:
+              Header always append X-Frame-Options SAMEORIGIN
+     
+     Issue: Mixed content warning (HTTP/HTTPS)
+     Solution: Ensure both page and iframe use HTTPS
+     
+     ======================================================================== -->
