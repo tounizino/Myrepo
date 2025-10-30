@@ -1,6 +1,6 @@
 # Ultimate NAT & Port Checker WordPress Plugin
 
-**Version:** 1.1.0  
+**Version:** 1.1.1  
 **Author:** Your Name  
 **License:** GPL v2 or later
 
@@ -59,8 +59,10 @@ The **Ultimate NAT & Port Checker** is a cutting-edge WordPress plugin designed 
 Located at **Settings → NAT & Port Checker**, the admin panel allows you to:
 - Toggle between light and dark default themes
 - Customize the accent color
-- Enable/disable animations and adjust animation speed
+- Edit the tool title and subtitle directly from the dashboard
+- Choose the global font scale preset (Compact, Standard, Comfort)
 - Set container width (768px–2400px)
+- Customize light and dark theme background colors
 - Enable/disable individual feature modules
 - Configure custom useful links (2 links, stacked vertically)
 - Add a custom quick tip message

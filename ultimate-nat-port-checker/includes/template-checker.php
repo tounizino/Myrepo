@@ -58,6 +58,11 @@ if (empty($site_name)) {
 }
 $current_year = date_i18n('Y');
 $inline_max_width = isset($settings['container_width']) ? absint($settings['container_width']) : 1400;
+$tool_title = isset($settings['tool_title']) ? $settings['tool_title'] : __('Ultimate NAT & Port Checker', 'ultimate-nat-port-checker');
+$tool_subtitle = isset($settings['tool_subtitle']) ? $settings['tool_subtitle'] : __('Next-generation diagnostics crafted for cloud gaming visitors. Analyse NAT type, validate ports, and fine-tune your network in minutes.', 'ultimate-nat-port-checker');
+$font_scale = isset($settings['tool_font_scale']) ? $settings['tool_font_scale'] : 'base';
+$light_bg = isset($settings['theme_light_bg']) ? $settings['theme_light_bg'] : '#f4f5f7';
+$dark_bg = isset($settings['theme_dark_bg']) ? $settings['theme_dark_bg'] : '#101827';
 
 $show_nat_checker = !empty($settings['enable_nat_checker']) && in_array($mode, array('full', 'nat'), true);
 $show_port_checker = !empty($settings['enable_port_checker']) && in_array($mode, array('full', 'port'), true);
@@ -65,31 +70,35 @@ $show_device_info = !empty($settings['enable_device_info']) && 'full' === $mode;
 $show_router_logins = !empty($settings['enable_router_logins']) && 'full' === $mode;
 $show_useful_links = !empty($settings['enable_useful_links']) && 'full' === $mode;
 $show_guides = !empty($settings['enable_guides']) && 'full' === $mode;
+
+$wrapper_classes = array('unpc-wrapper', 'unpc-font-' . $font_scale, 'unpc-mode-' . $mode);
+if ('nat' === $mode || 'port' === $mode) {
+    $wrapper_classes[] = 'unpc-mode-single';
+}
 ?>
-<div class="unpc-wrapper" data-default-theme="<?php echo esc_attr($theme); ?>" data-animations="<?php echo $animations_enabled ? 'enabled' : 'disabled'; ?>">
-    <div class="unpc-container" data-theme="<?php echo esc_attr($theme); ?>" data-default-theme="<?php echo esc_attr($theme); ?>" style="--unpc-max-width: <?php echo esc_attr($inline_max_width); ?>px; max-width: <?php echo esc_attr($inline_max_width); ?>px;">
-        <header class="unpc-header">
-            <div class="unpc-header__titles">
-                <h2 class="unpc-header__title"><?php esc_html_e('Ultimate NAT & Port Checker', 'ultimate-nat-port-checker'); ?></h2>
-                <p class="unpc-header__subtitle">
-                    <?php esc_html_e('Next-generation diagnostics crafted for cloud gaming visitors. Analyse NAT type, validate ports, and fine-tune your network in minutes.', 'ultimate-nat-port-checker'); ?>
-                </p>
-            </div>
-            <div class="unpc-header__toggles">
-                <a href="<?php echo esc_url($home_url); ?>" class="unpc-button unpc-button--home" title="<?php esc_attr_e('Go to homepage', 'ultimate-nat-port-checker'); ?>">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                    <?php esc_html_e('Go Home', 'ultimate-nat-port-checker'); ?>
-                </a>
-                <div class="unpc-theme-toggle" role="group" aria-label="<?php esc_attr_e('Theme toggle', 'ultimate-nat-port-checker'); ?>">
-                    <button type="button" class="unpc-pill" data-theme-target="light" aria-pressed="<?php echo 'light' === $theme ? 'true' : 'false'; ?>"><?php esc_html_e('Light', 'ultimate-nat-port-checker'); ?></button>
-                    <button type="button" class="unpc-pill" data-theme-target="dark" aria-pressed="<?php echo 'dark' === $theme ? 'true' : 'false'; ?>"><?php esc_html_e('Dark', 'ultimate-nat-port-checker'); ?></button>
+<div class="<?php echo esc_attr(implode(' ', $wrapper_classes)); ?>" data-default-theme="<?php echo esc_attr($theme); ?>" data-animations="<?php echo $animations_enabled ? 'enabled' : 'disabled'; ?>">
+    <div class="unpc-home-bar">
+        <a href="<?php echo esc_url($home_url); ?>" class="unpc-home-link" title="<?php esc_attr_e('Back to homepage', 'ultimate-nat-port-checker'); ?>">
+            <span class="unpc-home-icon" aria-hidden="true">&#8592;</span>
+            <span class="unpc-home-label"><?php esc_html_e('Go Home', 'ultimate-nat-port-checker'); ?></span>
+        </a>
+    </div>
+    <div class="unpc-container" data-theme="<?php echo esc_attr($theme); ?>" data-default-theme="<?php echo esc_attr($theme); ?>" style="--unpc-max-width: <?php echo esc_attr($inline_max_width); ?>px; max-width: <?php echo esc_attr($inline_max_width); ?>px; --unpc-light-bg: <?php echo esc_attr($light_bg); ?>; --unpc-dark-bg: <?php echo esc_attr($dark_bg); ?>;">
+        <?php if ('full' === $mode) : ?>
+            <header class="unpc-header">
+                <div class="unpc-header__titles">
+                    <h1 class="unpc-header__title"><?php echo esc_html($tool_title); ?></h1>
+                    <p class="unpc-header__subtitle"><?php echo esc_html($tool_subtitle); ?></p>
                 </div>
-                <span class="unpc-badge unpc-quick-tip" data-field="quick-tip"><?php echo esc_html($settings['custom_quick_tip']); ?></span>
-            </div>
-        </header>
+                <div class="unpc-header__toggles">
+                    <div class="unpc-theme-toggle" role="group" aria-label="<?php esc_attr_e('Theme toggle', 'ultimate-nat-port-checker'); ?>">
+                        <button type="button" class="unpc-pill" data-theme-target="light" aria-pressed="<?php echo 'light' === $theme ? 'true' : 'false'; ?>"><?php esc_html_e('Light', 'ultimate-nat-port-checker'); ?></button>
+                        <button type="button" class="unpc-pill" data-theme-target="dark" aria-pressed="<?php echo 'dark' === $theme ? 'true' : 'false'; ?>"><?php esc_html_e('Dark', 'ultimate-nat-port-checker'); ?></button>
+                    </div>
+                    <span class="unpc-badge unpc-quick-tip" data-field="quick-tip"><?php echo esc_html($settings['custom_quick_tip']); ?></span>
+                </div>
+            </header>
+        <?php endif; ?>
 
         <?php if ($show_nat_checker) : ?>
             <section class="unpc-card unpc-card--nat" id="unpc-nat" aria-labelledby="unpc-nat-title">

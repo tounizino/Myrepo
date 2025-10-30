@@ -3,7 +3,7 @@
  * Plugin Name: Ultimate NAT & Port Checker
  * Plugin URI: https://example.com/ultimate-nat-port-checker
  * Description: The ultimate NAT and Port checking tool for cloud gaming with comprehensive network diagnostics, device info, and router configuration guides.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Your Name
  * Author URI: https://example.com
  * License: GPL v2 or later
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('UNPC_VERSION', '1.1.0');
+define('UNPC_VERSION', '1.1.1');
 define('UNPC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('UNPC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -38,11 +38,16 @@ function unpc_default_settings() {
         'useful_link_1_url' => 'https://example.com/advanced-router-configuration',
         'useful_link_2_text' => __('Cloud Gaming Optimization Tips', 'ultimate-nat-port-checker'),
         'useful_link_2_url' => 'https://example.com/cloud-gaming-optimization',
+        'tool_title' => __('Ultimate NAT & Port Checker', 'ultimate-nat-port-checker'),
+        'tool_subtitle' => __('Next-generation diagnostics crafted for cloud gaming visitors. Analyse NAT type, validate ports, and fine-tune your network in minutes.', 'ultimate-nat-port-checker'),
+        'tool_font_scale' => 'base',
         'animation_speed' => 'normal',
         'enable_animations' => true,
         'container_width' => '1400',
         'api_timeout' => '10',
         'custom_quick_tip' => __('Remember to reboot your router after applying configuration changes to ensure everything takes effect.', 'ultimate-nat-port-checker'),
+        'theme_light_bg' => '#f4f5f7',
+        'theme_dark_bg' => '#101827',
     );
 }
 

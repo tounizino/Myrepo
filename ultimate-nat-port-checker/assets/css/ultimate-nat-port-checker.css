@@ -78,6 +78,53 @@
   line-height: 1.55;
 }
 
+.unpc-font-compact {
+  --unpc-text-xs: 0.63rem;
+  --unpc-text-sm: 0.75rem;
+  --unpc-text-base: 0.86rem;
+  --unpc-text-md: 0.98rem;
+  --unpc-text-lg: 1.09rem;
+  --unpc-text-xl: 1.27rem;
+  --unpc-text-2xl: 1.61rem;
+}
+
+.unpc-font-comfort {
+  --unpc-text-xs: 0.74rem;
+  --unpc-text-sm: 0.88rem;
+  --unpc-text-base: 1.01rem;
+  --unpc-text-md: 1.15rem;
+  --unpc-text-lg: 1.28rem;
+  --unpc-text-xl: 1.49rem;
+  --unpc-text-2xl: 1.89rem;
+}
+
+.unpc-home-bar {
+  max-width: var(--unpc-max-width);
+  margin: 0 auto var(--unpc-spacing-sm);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.unpc-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--unpc-text-sm);
+  font-weight: var(--unpc-weight-medium);
+  color: var(--unpc-accent);
+  text-decoration: none;
+  padding: 0.25rem 0;
+}
+
+.unpc-home-link:hover {
+  text-decoration: underline;
+}
+
+.unpc-home-icon {
+  font-size: 1.25rem;
+}
+
 .unpc-container {
   max-width: var(--unpc-max-width);
   margin: 0 auto;
@@ -102,6 +149,10 @@
   --unpc-state-warning: var(--unpc-light-state-warning);
   --unpc-state-error: var(--unpc-light-state-error);
   --unpc-state-info: var(--unpc-light-state-info);
+
+  --unpc-surface: var(--unpc-light-bg);
+  background: var(--unpc-surface);
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
 }
 
 .unpc-container[data-theme="dark"] {
@@ -121,6 +172,10 @@
   --unpc-state-warning: var(--unpc-dark-state-warning);
   --unpc-state-error: var(--unpc-dark-state-error);
   --unpc-state-info: var(--unpc-dark-state-info);
+
+  --unpc-surface: var(--unpc-dark-bg);
+  background: var(--unpc-surface);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
 }
 
 .unpc-no-animations,
@@ -140,9 +195,10 @@
   margin-bottom: var(--unpc-spacing-xl);
 }
 
+.unpc-header__titles h1,
 .unpc-header__titles h2 {
   margin: 0 0 var(--unpc-spacing-xs) 0;
-  font-size: var(--unpc-text-2xl);
+  font-size: 2.25rem;
   font-weight: var(--unpc-weight-bold);
   color: var(--unpc-text-primary);
   letter-spacing: -0.015em;
@@ -897,8 +953,33 @@
 .unpc-container {
   max-width: var(--unpc-max-width) !important;
   margin: 0 auto !important;
-  background: transparent !important;
+  background: var(--unpc-surface) !important;
   box-sizing: border-box !important;
+  padding: var(--unpc-spacing-xl) !important;
+  border-radius: var(--unpc-radius-lg) !important;
+}
+
+.unpc-mode-single .unpc-container[data-theme="light"] {
+  background: linear-gradient(0deg, rgba(15, 23, 42, 0.02), rgba(15, 23, 42, 0.02)), var(--unpc-surface) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+.unpc-mode-single .unpc-container[data-theme="dark"] {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)), var(--unpc-surface) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.unpc-home-link {
+  color: var(--unpc-accent) !important;
+  font-size: var(--unpc-text-sm) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  text-decoration: none !important;
+}
+
+.unpc-home-link:hover {
+  text-decoration: underline !important;
 }
 
 .unpc-header {
@@ -951,33 +1032,6 @@
   text-decoration: none !important;
 }
 
-.unpc-button svg {
-  margin-right: 0.5rem !important;
-}
-
-.unpc-button--home {
-  background: var(--unpc-accent) !important;
-  color: #ffffff !important;
-}
-
-.unpc-button--ghost {
-  background: transparent !important;
-  color: var(--unpc-text-secondary) !important;
-  border: 1px solid var(--unpc-border-primary) !important;
-}
-
-.unpc-button--subtle {
-  background: var(--unpc-bg-secondary) !important;
-  color: var(--unpc-text-primary) !important;
-  padding: 0.375rem 0.75rem !important;
-  font-size: var(--unpc-text-xs) !important;
-}
-
-.unpc-button--primary {
-  background: var(--unpc-accent) !important;
-  color: #ffffff !important;
-}
-
 .unpc-button:hover {
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
@@ -987,36 +1041,6 @@
   opacity: 0.6 !important;
   cursor: not-allowed !important;
   transform: none !important;
-}
-
-.unpc-pill {
-  border: none !important;
-  background: transparent !important;
-  color: var(--unpc-text-secondary) !important;
-  padding: 0.375rem 0.875rem !important;
-  border-radius: var(--unpc-radius-md) !important;
-  font-size: var(--unpc-text-xs) !important;
-  font-weight: var(--unpc-weight-medium) !important;
-  cursor: pointer !important;
-}
-
-.unpc-theme-toggle {
-  display: inline-flex !important;
-  gap: 0.25rem !important;
-  background: var(--unpc-bg-secondary) !important;
-  padding: 0.25rem !important;
-  border-radius: var(--unpc-radius-lg) !important;
-  border: 1px solid var(--unpc-border-primary) !important;
-}
-
-.unpc-pill:hover {
-  background: var(--unpc-bg-tertiary) !important;
-}
-
-.unpc-pill[aria-pressed="true"] {
-  background: var(--unpc-bg-primary) !important;
-  color: var(--unpc-text-primary) !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .unpc-badge {
@@ -1058,6 +1082,7 @@
 .unpc-input-group input[type="text"],
 .unpc-input-group textarea {
   width: 100% !important;
+  max-width: 420px !important;
   padding: 0.625rem 0.875rem !important;
   background: var(--unpc-bg-secondary) !important;
   border: 1px solid var(--unpc-border-primary) !important;
@@ -1092,18 +1117,19 @@
 }
 
 .unpc-footer {
-  margin-top: var(--unpc-spacing-xl) !important;
-  padding-top: var(--unpc-spacing-md) !important;
-  border-top: 1px solid var(--unpc-border-primary) !important;
+  margin: var(--unpc-spacing-xl) calc(var(--unpc-spacing-xl) * -1) calc(var(--unpc-spacing-xl) * -1) !important;
+  padding: var(--unpc-spacing-lg) var(--unpc-spacing-md) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #0f172a !important;
   text-align: center !important;
+  border-radius: 0 0 var(--unpc-radius-lg) var(--unpc-radius-lg) !important;
 }
 
 .unpc-footer__line {
   margin: 0.25rem 0 !important;
   font-size: var(--unpc-text-xs) !important;
-  color: var(--unpc-text-secondary) !important;
+  color: #cbd5e1 !important;
 }
-
 .unpc-container[data-theme="dark"] .unpc-header__title,
 .unpc-container[data-theme="dark"] .unpc-header__subtitle,
 .unpc-container[data-theme="dark"] .unpc-quick-tip {

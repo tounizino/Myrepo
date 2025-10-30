@@ -2,6 +2,34 @@
 
 All notable changes to the Ultimate NAT & Port Checker plugin will be documented in this file.
 
+## [1.1.1] - 2024
+
+### Added
+- **Editable Tool Title & Subtitle**: Customize the main heading and description text from the admin panel
+- **Font Scale Control**: Three typography presets (Compact, Standard, Comfort) for different reading preferences
+- **Background Color Settings**: Customize light and dark theme background colors from admin panel
+- **Home Button**: Simplified top-left "Go Home" link above the header with clean styling
+
+### Changed
+- **Header Visibility**: Removed header from `[nat_checker_only]` and `[port_checker_only]` shortcodes for cleaner single-module views
+- **Single Mode Background**: NAT-only and Port-only views now have a subtle gray background for better separation
+- **Footer Styling**: Footer section is now always dark (#0f172a) regardless of theme choice
+- **Home Button Position**: Moved from header to above the main container at top-left
+- **Header Title Size**: Increased from 1.75rem to 2.25rem for better prominence
+- **Input Width**: "Ports to check" textarea now matches "Host or IP" input width (max 420px)
+- **Container Background**: Light theme containers now have a subtle gray tint (#f4f5f7 default)
+
+### Improved
+- Theme toggle reverted to simpler, previous styling without heavy `!important` overrides
+- Better visual hierarchy in single-module modes
+- More consistent spacing and padding across all modes
+- Enhanced readability with larger title font size
+
+### Technical
+- Added CSS custom property `--unpc-surface` for theme-aware backgrounds
+- Font scale implemented via CSS variable overrides (`.unpc-font-compact`, `.unpc-font-comfort`)
+- Single mode detection via `.unpc-mode-single` class for conditional styling
+
 ## [1.1.0] - 2024
 
 ### Added

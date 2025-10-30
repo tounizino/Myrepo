@@ -44,6 +44,14 @@ See the full documentation in [ultimate-nat-port-checker/README.md](ultimate-nat
 
 Configure the plugin at **WordPress Admin → Settings → NAT & Port Checker**
 
+**Latest Updates (v1.1.1)**:
+- ✨ Editable tool title and subtitle
+- 🔤 Three font size presets (Compact, Standard, Comfort)
+- 🎨 Customizable background colors for both themes
+- 🏠 Simplified home button (top-left position)
+- 🎯 Single-mode shortcodes without header
+- 🌑 Always-dark footer design
+
 ---
 
 **Licensed under GPL v2 or later**

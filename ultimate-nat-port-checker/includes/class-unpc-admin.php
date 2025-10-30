@@ -93,6 +93,50 @@ if (!class_exists('UNPC_Admin')) {
                 'unpc_general_section'
             );
 
+            add_settings_field(
+                'tool_title',
+                __('Tool Title', 'ultimate-nat-port-checker'),
+                array($this, 'render_text_field'),
+                'unpc-settings',
+                'unpc_general_section',
+                array('field' => 'tool_title')
+            );
+
+            add_settings_field(
+                'tool_subtitle',
+                __('Tool Subtitle', 'ultimate-nat-port-checker'),
+                array($this, 'render_text_field'),
+                'unpc-settings',
+                'unpc_general_section',
+                array('field' => 'tool_subtitle')
+            );
+
+            add_settings_field(
+                'tool_font_scale',
+                __('Global Font Size', 'ultimate-nat-port-checker'),
+                array($this, 'render_font_scale_field'),
+                'unpc-settings',
+                'unpc_general_section'
+            );
+
+            add_settings_field(
+                'theme_light_bg',
+                __('Light Theme Background', 'ultimate-nat-port-checker'),
+                array($this, 'render_color_field'),
+                'unpc-settings',
+                'unpc_general_section',
+                array('field' => 'theme_light_bg')
+            );
+
+            add_settings_field(
+                'theme_dark_bg',
+                __('Dark Theme Background', 'ultimate-nat-port-checker'),
+                array($this, 'render_color_field'),
+                'unpc-settings',
+                'unpc_general_section',
+                array('field' => 'theme_dark_bg')
+            );
+
             add_settings_section(
                 'unpc_modules_section',
                 __('Feature Modules', 'ultimate-nat-port-checker'),
@@ -224,6 +268,15 @@ if (!class_exists('UNPC_Admin')) {
             $sanitized['useful_link_1_url'] = isset($input['useful_link_1_url']) ? esc_url_raw($input['useful_link_1_url']) : '';
             $sanitized['useful_link_2_text'] = isset($input['useful_link_2_text']) ? sanitize_text_field($input['useful_link_2_text']) : '';
             $sanitized['useful_link_2_url'] = isset($input['useful_link_2_url']) ? esc_url_raw($input['useful_link_2_url']) : '';
+
+            $sanitized['tool_title'] = isset($input['tool_title']) ? sanitize_text_field($input['tool_title']) : $defaults['tool_title'];
+            $sanitized['tool_subtitle'] = isset($input['tool_subtitle']) ? sanitize_text_field($input['tool_subtitle']) : $defaults['tool_subtitle'];
+
+            $font_scale_input = isset($input['tool_font_scale']) ? $input['tool_font_scale'] : $defaults['tool_font_scale'];
+            $sanitized['tool_font_scale'] = in_array($font_scale_input, array('compact', 'base', 'comfort'), true) ? $font_scale_input : $defaults['tool_font_scale'];
+
+            $sanitized['theme_light_bg'] = isset($input['theme_light_bg']) && sanitize_hex_color($input['theme_light_bg']) ? sanitize_hex_color($input['theme_light_bg']) : $defaults['theme_light_bg'];
+            $sanitized['theme_dark_bg'] = isset($input['theme_dark_bg']) && sanitize_hex_color($input['theme_dark_bg']) ? sanitize_hex_color($input['theme_dark_bg']) : $defaults['theme_dark_bg'];
 
             $sanitized['custom_quick_tip'] = isset($input['custom_quick_tip']) ? sanitize_textarea_field($input['custom_quick_tip']) : $defaults['custom_quick_tip'];
 
@@ -420,6 +473,39 @@ if (!class_exists('UNPC_Admin')) {
         }
 
         /**
+         * Render a color picker field.
+         *
+         * @param array $args Field arguments.
+         * @return void
+         */
+        public function render_color_field($args) {
+            $settings = unpc_get_settings();
+            $field = $args['field'];
+            $current = isset($settings[$field]) ? $settings[$field] : '#ffffff';
+            ?>
+            <input type="text" name="unpc_settings[<?php echo esc_attr($field); ?>]" value="<?php echo esc_attr($current); ?>" class="unpc-color-field" data-default-color="<?php echo esc_attr($current); ?>">
+            <?php
+        }
+
+        /**
+         * Render font scale field.
+         *
+         * @return void
+         */
+        public function render_font_scale_field() {
+            $settings = unpc_get_settings();
+            $current = isset($settings['tool_font_scale']) ? $settings['tool_font_scale'] : 'base';
+            ?>
+            <select name="unpc_settings[tool_font_scale]" id="unpc_font_scale">
+                <option value="compact" <?php selected($current, 'compact'); ?>><?php esc_html_e('Compact', 'ultimate-nat-port-checker'); ?></option>
+                <option value="base" <?php selected($current, 'base'); ?>><?php esc_html_e('Standard', 'ultimate-nat-port-checker'); ?></option>
+                <option value="comfort" <?php selected($current, 'comfort'); ?>><?php esc_html_e('Comfort (Larger)', 'ultimate-nat-port-checker'); ?></option>
+            </select>
+            <p class="description"><?php esc_html_e('Choose the overall typography scale for the tool interface.', 'ultimate-nat-port-checker'); ?></p>
+            <?php
+        }
+
+        /**
          * Render a generic textarea field.
          *
          * @param array $args Field arguments.
@@ -474,6 +560,13 @@ if (!class_exists('UNPC_Admin')) {
                 .unpc-admin-banner code { background: #e0e7ff; padding: 0.125em 0.375em; border-radius: 3px; font-size: 0.95em; }
             ';
             wp_add_inline_style('wp-color-picker', $custom_css);
+
+            $custom_js = "
+                jQuery(document).ready(function($) {
+                    $('.unpc-color-field').wpColorPicker();
+                });
+            ";
+            wp_add_inline_script('wp-color-picker', $custom_js);
         }
     }
 }

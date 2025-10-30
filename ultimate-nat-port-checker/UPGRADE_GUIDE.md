@@ -1,8 +1,31 @@
-# Upgrade Guide: Version 1.0.0 → 1.1.0
+# Upgrade Guide
 
-## What's New in Version 1.1.0
+## Version 1.1.1 (Latest)
 
-This release brings several user-requested improvements and refinements to the Ultimate NAT & Port Checker plugin.
+### What's New in Version 1.1.1
+
+This update focuses on customization, improved UI consistency, and better single-mode experiences.
+
+#### New Admin Controls
+1. **Editable Tool Title & Subtitle** – Change the heading and description from the admin panel
+2. **Font Scale Control** – Choose between Compact, Standard, or Comfort typography sizes
+3. **Background Color Customization** – Set custom colors for light and dark theme backgrounds
+
+#### UI Refinements
+- **Home Button** – Now positioned at top-left with simpler styling (no longer in header)
+- **Header Removal for Single Modes** – `[nat_checker_only]` and `[port_checker_only]` no longer show the main header
+- **Larger Title Font** – Header title increased from 1.75rem to 2.25rem
+- **Always-Dark Footer** – Footer is always dark (#0f172a) regardless of theme
+- **Input Width Fix** – "Ports to check" textarea now matches "Host or IP" input width (max 420px)
+- **Subtle Gray Background** – Single-mode views have a soft gray tint for better separation
+
+---
+
+## Version 1.1.0
+
+### What's New in Version 1.1.0
+
+This release brought several user-requested improvements and refinements to the Ultimate NAT & Port Checker plugin.
 
 ### New Features
 
