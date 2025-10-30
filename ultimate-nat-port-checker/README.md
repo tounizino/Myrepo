@@ -1,6 +1,6 @@
 # Ultimate NAT & Port Checker WordPress Plugin
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Author:** Your Name  
 **License:** GPL v2 or later
 
@@ -84,9 +84,15 @@ Located at **Settings → NAT & Port Checker**, the admin panel allows you to:
 
 ```php
 [nat_port_checker]
+[nat_checker_only]
+[port_checker_only]
 ```
 
-The shortcode is self-contained and will render the entire NAT & Port Checker interface wherever it's placed.
+- `[nat_port_checker]` renders the complete toolkit with every module enabled according to your settings.
+- `[nat_checker_only]` renders only the NAT Intelligence module (ideal for compact diagnostics pages).
+- `[port_checker_only]` renders only the Port Availability Suite (perfect for quick port verification pages).
+
+All shortcodes respect the global settings configured in the admin panel.
 
 ## Technical Stack
 

@@ -24,7 +24,10 @@ This repository contains the **Ultimate NAT & Port Checker**, a comprehensive Wo
 2. Install in WordPress:
    - Copy the `ultimate-nat-port-checker` directory to `wp-content/plugins/`
    - Activate via WordPress admin panel
-   - Use shortcode `[nat_port_checker]` on any page
+   - Use shortcodes on any page:
+     - `[nat_port_checker]` – Full tool
+     - `[nat_checker_only]` – NAT checker only
+     - `[port_checker_only]` – Port checker only
 
 ### Documentation
 

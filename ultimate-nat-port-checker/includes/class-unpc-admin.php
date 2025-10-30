@@ -247,9 +247,13 @@ if (!class_exists('UNPC_Admin')) {
                 <h1><?php esc_html_e('Ultimate NAT & Port Checker – Settings', 'ultimate-nat-port-checker'); ?></h1>
                 <div class="unpc-admin-banner">
                     <p class="description">
-                        <?php esc_html_e('Configure your NAT and Port Checker plugin to suit your needs. Use the shortcode', 'ultimate-nat-port-checker'); ?>
-                        <code>[nat_port_checker]</code>
-                        <?php esc_html_e('on any page or post to display the tool.', 'ultimate-nat-port-checker'); ?>
+                        <?php esc_html_e('Configure your NAT and Port Checker plugin to suit your needs.', 'ultimate-nat-port-checker'); ?>
+                    </p>
+                    <p class="description">
+                        <strong><?php esc_html_e('Available Shortcodes:', 'ultimate-nat-port-checker'); ?></strong><br>
+                        <code>[nat_port_checker]</code> – <?php esc_html_e('Full tool with all features', 'ultimate-nat-port-checker'); ?><br>
+                        <code>[nat_checker_only]</code> – <?php esc_html_e('NAT checker only', 'ultimate-nat-port-checker'); ?><br>
+                        <code>[port_checker_only]</code> – <?php esc_html_e('Port checker only', 'ultimate-nat-port-checker'); ?>
                     </p>
                     <p class="description">
                         <strong><?php esc_html_e('Key Features:', 'ultimate-nat-port-checker'); ?></strong>
