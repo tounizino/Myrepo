@@ -1,0 +1,26 @@
+# Cloud Network Analyzer Plugin - Gitignore
+
+# WordPress plugin build artifacts
+*.zip
+*.tar.gz
+*.tar
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor config
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHPStorm / PHPUnit / Composer
+/.phpunit.result.cache
+/vendor/
+composer.lock
+composer.phar
+
+# Logs
+*.log
+logs/

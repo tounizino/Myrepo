@@ -1,0 +1,25 @@
+# Global ignore file for repository
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE configurations
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and temporary files
+*.log
+logs/
+
+# Archives
+*.zip
+*.tar.gz
+*.tar
+
+# Node, Composer, Python caches (future-proof)
+node_modules/
+vendor/
+__pycache__/
