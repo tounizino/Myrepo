@@ -1,0 +1,64 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "ubcg/latest-posts-grid",
+    "version": "1.0.0",
+    "title": "Latest Posts Grid",
+    "category": "widgets",
+    "icon": "grid-view",
+    "description": "Display latest articles in a responsive 3x3 grid with pagination",
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "textdomain": "ubcg",
+    "editorScript": "file:../../assets/js/blocks.js",
+    "editorStyle": "file:../../assets/css/editor.css",
+    "style": "file:../../assets/css/frontend.css",
+    "attributes": {
+        "postsPerPage": {
+            "type": "number",
+            "default": 9
+        },
+        "columns": {
+            "type": "number",
+            "default": 3
+        },
+        "showImage": {
+            "type": "boolean",
+            "default": true
+        },
+        "showDate": {
+            "type": "boolean",
+            "default": true
+        },
+        "showExcerpt": {
+            "type": "boolean",
+            "default": true
+        },
+        "showAuthor": {
+            "type": "boolean",
+            "default": false
+        },
+        "showCategory": {
+            "type": "boolean",
+            "default": true
+        },
+        "pagination": {
+            "type": "boolean",
+            "default": true
+        },
+        "orderBy": {
+            "type": "string",
+            "default": "date"
+        },
+        "order": {
+            "type": "string",
+            "default": "DESC"
+        }
+    }
+}
