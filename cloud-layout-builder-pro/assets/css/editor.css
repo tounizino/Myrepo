@@ -1,0 +1,44 @@
+/**
+ * Cloud Layout Builder Pro - Block Editor Styles
+ */
+
+.clbp-block-preview {
+    padding: 20px;
+    background: #F9FAFB;
+    border-radius: 12px;
+    border: 2px dashed #CBD5E1;
+}
+
+.clbp-block-placeholder {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6B7280;
+}
+
+.clbp-block-placeholder svg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.clbp-block-controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.clbp-block-controls .components-base-control {
+    margin-bottom: 0;
+}
+
+.wp-block-cloud-layout-builder-latest-articles,
+.wp-block-cloud-layout-builder-featured-hero,
+.wp-block-cloud-layout-builder-category-highlight {
+    margin: 24px 0;
+}
+
+.editor-styles-wrapper .clbp-post-card {
+    pointer-events: none;
+}
