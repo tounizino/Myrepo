@@ -1,0 +1,13 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "ubcg/'$dir'",
+    "version": "1.0.0",
+    "title": "'$(echo $dir | sed 's/-/ /g' | sed 's/\b\(.\)/\u\1/g')'",
+    "category": "widgets",
+    "icon": "admin-generic",
+    "textdomain": "ubcg",
+    "editorScript": "file:../../assets/js/blocks.js",
+    "editorStyle": "file:../../assets/css/editor.css",
+    "style": "file:../../assets/css/frontend.css"
+}

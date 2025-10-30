@@ -1,0 +1,120 @@
+/**
+ * Ultimate Blocks for Cloud Gaming - Admin Styles
+ */
+
+.ubcg-settings-wrap {
+    max-width: 1200px;
+}
+
+.ubcg-settings-header {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.ubcg-settings-header h2 {
+    margin: 0 0 0.5rem;
+    color: #ffffff;
+}
+
+.ubcg-settings-header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+.ubcg-settings-container {
+    background: #ffffff;
+    padding: 2rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.ubcg-settings-section {
+    margin-bottom: 3rem;
+}
+
+.ubcg-settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.ubcg-settings-section h2 {
+    margin: 0 0 0.5rem;
+    color: #2563eb;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.75rem;
+}
+
+.ubcg-settings-section > p.description {
+    margin: 0.5rem 0 1.5rem;
+    color: #64748b;
+}
+
+.ubcg-color-picker {
+    width: 100px;
+}
+
+.ubcg-blocks-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.ubcg-block-item {
+    background: #eff6ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.ubcg-block-item h3 {
+    margin: 0 0 0.5rem;
+    color: #2563eb;
+    font-size: 1.125rem;
+}
+
+.ubcg-block-item p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.ubcg-settings-sidebar {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.ubcg-sidebar-box {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ubcg-sidebar-box:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.ubcg-sidebar-box h3 {
+    margin: 0 0 0.5rem;
+    color: #2563eb;
+}
+
+.ubcg-sidebar-box p {
+    margin: 0 0 1rem;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+@media screen and (max-width: 782px) {
+    .ubcg-blocks-list {
+        grid-template-columns: 1fr;
+    }
+}
