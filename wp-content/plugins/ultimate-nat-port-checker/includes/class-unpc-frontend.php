@@ -175,6 +175,24 @@ class UNPC_Frontend {
     }
     
     /**
+     * Render preset buttons for port checker
+     */
+    private function render_port_preset_buttons() {
+        $buttons = '';
+        $presets = $this->get_port_presets();
+        foreach ($presets as $preset) {
+            $buttons .= sprintf(
+                '<button type="button" class="unpc-preset-btn" data-ports="%1$s" data-protocol="%2$s">%3$s</button>',
+                esc_attr($preset['ports']),
+                esc_attr(strtoupper($preset['protocol'])),
+                esc_html($preset['platform_name'])
+            );
+        }
+        $buttons .= '<button type="button" class="unpc-preset-btn" data-ports="custom">Custom Ports</button>';
+        return $buttons;
+    }
+    
+    /**
      * Render full tool shortcode
      */
     public function render_full_tool($atts) {
@@ -187,30 +205,26 @@ class UNPC_Frontend {
         ob_start();
         ?>
         <div class="unpc-wrapper" data-theme="dark" data-font-size="<?php echo esc_attr($font_preset); ?>"<?php echo $style_attr ? ' style="' . esc_attr($style_attr) . '"' : ''; ?>>
-            <a href="<?php echo esc_url($settings['home_url']); ?>" class="unpc-home-btn" aria-label="Go to home">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                </svg>
-            </a>
-            
-            <button class="unpc-theme-toggle" type="button" aria-label="Toggle light or dark theme">
-                <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
-                <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
-            </button>
-            
             <header class="unpc-header">
-                <h1 class="unpc-title"><?php echo esc_html($settings['header_text']); ?></h1>
-                <p class="unpc-subtitle">Advanced live diagnostics engineered for next-generation cloud gaming</p>
+                <a href="<?php echo esc_url($settings['home_url']); ?>" class="unpc-home-btn" aria-label="Go to home">
+                    <span class="dashicons dashicons-admin-home" aria-hidden="true"></span>
+                </a>
+                <button class="unpc-theme-toggle" type="button" aria-label="Toggle light or dark theme">
+                    <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
+                    <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
+                    <span class="theme-label">Dark Mode</span>
+                </button>
             </header>
             
-            <div class="unpc-privacy-notice">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 1l9 4v6c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4zm0 2.18L5 6.09v4.91c0 4.33 2.89 8.5 7 9.93 4.11-1.43 7-5.6 7-9.93V6.09l-7-2.91zM11 8h2v2h-2V8zm0 4h2v6h-2v-6z" />
-                </svg>
-                <span><?php echo esc_html($settings['privacy_note']); ?></span>
-            </div>
-            
             <div class="unpc-container">
+                <h1 class="unpc-title"><?php echo esc_html($settings['header_text']); ?></h1>
+                <p class="unpc-subtitle">Advanced live diagnostics engineered for next-generation cloud gaming</p>
+                
+                <div class="unpc-privacy-notice">
+                    <span class="dashicons dashicons-shield" aria-hidden="true"></span>
+                    <span><?php echo esc_html($settings['privacy_note']); ?></span>
+                </div>
+                
                 <section class="unpc-section unpc-nat-section">
                     <div class="unpc-section-header">
                         <h2>NAT Type Intelligence</h2>
@@ -227,10 +241,10 @@ class UNPC_Frontend {
                         
                         <div id="unpc-nat-results" class="unpc-results" style="display:none;">
                             <div class="unpc-result-card">
-                                <div class="unpc-result-main" role="status">
+                                <div class="unpc-result-main" id="unpc-result-main" role="status" data-nat-type="2">
                                     <div class="unpc-result-label">Detected NAT Profile</div>
                                     <div class="unpc-result-value" id="nat-type-value">-</div>
-                                    <div class="unpc-result-status" id="nat-status-badge" data-type="2">-</div>
+                                    <div class="unpc-result-status" id="nat-status-badge">-</div>
                                     <div class="unpc-result-description" id="nat-insights">Detailed insights will appear after analysis.</div>
                                 </div>
                                 <div class="unpc-result-grid" aria-live="polite">
@@ -260,6 +274,7 @@ class UNPC_Frontend {
                                 </details>
                             </div>
                         </div>
+                        <div class="unpc-technical-log" id="unpc-technical-log" style="display:none;"></div>
                     </div>
                 </section>
                 
@@ -269,22 +284,16 @@ class UNPC_Frontend {
                         <p>Validate gaming platform presets or custom ranges for direct-to-device reachability</p>
                     </div>
                     <div class="unpc-section-content">
+                        <input type="hidden" id="port-host" value="" />
+                        <input type="hidden" id="port-protocol" value="TCP" />
+                        <div class="unpc-port-presets" id="unpc-port-presets">
+                            <?php echo $this->render_port_preset_buttons(); ?>
+                        </div>
                         <div class="unpc-port-controls">
                             <div class="unpc-form-group">
-                                <label for="port-host">Target Public Host/IP</label>
-                                <input type="text" id="port-host" class="unpc-input" placeholder="Auto detects your public IP" />
-                            </div>
-                            <div class="unpc-form-group">
-                                <label for="platform-preset">Cloud Gaming Preset</label>
-                                <select id="platform-preset" class="unpc-select">
-                                    <option value="">Select a platform…</option>
-                                    <?php echo $this->render_port_preset_options(); ?>
-                                </select>
-                            </div>
-                            <div class="unpc-form-group">
                                 <label for="custom-port">Port / Range</label>
-                                <input type="text" id="custom-port" class="unpc-input" placeholder="Example: 3074, 27015-27030" />
-                                <span class="unpc-input-hint">Comma separated ports or hyphenated ranges • TCP checks by default</span>
+                                <input type="text" id="custom-port" class="unpc-input" placeholder="Enter ports e.g. 3074 or 27015-27030" />
+                                <span class="unpc-input-hint">Supports multiple ports, ranges, and mixed entries. Default protocol: TCP.</span>
                             </div>
                             <div class="unpc-form-group unpc-form-group-action">
                                 <button class="unpc-btn unpc-btn-primary" id="unpc-check-port" type="button">
@@ -365,6 +374,10 @@ class UNPC_Frontend {
                         <div class="unpc-router-list" id="router-list">
                             <?php echo $this->get_router_list_html(); ?>
                         </div>
+                        <div class="unpc-info-banner">
+                            <p><span class="accent accent-success">Quick NAT Setup:</span> Enable UPnP or NAT-PMP in your router to allow automatic port forwarding for consoles and cloud gaming rigs.</p>
+                            <p><span class="accent accent-info">QoS Setup:</span> Prioritize your gaming device by MAC or IP address to guarantee low-latency traffic during peak usage.</p>
+                        </div>
                     </div>
                 </section>
                 
@@ -420,10 +433,10 @@ class UNPC_Frontend {
                 </div>
                 <div id="unpc-nat-results-standalone" class="unpc-results" style="display:none;">
                     <div class="unpc-result-card">
-                        <div class="unpc-result-main" role="status">
+                        <div class="unpc-result-main" id="unpc-result-main-standalone" role="status" data-nat-type="2">
                             <div class="unpc-result-label">Detected NAT Profile</div>
                             <div class="unpc-result-value" id="nat-type-value-standalone">-</div>
-                            <div class="unpc-result-status" id="nat-status-badge-standalone" data-type="2">-</div>
+                            <div class="unpc-result-status" id="nat-status-badge-standalone">-</div>
                             <div class="unpc-result-description" id="nat-insights-standalone">Insights will load after diagnostics.</div>
                         </div>
                         <div class="unpc-result-grid">
@@ -444,6 +457,7 @@ class UNPC_Frontend {
                         </details>
                     </div>
                 </div>
+                <div class="unpc-technical-log" id="unpc-technical-log-standalone" style="display:none;"></div>
             </div>
         </div>
         <?php
@@ -463,21 +477,15 @@ class UNPC_Frontend {
         ?>
         <div class="unpc-standalone unpc-port-standalone" data-theme="dark" data-font-size="<?php echo esc_attr($font_preset); ?>"<?php echo $style_attr ? ' style="' . esc_attr($style_attr) . '"' : ''; ?>>
             <div class="unpc-section-content">
+                <input type="hidden" id="port-host-standalone" value="" />
+                <input type="hidden" id="port-protocol-standalone" value="TCP" />
+                <div class="unpc-port-presets" id="unpc-port-presets-standalone">
+                    <?php echo $this->render_port_preset_buttons(); ?>
+                </div>
                 <div class="unpc-port-controls">
                     <div class="unpc-form-group">
-                        <label for="port-host-standalone">Target Public Host/IP</label>
-                        <input type="text" id="port-host-standalone" class="unpc-input" placeholder="Auto detects your public IP" />
-                    </div>
-                    <div class="unpc-form-group">
-                        <label for="platform-preset-standalone">Cloud Gaming Preset</label>
-                        <select id="platform-preset-standalone" class="unpc-select">
-                            <option value="">Select a platform…</option>
-                            <?php echo $this->render_port_preset_options(); ?>
-                        </select>
-                    </div>
-                    <div class="unpc-form-group">
                         <label for="custom-port-standalone">Port / Range</label>
-                        <input type="text" id="custom-port-standalone" class="unpc-input" placeholder="Example: 3074, 27015-27030" />
+                        <input type="text" id="custom-port-standalone" class="unpc-input" placeholder="Enter ports e.g. 3074 or 27015-27030" />
                         <span class="unpc-input-hint">Supports multiple ports &amp; ranges</span>
                     </div>
                     <div class="unpc-form-group unpc-form-group-action">

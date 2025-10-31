@@ -87,12 +87,28 @@
             if (savedTheme) {
                 wrappers.attr('data-theme', savedTheme);
             }
+            this.updateThemeToggleLabel(savedTheme || wrappers.first().attr('data-theme') || 'dark');
             $(document).on('click', '.unpc-theme-toggle', function() {
                 const currentTheme = wrappers.first().attr('data-theme') || 'dark';
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 wrappers.attr('data-theme', newTheme);
                 localStorage.setItem('unpc_theme', newTheme);
+                UNPC.updateThemeToggleLabel(newTheme);
             });
+        },
+
+        updateThemeToggleLabel: function(theme) {
+            const $toggle = $('.unpc-theme-toggle');
+            const $label = $toggle.find('.theme-label');
+            if (theme === 'dark') {
+                $label.text('Dark Mode');
+                $toggle.find('.theme-icon-light').hide();
+                $toggle.find('.theme-icon-dark').show();
+            } else {
+                $label.text('Light Mode');
+                $toggle.find('.theme-icon-dark').hide();
+                $toggle.find('.theme-icon-light').show();
+            }
         },
 
         setupNATChecker: function() {
@@ -148,6 +164,7 @@
             this.fillText('#nat-postal' + suffix, data.postal);
             this.fillText('#nat-symmetric' + suffix, 'Analysing…');
             $('#nat-ice-details' + suffix).text('Gathering peer-to-peer routing signatures…');
+            this.updateTechLog('', suffix);
             $results.fadeIn(300);
         },
 
@@ -155,8 +172,12 @@
             const advice = this.generateNATAdvice(typeNumber, false);
             this.fillText('#nat-type-value' + suffix, typeName);
             const $badge = $('#nat-status-badge' + suffix);
-            $badge.text(description).attr('data-type', typeNumber);
+            $badge.text(description);
             this.fillText('#nat-insights' + suffix, advice);
+            const $main = $('#unpc-result-main' + suffix);
+            if ($main.length) {
+                $main.attr('data-nat-type', typeNumber);
+            }
         },
 
         generateNATAdvice: function(typeNumber, symmetric) {
@@ -171,8 +192,10 @@
 
         runWebRTCNATAnalysis: function(publicIP, suffix) {
             const self = this;
+            this.updateTechLog('Collecting ICE candidates…', suffix);
             if (!window.RTCPeerConnection) {
                 this.fillText('#nat-ice-details' + suffix, 'WebRTC not supported on this browser. NAT inference limited.');
+                this.updateTechLog('WebRTC not supported on this browser. Detailed NAT diagnostics unavailable.', suffix);
                 return;
             }
             const pc = new RTCPeerConnection({
@@ -272,6 +295,8 @@
             this.updateNATStatus(type, label, description, suffix);
             const symText = symmetric ? 'Likely symmetric – port preservation blocked' : 'No symmetric pattern detected';
             this.fillText('#nat-symmetric' + suffix, symText);
+            const techLog = this.buildTechLog(state, publicIP, label, symmetric);
+            this.updateTechLog(techLog, suffix);
         },
 
         hostMatchesPublic: function(hostCandidates, publicIP) {
@@ -306,51 +331,67 @@
 
         setupPortChecker: function() {
             const self = this;
-            $(document).on('change', '#platform-preset, #platform-preset-standalone', function() {
-                const $select = $(this);
-                const ports = $select.find('option:selected').data('ports');
-                const suffix = $select.is('#platform-preset-standalone') ? '-standalone' : '';
-                if (ports) {
+            $(document).on('click', '.unpc-preset-btn', function(e) {
+                e.preventDefault();
+                const $btn = $(this);
+                const ports = $btn.data('ports');
+                const protocol = $btn.data('protocol') || 'TCP';
+                const isStandalone = $(this).closest('.unpc-port-standalone').length > 0;
+                const suffix = isStandalone ? '-standalone' : '';
+                
+                if (ports === 'custom') {
+                    $('#custom-port' + suffix).val('').focus();
+                    $('#port-protocol' + suffix).val('TCP');
+                } else {
                     $('#custom-port' + suffix).val(ports);
+                    $('#port-protocol' + suffix).val(protocol);
+                    UNPC.triggerPortScan(suffix);
                 }
             });
+            
             $(document).on('click', '#unpc-check-port, #unpc-check-port-standalone', function(e) {
                 e.preventDefault();
                 const $btn = $(this);
                 const suffix = $btn.is('#unpc-check-port-standalone') ? '-standalone' : '';
-                if ($btn.hasClass('loading')) {
-                    return;
+                self.triggerPortScan(suffix);
+            });
+        },
+        
+        triggerPortScan: function(suffix) {
+            const $btn = $('#unpc-check-port' + suffix);
+            if ($btn.hasClass('loading')) {
+                return;
+            }
+            const port = $('#custom-port' + suffix).val().trim();
+            const host = $('#port-host' + suffix).val().trim();
+            const protocol = ($('#port-protocol' + suffix).val() || 'TCP').toString().toUpperCase();
+            if (!port) {
+                alert('Please enter at least one port or range.');
+                return;
+            }
+            const self = this;
+            $btn.addClass('loading').prop('disabled', true);
+            $.ajax({
+                url: unpcData.ajaxUrl,
+                method: 'POST',
+                data: {
+                    action: 'unpc_check_port',
+                    nonce: unpcData.nonce,
+                    port: port,
+                    host: host,
+                    protocol: protocol
                 }
-                const port = $('#custom-port' + suffix).val().trim();
-                const host = $('#port-host' + suffix).val().trim();
-                const protocol = ($('#platform-preset' + suffix).find('option:selected').data('protocol') || 'TCP').toString().toUpperCase();
-                if (!port) {
-                    alert('Please enter at least one port or range.');
-                    return;
+            }).done(function(response) {
+                if (response && response.success && response.data) {
+                    self.displayPortResults(response.data, suffix, port, protocol);
+                } else {
+                    const message = response && response.data && response.data.message ? response.data.message : 'Port scan failed. Try again later.';
+                    alert(message);
                 }
-                $btn.addClass('loading').prop('disabled', true);
-                $.ajax({
-                    url: unpcData.ajaxUrl,
-                    method: 'POST',
-                    data: {
-                        action: 'unpc_check_port',
-                        nonce: unpcData.nonce,
-                        port: port,
-                        host: host,
-                        protocol: protocol
-                    }
-                }).done(function(response) {
-                    if (response && response.success && response.data) {
-                        self.displayPortResults(response.data, suffix, port, protocol);
-                    } else {
-                        const message = response && response.data && response.data.message ? response.data.message : 'Port scan failed. Try again later.';
-                        alert(message);
-                    }
-                }).fail(function() {
-                    alert('Network error while scanning ports.');
-                }).always(function() {
-                    $btn.removeClass('loading').prop('disabled', false);
-                });
+            }).fail(function() {
+                alert('Network error while scanning ports.');
+            }).always(function() {
+                $btn.removeClass('loading').prop('disabled', false);
             });
         },
 
@@ -534,8 +575,46 @@
             return !privateRanges.some(function(regex) { return regex.test(ip); });
         },
 
+        buildTechLog: function(state, publicIP, label, symmetric) {
+            const lines = [];
+            lines.push(`[NAT DIAGNOSTICS] ${new Date().toISOString()}`);
+            if (label) {
+                lines.push(`Detected NAT: ${label}`);
+            }
+            lines.push(`Symmetric NAT: ${symmetric ? 'Yes' : 'No'}`);
+            if (publicIP) {
+                lines.push(`Public IP: ${publicIP}`);
+            }
+            ['host', 'srflx', 'relay'].forEach(function(type) {
+                const candidates = state[type] || [];
+                const title = type === 'host' ? 'Host (LAN)' : type === 'srflx' ? 'Server Reflexive' : 'Relay (TURN)';
+                lines.push('');
+                lines.push(`${title} candidates (${candidates.length}):`);
+                if (!candidates.length) {
+                    lines.push('  • None');
+                } else {
+                    candidates.forEach(function(item) {
+                        lines.push(`  • ${item.ip}:${item.port} via ${item.protocol}`);
+                    });
+                }
+            });
+            return lines.join('\n');
+        },
+
         showError: function(message, suffix) {
             alert(message);
+        },
+
+        updateTechLog: function(message, suffix) {
+            const $log = $('#unpc-technical-log' + suffix);
+            if (!$log.length) {
+                return;
+            }
+            if (message) {
+                $log.text(message).show();
+            } else {
+                $log.hide();
+            }
         }
     };
 
