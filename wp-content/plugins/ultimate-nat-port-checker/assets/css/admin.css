@@ -1,0 +1,161 @@
+/**
+ * Admin Panel Styles
+ */
+
+.unpc-admin-wrap {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.unpc-admin-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #0073aa;
+}
+
+.unpc-admin-header h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #0073aa;
+}
+
+.unpc-admin-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.unpc-settings-form {
+    margin-top: 20px;
+}
+
+.unpc-admin-tabs .nav-tab-wrapper {
+    margin-bottom: 25px;
+}
+
+.unpc-admin-tabs .tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.unpc-admin-tabs .tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-table th {
+    font-weight: 600;
+}
+
+.form-table .description {
+    font-style: italic;
+    color: #666;
+}
+
+.color-picker {
+    max-width: 100px;
+}
+
+.guide-row {
+    background: #f5f5f5;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #0073aa;
+}
+
+.guide-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.guide-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-field:last-child {
+    grid-column: 1 / -1;
+}
+
+.guide-field label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.guide-field input,
+.guide-field textarea {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.guide-field textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.remove-guide {
+    align-self: flex-start;
+}
+
+#add-guide {
+    margin-top: 10px;
+}
+
+.shortcode-box {
+    background: #f9f9f9;
+    border: 2px solid #0073aa;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.shortcode-box h3 {
+    margin-top: 0;
+    color: #0073aa;
+}
+
+.shortcode-box code {
+    background: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    color: #d63638;
+    font-weight: 600;
+}
+
+.shortcode-box p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .guide-fields {
+        grid-template-columns: 1fr;
+    }
+    
+    .guide-field:last-child {
+        grid-column: 1;
+    }
+}
