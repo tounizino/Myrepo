@@ -28,6 +28,9 @@ class CGNPC_Admin_Settings {
             'font_size_large' => '17px',
             'container_width' => '1180px',
             'container_padding' => '24px',
+            'section_title_font' => 'Space Grotesk, "Segoe UI", sans-serif',
+            'section_title_size' => '1.35em',
+            'header_title_size' => '2.25em',
             'guides' => array(
                 array(
                     'title' => __('Optimize Your Router for Cloud Gaming', 'cloud-nat-port-checker'),
@@ -153,6 +156,33 @@ class CGNPC_Admin_Settings {
             array('field' => 'container_padding', 'placeholder' => '24px')
         );
         
+        add_settings_field(
+            'header_title_size',
+            __('Hero Title Size', 'cloud-nat-port-checker'),
+            array($this, 'text_field_callback'),
+            'cgnpc-settings',
+            'cgnpc_design_section',
+            array('field' => 'header_title_size', 'placeholder' => '2.25em')
+        );
+        
+        add_settings_field(
+            'section_title_size',
+            __('Section Heading Size', 'cloud-nat-port-checker'),
+            array($this, 'text_field_callback'),
+            'cgnpc-settings',
+            'cgnpc_design_section',
+            array('field' => 'section_title_size', 'placeholder' => '1.35em')
+        );
+        
+        add_settings_field(
+            'section_title_font',
+            __('Section Heading Font', 'cloud-nat-port-checker'),
+            array($this, 'font_family_field_callback'),
+            'cgnpc-settings',
+            'cgnpc_design_section',
+            array('field' => 'section_title_font')
+        );
+        
         // Guides Section
         add_settings_section(
             'cgnpc_guides_section',
@@ -215,6 +245,9 @@ class CGNPC_Admin_Settings {
         
         $sanitized['container_width'] = $this->sanitize_dimension(isset($input['container_width']) ? $input['container_width'] : '', $defaults['container_width']);
         $sanitized['container_padding'] = $this->sanitize_dimension(isset($input['container_padding']) ? $input['container_padding'] : '', $defaults['container_padding']);
+        $sanitized['header_title_size'] = $this->sanitize_dimension(isset($input['header_title_size']) ? $input['header_title_size'] : '', $defaults['header_title_size']);
+        $sanitized['section_title_size'] = $this->sanitize_dimension(isset($input['section_title_size']) ? $input['section_title_size'] : '', $defaults['section_title_size']);
+        $sanitized['section_title_font'] = $this->sanitize_font_family(isset($input['section_title_font']) ? $input['section_title_font'] : '', $defaults['section_title_font']);
         
         $sanitized['guides'] = array();
         if (!empty($input['guides']) && is_array($input['guides'])) {
@@ -461,6 +494,29 @@ class CGNPC_Admin_Settings {
             return $value;
         }
         return $default;
+    }
+    
+    private function sanitize_font_family($value, $default) {
+        if (empty($value)) {
+            return $default;
+        }
+        $value = trim($value);
+        $value = preg_replace('/[^a-zA-Z0-9\s,\-\'"]/', '', $value);
+        return !empty($value) ? $value : $default;
+    }
+    
+    public function font_family_field_callback($args) {
+        $options = $this->get_options();
+        $field = $args['field'];
+        $value = isset($options[$field]) ? $options[$field] : '';
+        printf(
+            '<input type="text" class="large-text" name="%1$s[%2$s]" value="%3$s" placeholder="%4$s" />',
+            esc_attr($this->option_name),
+            esc_attr($field),
+            esc_attr($value),
+            'Space Grotesk, "Segoe UI", sans-serif'
+        );
+        echo '<p class="description">' . esc_html__('CSS font-family value. Use quotes for multi-word fonts.', 'cloud-nat-port-checker') . '</p>';
     }
     
     private function get_options() {

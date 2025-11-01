@@ -152,17 +152,31 @@ class CGNPC_Shortcodes {
         ?>
         <style>
             :root {
-                --cgnpc-primary: <?php echo esc_attr($settings['primary_color']); ?>;
-                --cgnpc-secondary: <?php echo esc_attr($settings['secondary_color']); ?>;
-                --cgnpc-bg-dark: <?php echo esc_attr($settings['bg_color_dark']); ?>;
-                --cgnpc-bg-light: <?php echo esc_attr($settings['bg_color_light']); ?>;
-                --cgnpc-text-dark: <?php echo esc_attr($settings['text_color_dark']); ?>;
-                --cgnpc-text-light: <?php echo esc_attr($settings['text_color_light']); ?>;
-                --cgnpc-font-small: <?php echo esc_attr($settings['font_size_small']); ?>;
-                --cgnpc-font-medium: <?php echo esc_attr($settings['font_size_medium']); ?>;
-                --cgnpc-font-large: <?php echo esc_attr($settings['font_size_large']); ?>;
-                --cgnpc-container-width: <?php echo esc_attr($settings['container_width']); ?>;
-                --cgnpc-container-padding: <?php echo esc_attr($settings['container_padding']); ?>;
+                --cgnpc-primary: <?php echo esc_attr($settings['primary_color']); ?> !important;
+                --cgnpc-secondary: <?php echo esc_attr($settings['secondary_color']); ?> !important;
+                --cgnpc-bg-dark: <?php echo esc_attr($settings['bg_color_dark']); ?> !important;
+                --cgnpc-bg-light: <?php echo esc_attr($settings['bg_color_light']); ?> !important;
+                --cgnpc-text-dark: <?php echo esc_attr($settings['text_color_dark']); ?> !important;
+                --cgnpc-text-light: <?php echo esc_attr($settings['text_color_light']); ?> !important;
+                --cgnpc-font-small: <?php echo esc_attr($settings['font_size_small']); ?> !important;
+                --cgnpc-font-medium: <?php echo esc_attr($settings['font_size_medium']); ?> !important;
+                --cgnpc-font-large: <?php echo esc_attr($settings['font_size_large']); ?> !important;
+                --cgnpc-container-width: <?php echo esc_attr($settings['container_width']); ?> !important;
+                --cgnpc-container-padding: <?php echo esc_attr($settings['container_padding']); ?> !important;
+                --cgnpc-header-title-size: <?php echo esc_attr($settings['header_title_size']); ?> !important;
+                --cgnpc-section-title-size: <?php echo esc_attr($settings['section_title_size']); ?> !important;
+                --cgnpc-section-title-font: <?php echo esc_attr($settings['section_title_font']); ?> !important;
+            }
+            .cgnpc-header h1 {
+                font-size: var(--cgnpc-header-title-size) !important;
+                color: #ffffff !important;
+            }
+            .cgnpc-wrapper[data-theme="dark"] .cgnpc-header h1 {
+                color: #ffffff !important;
+            }
+            .cgnpc-section-header h2 {
+                font-size: var(--cgnpc-section-title-size) !important;
+                font-family: var(--cgnpc-section-title-font) !important;
             }
         </style>
         <?php
@@ -178,11 +192,14 @@ class CGNPC_Shortcodes {
                 <h1><?php esc_html_e('Cloud Gaming NAT & Port Checker', 'cloud-nat-port-checker'); ?></h1>
                 <div class="cgnpc-controls">
                     <button class="cgnpc-font-toggle" aria-label="<?php esc_attr_e('Font Size', 'cloud-nat-port-checker'); ?>" title="<?php esc_attr_e('Cycle Font Size', 'cloud-nat-port-checker'); ?>">
-                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><text x="2" y="18" font-size="14" font-weight="bold">A</text><text x="11" y="18" font-size="10">a</text></svg>
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><text x="3" y="19" font-size="14" font-weight="bold">A</text><text x="13" y="19" font-size="10">a</text></svg>
                     </button>
                     <button class="cgnpc-theme-toggle" aria-label="<?php esc_attr_e('Toggle Theme', 'cloud-nat-port-checker'); ?>" title="<?php esc_attr_e('Toggle Light/Dark Mode', 'cloud-nat-port-checker'); ?>">
-                        <svg class="cgnpc-sun-icon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                        <svg class="cgnpc-moon-icon" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <span class="cgnpc-theme-icon" aria-hidden="true">
+                            <svg class="cgnpc-theme-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                            <svg class="cgnpc-theme-moon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </span>
+                        <span class="cgnpc-theme-label"><?php esc_html_e('Theme', 'cloud-nat-port-checker'); ?></span>
                     </button>
                 </div>
             </div>
@@ -210,37 +227,53 @@ class CGNPC_Shortcodes {
                         <span><?php esc_html_e('Auto refresh (30s)', 'cloud-nat-port-checker'); ?></span>
                     </label>
                     <button class="cgnpc-check-nat-btn cgnpc-btn-primary" aria-live="polite">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79 2.73 2.71 7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58 3.51-3.47 9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/></svg>
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79 2.73 2.71 7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58 3.51-3.47 9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z"/></svg>
                         <?php esc_html_e('Check NAT Type', 'cloud-nat-port-checker'); ?>
                     </button>
                 </div>
             </header>
             <div class="cgnpc-nat-result" style="display:none;">
-                <div class="cgnpc-nat-status-card">
-                    <div class="cgnpc-nat-indicator"></div>
-                    <div class="cgnpc-nat-info">
-                        <h3 class="cgnpc-nat-label"></h3>
+                <div class="cgnpc-nat-card" data-nat-tier="unknown">
+                    <div class="cgnpc-nat-card__status">
+                        <span class="cgnpc-nat-chip"></span>
                         <p class="cgnpc-nat-description"></p>
                     </div>
+                    <div class="cgnpc-nat-card__metrics">
+                        <div class="cgnpc-nat-metric">
+                            <span class="cgnpc-metric-label"><?php esc_html_e('Public IP', 'cloud-nat-port-checker'); ?></span>
+                            <span class="cgnpc-metric-value cgnpc-ip"></span>
+                        </div>
+                        <div class="cgnpc-nat-metric">
+                            <span class="cgnpc-metric-label"><?php esc_html_e('Region', 'cloud-nat-port-checker'); ?></span>
+                            <span class="cgnpc-metric-value cgnpc-location"></span>
+                        </div>
+                        <div class="cgnpc-nat-metric">
+                            <span class="cgnpc-metric-label"><?php esc_html_e('ISP', 'cloud-nat-port-checker'); ?></span>
+                            <span class="cgnpc-metric-value cgnpc-isp"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="cgnpc-geo-grid">
-                    <div class="cgnpc-info-item">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
-                        <div><strong><?php esc_html_e('Public IP:', 'cloud-nat-port-checker'); ?></strong> <span class="cgnpc-ip"></span> <button class="cgnpc-copy-btn" data-target="ip" aria-label="<?php esc_attr_e('Copy IP', 'cloud-nat-port-checker'); ?>">📋</button></div>
+                <div class="cgnpc-nat-meta-grid">
+                    <div class="cgnpc-nat-meta-card">
+                        <span class="cgnpc-meta-label"><?php esc_html_e('Confidence', 'cloud-nat-port-checker'); ?></span>
+                        <span class="cgnpc-meta-value cgnpc-nat-confidence"></span>
                     </div>
-                    <div class="cgnpc-info-item">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        <div><strong><?php esc_html_e('Location:', 'cloud-nat-port-checker'); ?></strong> <span class="cgnpc-location"></span></div>
+                    <div class="cgnpc-nat-meta-card">
+                        <span class="cgnpc-meta-label"><?php esc_html_e('Advice', 'cloud-nat-port-checker'); ?></span>
+                        <div class="cgnpc-meta-list cgnpc-nat-advice"></div>
                     </div>
-                    <div class="cgnpc-info-item">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/></svg>
-                        <div><strong><?php esc_html_e('ISP:', 'cloud-nat-port-checker'); ?></strong> <span class="cgnpc-isp"></span></div>
+                    <div class="cgnpc-nat-meta-card">
+                        <span class="cgnpc-meta-label"><?php esc_html_e('Fallback Plan', 'cloud-nat-port-checker'); ?></span>
+                        <p class="cgnpc-meta-value cgnpc-nat-fallback"></p>
                     </div>
                 </div>
-                <details class="cgnpc-advanced-details">
-                    <summary><?php esc_html_e('Show Advanced Technical Details', 'cloud-nat-port-checker'); ?></summary>
-                    <div class="cgnpc-advanced-content"></div>
-                </details>
+                <div class="cgnpc-advanced-panel">
+                    <button type="button" class="cgnpc-advanced-toggle" aria-expanded="false">
+                        <span class="cgnpc-advanced-toggle__label"><?php esc_html_e('Show Advanced Insights', 'cloud-nat-port-checker'); ?></span>
+                        <span class="cgnpc-advanced-toggle__icon" aria-hidden="true"></span>
+                    </button>
+                    <div class="cgnpc-advanced-body"></div>
+                </div>
             </div>
             <div class="cgnpc-nat-loading" style="display:none;">
                 <div class="cgnpc-spinner"></div>
@@ -258,6 +291,15 @@ class CGNPC_Shortcodes {
                 <h2><?php esc_html_e('Port Checker', 'cloud-nat-port-checker'); ?></h2>
             </header>
             <div class="cgnpc-port-controls">
+                <div class="cgnpc-port-options">
+                    <div class="cgnpc-target-ip-wrapper">
+                        <label class="cgnpc-custom-ip-label">
+                            <input type="checkbox" class="cgnpc-custom-ip-toggle" aria-label="<?php esc_attr_e('Use custom IP address', 'cloud-nat-port-checker'); ?>" />
+                            <span><?php esc_html_e('Custom IP address', 'cloud-nat-port-checker'); ?></span>
+                        </label>
+                        <input type="text" class="cgnpc-custom-ip-input" placeholder="<?php esc_attr_e('e.g., 8.8.8.8 or example.com', 'cloud-nat-port-checker'); ?>" style="display:none;" />
+                    </div>
+                </div>
                 <div class="cgnpc-presets-grid">
                     <?php foreach ($presets as $key => $preset) : ?>
                         <button class="cgnpc-preset-btn" data-preset="<?php echo esc_attr($key); ?>">
@@ -274,7 +316,9 @@ class CGNPC_Shortcodes {
                     <button class="cgnpc-check-custom-port-btn cgnpc-btn-primary"><?php esc_html_e('Check Port', 'cloud-nat-port-checker'); ?></button>
                 </div>
             </div>
-            <div class="cgnpc-port-results"></div>
+            <div class="cgnpc-port-results-wrapper">
+                <div class="cgnpc-port-results"></div>
+            </div>
         </section>
         <?php
     }
@@ -295,33 +339,51 @@ class CGNPC_Shortcodes {
     }
     
     private function render_router_tips_section() {
+        $routers = array(
+            array('name' => 'Linksys / Netgear / D-Link', 'ip' => '192.168.1.1', 'user' => 'admin', 'pass' => 'admin'),
+            array('name' => 'TP-Link / ASUS', 'ip' => '192.168.0.1', 'user' => 'admin', 'pass' => 'admin'),
+            array('name' => 'Belkin / SMC', 'ip' => '192.168.2.1', 'user' => 'admin', 'pass' => 'password'),
+            array('name' => 'Comcast Xfinity / Cox', 'ip' => '10.0.0.1', 'user' => 'admin', 'pass' => 'password'),
+            array('name' => 'AT&T', 'ip' => '192.168.1.254', 'user' => 'admin', 'pass' => 'attadmin'),
+            array('name' => 'Thomson / Technicolor', 'ip' => '192.168.100.1', 'user' => 'admin', 'pass' => 'admin'),
+        );
         ?>
         <section class="cgnpc-section cgnpc-router-section">
             <header class="cgnpc-section-header">
-                <h2><?php esc_html_e('Router Configuration Tips', 'cloud-nat-port-checker'); ?></h2>
+                <h2><?php esc_html_e('Router Configuration Quick Access', 'cloud-nat-port-checker'); ?></h2>
             </header>
-            <div class="cgnpc-router-content">
-                <div class="cgnpc-router-logins">
-                    <h3><?php esc_html_e('Common Router Admin IPs', 'cloud-nat-port-checker'); ?></h3>
-                    <ul class="cgnpc-router-list">
-                        <li><strong>192.168.1.1</strong> – Most common (Linksys, Netgear, D-Link)</li>
-                        <li><strong>192.168.0.1</strong> – Alternative common address</li>
-                        <li><strong>192.168.2.1</strong> – Belkin, SMC</li>
-                        <li><strong>10.0.0.1</strong> – Comcast Xfinity, Cox</li>
-                        <li><strong>192.168.100.1</strong> – Thomson</li>
-                    </ul>
-                    <p class="cgnpc-tip"><?php esc_html_e('💡 Default username/password is often: admin/admin, admin/password, or printed on router label.', 'cloud-nat-port-checker'); ?></p>
-                </div>
-                <div class="cgnpc-router-tips-list">
-                    <h3><?php esc_html_e('Quick NAT/QoS Setup Tips', 'cloud-nat-port-checker'); ?></h3>
-                    <ul class="cgnpc-tips-list">
-                        <li><?php esc_html_e('✅ Enable UPnP (Universal Plug and Play) for automatic port forwarding.', 'cloud-nat-port-checker'); ?></li>
-                        <li><?php esc_html_e('✅ Set up DMZ (Demilitarized Zone) for your gaming device if issues persist.', 'cloud-nat-port-checker'); ?></li>
-                        <li><?php esc_html_e('✅ Enable QoS and prioritize gaming traffic for reduced lag.', 'cloud-nat-port-checker'); ?></li>
-                        <li><?php esc_html_e('✅ Disable SIP ALG in router settings (can interfere with gaming protocols).', 'cloud-nat-port-checker'); ?></li>
-                        <li><?php esc_html_e('✅ Use wired Ethernet instead of Wi-Fi for best latency and stability.', 'cloud-nat-port-checker'); ?></li>
-                    </ul>
-                </div>
+            <div class="cgnpc-router-cards">
+                <?php foreach ($routers as $router) : ?>
+                    <div class="cgnpc-router-card">
+                        <div class="cgnpc-router-card__header">
+                            <h4><?php echo esc_html($router['name']); ?></h4>
+                            <a href="http://<?php echo esc_attr($router['ip']); ?>" class="cgnpc-router-link" target="_blank" rel="noopener noreferrer">
+                                <?php echo esc_html($router['ip']); ?>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3"/></svg>
+                            </a>
+                        </div>
+                        <div class="cgnpc-router-creds">
+                            <div class="cgnpc-cred-line">
+                                <span class="cgnpc-cred-label">admin:</span>
+                                <code class="cgnpc-typewriter" data-text="<?php echo esc_attr($router['user']); ?>"></code>
+                            </div>
+                            <div class="cgnpc-cred-line">
+                                <span class="cgnpc-cred-label">password:</span>
+                                <code class="cgnpc-typewriter" data-text="<?php echo esc_attr($router['pass']); ?>"></code>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="cgnpc-router-tips">
+                <h3><?php esc_html_e('Quick NAT/UPnP Optimization Tips', 'cloud-nat-port-checker'); ?></h3>
+                <ul class="cgnpc-tips-list">
+                    <li><span class="cgnpc-tip-icon">⚡</span> <?php esc_html_e('Enable UPnP for automatic port forwarding', 'cloud-nat-port-checker'); ?></li>
+                    <li><span class="cgnpc-tip-icon">🎯</span> <?php esc_html_e('Set up DMZ for your gaming device', 'cloud-nat-port-checker'); ?></li>
+                    <li><span class="cgnpc-tip-icon">⏫</span> <?php esc_html_e('Enable QoS and prioritize gaming traffic', 'cloud-nat-port-checker'); ?></li>
+                    <li><span class="cgnpc-tip-icon">🔇</span> <?php esc_html_e('Disable SIP ALG (can interfere with gaming)', 'cloud-nat-port-checker'); ?></li>
+                    <li><span class="cgnpc-tip-icon">🔌</span> <?php esc_html_e('Use wired Ethernet instead of Wi-Fi', 'cloud-nat-port-checker'); ?></li>
+                </ul>
             </div>
         </section>
         <?php
