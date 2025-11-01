@@ -1,278 +1,178 @@
-# Top 5 Cloud Games Section - Documentation
+# Top 5 Cloud Games Section – Developer Documentation
 
-## 🎮 Overview
+## 📦 Package Overview
 
-A modern, fully responsive WordPress section showcasing the top 5 cloud gaming titles with 2026-inspired design aesthetics. Features smooth animations, interactive cards, and SEO-optimized markup.
+This repository ships two ready-to-embed HTML snippets that render a modern "Top 5 Games on the Cloud" showcase for WordPress sites.
 
-## ✨ Features
+| File | Theme | Description |
+|------|-------|-------------|
+| `top-5-cloud-games-section.html` | **Dark / Neon** | Glassmorphism-inspired background with vibrant gradients and glowing genre chips. |
+| `top-5-cloud-games-section-light.html` | **Light / Pastel** | Minimal white cards, pastel genre chips, and professional presentation ideal for corporate blogs. |
 
-- **2026 Modern Design**: Glassmorphism effects, gradient accents, and futuristic styling
-- **Fully Responsive**: Optimized layouts for desktop (5 cards), tablet (3 cards + 2), and mobile (stacked)
-- **Animated**: Smooth fade-in animations, hover effects, and interactive elements
-- **SEO Friendly**: Semantic HTML5 with proper heading hierarchy and alt text
-- **WordPress Compatible**: Ready to paste into Custom HTML blocks
-- **Mobile Optimized**: Touch-friendly interactions and optimized for small screens
-- **Accessibility**: Keyboard navigation support and ARIA-compliant
-- **Performance**: Lazy loading images and optimized animations
+Both versions share the same markup structure and JavaScript behaviour, making it easy to switch themes or maintain parity between them.
 
-## 📋 Installation
+---
 
-### Method 1: WordPress Custom HTML Block (Recommended)
+## ✨ Feature Highlights
 
-1. Log into your WordPress admin panel
-2. Edit the page/post where you want to add the section
-3. Click "Add Block" (+) and search for "Custom HTML"
-4. Copy the entire contents of `top-5-cloud-games-section.html`
-5. Paste it into the Custom HTML block
-6. Click "Preview" to see the result
-7. Publish when satisfied
+- **Clickable Cards** – Entire card links to your game review or landing page.
+- **Genre Chips** – Platform badges replaced with colourful genre tags displayed inside translucent capsules.
+- **Compact Artwork** – Game cover region reduced to ~66% width for slimmer cards while keeping portrait ratio.
+- **Responsive Layout** – Five columns on wide screens, gracefully collapsing to 3 / 2 / 1 columns on tablet and mobile.
+- **Animation Suite** – Fade-in entrance, hover elevation, parallax background (dark version), and pulsating rank badge.
+- **Performance-first** – Lazy-loaded images, GPU-friendly transforms, Intersection Observer driven reveal logic.
+- **Accessibility** – Semantic `<article>` elements, descriptive `aria-label`s on links, focus outlines, high-contrast light theme.
 
-### Method 2: WordPress Theme Editor
+---
 
-1. Go to Appearance → Theme Editor
-2. Select your page template (e.g., `page.php` or create a custom template)
-3. Paste the code where you want the section to appear
-4. Save changes
+## 🧱 HTML Structure
 
-### Method 3: PHP Template File
-
-```php
-<?php
-// In your template file
-include(get_template_directory() . '/top-5-cloud-games-section.html');
-?>
-```
-
-## 🎨 Customization Guide
-
-### Changing Game Data
-
-Replace the game information in each card:
+Each card follows the same pattern:
 
 ```html
-<!-- Example for Card 1 -->
 <article class="game-card" data-game="1">
-    <div class="card-inner">
-        <div class="card-rank">
-            <span class="rank-number">1</span> <!-- Change rank number -->
-        </div>
-        <div class="card-image-wrapper">
-            <img src="YOUR_IMAGE_URL" <!-- Change image URL -->
-                 alt="Your Game Name - Top Cloud Game" <!-- Update alt text -->
-                 class="card-image" 
-                 loading="lazy">
-            ...
-        </div>
-        <div class="card-content">
-            <h3 class="game-title">Your Game Title</h3> <!-- Change title -->
-            <p class="game-genre">Genre • Category</p> <!-- Update genre -->
-            <div class="game-stats">
-                <span class="stat-item">
-                    <svg>...</svg>
-                    4.8 <!-- Change rating -->
-                </span>
-                <span class="stat-item">X.XM players</span> <!-- Update player count -->
+    <a class="card-link" href="https://yourdomain.com/cloud-gaming/cyberpunk-2077" aria-label="Explore Cyberpunk 2077 cloud gaming guide">
+        <div class="card-inner">
+            <div class="card-rank"><span class="rank-number">1</span></div>
+            <div class="card-image-wrapper">
+                <img src="..." alt="Cyberpunk 2077 - Top Cloud Game" loading="lazy">
+                <div class="card-overlay"></div>
             </div>
-            <div class="platform-badges">
-                <span class="badge">Platform 1</span> <!-- Update platforms -->
-                <span class="badge">Platform 2</span>
+            <div class="card-content">
+                <h3 class="game-title">Cyberpunk 2077</h3>
+                <div class="game-stats">
+                    <span class="stat-item">…</span>
+                </div>
+                <div class="game-genres">
+                    <span class="genre-chip">RPG</span>
+                    <span class="genre-chip">Open World</span>
+                </div>
             </div>
         </div>
-    </div>
+    </a>
 </article>
 ```
 
-### Recommended Image Dimensions
+> **Note:** Light-theme classes use the suffix `-light` (e.g., `.game-card-light`, `.genre-chip-light`). All instructions apply equally—replace the class names with the corresponding light theme variants.
 
-- **Aspect Ratio**: 4:5 (portrait)
-- **Recommended Size**: 400px × 500px
-- **Format**: JPG or WebP for best performance
-- **File Size**: Keep under 200KB for optimal loading
+---
 
-### Color Scheme Customization
+## 🛠️ Installation Options
 
-Find these CSS variables in the `<style>` section:
+### 1. WordPress Custom HTML Block (Recommended)
+1. Open the page or post editor.
+2. Add a **Custom HTML** block.
+3. Paste the entire contents of the chosen HTML file (including `<style>` and `<script>`).
+4. Preview → Publish.
 
-```css
-/* Primary Gradient Colors */
-.top-cloud-games-2026 {
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-}
+### 2. WordPress Template / Theme Integration
+- Include the HTML snippet directly inside your theme template file using `get_template_part` or `include`.
+- Register a reusable block using ACF, Gutenberg, or a theme builder (Elementor, Divi, etc.).
 
-/* Accent Colors */
-.title-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* Card Hover Effects */
-.game-card:hover {
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
-}
+### 3. PHP Include
+```php
+<?php
+include get_template_directory() . '/partials/top-5-cloud-games-section.html';
+?>
 ```
 
-#### Suggested Color Themes
+Ensure the referenced file path matches your theme structure.
 
-**Cyberpunk Theme:**
-```css
-background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #330033 100%);
+---
+
+## 🧩 Customization Guide
+
+### 1. Update Links
+- Modify each anchor `href` to point to the relevant article.
+- Keep the descriptive `aria-label` for SEO and accessibility.
+
+```html
+<a class="card-link" href="https://yourblog.com/reviews/cyberpunk-2077" aria-label="Read the Cyberpunk 2077 cloud gaming review">
 ```
 
-**Ocean Theme:**
-```css
-background: linear-gradient(135deg, #001f3f 0%, #083358 50%, #0a4d68 100%);
+### 2. Swap Game Titles & Stats
+- Edit `<h3 class="game-title">`, rating values, and player counts.
+- Player count unit (e.g., `M`, `K`) can be replaced with any string.
+
+### 3. Replace Artwork
+- Upload 4:5 portrait covers (recommended 400 × 520 px, ≤150 KB).
+- Swap the `src` value with the new image URL.
+- Ensure the `alt` attribute is descriptive.
+
+### 4. Edit Genres
+- Update or duplicate `<span class="genre-chip">` entries to reflect actual genres.
+- Dark theme auto-styles chips based on the parent card index.
+- Light theme offers pre-defined colour helper classes: `genre-blue`, `genre-purple`, `genre-pink`, `genre-cyan`, `genre-green`.
+
+```html
+<div class="game-genres">
+    <span class="genre-chip">MMO</span>
+    <span class="genre-chip">Co-op</span>
+</div>
 ```
 
-**Sunset Theme:**
-```css
-background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #533483 100%);
-```
-
-### Typography
-
-Change fonts by modifying the `font-family` property:
+### 5. Adjust Image Width
+- Default width is `66%`. Increase or decrease to taste:
 
 ```css
-.top-cloud-games-2026 {
-    font-family: 'Your Font', sans-serif;
-}
-```
-
-**Popular Gaming Fonts:**
-- Orbitron (futuristic)
-- Rajdhani (modern)
-- Montserrat (clean)
-- Bebas Neue (bold)
-
-### Animation Speed
-
-Adjust animation durations:
-
-```css
-/* Card hover animation speed */
-.game-card {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Image zoom speed */
-.card-image {
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.card-image-wrapper {
+    width: 70%; /* Range suggestion: 55% – 80% */
 }
 ```
 
-## 📱 Responsive Breakpoints
+Apply the corresponding `-light` class for the light theme variant.
 
-The section adapts to different screen sizes:
+---
 
-| Screen Width | Layout | Cards per Row |
-|--------------|--------|---------------|
-| > 1200px | Desktop | 5 cards inline |
-| 768px - 1200px | Tablet | 3 + 2 cards |
-| 480px - 768px | Mobile | 2 + 1 card (centered) |
-| < 480px | Small Mobile | 1 card stacked |
+## 🎨 Theming Notes
 
-## 🔧 Advanced Customization
+### Dark Version Highlights
+- Background gradient: `#0f0c29 → #302b63 → #24243e`
+- Glass effect achieved with `backdrop-filter` and translucent borders.
+- Parallax background driven by a small vanilla JS helper.
 
-### Add More Cards
+### Light Version Highlights
+- Soft gray gradient background for subtle depth.
+- Solid white cards with pastel-colour genre chips.
+- No parallax script (fewer animations for a calmer aesthetic).
 
-To add a 6th card (or more):
+### Changing Colour Palettes
+- Modify gradients inside the `.top-cloud-games-*` section or individual genre chip blocks.
+- Use CSS custom properties if you plan repeated theme swaps.
 
-1. Copy an existing `<article class="game-card">...</article>` block
-2. Update the `data-game` attribute
-3. Change the rank number
-4. Update all game information
-5. Adjust the CSS grid:
+---
 
-```css
-@media (min-width: 1400px) {
-    .games-grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
-}
-```
+## 🧠 JavaScript Behaviour
 
-### Custom Click Actions
+### Dark Theme (`top-5-cloud-games-section.html`)
+- **Intersection Observer** toggles `.is-visible` as cards enter the viewport.
+- **Parallax Effect** adjusts the section background position on scroll.
+- Scroll handler throttled with `requestAnimationFrame` for performance.
 
-Modify the JavaScript section to handle card clicks:
+### Light Theme (`top-5-cloud-games-section-light.html`)
+- Uses only the Intersection Observer for reveal animations.
+- No parallax to keep the presentation airy and fast.
 
-```javascript
-card.addEventListener('click', function(e) {
-    if (!e.target.closest('.play-icon')) {
-        return;
-    }
-    
-    const gameTitle = card.querySelector('.game-title').textContent;
-    
-    // Option 1: Link to another page
-    window.location.href = '/game-details/' + gameTitle.toLowerCase().replace(/\s+/g, '-');
-    
-    // Option 2: Open in new tab
-    window.open('https://your-cloud-gaming-platform.com/play', '_blank');
-    
-    // Option 3: Show modal (requires additional modal HTML)
-    showGameModal(gameTitle);
-});
-```
+Both scripts are encapsulated in an IIFE to avoid polluting global scope.
 
-### Integration with WordPress Plugins
+---
 
-#### Elementor
-1. Add an HTML widget
-2. Paste the code
-3. Adjust spacing in Elementor's settings
+## 🔍 SEO & Accessibility
 
-#### WPBakery
-1. Add a Raw HTML element
-2. Paste the code
-3. Style with WPBakery's design options
+- Descriptive `alt` attributes on every image.
+- `aria-label` on card links clarifies navigation for screen readers.
+- `<article>` wrappers enable richer semantics for lists of features.
+- Focus outlines maintained (`:focus-within`), and `card-link:focus-visible` prevents double outlines.
+- Print styles convert backgrounds to white and text to black.
 
-#### Gutenberg
-1. Use the Custom HTML block (as described in installation)
-2. Or convert to a custom Gutenberg block using `@wordpress/scripts`
-
-## 🚀 Performance Optimization
-
-### Image Optimization Tips
-
-1. **Use WebP Format**: Convert images to WebP for 30-50% smaller file sizes
-2. **Lazy Loading**: Already implemented with `loading="lazy"` attribute
-3. **CDN**: Host images on a CDN for faster global delivery
-4. **Compression**: Use tools like TinyPNG or ImageOptim
-
-### Code Optimization
-
-The code is already optimized with:
-- Minimal DOM manipulation
-- RequestAnimationFrame for scroll events
-- CSS transforms instead of layout properties
-- Debounced scroll handlers
-
-### WordPress Caching
-
-Compatible with popular caching plugins:
-- WP Rocket
-- W3 Total Cache
-- WP Super Cache
-- LiteSpeed Cache
-
-## 🔍 SEO Best Practices
-
-The section includes:
-- **Semantic HTML5**: `<section>`, `<article>`, proper heading hierarchy
-- **Alt Text**: Descriptive image alt attributes
-- **Structured Data Ready**: Easy to add JSON-LD schema
-- **Mobile-First**: Google's primary ranking factor
-- **Fast Loading**: Optimized animations and images
-
-### Adding Schema Markup
-
-Add this script before the closing `</section>` tag:
+Add structured data via JSON-LD beneath the section if you want Google to treat this as a list of games.
 
 ```html
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Top 5 Games on the Cloud",
+  "name": "Top 5 Cloud Games",
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -280,12 +180,8 @@ Add this script before the closing `</section>` tag:
       "item": {
         "@type": "VideoGame",
         "name": "Cyberpunk 2077",
-        "genre": "RPG",
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "2500000"
-        }
+        "genre": ["RPG", "Open World"],
+        "url": "https://yourdomain.com/cloud-gaming/cyberpunk-2077"
       }
     }
   ]
@@ -293,66 +189,62 @@ Add this script before the closing `</section>` tag:
 </script>
 ```
 
-## 🐛 Troubleshooting
+---
 
-### Issue: Animations not working
-**Solution**: Ensure JavaScript is enabled. Check browser console for errors.
+## 📱 Responsive Breakpoints
 
-### Issue: Cards not responsive
-**Solution**: Make sure no conflicting CSS from your theme. Add `!important` if needed.
+| Viewport | Grid Columns | Notes |
+|----------|--------------|-------|
+| ≥1200 px | 5 columns | Cards centred with reduced max width. |
+| 768–1199 px | 3 columns | Equal spacing, last two cards fill second row. |
+| 520–767 px | 2 columns | Fifth card spans both columns for symmetry. |
+| <520 px | 1 column | Max width capped for better readability. |
 
-### Issue: Images not loading
-**Solution**: 
-1. Check image URLs are correct and accessible
-2. Verify HTTPS for secure pages
-3. Check CORS policy for external images
-
-### Issue: Styles conflict with theme
-**Solution**: Add more specificity to selectors or use `!important`:
-```css
-.top-cloud-games-2026 .game-card {
-    /* your styles */
-}
-```
-
-## 📊 Browser Compatibility
-
-Tested and working on:
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ✅ Opera 76+
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
-**Note**: Older browsers (IE11) may not display all animations but will remain functional.
-
-## 📄 License
-
-Free to use for personal and commercial projects. Attribution appreciated but not required.
-
-## 🤝 Support
-
-For issues or questions:
-1. Check this documentation
-2. Review the commented code in the HTML file
-3. Test in browser developer tools
-4. Verify WordPress theme compatibility
-
-## 🎯 Tips for Best Results
-
-1. **Use High-Quality Images**: Invest in good game artwork
-2. **Update Regularly**: Keep the top 5 list fresh
-3. **Test on Mobile**: Most users will view on phones
-4. **Monitor Performance**: Use Google PageSpeed Insights
-5. **Gather Analytics**: Track which games get the most clicks
-6. **A/B Test**: Try different color schemes or layouts
-7. **Engage Users**: Add links to full game reviews
-
-## 🔄 Version History
-
-- **v1.0** (2026): Initial release with full features
+Mobile hover transforms are softened to prevent aggressive zooming on touch devices.
 
 ---
 
-**Made with ❤️ for the cloud gaming community**
+## ⚙️ Performance Tips
+
+- **Image Optimisation:** Use modern formats (WebP/AVIF) and compress before uploading.
+- **Caching:** Works flawlessly with WP Rocket, W3 Total Cache, LiteSpeed Cache, etc.
+- **Minification:** Inline `<style>` and `<script>` blocks are small—minify if bundling into larger assets.
+- **Lazy Loading:** Already enabled via `loading="lazy"` attributes.
+
+---
+
+## 🧪 Testing Checklist
+
+1. ✅ Card links open the correct article (test in new tab).
+2. ✅ Hover animations trigger smoothly on desktop.
+3. ✅ Focus outlines appear when tabbing through the section.
+4. ✅ Images scale correctly on retina and mobile displays.
+5. ✅ Genre chips don’t wrap awkwardly—adjust text length if needed.
+6. ✅ Parallax scroll (dark theme) doesn’t conflict with other scripts.
+
+---
+
+## ❓ Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| Cards not clickable | Ensure `<a class="card-link">` wraps the entire `card-inner`. |
+| Genre chips misaligned | Reduce text length or adjust `.game-genres` `gap` value. |
+| Images stretched | Maintain the 4:5 ratio; use `object-fit: cover` (already set). |
+| Layout breaks inside page builders | Wrap the section inside a full-width container block. |
+| Colours clash with theme | Override gradients and chip colours inside your theme stylesheet. |
+
+---
+
+## 📚 Additional Resources
+
+- `QUICK-START.md` – Copy/paste checklist for content editors.
+- `CHANGES.md` – Full changelog for this release (v2.0).
+
+For feature requests or bug fixes, document them in your tracking tool and include references to the file(s) above.
+
+---
+
+**Maintainer:** UI/UX Specialist @ 2026 Cloud Gaming Project  
+**Last Updated:** November 2026  
+**Version:** 2.0
