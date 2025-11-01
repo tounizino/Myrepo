@@ -1,0 +1,108 @@
+.unpc-admin {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    border-radius: 16px;
+    padding: 2rem !important;
+    margin: 1.5rem 0;
+    box-shadow: 0 20px 60px rgba(15, 15, 27, 0.1);
+}
+
+.unpc-admin__title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.unpc-admin__subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.unpc-admin__panel {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.unpc-settings-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.unpc-settings-section .form-table th {
+    font-weight: 600;
+    color: #334155;
+}
+
+.unpc-settings-section .form-table td .description {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+.unpc-admin .button-primary.button-hero {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border: none;
+    padding: 0.85rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.unpc-admin .button-primary.button-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 50px rgba(59, 130, 246, 0.4);
+}
+
+.unpc-admin__shortcodes {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-radius: 12px;
+    border-left: 5px solid #f59e0b;
+}
+
+.unpc-admin__shortcodes h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.unpc-admin__shortcodes ul {
+    list-style: none;
+    padding: 0;
+}
+
+.unpc-admin__shortcodes li {
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.unpc-admin__shortcodes strong {
+    font-family: 'Courier New', monospace;
+    padding: 0.25rem 0.5rem;
+    background: #1e293b;
+    color: #fbbf24;
+    border-radius: 6px;
+    font-weight: 700;
+}
