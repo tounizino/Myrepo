@@ -1,0 +1,24 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Dependency directories
+node_modules/
+bower_components/
+vendor/
+
+# Build output
+/dist/
+/build/
+/.parcel-cache/
+/.cache/
+
+# Environment files
+.env
+.env.*
+
+# IDE settings
+.idea/
+.vscode/

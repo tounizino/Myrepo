@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Featured Posts Widget - Demo</title>
+    <link rel="stylesheet" href="assets/css/featured-posts-widget.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 2rem 0;
+        }
+
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+        }
+
+        .demo-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 1rem;
+        }
+
+        .demo-header p {
+            font-size: 1.125rem;
+            color: #64748B;
+        }
+
+        .theme-section {
+            margin-bottom: 3rem;
+        }
+
+        .theme-label {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: #0EA5E9;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-section:nth-child(3) .theme-label {
+            background: #2563EB;
+        }
+
+        .theme-section:nth-child(4) .theme-label {
+            background: #60A5FA;
+        }
+
+        .theme-section:nth-child(5) .theme-label {
+            background: #1E40AF;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🎮 Cloud Gaming Featured Posts Widget</h1>
+            <p>Professional, responsive widget with 4 blue-themed variations - No shadows, No glowing</p>
+        </div>
+
+        <!-- Sky Blue Theme -->
+        <div class="theme-section">
+            <div class="theme-label">Theme 1: Sky Blue</div>
+            <section class="cgw-featured-posts-widget cgw-theme-sky">
+                <header class="cgw-widget-header">
+                    <h2 class="cgw-widget-title">Featured Gaming Stories</h2>
+                    <a class="cgw-widget-link" href="#">
+                        View all
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </header>
+
+                <div class="cgw-posts-grid">
+                    <!-- Post 1 -->
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Game Reviews</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">The Future of Cloud Gaming: What to Expect in 2024</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Discover the latest innovations and trends shaping the cloud gaming landscape this year. From improved latency to new platforms...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 15, 2024
+                                    <span aria-hidden="true">•</span>
+                                    5 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <!-- Post 2 -->
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Technology</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">5G and Cloud Gaming: A Perfect Match</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                How 5G technology is revolutionizing cloud gaming experiences with ultra-low latency and improved streaming quality...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 12, 2024
+                                    <span aria-hidden="true">•</span>
+                                    4 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <!-- Post 3 -->
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">News</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">Top 10 Games to Play on Cloud Gaming Platforms</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Our curated list of the best games optimized for cloud gaming, featuring AAA titles and indie favorites...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 10, 2024
+                                    <span aria-hidden="true">•</span>
+                                    8 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <!-- Blue Theme -->
+        <div class="theme-section">
+            <div class="theme-label">Theme 2: Blue</div>
+            <section class="cgw-featured-posts-widget cgw-theme-blue">
+                <header class="cgw-widget-header">
+                    <h2 class="cgw-widget-title">Featured Gaming Stories</h2>
+                    <a class="cgw-widget-link" href="#">
+                        View all
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </header>
+
+                <div class="cgw-posts-grid">
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Game Reviews</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">The Future of Cloud Gaming: What to Expect in 2024</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Discover the latest innovations and trends shaping the cloud gaming landscape this year. From improved latency to new platforms...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 15, 2024
+                                    <span aria-hidden="true">•</span>
+                                    5 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Technology</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">5G and Cloud Gaming: A Perfect Match</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                How 5G technology is revolutionizing cloud gaming experiences with ultra-low latency and improved streaming quality...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 12, 2024
+                                    <span aria-hidden="true">•</span>
+                                    4 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">News</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">Top 10 Games to Play on Cloud Gaming Platforms</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Our curated list of the best games optimized for cloud gaming, featuring AAA titles and indie favorites...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 10, 2024
+                                    <span aria-hidden="true">•</span>
+                                    8 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dark Theme -->
+        <div class="theme-section">
+            <div class="theme-label">Theme 3: Dark</div>
+            <section class="cgw-featured-posts-widget cgw-theme-dark">
+                <header class="cgw-widget-header">
+                    <h2 class="cgw-widget-title">Featured Gaming Stories</h2>
+                    <a class="cgw-widget-link" href="#">
+                        View all
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </header>
+
+                <div class="cgw-posts-grid">
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Game Reviews</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">The Future of Cloud Gaming: What to Expect in 2024</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Discover the latest innovations and trends shaping the cloud gaming landscape this year. From improved latency to new platforms...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 15, 2024
+                                    <span aria-hidden="true">•</span>
+                                    5 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Technology</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">5G and Cloud Gaming: A Perfect Match</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                How 5G technology is revolutionizing cloud gaming experiences with ultra-low latency and improved streaming quality...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 12, 2024
+                                    <span aria-hidden="true">•</span>
+                                    4 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">News</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">Top 10 Games to Play on Cloud Gaming Platforms</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Our curated list of the best games optimized for cloud gaming, featuring AAA titles and indie favorites...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 10, 2024
+                                    <span aria-hidden="true">•</span>
+                                    8 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <!-- Light Theme -->
+        <div class="theme-section">
+            <div class="theme-label">Theme 4: Light</div>
+            <section class="cgw-featured-posts-widget cgw-theme-light">
+                <header class="cgw-widget-header">
+                    <h2 class="cgw-widget-title">Featured Gaming Stories</h2>
+                    <a class="cgw-widget-link" href="#">
+                        View all
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </header>
+
+                <div class="cgw-posts-grid">
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Game Reviews</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">The Future of Cloud Gaming: What to Expect in 2024</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Discover the latest innovations and trends shaping the cloud gaming landscape this year. From improved latency to new platforms...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 15, 2024
+                                    <span aria-hidden="true">•</span>
+                                    5 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">Technology</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">5G and Cloud Gaming: A Perfect Match</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                How 5G technology is revolutionizing cloud gaming experiences with ultra-low latency and improved streaming quality...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 12, 2024
+                                    <span aria-hidden="true">•</span>
+                                    4 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+
+                    <article class="cgw-post-card">
+                        <a class="cgw-post-thumbnail" href="#" tabindex="-1" aria-hidden="true">
+                            <div class="cgw-post-thumbnail-placeholder">
+                                <span>Cloud Gaming</span>
+                            </div>
+                        </a>
+                        <div class="cgw-post-content">
+                            <span class="cgw-post-category">News</span>
+                            <h3 class="cgw-post-title">
+                                <a href="#">Top 10 Games to Play on Cloud Gaming Platforms</a>
+                            </h3>
+                            <p class="cgw-post-excerpt">
+                                Our curated list of the best games optimized for cloud gaming, featuring AAA titles and indie favorites...
+                            </p>
+                            <footer class="cgw-post-footer">
+                                <span class="cgw-post-meta">
+                                    Jan 10, 2024
+                                    <span aria-hidden="true">•</span>
+                                    8 min read
+                                </span>
+                                <a class="cgw-post-cta" href="#">
+                                    Read more
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </footer>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
