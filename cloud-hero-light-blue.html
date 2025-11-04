@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout Picks — Light Blue Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           MODERN BLUE PALETTE HERO - LIGHTWEIGHT & RESPONSIVE
+           ======================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Blue Palette Theme */
+            --primary-blue: #0EA5E9;
+            --secondary-blue: #3B82F6;
+            --accent-blue: #06B6D4;
+            --dark-blue: #0C4A6E;
+            --light-blue: #E0F2FE;
+            --title-grad-a: #0EA5E9;
+            --title-grad-b: #3B82F6;
+            --title-grad-c: #06B6D4;
+            --blue-gradient: linear-gradient(135deg, var(--title-grad-a) 0%, var(--title-grad-b) 50%, var(--title-grad-c) 100%);
+            
+            /* Neutral Colors */
+            --white: #FFFFFF;
+            --off-white: #F8FAFC;
+            --gray-50: #F1F5F9;
+            --gray-100: #E2E8F0;
+            --gray-200: #CBD5E1;
+            --gray-300: #94A3B8;
+            --gray-400: #64748B;
+            --gray-600: #475569;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            
+            /* Typography */
+            --font-primary: 'Outfit', system-ui, -apple-system, sans-serif;
+            --font-accent: 'Space Grotesk', monospace;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+            --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.12);
+            --shadow-lg: 0 12px 32px rgba(14, 165, 233, 0.15);
+            --shadow-xl: 0 20px 50px rgba(14, 165, 233, 0.25);
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--off-white);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        
+        #cloud-hero {
+            background: linear-gradient(180deg, var(--white) 0%, var(--light-blue) 100%);
+            padding: clamp(2rem, 8vw, 5rem) var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Background Elements */
+        #cloud-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        #cloud-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -20px) scale(1.05); }
+            50% { transform: translate(-20px, -40px) scale(0.95); }
+            75% { transform: translate(-10px, -20px) scale(1.02); }
+        }
+
+        .cl-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========================================
+           TITLE
+           ======================================== */
+        
+        .cl-title {
+            font-family: var(--font-accent);
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--spacing-lg);
+            display: inline-flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+
+        .cl-grad,
+        .cl-grad-2 {
+            background: var(--blue-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ========================================
+           SUBTITLE
+           ======================================== */
+        
+        .cl-sub {
+            color: var(--gray-600);
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            max-width: 48rem;
+            margin: 0 auto var(--spacing-2xl);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* ========================================
+           CONTROLS (Trending + Typing)
+           ======================================== */
+        
+        .cl-controls {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            align-items: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .cl-trending {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-xl);
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-md);
+            cursor: default;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cl-trending::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cl-trending:hover::before {
+            left: 100%;
+        }
+
+        .cl-trending:focus {
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 3px;
+        }
+
+        .cl-typer-wrap {
+            min-height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cl-typer {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-family: var(--font-accent);
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            color: var(--gray-700);
+        }
+
+        .cl-typed {
+            background: var(--blue-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .cl-cursor {
+            color: var(--accent-blue);
+            font-weight: 900;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ========================================
+           SEARCH SECTION
+           ======================================== */
+        
+        .cl-search-container {
+            max-width: 42rem;
+            margin: 0 auto var(--spacing-3xl);
+            position: relative;
+        }
+
+        .cl-search-box {
+            display: flex;
+            background: var(--white);
+            border-radius: var(--radius-full);
+            padding: 0.375rem;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gray-100);
+            transition: all var(--transition-base);
+            gap: var(--spacing-xs);
+        }
+
+        .cl-search-box:focus-within {
+            border-color: var(--primary-blue);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-2px);
+        }
+
+        .cl-search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-lg);
+            color: var(--gray-900);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            outline: none;
+        }
+
+        .cl-search-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .cl-search-btn {
+            background: var(--blue-gradient);
+            border: none;
+            border-radius: var(--radius-full);
+            color: var(--white);
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cl-search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cl-search-btn:active {
+            transform: scale(0.98);
+        }
+
+        .cl-search-results {
+            position: absolute;
+            top: calc(100% + var(--spacing-md));
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-100);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            animation: slideDown var(--transition-base);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cl-search-results.show {
+            display: block;
+        }
+
+        .cl-result-item {
+            display: block;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--gray-100);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .cl-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .cl-result-item:hover {
+            background: var(--light-blue);
+            padding-left: calc(var(--spacing-lg) + 0.25rem);
+        }
+
+        .cl-result-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+            text-align: left;
+        }
+
+        .cl-result-excerpt {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .cl-no-results,
+        .cl-loading {
+            padding: var(--spacing-2xl);
+            text-align: center;
+            color: var(--gray-600);
+        }
+
+        .cl-no-results i {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-blue);
+            display: block;
+        }
+
+        .cl-spinner {
+            border: 3px solid var(--gray-200);
+            border-radius: 50%;
+            border-top-color: var(--primary-blue);
+            width: 2rem;
+            height: 2rem;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .cl-search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .cl-search-results::-webkit-scrollbar-track {
+            background: var(--gray-50);
+        }
+
+        .cl-search-results::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: var(--radius-sm);
+        }
+
+        .cl-search-results::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* ========================================
+           GENRE CHIPS
+           ======================================== */
+        
+        .cl-genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cl-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            text-decoration: none;
+            color: var(--gray-700);
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cl-chip::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--blue-gradient);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+            z-index: -1;
+        }
+
+        .cl-chip:hover,
+        .cl-chip:focus {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .cl-chip:hover::before,
+        .cl-chip:focus::before {
+            opacity: 1;
+        }
+
+        .cl-chip:active {
+            transform: translateY(-2px);
+        }
+
+        .cl-chip:focus-visible {
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 3px;
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        
+        @media (max-width: 768px) {
+            .cl-inner {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .cl-title {
+                font-size: clamp(1.75rem, 8vw, 2.5rem);
+                gap: var(--spacing-xs);
+            }
+
+            .cl-sub {
+                font-size: 1rem;
+                margin-bottom: var(--spacing-xl);
+            }
+
+            .cl-controls {
+                gap: var(--spacing-md);
+            }
+
+            .cl-trending {
+                font-size: 0.7rem;
+                padding: var(--spacing-xs) var(--spacing-lg);
+            }
+
+            .cl-typer {
+                font-size: 1.125rem;
+            }
+
+            .cl-search-box {
+                flex-direction: column;
+                border-radius: var(--radius-lg);
+                gap: 0;
+                padding: 0;
+            }
+
+            .cl-search-input {
+                border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+                padding: var(--spacing-md);
+            }
+
+            .cl-search-btn {
+                border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+                padding: var(--spacing-md);
+                justify-content: center;
+            }
+
+            .cl-genres {
+                gap: var(--spacing-sm);
+            }
+
+            .cl-chip {
+                font-size: 0.875rem;
+                padding: var(--spacing-xs) var(--spacing-md);
+            }
+
+            #cloud-hero::before,
+            #cloud-hero::after {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #cloud-hero {
+                padding: var(--spacing-xl) var(--spacing-sm);
+            }
+
+            .cl-inner {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+
+            .cl-title {
+                font-size: 1.75rem;
+            }
+
+            .cl-sub {
+                font-size: 0.9375rem;
+            }
+
+            .cl-chip {
+                font-size: 0.8125rem;
+                padding: 0.5rem var(--spacing-md);
+            }
+        }
+
+        /* ========================================
+           ACCESSIBILITY & PERFORMANCE
+           ======================================== */
+        
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media print {
+            #cloud-hero::before,
+            #cloud-hero::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="cloud-hero" class="cl-hero" aria-label="Cloud Loadout Picks hero">
+        <div class="cl-inner">
+            <h1 class="cl-title">
+                <span class="cl-grad">Cloud Loadout Picks:</span>
+                <span class="cl-grad-2">Top Titles in the Cloud</span>
+            </h1>
+
+            <p class="cl-sub">
+                Our top cloud gaming picks are live on GeForce NOW, Boosteroid, Shadow, airgpu, and Xbox Cloud Gaming.
+                No installs. No limits. Just pure gaming, wherever you are.
+            </p>
+
+            <div class="cl-controls">
+                <div class="cl-trending" id="cl-trending-pill" tabindex="0" role="region" aria-label="Trending on cloud">
+                    ⚡ TRENDING ON CLOUD
+                </div>
+
+                <div class="cl-typer-wrap" aria-live="polite" aria-atomic="true">
+                    <div class="cl-typer">
+                        <span id="cl-typed" class="cl-typed" aria-hidden="false"></span>
+                        <span class="cl-cursor" aria-hidden="true">|</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cl-search-container">
+                <div class="cl-search-box">
+                    <input type="text" class="cl-search-input" id="clSearchInput" placeholder="Search for games..." aria-label="Search for games">
+                    <button class="cl-search-btn" id="clSearchBtn" aria-label="Search">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="cl-search-results" id="clSearchResults" role="region" aria-live="polite"></div>
+            </div>
+
+            <nav class="cl-genres" aria-label="Browse by genre">
+                <a class="cl-chip" href="/tag/rpg/" data-tag="rpg">⚔️ RPG</a>
+                <a class="cl-chip" href="/tag/battle-royale/" data-tag="battle-royale">🏆 Battle Royale</a>
+                <a class="cl-chip" href="/tag/adventure/" data-tag="adventure">🗺️ Adventure</a>
+                <a class="cl-chip" href="/tag/shooter/" data-tag="shooter">🔫 Shooter</a>
+                <a class="cl-chip" href="/tag/racing/" data-tag="racing">🏎️ Racing</a>
+                <a class="cl-chip" href="/tag/sports/" data-tag="sports">⚽ Sports</a>
+                <a class="cl-chip" href="/tag/strategy/" data-tag="strategy">♟️ Strategy</a>
+            </nav>
+        </div>
+    </section>
+
+    <script>
+        /* Typing Animation */
+        (function(){
+          const presets = ["Apex Legends","Fortnite","Cyberpunk 2077","Sea of Thieves","Forza Horizon","FIFA Ultimate","Age of Empires","Valorant","Rocket League","Genshin Impact"];
+          let typingSpeed = 60, deletingSpeed = 28, pauseAfterType = 1200, pauseAfterDelete = 280;
+          const root = document.getElementById('cloud-hero');
+          if (!root) return;
+          const typedEl = document.getElementById('cl-typed');
+          let cursorEl = root.querySelector('.cl-cursor');
+          if (!cursorEl) {
+            cursorEl = document.createElement('span'); cursorEl.className = 'cl-cursor'; cursorEl.textContent = '|';
+            root.querySelector('.cl-typer').appendChild(cursorEl);
+          }
+          let words = presets.slice(), wordIndex = 0, charIndex = 0, deleting = false;
+          function jitter(max){ return Math.floor(Math.random() * max); }
+          function typeLoop(){
+            const cur = words[wordIndex % words.length] || "";
+            if (!deleting) {
+              if (charIndex < cur.length) {
+                charIndex++; typedEl.textContent = cur.slice(0, charIndex); pulseCursor(true);
+                setTimeout(typeLoop, typingSpeed + jitter(12));
+              } else {
+                setTimeout(()=>{ deleting = true; setTimeout(typeLoop, deletingSpeed); }, pauseAfterType);
+              }
+            } else {
+              if (charIndex > 0) {
+                charIndex--; typedEl.textContent = cur.slice(0, charIndex); pulseCursor(true);
+                setTimeout(typeLoop, deletingSpeed + jitter(6));
+              } else {
+                deleting = false; wordIndex++; setTimeout(typeLoop, pauseAfterDelete);
+              }
+            }
+          }
+          let pulseTimer = null;
+          function pulseCursor(active){
+            const c = root.querySelector('.cl-cursor');
+            if (!c) return;
+            if (active) {
+              c.style.opacity = "0.98";
+              if (pulseTimer) clearTimeout(pulseTimer);
+              pulseTimer = setTimeout(()=>{ c.style.opacity = "0.45"; }, 360);
+            } else c.style.opacity = "0.45";
+          }
+          setTimeout(typeLoop, 450);
+          window.CL_UpdatePresets = function(newList){
+            try {
+              if (!Array.isArray(newList) || newList.length === 0) throw "Provide a non-empty array";
+              words = newList.map(x=>String(x));
+              wordIndex = 0; charIndex = 0; deleting = false;
+              if (typedEl) typedEl.textContent = "";
+            } catch(e) { console.warn("CL_UpdatePresets error:", e); }
+          };
+          window.CL_SetSpeed = function(t,d){
+            if (typeof t === 'number' && t>0) typingSpeed = t;
+            if (typeof d === 'number' && d>0) deletingSpeed = d;
+          };
+          window.CL_SetColors = function(a,b,c){
+            try {
+              if (!a||!b||!c) throw "Provide three color values";
+              const rootEl = document.getElementById('cloud-hero');
+              rootEl.style.setProperty('--title-grad-a', a);
+              rootEl.style.setProperty('--title-grad-b', b);
+              rootEl.style.setProperty('--title-grad-c', c);
+            } catch(e) { console.warn("CL_SetColors error:", e); }
+          };
+          const exampleMap = {
+            rpg: ["Skyrim","Witcher 3","Baldur's Gate","Monster Hunter","Dragon Age"],
+            "battle-royale": ["Fortnite","Apex Legends","PUBG","Fall Guys","Call of Duty: Warzone"],
+            adventure: ["Tomb Raider","Sea of Thieves","Zelda","Uncharted","Outer Wilds"],
+            shooter: ["Valorant","CS2","Overwatch 2","Doom Eternal","Halo Infinite"],
+            racing: ["Forza Horizon","F1 2024","Need for Speed","Gran Turismo","Trackmania"],
+            sports: ["FIFA","Madden","NBA 2K","Rocket League","PES"],
+            strategy: ["Age of Empires","Civilization VI","Total War","Starcraft II","XCOM 2"]
+          };
+          document.querySelectorAll('.cl-chip').forEach(chip => {
+            chip.addEventListener('click', function(e){
+              const tag = (this.dataset.tag || '').toLowerCase();
+              if (exampleMap[tag]) window.CL_UpdatePresets(exampleMap[tag]);
+            });
+          });
+        })();
+
+        /* WordPress Search Function - Copied from Header */
+        (function() {
+            const searchInput = document.getElementById('clSearchInput');
+            const searchResults = document.getElementById('clSearchResults');
+            let searchTimeout;
+
+            async function performSearch(query) {
+                if (query.trim().length < 2) {
+                    searchResults.classList.remove('show');
+                    return;
+                }
+
+                searchResults.innerHTML = '<div class="cl-loading"><div class="cl-spinner"></div><p>Searching...</p></div>';
+                searchResults.classList.add('show');
+
+                try {
+                    // Enhanced search with multiple parameters
+                    const searchParams = new URLSearchParams({
+                        search: query,
+                        per_page: 10,
+                        _embed: 'true',
+                        orderby: 'relevance'
+                    });
+
+                    // Search posts
+                    const postsPromise = fetch(`/wp-json/wp/v2/posts?${searchParams}`);
+                    
+                    // Also search pages
+                    const pagesPromise = fetch(`/wp-json/wp/v2/pages?${searchParams}`);
+
+                    // Wait for both requests
+                    const [postsResponse, pagesResponse] = await Promise.all([postsPromise, pagesPromise]);
+
+                    if (!postsResponse.ok && !pagesResponse.ok) {
+                        throw new Error('Search failed');
+                    }
+
+                    const posts = postsResponse.ok ? await postsResponse.json() : [];
+                    const pages = pagesResponse.ok ? await pagesResponse.json() : [];
+
+                    // Combine results
+                    const allResults = [...posts, ...pages];
+                    
+                    // Score by relevance
+                    const queryLower = query.toLowerCase();
+                    const scoredResults = allResults.map(item => {
+                        const title = item.title.rendered.toLowerCase();
+                        const content = item.content?.rendered?.replace(/<[^>]*>/g, '').toLowerCase() || '';
+                        const excerpt = item.excerpt?.rendered?.replace(/<[^>]*>/g, '').toLowerCase() || '';
+                        
+                        let score = 0;
+                        if (title.includes(queryLower)) score += 10;
+                        if (title.startsWith(queryLower)) score += 5;
+                        if (excerpt.includes(queryLower)) score += 3;
+                        if (content.includes(queryLower)) score += 1;
+                        
+                        return { item, score };
+                    }).filter(r => r.score > 0)
+                      .sort((a, b) => b.score - a.score)
+                      .slice(0, 8);
+
+                    if (scoredResults.length === 0) {
+                        searchResults.innerHTML = '<div class="cl-no-results"><i class="fas fa-search"></i><p>No results found. Try different keywords.</p></div>';
+                        return;
+                    }
+
+                    const results = scoredResults.map(({ item }) => {
+                        const excerpt = (item.excerpt?.rendered || item.content?.rendered || '')
+                            .replace(/<[^>]*>/g, '')
+                            .trim()
+                            .substring(0, 120) + '...';
+                        return {
+                            title: item.title.rendered,
+                            excerpt: excerpt || 'No description available.',
+                            url: item.link
+                        };
+                    });
+
+                    displayResults(results);
+
+                } catch (error) {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<div class="cl-no-results"><i class="fas fa-exclamation-triangle"></i><p>Search unavailable. Please try again later.</p></div>';
+                }
+            }
+
+            function displayResults(results) {
+                searchResults.innerHTML = results.map(post => `
+                    <a href="${post.url}" class="cl-result-item">
+                        <div class="cl-result-title">${post.title}</div>
+                        <div class="cl-result-excerpt">${post.excerpt}</div>
+                    </a>
+                `).join('');
+                searchResults.classList.add('show');
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    performSearch(e.target.value);
+                }, 300);
+            });
+
+            searchInput.addEventListener('focus', (e) => {
+                if (e.target.value.trim().length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.cl-search-container')) {
+                    searchResults.classList.remove('show');
+                }
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        window.location.href = `/?s=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
