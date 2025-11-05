@@ -1,19 +1,19 @@
 # 🎮 Cloud Gaming Sidebar Widget
 
-A beautiful, responsive sidebar widget designed specifically for cloud gaming blogs. Features 5 essential gaming tools with 3 stunning theme variations (Dark, Light, and Sky Blue).
+A beautiful, responsive sidebar widget designed specifically for cloud gaming blogs. Simply **copy and paste** the embed code into your WordPress sidebar or any HTML page. Features 5 essential gaming tool links with 3 stunning theme variations (Dark, Light, and Sky Blue).
 
 ![Widget Themes](https://img.shields.io/badge/Themes-Dark%20%7C%20Light%20%7C%20Sky%20Blue-blue)
 ![Responsive](https://img.shields.io/badge/Responsive-Mobile%20Friendly-green)
-![WordPress](https://img.shields.io/badge/WordPress-Ready-orange)
+![WordPress](https://img.shields.io/badge/Copy%20&%20Paste-Ready-orange)
 
 ## ✨ Features
 
-### 🛠️ 5 Essential Tools
-1. **Cloud Platforms Latency Tester** - Test connection speed to cloud gaming platforms
-2. **Network Performance Monitor** - Real-time network statistics monitoring
-3. **Cloud Gaming Launchers** - Quick access to popular gaming platforms
-4. **Online Gamepad Tester** - Test controller functionality
-5. **NAT, IP & Port Checker** - Network configuration diagnostics
+### 🛠️ 5 Essential Tool Links
+1. **Cloud Platforms Latency Tester** - Link to your latency testing tool
+2. **Network Performance Monitor** - Link to network monitoring tool
+3. **Cloud Gaming Launchers** - Link to launcher resources
+4. **Online Gamepad Tester** - Link to controller testing tool
+5. **NAT, IP & Port Checker** - Link to network diagnostics tool
 
 ### 🎨 3 Beautiful Themes
 - 🌙 **Dark Theme** - Sleek design perfect for gaming sites
@@ -25,38 +25,34 @@ A beautiful, responsive sidebar widget designed specifically for cloud gaming bl
 - Touch-friendly interactions for mobile users
 - Optimized for tablets and smartphones
 
-### 💻 WordPress Ready
-- Custom WordPress widget class included
-- Easy integration with any WordPress theme
-- Customizable via WordPress admin panel
+### 💻 Ready to Embed
+- **No plugin needed** - just copy and paste HTML code
+- Works with WordPress Custom HTML widget
+- Compatible with any HTML website or CMS
+- Update links to point to your actual tool pages
 
 ## 🚀 Quick Start
 
-### Preview the Demo
-Open `cloud-gaming-sidebar-widget.html` in your browser to see the widget in action with live theme switching.
+### 1️⃣ Preview the Demo
+Open `cloud-gaming-sidebar-widget.html` in your browser to see all 3 themes in action.
 
-### Basic HTML Integration
+### 2️⃣ Copy the Widget Code
+Open `widget-standalone.html` - this file contains the complete widget with everything you need.
+
+### 3️⃣ Paste into WordPress
+1. Go to **Appearance → Widgets** in WordPress
+2. Add a **Custom HTML** widget to your sidebar
+3. Paste the entire code from `widget-standalone.html`
+4. Update the links to point to your tool pages
+5. Save!
+
+### 4️⃣ Choose Your Theme
+Change the theme by editing this line in the code:
 ```html
-<!-- Add to <head> -->
-<link rel="stylesheet" href="cloud-gaming-widget-styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Add widget markup to your sidebar -->
-<div id="cloud-gaming-widget" class="cloud-gaming-widget theme-dark">
-    <!-- Widget content here -->
-</div>
-
-<!-- Add before </body> -->
-<script src="cloud-gaming-widget-script.js"></script>
+<div class="cloud-gaming-widget theme-dark">   <!-- Dark theme -->
+<div class="cloud-gaming-widget theme-light">  <!-- Light theme -->
+<div class="cloud-gaming-widget theme-blue">   <!-- Sky blue theme -->
 ```
-
-### WordPress Integration
-```php
-// Add to functions.php
-require_once get_template_directory() . '/wordpress-widget-integration.php';
-```
-
-Then go to **Appearance → Widgets** and add the **Cloud Gaming Tools** widget to your sidebar.
 
 ## 📚 Documentation
 
@@ -72,12 +68,12 @@ Then go to **Appearance → Widgets** and add the **Cloud Gaming Tools** widget 
 ## 🎯 What's Included
 
 ```
+├── widget-standalone.html              # ⭐ COPY THIS - All-in-one embed code
 ├── cloud-gaming-sidebar-widget.html    # Interactive demo with theme switcher
 ├── cloud-gaming-widget-styles.css      # Complete widget styles (all themes)
 ├── cloud-gaming-widget-script.js       # Interactive functionality
-├── widget-standalone.html              # All-in-one standalone widget file
-├── wordpress-widget-integration.php    # WordPress widget class
 ├── INSTALLATION.md                     # Detailed installation guide
+├── QUICK-START.md                      # 5-minute setup guide
 ├── PREVIEW.md                          # Visual preview and testing guide
 ├── README.md                           # This file
 └── .gitignore                          # Git ignore file
@@ -131,7 +127,7 @@ The widget automatically adapts to different screen sizes:
 - **Vanilla JavaScript** - No jQuery or other dependencies
 - **Font Awesome** - Icons via CDN (can be self-hosted)
 - **Mobile-First** - Responsive design approach
-- **WordPress Compatible** - Custom widget class included
+- **WordPress-Friendly** - Paste into Custom HTML widget
 
 ## 📄 License
 

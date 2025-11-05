@@ -55,13 +55,7 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
   - All-in-one standalone widget
   - Includes CSS inline
   - Copy & paste ready
-  - **👉 Use this for quickest integration**
-
-- **[wordpress-widget-integration.php](wordpress-widget-integration.php)** (11KB)
-  - Complete WordPress widget class
-  - Admin panel configuration
-  - WordPress best practices
-  - **👉 Use this for WordPress sites**
+  - **👉 Use this - paste into WordPress Custom HTML widget**
 
 ---
 
@@ -77,8 +71,7 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 | **PREVIEW.md** | Visual guide | Want to see what it looks like |
 | **PROJECT-SUMMARY.md** | Full documentation | Complete project reference |
 | **cloud-gaming-sidebar-widget.html** | Demo page | Testing and preview |
-| **widget-standalone.html** | One-file widget | Quick integration |
-| **wordpress-widget-integration.php** | WP widget | WordPress sites |
+| **widget-standalone.html** | One-file widget | Copy & paste into WordPress |
 | **cloud-gaming-widget-styles.css** | Styles | Separate file integration |
 | **cloud-gaming-widget-script.js** | JavaScript | Separate file integration |
 
@@ -96,7 +89,7 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 → Read **[INSTALLATION.md](INSTALLATION.md)**
 
 ### I want to use with WordPress
-→ Use **[wordpress-widget-integration.php](wordpress-widget-integration.php)** and follow WordPress section in **[INSTALLATION.md](INSTALLATION.md)**
+→ Use **[widget-standalone.html](widget-standalone.html)** - copy all code and paste into Custom HTML widget
 
 ### I want to see code examples
 → Check **[EXAMPLES.md](EXAMPLES.md)** for 10+ real-world scenarios
@@ -114,9 +107,9 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 
 ## 📊 Project Statistics
 
-- **Total Files:** 13
-- **Documentation Files:** 7
-- **Code Files:** 5
+- **Total Files:** 12
+- **Documentation Files:** 8
+- **Code Files:** 4
 - **Widget Themes:** 3 (Dark, Light, Sky Blue)
 - **Tools Included:** 5
 - **Lines of CSS:** ~386
@@ -159,13 +152,10 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 ## 🔗 Integration Methods
 
 ### Method 1: Standalone (Easiest) ⭐
-Use `widget-standalone.html` - Copy & paste into sidebar
+Use `widget-standalone.html` - Copy & paste into WordPress Custom HTML widget
 
-### Method 2: Separate Files (Best Practice)
+### Method 2: Separate Files (For custom sites)
 Use HTML + CSS + JS separately for better organization
-
-### Method 3: WordPress Widget (WordPress Only)
-Use PHP widget class for WordPress admin integration
 
 ---
 
@@ -175,7 +165,6 @@ Use PHP widget class for WordPress admin integration
 - **Quick Setup:** [QUICK-START.md](QUICK-START.md)
 - **Live Demo:** [cloud-gaming-sidebar-widget.html](cloud-gaming-sidebar-widget.html)
 - **Standalone Widget:** [widget-standalone.html](widget-standalone.html)
-- **WordPress Integration:** [wordpress-widget-integration.php](wordpress-widget-integration.php)
 - **Code Examples:** [EXAMPLES.md](EXAMPLES.md)
 
 ---
