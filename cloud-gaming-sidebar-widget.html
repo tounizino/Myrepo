@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Sidebar Widget - Demo</title>
+    <link rel="stylesheet" href="cloud-gaming-widget-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Cloud Gaming Sidebar Widget</h1>
+        <p>Interactive Demo - Switch between theme variations</p>
+        
+        <div class="theme-switcher">
+            <button onclick="switchTheme('dark')" class="theme-btn dark-btn">
+                <i class="fas fa-moon"></i> Dark Theme
+            </button>
+            <button onclick="switchTheme('light')" class="theme-btn light-btn">
+                <i class="fas fa-sun"></i> Light Theme
+            </button>
+            <button onclick="switchTheme('blue')" class="theme-btn blue-btn">
+                <i class="fas fa-cloud"></i> Sky Blue Theme
+            </button>
+        </div>
+
+        <div id="cloud-gaming-widget" class="cloud-gaming-widget theme-dark">
+            <div class="widget-header">
+                <div class="header-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="widget-title">Cloud Gaming Tools</h3>
+                <p class="widget-subtitle">Essential tools for gamers</p>
+            </div>
+            
+            <div class="widget-body">
+                <ul class="tools-list">
+                    <li class="tool-item" data-tool="latency">
+                        <a href="#latency-tester" class="tool-link">
+                            <div class="tool-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h4 class="tool-title">Cloud Platforms Latency Tester</h4>
+                                <p class="tool-description">Test your connection speed</p>
+                            </div>
+                            <div class="tool-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="tool-item" data-tool="network">
+                        <a href="#network-monitor" class="tool-link">
+                            <div class="tool-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h4 class="tool-title">Network Performance Monitor</h4>
+                                <p class="tool-description">Monitor your network stats</p>
+                            </div>
+                            <div class="tool-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="tool-item" data-tool="launchers">
+                        <a href="#gaming-launchers" class="tool-link">
+                            <div class="tool-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h4 class="tool-title">Cloud Gaming Launchers</h4>
+                                <p class="tool-description">Access popular platforms</p>
+                            </div>
+                            <div class="tool-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="tool-item" data-tool="gamepad">
+                        <a href="#gamepad-tester" class="tool-link">
+                            <div class="tool-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h4 class="tool-title">Online Gamepad Tester</h4>
+                                <p class="tool-description">Test your controller</p>
+                            </div>
+                            <div class="tool-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="tool-item" data-tool="nat">
+                        <a href="#nat-checker" class="tool-link">
+                            <div class="tool-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h4 class="tool-title">NAT, IP & Port Checker</h4>
+                                <p class="tool-description">Check your connection type</p>
+                            </div>
+                            <div class="tool-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="widget-footer">
+                <div class="footer-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span>1.2M+ Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span>4.8/5 Rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cloud-gaming-widget-script.js"></script>
+</body>
+</html>
