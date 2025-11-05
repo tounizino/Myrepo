@@ -1,0 +1,290 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.cloud-gaming-widget {
+    width: 100%;
+    max-width: 380px;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cloud-gaming-widget * {
+    box-sizing: border-box;
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.widget-title {
+    margin: 0;
+    font-size: 1.25rem;
+    letter-spacing: -0.3px;
+    font-weight: 600;
+}
+
+.widget-subtitle {
+    margin: 0;
+    font-size: 0.88rem;
+    opacity: 0.7;
+}
+
+.widget-body {
+    padding: 0.75rem 0;
+}
+
+.tools-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tool-item {
+    margin: 0 0.85rem;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tool-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.tool-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.tool-content {
+    flex: 1;
+}
+
+.tool-title {
+    margin: 0;
+    font-size: 1.05rem;
+    letter-spacing: -0.2px;
+    font-weight: 600;
+}
+
+.tool-description {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+
+.tool-arrow {
+    font-size: 0.95rem;
+    opacity: 0.6;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.tool-item:hover {
+    transform: translateY(-2px);
+}
+
+.tool-item:hover .tool-arrow {
+    transform: translateX(4px);
+    opacity: 0.85;
+}
+
+.widget-footer {
+    padding: 1.15rem 1.6rem 1.35rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+    display: flex;
+    justify-content: center;
+}
+
+.footer-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 14px;
+    font-size: 0.85rem;
+}
+
+.theme-dark {
+    background: rgba(15, 23, 42, 0.95);
+    color: #e2e8f0;
+}
+
+.theme-dark .header-icon {
+    background: rgba(79, 70, 229, 0.18);
+    color: #c7d2fe;
+}
+
+.theme-dark .tool-link {
+    background: rgba(30, 41, 59, 0.92);
+    color: #e2e8f0;
+}
+
+.theme-dark .tool-item:hover .tool-link {
+    background: rgba(59, 130, 246, 0.35);
+}
+
+.theme-dark .tool-icon {
+    background: rgba(30, 64, 175, 0.2);
+    color: #60a5fa;
+}
+
+.theme-dark .stat-item {
+    background: rgba(79, 70, 229, 0.12);
+    color: #c7d2fe;
+}
+
+@media (max-width: 480px) {
+    .widget-header {
+        align-items: flex-start;
+    }
+    
+    .tool-link {
+        align-items: flex-start;
+        gap: 0.85rem;
+    }
+}
+</style>
+
+<div class="cloud-gaming-widget theme-dark">
+    <div class="widget-header">
+        <div class="header-icon">
+            <i class="fas fa-gamepad"></i>
+        </div>
+        <div>
+            <h3 class="widget-title">Cloud Gaming Tools</h3>
+            <p class="widget-subtitle">Essential tools for gamers</p>
+        </div>
+    </div>
+    
+    <div class="widget-body">
+        <ul class="tools-list">
+            <li class="tool-item">
+                <a href="#latency-tester" class="tool-link">
+                    <div class="tool-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4 class="tool-title">Cloud Platforms Latency Tester</h4>
+                        <p class="tool-description">Test your connection speed</p>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </li>
+
+            <li class="tool-item">
+                <a href="#network-monitor" class="tool-link">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4 class="tool-title">Network Performance Monitor</h4>
+                        <p class="tool-description">Monitor your network stats</p>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </li>
+
+            <li class="tool-item">
+                <a href="#gaming-launchers" class="tool-link">
+                    <div class="tool-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4 class="tool-title">Cloud Gaming Launchers</h4>
+                        <p class="tool-description">Access popular platforms</p>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </li>
+
+            <li class="tool-item">
+                <a href="#gamepad-tester" class="tool-link">
+                    <div class="tool-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4 class="tool-title">Online Gamepad Tester</h4>
+                        <p class="tool-description">Test your controller</p>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </li>
+
+            <li class="tool-item">
+                <a href="#nat-checker" class="tool-link">
+                    <div class="tool-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h4 class="tool-title">NAT, IP & Port Checker</h4>
+                        <p class="tool-description">Check your connection type</p>
+                    </div>
+                    <div class="tool-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="widget-footer">
+        <div class="footer-stats">
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span>1.2M+ Users</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <span>4.8/5 Rating</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

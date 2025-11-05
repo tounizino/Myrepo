@@ -1,38 +1,47 @@
-# Using the Standalone Widget
+# Using the Widget Files
 
-The `widget-standalone.html` file contains everything you need in a single HTML file. This is perfect for quick integration without managing multiple files.
+This project includes **3 separate theme files**, each optimized and ready to use. Simply pick one and paste!
 
-## ✨ What's Inside
+## ✨ The 3 Widget Files
 
-The standalone file includes:
-- ✅ All CSS styles (no external stylesheet needed)
+### 🌙 `widget-dark.html` - Dark Theme
+- Deep blue/black gradient
+- Perfect for gaming sites
+- Already configured with dark theme
+
+### ☀️ `widget-light.html` - Light Theme
+- Clean white/light gray
+- Perfect for professional blogs  
+- Already configured with light theme
+
+### ☁️ `widget-skyblue.html` - Sky Blue Theme
+- Sky blue (#E0F3FE) background
+- Perfect for cloud gaming branding
+- Already configured with sky blue theme
+
+Each file includes:
+- ✅ All CSS styles inline
 - ✅ Complete HTML structure
-- ✅ All 3 theme variations
 - ✅ Responsive design built-in
-- ✅ Font loading (Google Fonts)
+- ✅ Font Awesome icons loaded
 
 ## 🚀 Quick Integration
 
-### Option 1: Copy & Paste (Simplest)
+### Step 1: Choose Your Theme
 
-1. Open `widget-standalone.html`
-2. Copy ALL the contents
+Pick the file that matches your site:
+- Dark site? → `widget-dark.html`
+- Light site? → `widget-light.html`
+- Want sky blue? → `widget-skyblue.html`
+
+### Step 2: Copy & Paste
+
+1. Open your chosen file
+2. Copy ALL the contents (Ctrl+A, then Ctrl+C)
 3. Paste into your HTML page or CMS sidebar
-4. Done! The widget will appear with the dark theme
+4. Done!
 
-### Option 2: Change Theme
-
-To switch themes, find this line in the code:
-```html
-<div class="cloud-gaming-widget theme-dark">
-```
-
-Change it to:
-- `theme-dark` for Dark Theme 🌙
-- `theme-light` for Light Theme ☀️
-- `theme-blue` for Sky Blue Theme ☁️
-
-### Option 3: Update Links
+### Step 3: Update Links
 
 Find each tool link and update the `href`:
 ```html

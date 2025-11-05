@@ -8,7 +8,12 @@ A professional sidebar widget with 5 essential cloud gaming tool links, featurin
 
 **This is NOT a plugin - just embed code to paste directly into WordPress!**
 
-1. **Open** `widget-standalone.html` in any text editor
+**Choose your theme:**
+- `widget-dark.html` - Dark theme
+- `widget-light.html` - Light theme  
+- `widget-skyblue.html` - Sky blue theme (#E0F3FE)
+
+1. **Open** your chosen theme file in any text editor
 2. **Copy** all the code (Ctrl+A, then Ctrl+C)
 3. **Login** to WordPress admin
 4. Go to **Appearance → Widgets**
@@ -24,40 +29,22 @@ That's it! ✅
 
 ## 🎨 Choosing Your Theme
 
-Find this line in the code:
-```html
-<div class="cloud-gaming-widget theme-dark">
-```
+Pick the file that matches your site's design — no extra edits required:
 
-Change to one of these:
-
-### 🌙 Dark Theme (Default)
-```html
-<div class="cloud-gaming-widget theme-dark">
-```
+### 🌙 `widget-dark.html`
 - Deep blue/black gradient background
-- Light text
-- Blue accents
+- Light text with blue highlights
 - **Best for:** Gaming sites with dark designs
 
-### ☀️ Light Theme
-```html
-<div class="cloud-gaming-widget theme-light">
-```
+### ☀️ `widget-light.html`
 - Clean white/light gray background
-- Dark text
-- Subtle shadows
-- **Best for:** Professional blogs, content sites
+- Dark text with teal accents
+- **Best for:** Professional blogs, content-focused sites
 
-### ☁️ Sky Blue Theme
-```html
-<div class="cloud-gaming-widget theme-blue">
-```
-- Sky blue to deep blue gradient
-- White text
-- Cloud gaming aesthetic
-- **Best for:** Modern, eye-catching designs
-
+### ☁️ `widget-skyblue.html`
+- Sky blue (#E0F3FE) backdrop
+- White cards with rich blue accents (#0b5eaa)
+- **Best for:** Modern cloud gaming vibe
 ---
 
 ## 🔗 Update Your Tool Links

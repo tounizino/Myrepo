@@ -50,12 +50,18 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
   - Animations
   - Event handlers
 
-### Integration Files
-- **[widget-standalone.html](widget-standalone.html)** (8.7KB)
-  - All-in-one standalone widget
-  - Includes CSS inline
-  - Copy & paste ready
-  - **👉 Use this - paste into WordPress Custom HTML widget**
+### Integration Files (Pick One Theme)
+- **[widget-dark.html](widget-dark.html)** (7.2KB)
+  - Dark theme - Copy & paste ready
+  - **👉 Use for dark-themed gaming sites**
+
+- **[widget-light.html](widget-light.html)** (7.4KB)
+  - Light theme - Copy & paste ready
+  - **👉 Use for light/professional sites**
+
+- **[widget-skyblue.html](widget-skyblue.html)** (7.3KB)
+  - Sky blue (#E0F3FE) theme - Copy & paste ready
+  - **👉 Use for cloud gaming branding**
 
 ---
 
@@ -71,7 +77,9 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 | **PREVIEW.md** | Visual guide | Want to see what it looks like |
 | **PROJECT-SUMMARY.md** | Full documentation | Complete project reference |
 | **cloud-gaming-sidebar-widget.html** | Demo page | Testing and preview |
-| **widget-standalone.html** | One-file widget | Copy & paste into WordPress |
+| **widget-dark.html** | Dark theme widget | WordPress copy & paste |
+| **widget-light.html** | Light theme widget | WordPress copy & paste |
+| **widget-skyblue.html** | Sky blue theme widget (#E0F3FE) | WordPress copy & paste |
 | **cloud-gaming-widget-styles.css** | Styles | Separate file integration |
 | **cloud-gaming-widget-script.js** | JavaScript | Separate file integration |
 
@@ -83,13 +91,13 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 → Open **[cloud-gaming-sidebar-widget.html](cloud-gaming-sidebar-widget.html)** in your browser
 
 ### I want to integrate quickly
-→ Use **[widget-standalone.html](widget-standalone.html)** and follow **[STANDALONE-USAGE.md](STANDALONE-USAGE.md)**
+→ Pick a theme file (dark/light/skyblue) and follow **[STANDALONE-USAGE.md](STANDALONE-USAGE.md)**
 
 ### I want detailed instructions
 → Read **[INSTALLATION.md](INSTALLATION.md)**
 
 ### I want to use with WordPress
-→ Use **[widget-standalone.html](widget-standalone.html)** - copy all code and paste into Custom HTML widget
+→ Choose **widget-dark.html**, **widget-light.html**, or **widget-skyblue.html** and paste into a Custom HTML widget
 
 ### I want to see code examples
 → Check **[EXAMPLES.md](EXAMPLES.md)** for 10+ real-world scenarios
@@ -107,9 +115,9 @@ Quick navigation guide for the Cloud Gaming Sidebar Widget project.
 
 ## 📊 Project Statistics
 
-- **Total Files:** 12
-- **Documentation Files:** 8
-- **Code Files:** 4
+- **Total Files:** 14
+- **Documentation Files:** 9
+- **Code Files:** 5 (3 theme variants + demo + CSS/JS)
 - **Widget Themes:** 3 (Dark, Light, Sky Blue)
 - **Tools Included:** 5
 - **Lines of CSS:** ~386
@@ -164,7 +172,8 @@ Use HTML + CSS + JS separately for better organization
 - **Start Here:** [README.md](README.md)
 - **Quick Setup:** [QUICK-START.md](QUICK-START.md)
 - **Live Demo:** [cloud-gaming-sidebar-widget.html](cloud-gaming-sidebar-widget.html)
-- **Standalone Widget:** [widget-standalone.html](widget-standalone.html)
+- **Theme Widgets:** [widget-dark.html](widget-dark.html) · [widget-light.html](widget-light.html) · [widget-skyblue.html](widget-skyblue.html)
+- **Theme Guide:** [THEME-GUIDE.md](THEME-GUIDE.md)
 - **Code Examples:** [EXAMPLES.md](EXAMPLES.md)
 
 ---

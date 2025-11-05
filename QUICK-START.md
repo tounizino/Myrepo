@@ -6,10 +6,14 @@ Get the Cloud Gaming Sidebar Widget embedded in under 5 minutes!
 
 ### ✅ For WordPress Users
 
-**1. Open the widget file**
-- Find and open `widget-standalone.html` in a text editor
+**1. Choose your theme file**
+Pick one of the 3 files:
+- **`widget-dark.html`** - 🌙 Dark theme (perfect for gaming sites)
+- **`widget-light.html`** - ☀️ Light theme (clean professional look)
+- **`widget-skyblue.html`** - ☁️ Sky blue theme (#E0F3FE - modern cloud gaming)
 
 **2. Copy ALL the code**
+- Open your chosen file in a text editor
 - Select everything (Ctrl+A or Cmd+A)
 - Copy it (Ctrl+C or Cmd+C)
 
@@ -27,34 +31,27 @@ Get the Cloud Gaming Sidebar Widget embedded in under 5 minutes!
 - Change it to your actual tool page URL
 - Example: `href="https://yoursite.com/latency-tester"`
 
-**5. Choose your theme**
-- Find this line: `<div class="cloud-gaming-widget theme-dark">`
-- Change `theme-dark` to:
-  - `theme-dark` - Dark theme (default)
-  - `theme-light` - Light theme
-  - `theme-blue` - Sky blue theme
-
 ---
 
-## 🎨 Theme Options
+## 🎨 Theme Files
 
-### 🌙 Dark Theme
-```html
-<div class="cloud-gaming-widget theme-dark">
-```
-Perfect for gaming sites with dark backgrounds.
+### 🌙 Dark Theme (`widget-dark.html`)
+- Deep blue/black gradient background
+- Light text for maximum contrast
+- Purple/blue accent colors
+- **Best for:** Gaming sites with dark designs
 
-### ☀️ Light Theme
-```html
-<div class="cloud-gaming-widget theme-light">
-```
-Clean look for professional blogs.
+### ☀️ Light Theme (`widget-light.html`)
+- Clean white/light gray background
+- Dark text for readability
+- Teal/cyan accent colors
+- **Best for:** Professional blogs, content-heavy sites
 
-### ☁️ Sky Blue Theme
-```html
-<div class="cloud-gaming-widget theme-blue">
-```
-Modern cloud gaming aesthetic.
+### ☁️ Sky Blue Theme (`widget-skyblue.html`)
+- Sky blue (#E0F3FE) background
+- White card overlays
+- Blue accents (#0b5eaa)
+- **Best for:** Modern cloud gaming branding
 
 ---
 

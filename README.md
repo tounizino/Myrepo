@@ -36,23 +36,21 @@ A beautiful, responsive sidebar widget designed specifically for cloud gaming bl
 ### 1️⃣ Preview the Demo
 Open `cloud-gaming-sidebar-widget.html` in your browser to see all 3 themes in action.
 
-### 2️⃣ Copy the Widget Code
-Open `widget-standalone.html` - this file contains the complete widget with everything you need.
+### 2️⃣ Choose Your Theme
+Pick one of the 3 ready-to-use files:
+- **`widget-dark.html`** - Dark theme (perfect for gaming sites)
+- **`widget-light.html`** - Light theme (clean professional look)
+- **`widget-skyblue.html`** - Sky blue theme (#E0F3FE - modern cloud gaming aesthetic)
 
-### 3️⃣ Paste into WordPress
+### 3️⃣ Copy the Code
+Open your chosen theme file and copy ALL the content (Ctrl+A, then Ctrl+C).
+
+### 4️⃣ Paste into WordPress
 1. Go to **Appearance → Widgets** in WordPress
 2. Add a **Custom HTML** widget to your sidebar
-3. Paste the entire code from `widget-standalone.html`
-4. Update the links to point to your tool pages
+3. Paste the entire code
+4. Update the links to point to your tool pages (change `href="#..."` to your URLs)
 5. Save!
-
-### 4️⃣ Choose Your Theme
-Change the theme by editing this line in the code:
-```html
-<div class="cloud-gaming-widget theme-dark">   <!-- Dark theme -->
-<div class="cloud-gaming-widget theme-light">  <!-- Light theme -->
-<div class="cloud-gaming-widget theme-blue">   <!-- Sky blue theme -->
-```
 
 ## 📚 Documentation
 
@@ -68,7 +66,9 @@ Change the theme by editing this line in the code:
 ## 🎯 What's Included
 
 ```
-├── widget-standalone.html              # ⭐ COPY THIS - All-in-one embed code
+├── widget-dark.html                    # Dark theme embed code
+├── widget-light.html                   # Light theme embed code
+├── widget-skyblue.html                 # Sky blue theme (#E0F3FE) embed code
 ├── cloud-gaming-sidebar-widget.html    # Interactive demo with theme switcher
 ├── cloud-gaming-widget-styles.css      # Complete widget styles (all themes)
 ├── cloud-gaming-widget-script.js       # Interactive functionality
@@ -89,13 +89,11 @@ Change the theme by editing this line in the code:
 
 ## 💡 Customization
 
-### Change Theme
-Simply change the class on the widget container:
-```html
-<div class="cloud-gaming-widget theme-dark">   <!-- Dark -->
-<div class="cloud-gaming-widget theme-light">  <!-- Light -->
-<div class="cloud-gaming-widget theme-blue">   <!-- Sky Blue -->
-```
+### Choose Your Theme
+Pick the file that matches your site's design:
+- **widget-dark.html** - Dark theme with deep blues and purples
+- **widget-light.html** - Light theme with clean white backgrounds
+- **widget-skyblue.html** - Sky blue theme with #E0F3FE base color
 
 ### Update Tool Links
 Edit the `href` attributes in the widget HTML to point to your actual tool pages.
