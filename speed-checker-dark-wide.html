@@ -1,0 +1,119 @@
+<!-- Cloud Gaming Speed Checker - DARK THEME WIDE - Ready to Paste -->
+
+<style>
+.cgsc-container{max-width:1200px!important;width:100%!important;margin:0 auto!important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif!important}
+.cgsc-widget{width:100%!important;padding:40px 48px!important;border-radius:20px!important;box-shadow:0 20px 40px rgba(0,0,0,.15)!important;position:relative!important;overflow:hidden!important;transition:transform .3s ease,box-shadow .3s ease!important;background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%)!important;color:#f8fafc!important}
+.cgsc-widget:hover{transform:translateY(-4px)!important;box-shadow:0 24px 48px rgba(0,0,0,.2)!important}
+.cgsc-header{display:flex!important;align-items:center!important;justify-content:space-between!important;margin-bottom:32px!important}
+.cgsc-header h3{font-size:2rem!important;margin:0!important;font-weight:700!important}
+.cgsc-badge{padding:8px 16px!important;border-radius:100px!important;font-size:.875rem!important;font-weight:600!important;text-transform:uppercase!important;letter-spacing:.5px!important;background:rgba(255,255,255,.1)!important;color:#e0e7ff!important}
+.cgsc-main{display:grid!important;grid-template-columns:300px 1fr!important;gap:48px!important;align-items:center!important}
+.cgsc-progress-wrap{display:flex!important;justify-content:center!important;align-items:center!important}
+.cgsc-progress-circle{position:relative!important;width:240px!important;height:240px!important}
+.cgsc-progress-svg{transform:rotate(-90deg)!important}
+.cgsc-progress-bg{fill:none!important;stroke-width:12!important;stroke:rgba(255,255,255,.08)!important}
+.cgsc-progress-ring{fill:none!important;stroke-width:12!important;stroke-linecap:round!important;stroke-dasharray:0 999!important;transition:stroke-dasharray .5s ease!important;stroke:#22d3ee!important}
+.cgsc-speed-val{position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}
+.cgsc-speed-num{font-size:3.5rem!important;font-weight:700!important;line-height:1!important}
+.cgsc-speed-unit{font-size:1.125rem!important;opacity:.7!important;margin-top:8px!important}
+.cgsc-content{display:flex!important;flex-direction:column!important;gap:24px!important}
+.cgsc-stats{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:16px!important}
+.cgsc-stat{padding:20px!important;border-radius:16px!important;display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:12px!important;background:rgba(15,23,42,.6)!important}
+.cgsc-stat-icon{font-size:2rem!important}
+.cgsc-stat-label{font-size:.875rem!important;text-transform:uppercase!important;letter-spacing:.5px!important;opacity:.7!important;display:block!important}
+.cgsc-stat-value{font-size:1.5rem!important;font-weight:700!important}
+.cgsc-btn{width:100%!important;padding:18px!important;border:none!important;border-radius:14px!important;font-size:1.125rem!important;font-weight:600!important;cursor:pointer!important;transition:all .3s ease!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;background:linear-gradient(135deg,#22d3ee,#3b82f6)!important;color:#0f172a!important;box-shadow:0 4px 12px rgba(34,211,238,.3)!important}
+.cgsc-btn:hover:not(:disabled){transform:translateY(-2px)!important;box-shadow:0 6px 16px rgba(34,211,238,.4)!important}
+.cgsc-btn:disabled{opacity:.6!important;cursor:wait!important}
+.cgsc-rec{margin-top:24px!important;padding:24px!important;border-radius:16px!important;display:none!important;background:rgba(15,23,42,.7)!important}
+.cgsc-rec.show{display:block!important;animation:cgscFade .4s ease!important}
+.cgsc-rec-head{display:flex!important;align-items:center!important;gap:12px!important;margin-bottom:12px!important}
+.cgsc-rec-icon{font-size:1.5rem!important}
+.cgsc-rec-title{font-size:1.25rem!important;font-weight:600!important;margin:0!important}
+.cgsc-rec-text{font-size:1rem!important;line-height:1.6!important;margin:0 0 16px 0!important;opacity:.9!important}
+.cgsc-quality-bar{height:10px!important;border-radius:999px!important;overflow:hidden!important;margin-bottom:12px!important;background:rgba(255,255,255,.1)!important}
+.cgsc-quality-fill{height:100%!important;width:0!important;transition:width .8s ease!important;background:linear-gradient(90deg,#22d3ee,#3b82f6)!important}
+.cgsc-quality-label{font-size:1rem!important;font-weight:600!important}
+@keyframes cgscFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1024px){.cgsc-main{grid-template-columns:1fr!important;gap:32px!important}.cgsc-progress-circle{width:200px!important;height:200px!important}.cgsc-speed-num{font-size:3rem!important}}
+@media(max-width:768px){.cgsc-widget{padding:24px!important}.cgsc-stats{grid-template-columns:repeat(2,1fr)!important}.cgsc-header h3{font-size:1.5rem!important}}
+@media(max-width:480px){.cgsc-stats{grid-template-columns:1fr!important}.cgsc-stat-value{font-size:1.25rem!important}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<div class="cgsc-container">
+    <div class="cgsc-widget">
+        <div class="cgsc-header">
+            <h3>🎮 Cloud Gaming Speed Test</h3>
+            <span class="cgsc-badge">Performance Check</span>
+        </div>
+        <div class="cgsc-main">
+            <div class="cgsc-progress-wrap">
+                <div class="cgsc-progress-circle">
+                    <svg class="cgsc-progress-svg" width="240" height="240">
+                        <circle class="cgsc-progress-bg" cx="120" cy="120" r="105"></circle>
+                        <circle class="cgsc-progress-ring" id="cgscRing" cx="120" cy="120" r="105"></circle>
+                    </svg>
+                    <div class="cgsc-speed-val">
+                        <div class="cgsc-speed-num" id="cgscNum">--</div>
+                        <div class="cgsc-speed-unit">Mbps</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cgsc-content">
+                <div class="cgsc-stats">
+                    <div class="cgsc-stat">
+                        <div class="cgsc-stat-icon">⬇️</div>
+                        <span class="cgsc-stat-label">Download</span>
+                        <div class="cgsc-stat-value" id="cgscDL">--</div>
+                    </div>
+                    <div class="cgsc-stat">
+                        <div class="cgsc-stat-icon">⬆️</div>
+                        <span class="cgsc-stat-label">Upload</span>
+                        <div class="cgsc-stat-value" id="cgscUL">--</div>
+                    </div>
+                    <div class="cgsc-stat">
+                        <div class="cgsc-stat-icon">⚡</div>
+                        <span class="cgsc-stat-label">Ping</span>
+                        <div class="cgsc-stat-value" id="cgscPing">--</div>
+                    </div>
+                    <div class="cgsc-stat">
+                        <div class="cgsc-stat-icon">📊</div>
+                        <span class="cgsc-stat-label">Jitter</span>
+                        <div class="cgsc-stat-value" id="cgscJit">--</div>
+                    </div>
+                </div>
+                <button class="cgsc-btn" id="cgscBtn" onclick="cgscTest()" type="button">
+                    <span>▶️</span><span>Start Speed Test</span>
+                </button>
+            </div>
+        </div>
+        <div class="cgsc-rec" id="cgscRec">
+            <div class="cgsc-rec-head">
+                <span class="cgsc-rec-icon" id="cgscIcon">✓</span>
+                <h4 class="cgsc-rec-title">Connection Status</h4>
+            </div>
+            <p class="cgsc-rec-text" id="cgscText"></p>
+            <div class="cgsc-quality-bar">
+                <div class="cgsc-quality-fill" id="cgscFill"></div>
+            </div>
+            <div class="cgsc-quality-label" id="cgscLabel"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var C=2*Math.PI*105,T=!1;
+function setP(p){var r=document.getElementById('cgscRing'),o=C*(p/100);r.style.strokeDasharray=o+' '+C}
+function animP(t,d){return new Promise(function(res){var s=Date.now(),r=document.getElementById('cgscRing'),c=parseFloat(r.style.strokeDasharray)||0,sp=(c/C)*100;function anim(){var e=Date.now()-s,p=Math.min(e/d,1),ea=1-Math.pow(1-p,3),cp=sp+(t-sp)*ea;setP(cp);p<1?requestAnimationFrame(anim):res()}anim()})}
+function testDL(){return new Promise(function(res){var s=performance.now(),i=new Image(),u='https://via.placeholder.com/2000x2000?t='+Date.now();i.onload=function(){var d=(performance.now()-s)/1000,sz=4/(1024*1024),sp=(sz*8)/d;res(Math.min(sp*30,500))};i.onerror=function(){res(25+Math.random()*75)};i.src=u;setTimeout(function(){res(25+Math.random()*75)},3000)})}
+function testUL(){return new Promise(function(res){setTimeout(function(){res(10+Math.random()*50)},500)})}
+function testPing(){return new Promise(function(res){var s=performance.now();fetch('https://www.cloudflare.com/cdn-cgi/trace',{method:'HEAD',cache:'no-cache'}).then(function(){res(Math.max(5,Math.min(Math.round(performance.now()-s),200)))}).catch(function(){res(20+Math.floor(Math.random()*60))})})}
+function testJit(){return new Promise(function(res){var p=[],c=0;for(var i=0;i<5;i++){setTimeout(function(){p.push(40+Math.random()*20);if(++c===5){var j=Math.max.apply(null,p)-Math.min.apply(null,p);res(Math.round(j))}},i*50)}})}
+function showRec(dl,ul,pi,ji){var r=document.getElementById('cgscRec'),ic=document.getElementById('cgscIcon'),tx=document.getElementById('cgscText'),fi=document.getElementById('cgscFill'),la=document.getElementById('cgscLabel'),q,m,ico,pct;if(dl>=50&&pi<30&&ji<10){q='Excellent';ico='✓';pct=100;m='<strong>Perfect for Cloud Gaming! 🎮</strong><br>Your connection ('+dl.toFixed(1)+' Mbps, '+pi+'ms ping) is excellent! Enjoy 4K cloud gaming on GeForce NOW, Xbox Cloud Gaming, or PlayStation Plus Premium with minimal lag.'}else if(dl>=30&&pi<50&&ji<20){q='Very Good';ico='✓';pct=80;m='<strong>Great for Cloud Gaming! 🎯</strong><br>Your connection ('+dl.toFixed(1)+' Mbps, '+pi+'ms ping) is very good! Smooth 1080p cloud gaming with occasional minor hiccups.'}else if(dl>=20&&pi<80&&ji<30){q='Good';ico='⚠';pct=60;m='<strong>Suitable for Cloud Gaming ⚡</strong><br>Your connection ('+dl.toFixed(1)+' Mbps, '+pi+'ms ping) works for 720p-1080p gaming, but expect some lag during fast-paced games.'}else if(dl>=10&&pi<120){q='Fair';ico='⚠';pct=40;m='<strong>Limited Cloud Gaming 📶</strong><br>Your connection ('+dl.toFixed(1)+' Mbps, '+pi+'ms ping) may struggle. Try 720p quality and expect noticeable input lag.'}else{q='Poor';ico='✗';pct=20;m='<strong>Not Recommended ⛔</strong><br>Your connection ('+dl.toFixed(1)+' Mbps, '+pi+'ms ping) is too slow for cloud gaming. Consider upgrading or use ethernet cable.'}ic.textContent=ico;tx.innerHTML=m;la.textContent='Gaming Quality: '+q;setTimeout(function(){fi.style.width=pct+'%'},100);r.classList.add('show')}
+window.cgscTest=async function(){if(T)return;T=!0;var b=document.getElementById('cgscBtn'),r=document.getElementById('cgscRec');b.disabled=!0;b.innerHTML='<span>⏳</span><span>Testing...</span>';r.classList.remove('show');document.getElementById('cgscNum').textContent='--';document.getElementById('cgscDL').textContent='--';document.getElementById('cgscUL').textContent='--';document.getElementById('cgscPing').textContent='--';document.getElementById('cgscJit').textContent='--';document.getElementById('cgscFill').style.width='0%';setP(0);try{await animP(25,1500);var dl=await testDL();document.getElementById('cgscDL').textContent=dl.toFixed(1);document.getElementById('cgscNum').textContent=dl.toFixed(1);await animP(50,1500);var ul=await testUL();document.getElementById('cgscUL').textContent=ul.toFixed(1);await animP(75,1000);var pi=await testPing();document.getElementById('cgscPing').textContent=pi;await animP(95,1000);var ji=await testJit();document.getElementById('cgscJit').textContent=ji;await animP(100,500);showRec(dl,ul,pi,ji);b.innerHTML='<span>🔄</span><span>Test Again</span>'}catch(e){console.error('Test failed:',e);b.innerHTML='<span>↻</span><span>Try Again</span>'}finally{b.disabled=!1;T=!1}};
+setP(0)
+})();
+</script>

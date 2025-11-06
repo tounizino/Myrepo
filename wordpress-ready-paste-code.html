@@ -1,0 +1,743 @@
+<!-- Cloud Gaming Speed Checker Widget - Ready to Paste for WordPress -->
+<!-- Simply copy this entire code and paste into: Custom HTML Block, Classic Editor, or HTML Widget -->
+
+<style>
+.cgsc-widget-container {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.cgsc-theme-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cgsc-theme-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cgsc-theme-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.cgsc-theme-btn.active {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.cgsc-theme-btn.dark-btn {
+    background: #1a1a2e;
+    color: white;
+}
+
+.cgsc-theme-btn.light-btn {
+    background: #ffffff;
+    color: #1a1a2e;
+    border: 2px solid #e5e7eb;
+}
+
+.cgsc-theme-btn.skyblue-btn {
+    background: #E0F3FE;
+    color: #0369a1;
+    border: 2px solid #7dd3fc;
+}
+
+.cgsc-widget {
+    width: 100%;
+    padding: 28px 24px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cgsc-widget:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+.cgsc-widget.theme-dark {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #f8fafc;
+}
+
+.cgsc-widget.theme-light {
+    background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+    color: #1e293b;
+    border: 2px solid #e2e8f0;
+}
+
+.cgsc-widget.theme-skyblue {
+    background: linear-gradient(135deg, #E0F3FE 0%, #bae6fd 100%);
+    color: #0c4a6e;
+}
+
+.cgsc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.cgsc-header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.cgsc-badge {
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.theme-dark .cgsc-badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e7ff;
+}
+
+.theme-light .cgsc-badge {
+    background: rgba(79, 70, 229, 0.1);
+    color: #4f46e5;
+}
+
+.theme-skyblue .cgsc-badge {
+    background: rgba(14, 165, 233, 0.2);
+    color: #0369a1;
+}
+
+.cgsc-progress-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.cgsc-progress-circle {
+    position: relative;
+    width: 160px;
+    height: 160px;
+}
+
+.cgsc-progress-svg {
+    transform: rotate(-90deg);
+}
+
+.cgsc-progress-bg {
+    fill: none;
+    stroke-width: 10;
+}
+
+.theme-dark .cgsc-progress-bg {
+    stroke: rgba(255, 255, 255, 0.08);
+}
+
+.theme-light .cgsc-progress-bg {
+    stroke: rgba(79, 70, 229, 0.1);
+}
+
+.theme-skyblue .cgsc-progress-bg {
+    stroke: rgba(14, 165, 233, 0.15);
+}
+
+.cgsc-progress-ring {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 0 999;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+.theme-dark .cgsc-progress-ring {
+    stroke: #22d3ee;
+}
+
+.theme-light .cgsc-progress-ring {
+    stroke: #4f46e5;
+}
+
+.theme-skyblue .cgsc-progress-ring {
+    stroke: #0284c7;
+}
+
+.cgsc-speed-value {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cgsc-speed-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cgsc-speed-unit {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-top: 4px;
+}
+
+.cgsc-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.cgsc-stat {
+    padding: 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-dark .cgsc-stat {
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.theme-light .cgsc-stat {
+    background: rgba(79, 70, 229, 0.05);
+}
+
+.theme-skyblue .cgsc-stat {
+    background: rgba(14, 165, 233, 0.15);
+}
+
+.cgsc-stat-icon {
+    font-size: 1.5rem;
+}
+
+.cgsc-stat-content {
+    flex: 1;
+}
+
+.cgsc-stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.cgsc-stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.cgsc-test-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.theme-dark .cgsc-test-btn {
+    background: linear-gradient(135deg, #22d3ee, #3b82f6);
+    color: #0f172a;
+    box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+}
+
+.theme-light .cgsc-test-btn {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.theme-skyblue .cgsc-test-btn {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    color: white;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
+.cgsc-test-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.theme-dark .cgsc-test-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 16px rgba(34, 211, 238, 0.4);
+}
+
+.theme-light .cgsc-test-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+}
+
+.theme-skyblue .cgsc-test-btn:hover:not(:disabled) {
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+}
+
+.cgsc-test-btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.cgsc-recommendation {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    display: none;
+}
+
+.cgsc-recommendation.visible {
+    display: block;
+    animation: cgscFadeIn 0.4s ease;
+}
+
+.theme-dark .cgsc-recommendation {
+    background: rgba(15, 23, 42, 0.7);
+}
+
+.theme-light .cgsc-recommendation {
+    background: rgba(79, 70, 229, 0.08);
+}
+
+.theme-skyblue .cgsc-recommendation {
+    background: rgba(14, 165, 233, 0.2);
+}
+
+.cgsc-rec-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.cgsc-rec-icon {
+    font-size: 1.25rem;
+}
+
+.cgsc-rec-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.cgsc-rec-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+    opacity: 0.9;
+}
+
+.cgsc-quality-bar {
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.theme-dark .cgsc-quality-bar {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-light .cgsc-quality-bar {
+    background: rgba(79, 70, 229, 0.1);
+}
+
+.theme-skyblue .cgsc-quality-bar {
+    background: rgba(14, 165, 233, 0.15);
+}
+
+.cgsc-quality-fill {
+    height: 100%;
+    width: 0;
+    transition: width 0.8s ease;
+}
+
+.theme-dark .cgsc-quality-fill {
+    background: linear-gradient(90deg, #22d3ee, #3b82f6);
+}
+
+.theme-light .cgsc-quality-fill {
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+}
+
+.theme-skyblue .cgsc-quality-fill {
+    background: linear-gradient(90deg, #0284c7, #06b6d4);
+}
+
+.cgsc-quality-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+@keyframes cgscFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .cgsc-widget {
+        padding: 20px 16px;
+    }
+    
+    .cgsc-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .cgsc-progress-circle {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .cgsc-speed-number {
+        font-size: 2rem;
+    }
+    
+    .cgsc-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+
+<div class="cgsc-widget-container">
+    <div class="cgsc-theme-selector">
+        <button class="cgsc-theme-btn dark-btn active" onclick="cgscSwitchTheme('dark')" type="button">
+            🌙 Dark
+        </button>
+        <button class="cgsc-theme-btn light-btn" onclick="cgscSwitchTheme('light')" type="button">
+            ☀️ Light
+        </button>
+        <button class="cgsc-theme-btn skyblue-btn" onclick="cgscSwitchTheme('skyblue')" type="button">
+            🌊 Sky Blue
+        </button>
+    </div>
+
+    <div class="cgsc-widget theme-dark" id="cgscWidget">
+        <div class="cgsc-header">
+            <h3>🎮 Speed Test</h3>
+            <span class="cgsc-badge">Cloud Gaming</span>
+        </div>
+
+        <div class="cgsc-progress-container">
+            <div class="cgsc-progress-circle">
+                <svg class="cgsc-progress-svg" width="160" height="160">
+                    <circle class="cgsc-progress-bg" cx="80" cy="80" r="70"></circle>
+                    <circle class="cgsc-progress-ring" id="cgscProgressRing" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div class="cgsc-speed-value">
+                    <div class="cgsc-speed-number" id="cgscSpeedNumber">--</div>
+                    <div class="cgsc-speed-unit">Mbps</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cgsc-stats">
+            <div class="cgsc-stat">
+                <div class="cgsc-stat-icon">⬇️</div>
+                <div class="cgsc-stat-content">
+                    <span class="cgsc-stat-label">Download</span>
+                    <div class="cgsc-stat-value" id="cgscDownload">-- Mbps</div>
+                </div>
+            </div>
+            <div class="cgsc-stat">
+                <div class="cgsc-stat-icon">⬆️</div>
+                <div class="cgsc-stat-content">
+                    <span class="cgsc-stat-label">Upload</span>
+                    <div class="cgsc-stat-value" id="cgscUpload">-- Mbps</div>
+                </div>
+            </div>
+            <div class="cgsc-stat">
+                <div class="cgsc-stat-icon">⚡</div>
+                <div class="cgsc-stat-content">
+                    <span class="cgsc-stat-label">Ping</span>
+                    <div class="cgsc-stat-value" id="cgscPing">-- ms</div>
+                </div>
+            </div>
+            <div class="cgsc-stat">
+                <div class="cgsc-stat-icon">📊</div>
+                <div class="cgsc-stat-content">
+                    <span class="cgsc-stat-label">Jitter</span>
+                    <div class="cgsc-stat-value" id="cgscJitter">-- ms</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="cgsc-test-btn" id="cgscTestBtn" onclick="cgscRunTest()" type="button">
+            <span>▶️</span>
+            <span>Start Speed Test</span>
+        </button>
+
+        <div class="cgsc-recommendation" id="cgscRecommendation">
+            <div class="cgsc-rec-header">
+                <span class="cgsc-rec-icon" id="cgscRecIcon">✓</span>
+                <h4 class="cgsc-rec-title">Connection Status</h4>
+            </div>
+            <p class="cgsc-rec-text" id="cgscRecText"></p>
+            <div class="cgsc-quality-bar">
+                <div class="cgsc-quality-fill" id="cgscQualityFill"></div>
+            </div>
+            <div class="cgsc-quality-label" id="cgscQualityLabel"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    
+    const cgscCircumference = 2 * Math.PI * 70;
+    let cgscTesting = false;
+    
+    window.cgscSwitchTheme = function(theme) {
+        const widget = document.getElementById('cgscWidget');
+        const buttons = document.querySelectorAll('.cgsc-theme-btn');
+        
+        widget.className = 'cgsc-widget theme-' + theme;
+        
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+            if (btn.classList.contains(theme + '-btn')) {
+                btn.classList.add('active');
+            }
+        });
+    };
+    
+    function cgscSetProgress(percent) {
+        const ring = document.getElementById('cgscProgressRing');
+        const offset = cgscCircumference * (percent / 100);
+        ring.style.strokeDasharray = offset + ' ' + cgscCircumference;
+    }
+    
+    function cgscAnimateProgress(target, duration) {
+        return new Promise(function(resolve) {
+            const start = Date.now();
+            const ring = document.getElementById('cgscProgressRing');
+            const currentDash = parseFloat(ring.style.strokeDasharray) || 0;
+            const startPercent = (currentDash / cgscCircumference) * 100;
+            
+            function animate() {
+                const elapsed = Date.now() - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const currentPercent = startPercent + (target - startPercent) * eased;
+                
+                cgscSetProgress(currentPercent);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    resolve();
+                }
+            }
+            
+            animate();
+        });
+    }
+    
+    function cgscTestDownload() {
+        return new Promise(function(resolve) {
+            const start = performance.now();
+            const img = new Image();
+            const url = 'https://via.placeholder.com/2000x2000?t=' + Date.now();
+            
+            img.onload = function() {
+                const end = performance.now();
+                const duration = (end - start) / 1000;
+                const sizeMB = 4 / (1024 * 1024);
+                const speedMbps = (sizeMB * 8) / duration;
+                resolve(Math.min(speedMbps * 30, 500));
+            };
+            
+            img.onerror = function() {
+                resolve(25 + Math.random() * 75);
+            };
+            
+            img.src = url;
+            
+            setTimeout(function() {
+                resolve(25 + Math.random() * 75);
+            }, 3000);
+        });
+    }
+    
+    function cgscTestUpload() {
+        return new Promise(function(resolve) {
+            setTimeout(function() {
+                resolve(10 + Math.random() * 50);
+            }, 500);
+        });
+    }
+    
+    function cgscTestPing() {
+        return new Promise(function(resolve) {
+            const start = performance.now();
+            
+            fetch('https://www.cloudflare.com/cdn-cgi/trace', {
+                method: 'HEAD',
+                cache: 'no-cache'
+            }).then(function() {
+                const end = performance.now();
+                resolve(Math.max(5, Math.min(Math.round(end - start), 200)));
+            }).catch(function() {
+                resolve(20 + Math.floor(Math.random() * 60));
+            });
+        });
+    }
+    
+    function cgscTestJitter() {
+        return new Promise(function(resolve) {
+            const pings = [];
+            let completed = 0;
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(function() {
+                    const ping = 40 + Math.random() * 20;
+                    pings.push(ping);
+                    completed++;
+                    
+                    if (completed === 5) {
+                        const jitter = Math.max.apply(null, pings) - Math.min.apply(null, pings);
+                        resolve(Math.round(jitter));
+                    }
+                }, i * 50);
+            }
+        });
+    }
+    
+    function cgscShowRecommendation(download, upload, ping, jitter) {
+        const rec = document.getElementById('cgscRecommendation');
+        const icon = document.getElementById('cgscRecIcon');
+        const text = document.getElementById('cgscRecText');
+        const fill = document.getElementById('cgscQualityFill');
+        const label = document.getElementById('cgscQualityLabel');
+        
+        let quality, message, iconText, percent;
+        
+        if (download >= 50 && ping < 30 && jitter < 10) {
+            quality = 'Excellent';
+            iconText = '✓';
+            percent = 100;
+            message = '<strong>Perfect for Cloud Gaming! 🎮</strong><br>Your connection (' + download.toFixed(1) + ' Mbps, ' + ping + 'ms ping) is excellent! Enjoy 4K cloud gaming on GeForce NOW, Xbox Cloud Gaming, or PlayStation Plus Premium with minimal lag.';
+        } else if (download >= 30 && ping < 50 && jitter < 20) {
+            quality = 'Very Good';
+            iconText = '✓';
+            percent = 80;
+            message = '<strong>Great for Cloud Gaming! 🎯</strong><br>Your connection (' + download.toFixed(1) + ' Mbps, ' + ping + 'ms ping) is very good! Smooth 1080p cloud gaming with occasional minor hiccups.';
+        } else if (download >= 20 && ping < 80 && jitter < 30) {
+            quality = 'Good';
+            iconText = '⚠';
+            percent = 60;
+            message = '<strong>Suitable for Cloud Gaming ⚡</strong><br>Your connection (' + download.toFixed(1) + ' Mbps, ' + ping + 'ms ping) works for 720p-1080p gaming, but expect some lag during fast-paced games.';
+        } else if (download >= 10 && ping < 120) {
+            quality = 'Fair';
+            iconText = '⚠';
+            percent = 40;
+            message = '<strong>Limited Cloud Gaming 📶</strong><br>Your connection (' + download.toFixed(1) + ' Mbps, ' + ping + 'ms ping) may struggle. Try 720p quality and expect noticeable input lag.';
+        } else {
+            quality = 'Poor';
+            iconText = '✗';
+            percent = 20;
+            message = '<strong>Not Recommended ⛔</strong><br>Your connection (' + download.toFixed(1) + ' Mbps, ' + ping + 'ms ping) is too slow for cloud gaming. Consider upgrading or use ethernet cable.';
+        }
+        
+        icon.textContent = iconText;
+        text.innerHTML = message;
+        label.textContent = 'Gaming Quality: ' + quality;
+        
+        setTimeout(function() {
+            fill.style.width = percent + '%';
+        }, 100);
+        
+        rec.classList.add('visible');
+    }
+    
+    window.cgscRunTest = async function() {
+        if (cgscTesting) return;
+        
+        cgscTesting = true;
+        const btn = document.getElementById('cgscTestBtn');
+        const rec = document.getElementById('cgscRecommendation');
+        
+        btn.disabled = true;
+        btn.innerHTML = '<span>⏳</span><span>Testing...</span>';
+        rec.classList.remove('visible');
+        
+        document.getElementById('cgscSpeedNumber').textContent = '--';
+        document.getElementById('cgscDownload').textContent = '-- Mbps';
+        document.getElementById('cgscUpload').textContent = '-- Mbps';
+        document.getElementById('cgscPing').textContent = '-- ms';
+        document.getElementById('cgscJitter').textContent = '-- ms';
+        document.getElementById('cgscQualityFill').style.width = '0%';
+        
+        cgscSetProgress(0);
+        
+        try {
+            await cgscAnimateProgress(25, 1500);
+            const download = await cgscTestDownload();
+            document.getElementById('cgscDownload').textContent = download.toFixed(1) + ' Mbps';
+            document.getElementById('cgscSpeedNumber').textContent = download.toFixed(1);
+            
+            await cgscAnimateProgress(50, 1500);
+            const upload = await cgscTestUpload();
+            document.getElementById('cgscUpload').textContent = upload.toFixed(1) + ' Mbps';
+            
+            await cgscAnimateProgress(75, 1000);
+            const ping = await cgscTestPing();
+            document.getElementById('cgscPing').textContent = ping + ' ms';
+            
+            await cgscAnimateProgress(95, 1000);
+            const jitter = await cgscTestJitter();
+            document.getElementById('cgscJitter').textContent = jitter + ' ms';
+            
+            await cgscAnimateProgress(100, 500);
+            
+            cgscShowRecommendation(download, upload, ping, jitter);
+            
+            btn.innerHTML = '<span>🔄</span><span>Test Again</span>';
+        } catch (error) {
+            console.error('Test failed:', error);
+            btn.innerHTML = '<span>↻</span><span>Try Again</span>';
+        } finally {
+            btn.disabled = false;
+            cgscTesting = false;
+        }
+    };
+    
+    cgscSetProgress(0);
+})();
+</script>

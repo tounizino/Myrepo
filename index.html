@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Speed Checker Widget - Demo</title>
+    <link rel="stylesheet" href="speed-checker-widget.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .demo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .demo-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        .demo-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .demo-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .theme-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .theme-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .theme-btn.dark {
+            background: #1a1a2e;
+            color: white;
+        }
+        .theme-btn.light {
+            background: #ffffff;
+            color: #333;
+        }
+        .theme-btn.skyblue {
+            background: linear-gradient(135deg, #667eea 0%, #64b5f6 100%);
+            color: white;
+        }
+        .widgets-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .widget-wrapper {
+            display: none;
+            justify-content: center;
+        }
+        .widget-wrapper.active {
+            display: flex;
+        }
+        @media (max-width: 768px) {
+            .demo-header h1 {
+                font-size: 1.8rem;
+            }
+            .widgets-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>🎮 Cloud Gaming Speed Checker Widget</h1>
+            <p>Test your internet connection for optimal cloud gaming performance</p>
+        </div>
+
+        <div class="theme-switcher" role="tablist" aria-label="Speed checker themes">
+            <button class="theme-btn dark" type="button" onclick="showTheme('dark')">🌙 Dark Theme</button>
+            <button class="theme-btn light" type="button" onclick="showTheme('light')">☀️ Light Theme</button>
+            <button class="theme-btn skyblue" type="button" onclick="showTheme('skyblue')">🌊 Sky Blue Theme</button>
+        </div>
+
+        <div class="widgets-showcase">
+            <div class="widget-wrapper" data-theme="dark">
+                <div id="speed-checker-dark" class="speed-checker-widget theme-dark" data-status="idle">
+                    <div class="widget-header">
+                        <h3>🎮 Speed Test</h3>
+                        <span class="theme-badge">Dark</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="speed-display">
+                            <div class="speed-circle">
+                                <svg class="progress-ring" width="180" height="180" role="presentation" focusable="false">
+                                    <circle class="progress-ring-bg" cx="90" cy="90" r="80"></circle>
+                                    <circle class="progress-ring-circle" cx="90" cy="90" r="80"></circle>
+                                </svg>
+                                <div class="speed-value" aria-live="polite" aria-atomic="true">
+                                    <span class="speed-number">--</span>
+                                    <span class="speed-unit">Mbps</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⬇️</span>
+                                <span class="stat-label">Download</span>
+                                <span class="stat-value">-- Mbps</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⬆️</span>
+                                <span class="stat-label">Upload</span>
+                                <span class="stat-value">-- Mbps</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⚡</span>
+                                <span class="stat-label">Ping</span>
+                                <span class="stat-value">-- ms</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">📊</span>
+                                <span class="stat-label">Jitter</span>
+                                <span class="stat-value">-- ms</span>
+                            </div>
+                        </div>
+
+                        <button class="test-button" type="button" aria-label="Start internet speed test">
+                            <span class="button-icon" aria-hidden="true">▶️</span>
+                            Start Speed Test
+                        </button>
+
+                        <div class="recommendation hidden" role="status" aria-live="polite" aria-atomic="true">
+                            <div class="recommendation-header">
+                                <span class="recommendation-icon" aria-hidden="true">✓</span>
+                                <h4>Connection Status</h4>
+                            </div>
+                            <p class="recommendation-text"></p>
+                            <div class="gaming-quality">
+                                <div class="quality-bar">
+                                    <div class="quality-fill"></div>
+                                </div>
+                                <span class="quality-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget-wrapper" data-theme="light">
+                <div id="speed-checker-light" class="speed-checker-widget theme-light" data-status="idle">
+                    <div class="widget-header">
+                        <h3>🎮 Speed Test</h3>
+                        <span class="theme-badge">Light</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="speed-display">
+                            <div class="speed-circle">
+                                <svg class="progress-ring" width="180" height="180" role="presentation" focusable="false">
+                                    <circle class="progress-ring-bg" cx="90" cy="90" r="80"></circle>
+                                    <circle class="progress-ring-circle" cx="90" cy="90" r="80"></circle>
+                                </svg>
+                                <div class="speed-value" aria-live="polite" aria-atomic="true">
+                                    <span class="speed-number">--</span>
+                                    <span class="speed-unit">Mbps</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⬇️</span>
+                                <span class="stat-label">Download</span>
+                                <span class="stat-value">-- Mbps</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⬆️</span>
+                                <span class="stat-label">Upload</span>
+                                <span class="stat-value">-- Mbps</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⚡</span>
+                                <span class="stat-label">Ping</span>
+                                <span class="stat-value">-- ms</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">📊</span>
+                                <span class="stat-label">Jitter</span>
+                                <span class="stat-value">-- ms</span>
+                            </div>
+                        </div>
+
+                        <button class="test-button" type="button" aria-label="Start internet speed test">
+                            <span class="button-icon" aria-hidden="true">▶️</span>
+                            Start Speed Test
+                        </button>
+
+                        <div class="recommendation hidden" role="status" aria-live="polite" aria-atomic="true">
+                            <div class="recommendation-header">
+                                <span class="recommendation-icon" aria-hidden="true">✓</span>
+                                <h4>Connection Status</h4>
+                            </div>
+                            <p class="recommendation-text"></p>
+                            <div class="gaming-quality">
+                                <div class="quality-bar">
+                                    <div class="quality-fill"></div>
+                                </div>
+                                <span class="quality-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget-wrapper" data-theme="skyblue">
+                <div id="speed-checker-skyblue" class="speed-checker-widget theme-skyblue" data-status="idle">
+                    <div class="widget-header">
+                        <h3>🎮 Speed Test</h3>
+                        <span class="theme-badge">Sky Blue</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="speed-display">
+                            <div class="speed-circle">
+                                <svg class="progress-ring" width="180" height="180" role="presentation" focusable="false">
+                                    <circle class="progress-ring-bg" cx="90" cy="90" r="80"></circle>
+                                    <circle class="progress-ring-circle" cx="90" cy="90" r="80"></circle>
+                                </svg>
+                                <div class="speed-value" aria-live="polite" aria-atomic="true">
+                                    <span class="speed-number">--</span>
+                                    <span class="speed-unit">Mbps</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⬇️</span>
+                                <span class="stat-label">Download</span>
+                                <span class="stat-value">-- Mbps</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⬆️</span>
+                                <span class="stat-label">Upload</span>
+                                <span class="stat-value">-- Mbps</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">⚡</span>
+                                <span class="stat-label">Ping</span>
+                                <span class="stat-value">-- ms</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon" aria-hidden="true">📊</span>
+                                <span class="stat-label">Jitter</span>
+                                <span class="stat-value">-- ms</span>
+                            </div>
+                        </div>
+
+                        <button class="test-button" type="button" aria-label="Start internet speed test">
+                            <span class="button-icon" aria-hidden="true">▶️</span>
+                            Start Speed Test
+                        </button>
+
+                        <div class="recommendation hidden" role="status" aria-live="polite" aria-atomic="true">
+                            <div class="recommendation-header">
+                                <span class="recommendation-icon" aria-hidden="true">✓</span>
+                                <h4>Connection Status</h4>
+                            </div>
+                            <p class="recommendation-text"></p>
+                            <div class="gaming-quality">
+                                <div class="quality-bar">
+                                    <div class="quality-fill"></div>
+                                </div>
+                                <span class="quality-label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="speed-checker-widget.js"></script>
+    <script>
+        function showTheme(theme) {
+            const wrappers = document.querySelectorAll('.widget-wrapper');
+            wrappers.forEach(wrapper => {
+                wrapper.classList.toggle('active', wrapper.getAttribute('data-theme') === theme);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showTheme('dark');
+        });
+    </script>
+</body>
+</html>
