@@ -70,6 +70,10 @@
     padding: 2rem;
     border: 1px solid rgba(148, 163, 184, 0.25);
     backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
 }
 
 .isdit-wrapper.theme-dark .isdit-speed-test {
@@ -85,7 +89,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
-    margin-bottom: 1.5rem;
 }
 
 .speed-result {
@@ -162,7 +165,10 @@
     letter-spacing: 0.02em;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: 100%;
+    width: auto;
+    min-width: 200px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .isdit-button:hover {
@@ -189,7 +195,6 @@
     background: rgba(148, 163, 184, 0.2);
     border-radius: 999px;
     overflow: hidden;
-    margin: 1.2rem 0;
 }
 
 .isdit-progress .progress-bar {
@@ -200,11 +205,29 @@
     transition: width 0.3s ease;
 }
 
+.isdit-speed-test .isdit-button {
+    align-self: center;
+}
+
 .isdit-status {
     font-size: 0.95rem;
-    color: var(--isdit-muted);
     text-align: center;
-    margin-top: 1rem;
+    color: var(--isdit-muted);
+    min-height: 1.25rem;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.isdit-status.isdit-status--loading {
+    color: #2563eb;
+}
+
+.isdit-status.isdit-status--success {
+    color: #16a34a;
+}
+
+.isdit-status.isdit-status--error {
+    color: #dc2626;
 }
 
 .isdit-info-grid {
@@ -289,10 +312,22 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    position: relative;
 }
 
 .isdit-wrapper.theme-dark .isdit-map {
     background: #1e293b;
+}
+
+.isdit-map--empty {
+    background: rgba(148, 163, 184, 0.1);
+    color: var(--isdit-muted);
+    font-style: italic;
+}
+
+.isdit-wrapper.theme-dark .isdit-map--empty {
+    background: rgba(30, 41, 59, 0.5);
+    color: #94a3b8;
 }
 
 @media (max-width: 1024px) {

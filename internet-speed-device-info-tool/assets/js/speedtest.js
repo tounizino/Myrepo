@@ -38,12 +38,42 @@ class SpeedTest {
         return payload;
     }
 
+    isReady() {
+        return !!(this.ajaxUrl && this.nonce && this.downloadUrl && this.uploadUrl && this.ipInfoUrl);
+    }
+
+    fetchWithDefaults(url, options = {}) {
+        if (!url) {
+            return Promise.reject(new Error('Missing AJAX endpoint.'));
+        }
+        const defaults = {
+            credentials: 'same-origin',
+            cache: 'no-store',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        };
+        const merged = {
+            ...defaults,
+            ...options,
+            headers: {
+                ...defaults.headers,
+                ...(options.headers || {}),
+            },
+        };
+        return fetch(url, merged);
+    }
+
     async testLatency(samples = 5) {
         const times = [];
         for (let i = 0; i < samples; i++) {
             const start = performance.now();
             try {
-                await fetch(`${this.downloadUrl}&size=0.05&_=${Date.now()}_${i}`, { cache: 'no-store' });
+                const response = await this.fetchWithDefaults(`${this.downloadUrl}&size=0.05&_=${Date.now()}_${i}`);
+                if (!response.ok) {
+                    throw new Error(`Latency request failed (${response.status})`);
+                }
+                await response.arrayBuffer();
                 const end = performance.now();
                 times.push(end - start);
             } catch (error) {
@@ -73,16 +103,19 @@ class SpeedTest {
         for (let i = 0; i < this.iterations; i++) {
             const start = performance.now();
             try {
-                const response = await fetch(`${this.downloadUrl}&size=${encodeURIComponent(sizeParam)}&_=${Date.now()}_${i}`, {
-                    cache: 'no-store'
-                });
+                const response = await this.fetchWithDefaults(`${this.downloadUrl}&size=${encodeURIComponent(sizeParam)}&_=${Date.now()}_${i}`);
+                if (!response.ok) {
+                    throw new Error(`Download request failed (${response.status})`);
+                }
                 const blob = await response.blob();
                 const end = performance.now();
 
                 const durationSeconds = (end - start) / 1000;
                 const bytes = blob.size || bytesExpected;
                 const speedMbps = durationSeconds > 0 ? (bytes * 8) / (durationSeconds * 1_000_000) : 0;
-                results.push(speedMbps);
+                if (speedMbps > 0) {
+                    results.push(speedMbps);
+                }
             } catch (error) {
                 console.error('Download test error', error);
             }
@@ -90,6 +123,10 @@ class SpeedTest {
             if (typeof onProgress === 'function') {
                 onProgress(((i + 1) / this.iterations) * 100);
             }
+        }
+
+        if (!results.length) {
+            throw new Error('Download test failed.');
         }
 
         return this.averageSpeed(results);
@@ -102,14 +139,17 @@ class SpeedTest {
         for (let i = 0; i < this.iterations; i++) {
             const start = performance.now();
             try {
-                const response = await fetch(`${this.uploadUrl}&_=${Date.now()}_${i}`, {
+                const response = await this.fetchWithDefaults(`${this.uploadUrl}&_=${Date.now()}_${i}`, {
                     method: 'POST',
                     body: payload,
-                    cache: 'no-store',
                     headers: {
-                        'Content-Type': 'application/octet-stream'
-                    }
+                        'Content-Type': 'application/octet-stream',
+                    },
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Upload request failed (${response.status})`);
+                }
 
                 await response.json();
                 const end = performance.now();
@@ -117,7 +157,9 @@ class SpeedTest {
                 const durationSeconds = (end - start) / 1000;
                 const bytes = payload.byteLength;
                 const speedMbps = durationSeconds > 0 ? (bytes * 8) / (durationSeconds * 1_000_000) : 0;
-                results.push(speedMbps);
+                if (speedMbps > 0) {
+                    results.push(speedMbps);
+                }
             } catch (error) {
                 console.error('Upload test error', error);
             }
@@ -125,6 +167,10 @@ class SpeedTest {
             if (typeof onProgress === 'function') {
                 onProgress(((i + 1) / this.iterations) * 100);
             }
+        }
+
+        if (!results.length) {
+            throw new Error('Upload test failed.');
         }
 
         return this.averageSpeed(results);
@@ -141,13 +187,16 @@ class SpeedTest {
 
     async getIPInfo() {
         try {
-            const response = await fetch(this.ipInfoUrl, {
+            const response = await this.fetchWithDefaults(this.ipInfoUrl, {
                 method: 'POST',
-                cache: 'no-store'
             });
-            const data = await response.json();
-            if (data && data.success) {
-                return data.data;
+            if (response.ok) {
+                const data = await response.json();
+                if (data && data.success) {
+                    return data.data;
+                }
+            } else {
+                throw new Error(`IP info request failed (${response.status})`);
             }
         } catch (error) {
             console.error('Server IP endpoint failed', error);
@@ -174,8 +223,8 @@ class SpeedTest {
                     timezone: data.timezone || '',
                     isp: data.org || data.isp || '',
                     organization: data.org || data.company || '',
-                    postal: data.postal || data.zip || ''
-                }
+                    postal: data.postal || data.zip || '',
+                },
             };
         } catch (error) {
             console.error('Fallback IP lookup failed', error);
@@ -255,6 +304,10 @@ class SpeedTest {
         }
         return parts.length ? parts.join(' · ') : 'Unknown';
     }
+}
+
+if (typeof window !== 'undefined') {
+    window.SpeedTest = SpeedTest;
 }
 
 if (typeof module !== 'undefined' && module.exports) {

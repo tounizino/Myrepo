@@ -33,11 +33,11 @@ if (!defined('ABSPATH')) {
                     <span class="unit">ms</span>
                 </div>
             </div>
-            <button class="isdit-button" data-speed-test-start><?php _e('Start Speed Test', 'isdit'); ?></button>
+            <button type="button" class="isdit-button" data-speed-test-start><?php _e('Start Speed Test', 'isdit'); ?></button>
             <div class="isdit-progress">
                 <div class="progress-bar" data-progress-bar></div>
             </div>
-            <div class="isdit-status"></div>
+            <div class="isdit-status" role="status" aria-live="polite" aria-atomic="true"></div>
         </div>
         <?php endif; ?>
         
