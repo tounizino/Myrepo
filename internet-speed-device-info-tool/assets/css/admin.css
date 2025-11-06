@@ -1,0 +1,57 @@
+.isdit-admin-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.isdit-admin-main {
+    flex: 2;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.isdit-admin-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 80px;
+}
+
+.isdit-sidebar-box {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+.isdit-sidebar-box h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.shortcode-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.shortcode-item code {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 1024px) {
+    .isdit-admin-container {
+        flex-direction: column;
+    }
+    
+    .isdit-admin-sidebar {
+        position: static;
+        width: 100%;
+    }
+}

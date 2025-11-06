@@ -1,0 +1,19 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Node and build artifacts
+node_modules/
+dist/
+build/
+
+# Composer
+/vendor/
+composer.lock
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
