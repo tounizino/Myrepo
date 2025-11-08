@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Gaming Setup Blueprint - Section 4</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Flow</title>
     <style>
         * {
             margin: 0;
@@ -12,336 +12,397 @@
         }
 
         body {
-            font-family: "Manrope", "Segoe UI", Roboto, sans-serif;
-            line-height: 1.7;
-            background: #ffffff;
-            color: #161616;
+            font-family: "Manrope", "Segoe UI", sans-serif;
+            background: #050505;
+            color: #f5f5f5;
+            overflow-x: hidden;
         }
 
         .setup-section {
-            max-width: 1380px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 60px 24px;
-        }
-
-        .setup-header {
-            margin-bottom: 36px;
-        }
-
-        .setup-header h2 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #0c0c0c;
-            margin-bottom: 10px;
-        }
-
-        .setup-header p {
-            font-size: 1.05rem;
-            color: #585858;
-        }
-
-        .setup-layout {
-            display: flex;
-            gap: 28px;
-            align-items: flex-start;
-        }
-
-        .setup-main {
-            flex: 2;
-        }
-
-        .setup-aside {
-            flex: 1;
-        }
-
-        .timeline-step {
-            border: 1px solid #d7d7d7;
-            background: #f6f7f8;
-            padding: 24px;
-            margin-bottom: 24px;
-            display: grid;
-            grid-template-columns: 60px 1fr;
-            gap: 24px;
-        }
-
-        .step-index {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0c6dff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .step-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #0c0c0c;
-        }
-
-        .step-content p {
-            color: #404040;
-            margin-bottom: 12px;
-        }
-
-        .step-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .action-pill {
-            padding: 10px 16px;
-            border: 1px solid #0c6dff;
-            color: #0c6dff;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
-        .step-details ul {
-            padding-left: 20px;
-            color: #303030;
-        }
-
-        .step-details li {
-            margin-bottom: 8px;
-        }
-
-        .toolkit-card {
-            border: 1px solid #d7d7d7;
-            background: #f6f7f8;
-            padding: 26px;
-            margin-bottom: 24px;
-        }
-
-        .toolkit-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 18px;
-            color: #0c0c0c;
-        }
-
-        .toolkit-list {
-            list-style: none;
-        }
-
-        .toolkit-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #d7d7d7;
-        }
-
-        .toolkit-list li:last-child {
-            border-bottom: none;
-        }
-
-        .tool-name {
-            font-weight: 600;
-            color: #0c0c0c;
-        }
-
-        .tool-meta {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .checklist-card {
-            border: 1px solid #d7d7d7;
-            background: #0f1a2d;
-            color: #ffffff;
-            padding: 26px;
-        }
-
-        .checklist-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 16px;
-        }
-
-        .checklist-card ul {
-            list-style: none;
-            font-size: 0.95rem;
-        }
-
-        .checklist-card li {
-            padding: 8px 0 8px 18px;
+            padding: 90px 32px;
             position: relative;
         }
 
-        .checklist-card li:before {
-            content: "✔";
+        .setup-section::after {
+            content: '';
             position: absolute;
-            left: 0;
-            color: #0c6dff;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(48, 87, 255, 0.08), transparent 60%);
+            pointer-events: none;
+        }
+
+        .header-block {
+            margin-bottom: 56px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeDrop 0.7s ease forwards;
+        }
+
+        .header-eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.4rem;
+            color: #30c8ff;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .header-title {
+            font-size: clamp(2.6rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-top: 12px;
+        }
+
+        .layout-container {
+            display: flex;
+            gap: 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .flow-column {
+            flex: 2;
+            display: grid;
+            gap: 24px;
+        }
+
+        .flow-card {
+            display: grid;
+            grid-template-columns: 88px 1fr;
+            gap: 28px;
+            padding: 32px;
+            border: 1px solid rgba(48, 87, 255, 0.18);
+            background: linear-gradient(135deg, rgba(18, 18, 23, 0.92), rgba(7, 7, 9, 0.92));
+            backdrop-filter: blur(14px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideFade 0.6s ease forwards;
+        }
+
+        .flow-card:nth-child(1) { animation-delay: 0.1s; }
+        .flow-card:nth-child(2) { animation-delay: 0.2s; }
+        .flow-card:nth-child(3) { animation-delay: 0.3s; }
+        .flow-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .flow-card::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -40%;
+            width: 60%;
+            height: 160%;
+            background: radial-gradient(circle, rgba(48, 87, 255, 0.25), transparent 60%);
+            transform: rotate(20deg);
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .step-badge {
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: grid;
+            place-items: center;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #30c8ff;
+            background: rgba(48, 87, 255, 0.1);
+        }
+
+        .step-icon {
+            width: 34px;
+            height: 2px;
+            background: rgba(48, 87, 255, 0.4);
+            position: relative;
+        }
+
+        .step-icon::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 1px solid rgba(48, 87, 255, 0.8);
+            top: -6px;
+            right: -6px;
+        }
+
+        .flow-body {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .flow-title {
+            font-size: 1.3rem;
             font-weight: 700;
         }
 
-        .network-recommendation {
-            border: 1px solid #d7d7d7;
-            background: #f6f7f8;
-            padding: 24px;
-            margin-top: 24px;
+        .flow-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .network-recommendation h4 {
-            font-size: 1.1rem;
+        .tag-pill {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(48, 87, 255, 0.25);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+        }
+
+        .tag-pill strong {
+            color: #30c8ff;
+            margin-right: 6px;
+        }
+
+        .queue-wrapper {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .queue-chip {
+            padding: 12px 20px;
+            background: rgba(48, 87, 255, 0.1);
+            border: 1px solid rgba(48, 87, 255, 0.3);
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
-        .network-recommendation p {
-            color: #3a3a3a;
-            font-size: 0.95rem;
+        .sidebar-column {
+            flex: 1;
+            display: grid;
+            gap: 24px;
+        }
+
+        .tool-card,
+        .check-card {
+            padding: 28px;
+            border: 1px solid rgba(48, 87, 255, 0.2);
+            background: rgba(12, 12, 18, 0.92);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: popUp 0.6s ease forwards 0.2s;
+        }
+
+        .tool-card::after,
+        .check-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -40%;
+            width: 110%;
+            height: 110%;
+            background: radial-gradient(circle, rgba(48, 87, 255, 0.22), transparent 70%);
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tool-list,
+        .check-list {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tool-list li,
+        .check-list li {
+            font-size: 0.9rem;
+            color: rgba(225, 225, 238, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tool-list li span {
+            font-size: 0.78rem;
+            color: rgba(144, 197, 255, 0.7);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .checkmark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(48, 87, 255, 0.4);
+            color: #30c8ff;
+            font-size: 0.75rem;
+        }
+
+        @keyframes fadeDrop {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideFade {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes popUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 1024px) {
-            .setup-layout {
+            .layout-container {
                 flex-direction: column;
             }
 
-            .setup-section {
-                padding: 48px 18px;
+            .flow-card {
+                grid-template-columns: 1fr;
+                text-align: left;
+            }
+
+            .flow-step {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+
+            .step-icon {
+                width: 80px;
             }
         }
 
         @media (max-width: 600px) {
-            .timeline-step {
-                grid-template-columns: 1fr;
+            .setup-section {
+                padding: 60px 20px;
             }
 
-            .step-index {
-                justify-content: flex-start;
+            .flow-card {
+                padding: 24px;
             }
 
-            .setup-header h2 {
-                font-size: 2rem;
+            .tool-card,
+            .check-card {
+                padding: 24px;
             }
         }
     </style>
 </head>
 <body>
     <section class="setup-section">
-        <header class="setup-header">
-            <h2>Cloud Gaming Setup Blueprint</h2>
-            <p>Build a professional-grade streaming setup with a clear 4-step implementation plan and curated toolkit.</p>
+        <header class="header-block">
+            <span class="header-eyebrow">quick build</span>
+            <h2 class="header-title">Launch-Ready Flow</h2>
         </header>
 
-        <div class="setup-layout">
-            <div class="setup-main">
-                <article class="timeline-step">
-                    <div class="step-index">01</div>
-                    <div class="step-content">
-                        <h3>Assess Connectivity & Hardware</h3>
-                        <p>Run speed and stability diagnostics to ensure your network matches your target quality tier.</p>
-                        <div class="step-details">
-                            <ul>
-                                <li>Use services like CloudPing.info to test latency to major providers.</li>
-                                <li>Prefer Ethernet or Wi-Fi 6E to sustain 4K/120fps streams.</li>
-                                <li>Verify controller compatibility (Xbox Wireless, DualSense, Luna Controller).</li>
-                            </ul>
-                        </div>
-                        <div class="step-actions">
-                            <span class="action-pill">Test Speed</span>
-                            <span class="action-pill">Controller Check</span>
+        <div class="layout-container">
+            <div class="flow-column">
+                <article class="flow-card">
+                    <div class="flow-step">
+                        <div class="step-badge">01</div>
+                        <div class="step-icon"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="flow-title">Signal Check</div>
+                        <div class="flow-tags">
+                            <span class="tag-pill"><strong>Ping</strong> <span>CloudPing | Stadia Speedtest</span></span>
+                            <span class="tag-pill"><strong>Target</strong> &lt;35ms</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="timeline-step">
-                    <div class="step-index">02</div>
-                    <div class="step-content">
-                        <h3>Select Your Streaming Platform</h3>
-                        <p>Match your library priorities and device ecosystem to the right provider.</p>
-                        <div class="step-details">
-                            <ul>
-                                <li>GeForce NOW: Bring-your-own games with RTX 4080-class servers.</li>
-                                <li>Xbox Cloud Gaming: Game Pass library plus native console integration.</li>
-                                <li>PlayStation Plus Premium: Essential for Sony exclusives and classics.</li>
-                            </ul>
-                        </div>
-                        <div class="step-actions">
-                            <span class="action-pill">Compare Plans</span>
+                <article class="flow-card">
+                    <div class="flow-step">
+                        <div class="step-badge">02</div>
+                        <div class="step-icon"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="flow-title">Platform Link</div>
+                        <div class="flow-tags">
+                            <span class="tag-pill"><strong>Primary</strong> GeForce NOW · Xbox Cloud · PS Plus</span>
+                            <span class="tag-pill"><strong>Auth</strong> MFA + PIN</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="timeline-step">
-                    <div class="step-index">03</div>
-                    <div class="step-content">
-                        <h3>Optimize Streaming Environment</h3>
-                        <p>Ensure consistent performance by governing bandwidth and display calibration.</p>
-                        <div class="step-details">
-                            <ul>
-                                <li>Enable Quality of Service (QoS) with priority for gaming packets.</li>
-                                <li>Disable background downloads on consoles and PCs.</li>
-                                <li>Calibrate HDR with provider-recommended settings (HDR10 / Dolby Vision).</li>
-                            </ul>
-                        </div>
-                        <div class="step-actions">
-                            <span class="action-pill">QoS Guide</span>
-                            <span class="action-pill">Display Setup</span>
+                <article class="flow-card">
+                    <div class="flow-step">
+                        <div class="step-badge">03</div>
+                        <div class="step-icon"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="flow-title">Optics & Control</div>
+                        <div class="flow-tags">
+                            <span class="tag-pill"><strong>Display</strong> HDR10 · VRR</span>
+                            <span class="tag-pill"><strong>Controllers</strong> DualSense | Xbox Elite | Luna</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="timeline-step">
-                    <div class="step-index">04</div>
-                    <div class="step-content">
-                        <h3>Integrate Companion Services</h3>
-                        <p>Automate highlights, overlays, and community sync for a studio-grade presence.</p>
-                        <div class="step-details">
-                                <ul>
-                                <li>Configure OBS overlays tailored to cloud gaming latency.</li>
-                                <li>Link Discord Stage channels for co-streaming events.</li>
-                                <li>Schedule backups for game captures using cloud storage.</li>
-                            </ul>
-                        </div>
-                        <div class="step-actions">
-                            <span class="action-pill">OBS Profiles</span>
-                            <span class="action-pill">Discord Automation</span>
+                <article class="flow-card">
+                    <div class="flow-step">
+                        <div class="step-badge">04</div>
+                        <div class="step-icon"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="flow-title">Launch Routine</div>
+                        <div class="queue-wrapper">
+                            <span class="queue-chip">QoS On</span>
+                            <span class="queue-chip">Downloads Off</span>
+                            <span class="queue-chip">Overlay Ready</span>
                         </div>
                     </div>
                 </article>
             </div>
 
-            <aside class="setup-aside">
-                <div class="toolkit-card">
-                    <h3>Pro Toolkit</h3>
-                    <ul class="toolkit-list">
-                        <li>
-                            <div class="tool-name">NetDuma R3 Router Firmware</div>
-                            <div class="tool-meta">Smart queue management with ping heatmaps</div>
-                        </li>
-                        <li>
-                            <div class="tool-name">OBS Studio 31.0 Cloud Profile</div>
-                            <div class="tool-meta">Optimized encoder presets for streamed input</div>
-                        </li>
-                        <li>
-                            <div class="tool-name">Razer Kishi Ultra</div>
-                            <div class="tool-meta">Low-latency mobile controller with USB-C passthrough</div>
-                        </li>
-                        <li>
-                            <div class="tool-name">NVIDIA Reflex Analyzer</div>
-                            <div class="tool-meta">Measure end-to-end latency on supported monitors</div>
-                        </li>
+            <aside class="sidebar-column">
+                <div class="tool-card">
+                    <h3 class="sidebar-title">Toolkit Stack</h3>
+                    <ul class="tool-list">
+                        <li>NetDuma R3<span>Latency map</span></li>
+                        <li>OBS Cloud Profile<span>18ms scenes</span></li>
+                        <li>Elgato Neo Light<span>Flat keylighting</span></li>
+                        <li>Razer Kishi Ultra<span>Mobile grip</span></li>
                     </ul>
                 </div>
 
-                <div class="checklist-card">
-                    <h3>Launch Checklist</h3>
-                    <ul>
-                        <li>Update GPU firmware and controller drivers</li>
-                        <li>Verify secure login and MFA for all platforms</li>
-                        <li>Enable session recording for highlight recaps</li>
-                        <li>Schedule weekly maintenance window</li>
+                <div class="check-card">
+                    <h3 class="sidebar-title">Ready Check</h3>
+                    <ul class="check-list">
+                        <li><span>Firmware current</span><span class="checkmark">✔</span></li>
+                        <li><span>Session recorder on</span><span class="checkmark">✔</span></li>
+                        <li><span>Alerts muted</span><span class="checkmark">✔</span></li>
+                        <li><span>Storage synced</span><span class="checkmark">✔</span></li>
                     </ul>
-                </div>
-
-                <div class="network-recommendation">
-                    <h4>Network Tip</h4>
-                    <p>For multi-player households, assign a dedicated 5 GHz SSID to your gaming devices and cap smart home gadgets to 2.4 GHz to avoid interference during peak sessions.</p>
                 </div>
             </aside>
         </div>

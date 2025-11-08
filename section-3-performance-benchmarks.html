@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Gaming Performance Benchmarks - Section 3</title>
+    <title>Performance Matrix</title>
     <style>
         * {
             margin: 0;
@@ -12,457 +12,409 @@
         }
 
         body {
-            font-family: "system-ui", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: #1c1c1c;
-            background: #fff;
+            font-family: "system-ui", -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 30%, #2c5364 100%);
+            color: #e0f7fa;
+            overflow-x: hidden;
         }
 
         .benchmark-section {
-            max-width: 1380px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 60px 22px;
+            padding: 90px 32px;
         }
 
-        .header-block {
-            margin-bottom: 44px;
+        .section-intro {
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: slideIn 0.8s ease forwards;
         }
 
-        .header-block h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0d0d0d;
+        .section-intro h2 {
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            font-weight: 800;
             margin-bottom: 10px;
+            letter-spacing: -1.5px;
         }
 
-        .header-block p {
+        .section-intro p {
             font-size: 1.1rem;
-            color: #606060;
+            color: #80deea;
+            font-weight: 300;
         }
 
-        .layout-grid {
+        .layout-main {
             display: flex;
             gap: 32px;
-            align-items: flex-start;
         }
 
-        .primary-area {
+        .chart-area {
             flex: 2;
+            display: grid;
+            gap: 28px;
         }
 
-        .sidebar-area {
-            flex: 1;
+        .bench-card {
+            background: rgba(11, 19, 43, 0.75);
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            padding: 36px;
+            backdrop-filter: blur(16px);
+            opacity: 0;
+            transform: scale(0.95);
+            animation: zoomIn 0.6s ease forwards;
         }
 
-        .benchmark-card {
-            border: 1px solid #d0d0d0;
-            background: #fafafa;
-            padding: 28px;
-            margin-bottom: 24px;
-        }
+        .bench-card:nth-child(1) { animation-delay: 0.1s; }
+        .bench-card:nth-child(2) { animation-delay: 0.2s; }
 
-        .benchmark-card h3 {
+        .bench-card h3 {
             font-size: 1.4rem;
-            font-weight: 600;
-            color: #0d0d0d;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
+            font-weight: 700;
         }
 
-        .metric-row {
+        .chart-bar-item {
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .bar-label {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-            border-bottom: 1px solid #dcdcdc;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
         }
 
-        .metric-row:last-child {
-            border-bottom: none;
+        .bar-service {
+            font-weight: 600;
         }
 
-        .metric-label {
-            font-weight: 500;
-            color: #2c2c2c;
-            font-size: 0.98rem;
-        }
-
-        .metric-value {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .metric-number {
+        .bar-value {
+            color: #80deea;
             font-weight: 700;
-            font-size: 1.4rem;
-            color: #0066ff;
         }
 
-        .metric-bar {
-            width: 160px;
+        .bar-track {
             height: 10px;
-            background: #e4e4e4;
+            background: rgba(128, 222, 234, 0.08);
             position: relative;
             overflow: hidden;
         }
 
-        .metric-fill {
+        .bar-fill {
             height: 100%;
-            background: #0066ff;
+            background: linear-gradient(90deg, #00bfa5 0%, #00acc1 100%);
+            position: relative;
+            transform-origin: left;
+            animation: barGrow 1.5s ease forwards;
         }
 
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: #00c851;
-            margin-right: 6px;
+        .bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
         }
 
-        .status-warning {
-            background: #ff9800;
+        .speed-grid {
+            display: grid;
+            gap: 16px;
         }
 
-        .status-critical {
-            background: #ff3547;
-        }
-
-        .latency-breakdown {
-            margin-top: 20px;
-        }
-
-        .breakdown-item {
+        .speed-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            font-size: 0.9rem;
-            color: #444;
-        }
-
-        .sidebar-widget {
-            border: 1px solid #d0d0d0;
-            background: #fafafa;
-            padding: 26px;
-            margin-bottom: 24px;
-        }
-
-        .sidebar-widget h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #0d0d0d;
-            margin-bottom: 18px;
-        }
-
-        .realtime-indicator {
-            display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px;
-            background: #fff;
-            border: 1px solid #d0d0d0;
-            margin-bottom: 12px;
-        }
-
-        .pulse {
-            width: 12px;
-            height: 12px;
-            background: #00c851;
-            animation: pulse-animation 1.5s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .realtime-text {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #2c2c2c;
-        }
-
-        .quality-tier {
             padding: 18px;
-            background: #fff;
-            border: 1px solid #d0d0d0;
-            margin-bottom: 14px;
+            background: rgba(128, 222, 234, 0.05);
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
         }
 
-        .quality-tier strong {
-            display: block;
-            font-size: 1.05rem;
-            color: #0d0d0d;
+        .speed-row.optimal {
+            border-left-color: #00bfa5;
+        }
+
+        .speed-row.moderate {
+            border-left-color: #ffa726;
+        }
+
+        .speed-row.low {
+            border-left-color: #ef5350;
+        }
+
+        .speed-row:hover {
+            background: rgba(128, 222, 234, 0.12);
+            transform: translateX(8px);
+        }
+
+        .speed-tier {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .speed-status {
+            font-size: 0.85rem;
+            color: #80deea;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .info-panel {
+            flex: 1;
+            display: grid;
+            gap: 28px;
+        }
+
+        .info-box {
+            background: rgba(11, 19, 43, 0.75);
+            border: 1px solid rgba(128, 222, 234, 0.2);
+            padding: 32px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: zoomIn 0.6s ease forwards 0.15s;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(128, 222, 234, 0.15), transparent);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .info-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-display {
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-display:last-child {
+            margin-bottom: 0;
+        }
+
+        .metric-title {
+            font-size: 0.8rem;
+            color: #80deea;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: 8px;
         }
 
-        .quality-tier p {
-            font-size: 0.9rem;
-            color: #555;
+        .metric-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #00bfa5;
         }
 
-        .dark-panel {
-            background: #1a1a1a;
-            color: #fff;
-            border: 1px solid #1a1a1a;
-            padding: 26px;
+        .pulse-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: rgba(0, 191, 165, 0.12);
+            border: 1px solid rgba(0, 191, 165, 0.3);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #00bfa5;
         }
 
-        .dark-panel h3 {
-            color: #fff;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00bfa5;
+            animation: pulse 1.5s ease infinite;
         }
 
-        .dark-panel p {
-            color: #c0c0c0;
-            margin-bottom: 12px;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .dark-panel ul {
-            list-style: none;
-            color: #c0c0c0;
+        @keyframes zoomIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .dark-panel li {
-            padding: 6px 0;
-            padding-left: 18px;
-            position: relative;
+        @keyframes barGrow {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
         }
 
-        .dark-panel li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #0066ff;
+        @keyframes shimmer {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
         }
 
-        @media (max-width: 992px) {
-            .layout-grid {
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.4);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .layout-main {
                 flex-direction: column;
             }
+        }
 
-            .metric-bar {
-                width: 100px;
-            }
-
+        @media (max-width: 600px) {
             .benchmark-section {
-                padding: 40px 18px;
+                padding: 60px 20px;
             }
 
-            .header-block h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .header-block h2 {
-                font-size: 1.75rem;
-            }
-
-            .metric-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .metric-bar {
-                width: 100%;
-                max-width: 200px;
-            }
-
-            .benchmark-card, .sidebar-widget, .dark-panel {
-                padding: 20px;
+            .bench-card, .info-box {
+                padding: 28px;
             }
         }
     </style>
 </head>
 <body>
     <section class="benchmark-section">
-        <header class="header-block">
-            <h2>Performance Benchmarks</h2>
-            <p>Real-world streaming metrics across platforms and connection types</p>
+        <header class="section-intro">
+            <h2>Performance Matrix</h2>
+            <p>Real-world streaming metrics · Updated every 6 hours</p>
         </header>
 
-        <div class="layout-grid">
-            <div class="primary-area">
-                <div class="benchmark-card">
-                    <h3>Average Latency by Platform (2026 Q1)</h3>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator"></span>
-                            GeForce NOW Ultimate
+        <div class="layout-main">
+            <div class="chart-area">
+                <article class="bench-card">
+                    <h3>Average Latency (ms)</h3>
+                    <div class="chart-bar-item">
+                        <div class="bar-label">
+                            <span class="bar-service">GeForce NOW Ultimate</span>
+                            <span class="bar-value">32ms</span>
                         </div>
-                        <div class="metric-value">
-                            <span class="metric-number">32ms</span>
-                            <div class="metric-bar">
-                                <div class="metric-fill" style="width: 82%;"></div>
-                            </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 86%;"></div>
                         </div>
                     </div>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator"></span>
-                            Xbox Cloud Gaming
+                    <div class="chart-bar-item">
+                        <div class="bar-label">
+                            <span class="bar-service">Amazon Luna+</span>
+                            <span class="bar-value">38ms</span>
                         </div>
-                        <div class="metric-value">
-                            <span class="metric-number">44ms</span>
-                            <div class="metric-bar">
-                                <div class="metric-fill" style="width: 65%;"></div>
-                            </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 78%;"></div>
                         </div>
                     </div>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator"></span>
-                            Amazon Luna+
+                    <div class="chart-bar-item">
+                        <div class="bar-label">
+                            <span class="bar-service">PlayStation Plus Premium</span>
+                            <span class="bar-value">41ms</span>
                         </div>
-                        <div class="metric-value">
-                            <span class="metric-number">38ms</span>
-                            <div class="metric-bar">
-                                <div class="metric-fill" style="width: 74%;"></div>
-                            </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 72%;"></div>
                         </div>
                     </div>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator"></span>
-                            PlayStation Plus Premium
+                    <div class="chart-bar-item">
+                        <div class="bar-label">
+                            <span class="bar-service">Xbox Cloud Gaming</span>
+                            <span class="bar-value">44ms</span>
                         </div>
-                        <div class="metric-value">
-                            <span class="metric-number">41ms</span>
-                            <div class="metric-bar">
-                                <div class="metric-fill" style="width: 68%;"></div>
-                            </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width: 66%;"></div>
                         </div>
                     </div>
+                </article>
 
-                    <div class="latency-breakdown">
-                        <strong style="display: block; margin-bottom: 10px; color: #2c2c2c;">Latency Breakdown (GeForce NOW)</strong>
-                        <div class="breakdown-item">
-                            <span>Network round-trip:</span>
-                            <span>18ms</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <span>Encoding overhead:</span>
-                            <span>7ms</span>
-                        </div>
-                        <div class="breakdown-item">
-                            <span>Decoding & rendering:</span>
-                            <span>7ms</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="benchmark-card">
-                    <h3>Streaming Quality Metrics</h3>
-                    <div class="metric-row">
-                        <div class="metric-label">Average bitrate (4K)</div>
-                        <div class="metric-value">
-                            <span class="metric-number">45 Mbps</span>
-                        </div>
-                    </div>
-                    <div class="metric-row">
-                        <div class="metric-label">Frame stability (120fps)</div>
-                        <div class="metric-value">
-                            <span class="metric-number">97.3%</span>
-                            <div class="metric-bar">
-                                <div class="metric-fill" style="width: 97%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="metric-row">
-                        <div class="metric-label">Packet loss tolerance</div>
-                        <div class="metric-value">
-                            <span class="metric-number">&lt; 0.5%</span>
-                        </div>
-                    </div>
-                    <div class="metric-row">
-                        <div class="metric-label">HDR10 support</div>
-                        <div class="metric-value">
-                            <span class="metric-number">Available</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="benchmark-card">
+                <article class="bench-card">
                     <h3>Connection Speed Impact</h3>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator status-critical"></span>
-                            15 Mbps (Below minimum)
+                    <div class="speed-grid">
+                        <div class="speed-row low">
+                            <span class="speed-tier">15 Mbps</span>
+                            <span class="speed-status">Unstable</span>
                         </div>
-                        <div class="metric-value">
-                            <span style="color: #ff3547; font-weight: 600;">Frequent buffering</span>
+                        <div class="speed-row moderate">
+                            <span class="speed-tier">25 Mbps (1080p)</span>
+                            <span class="speed-status">Moderate</span>
                         </div>
-                    </div>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator status-warning"></span>
-                            25 Mbps (1080p/60fps)
+                        <div class="speed-row optimal">
+                            <span class="speed-tier">50 Mbps (4K)</span>
+                            <span class="speed-status">Optimal</span>
                         </div>
-                        <div class="metric-value">
-                            <span style="color: #ff9800; font-weight: 600;">Occasional drops</span>
-                        </div>
-                    </div>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator"></span>
-                            50 Mbps (4K/60fps)
-                        </div>
-                        <div class="metric-value">
-                            <span style="color: #00c851; font-weight: 600;">Stable streaming</span>
+                        <div class="speed-row optimal">
+                            <span class="speed-tier">100+ Mbps (4K/120)</span>
+                            <span class="speed-status">Elite</span>
                         </div>
                     </div>
-                    <div class="metric-row">
-                        <div class="metric-label">
-                            <span class="status-indicator"></span>
-                            100+ Mbps (4K/120fps)
-                        </div>
-                        <div class="metric-value">
-                            <span style="color: #00c851; font-weight: 600;">Optimal experience</span>
-                        </div>
-                    </div>
-                </div>
+                </article>
             </div>
 
-            <aside class="sidebar-area">
-                <div class="sidebar-widget">
-                    <h3>Live Status Monitor</h3>
-                    <div class="realtime-indicator">
-                        <div class="pulse"></div>
-                        <span class="realtime-text">Data updated 2 minutes ago</span>
+            <aside class="info-panel">
+                <div class="info-box">
+                    <h3>Live Metrics</h3>
+                    <div class="metric-display">
+                        <div class="metric-title">Avg Bitrate (4K)</div>
+                        <div class="metric-number">45</div>
+                        <span style="font-size: 0.9rem; color: #80deea;">Mbps</span>
                     </div>
-                    <p style="font-size: 0.9rem; color: #555;">Performance metrics are aggregated from 12,500+ test sessions across North America, Europe, and Asia-Pacific regions.</p>
-                </div>
-
-                <div class="sidebar-widget">
-                    <h3>Quality Tiers Explained</h3>
-                    <div class="quality-tier">
-                        <strong>Entry (720p/30fps)</strong>
-                        <p>Casual games, mobile devices, slower connections</p>
+                    <div class="metric-display">
+                        <div class="metric-title">Frame Stability</div>
+                        <div class="metric-number">97.3%</div>
                     </div>
-                    <div class="quality-tier">
-                        <strong>Standard (1080p/60fps)</strong>
-                        <p>Mainstream gaming, most AAA titles, balanced experience</p>
-                    </div>
-                    <div class="quality-tier">
-                        <strong>Premium (4K/60fps)</strong>
-                        <p>High-fidelity visuals, story-driven games, 4K displays</p>
-                    </div>
-                    <div class="quality-tier">
-                        <strong>Ultimate (4K/120fps)</strong>
-                        <p>Competitive gaming, ultra-low latency, enthusiast tier</p>
+                    <div class="pulse-indicator">
+                        <span class="pulse-dot"></span>
+                        <span>Live</span>
                     </div>
                 </div>
 
-                <div class="dark-panel">
-                    <h3>Testing Methodology</h3>
-                    <p>Our benchmarks use controlled environments with standardized equipment:</p>
-                    <ul>
-                        <li>Wired gigabit ethernet connections</li>
-                        <li>Peak and off-peak hour sampling</li>
-                        <li>Multiple geographic test nodes</li>
-                        <li>Consistent game scenarios</li>
-                        <li>Professional-grade latency tools</li>
-                    </ul>
+                <div class="info-box">
+                    <h3>Test Specs</h3>
+                    <div style="font-size: 0.9rem; color: #b2ebf2; line-height: 1.8; position: relative; z-index: 1;">
+                        <p>• 12,500+ sessions sampled</p>
+                        <p>• Wired gigabit connections</p>
+                        <p>• Peak + off-peak hours</p>
+                        <p>• Multi-region nodes</p>
+                    </div>
                 </div>
             </aside>
         </div>

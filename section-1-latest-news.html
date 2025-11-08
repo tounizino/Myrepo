@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Gaming Latest News - Section 1</title>
+    <title>Latest News - Cloud Gaming</title>
     <style>
         * {
             margin: 0;
@@ -12,42 +12,52 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        .cloud-gaming-section {
-            max-width: 1400px;
+        .news-section {
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 80px 24px;
+            position: relative;
         }
 
         .section-header {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0a0a0a;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -2px;
         }
 
         .section-header p {
-            font-size: 1.1rem;
-            color: #666;
+            font-size: 1.2rem;
+            color: #888;
+            font-weight: 300;
         }
 
         .layout-container {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: flex-start;
         }
 
         .main-content {
             flex: 2;
+            display: grid;
+            gap: 24px;
         }
 
         .sidebar-content {
@@ -57,82 +67,141 @@
         }
 
         .article-card {
-            background: #f8f9fa;
-            padding: 25px;
-            margin-bottom: 20px;
-            border: 1px solid #e0e0e0;
-            transition: transform 0.2s ease;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid #222;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .article-card:nth-child(2) { animation-delay: 0.2s; }
+        .article-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .article-card:hover::before {
+            transform: scaleY(1);
         }
 
         .article-card:hover {
-            transform: translateY(-2px);
-            border-color: #4a90e2;
+            transform: translateX(8px);
+            border-color: #667eea;
+            background: linear-gradient(135deg, #222 0%, #1a1a1a 100%);
         }
 
         .article-meta {
             display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 16px;
+            margin-bottom: 16px;
             font-size: 0.85rem;
-            color: #666;
         }
 
         .article-category {
-            background: #4a90e2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
-            padding: 4px 12px;
-            font-weight: 600;
+            padding: 6px 16px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
         }
 
         .article-date {
-            padding: 4px 0;
+            color: #666;
+            display: flex;
+            align-items: center;
         }
 
         .article-card h3 {
             font-size: 1.5rem;
-            color: #0a0a0a;
+            color: #fff;
             margin-bottom: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            line-height: 1.3;
+            transition: color 0.3s;
         }
 
-        .article-card p {
-            color: #444;
-            margin-bottom: 15px;
-            line-height: 1.7;
+        .article-card:hover h3 {
+            color: #667eea;
         }
 
         .read-more {
-            display: inline-block;
-            color: #4a90e2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
             font-weight: 600;
             text-decoration: none;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.2s;
+            margin-top: 16px;
+            transition: gap 0.3s ease;
         }
 
         .read-more:hover {
-            border-bottom-color: #4a90e2;
+            gap: 16px;
+        }
+
+        .read-more::after {
+            content: '→';
+            font-size: 1.2rem;
         }
 
         .trending-widget {
-            background: #f8f9fa;
-            padding: 25px;
-            border: 1px solid #e0e0e0;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 32px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.4s;
+        }
+
+        .trending-widget::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
         }
 
         .trending-widget h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #0a0a0a;
-            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: #fff;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
         }
 
         .trending-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .trending-item:hover {
+            transform: translateX(8px);
         }
 
         .trending-item:last-child {
@@ -140,42 +209,49 @@
         }
 
         .trending-number {
-            display: inline-block;
-            width: 28px;
-            height: 28px;
-            background: #4a90e2;
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.2);
             color: #fff;
-            text-align: center;
-            line-height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700;
-            margin-right: 10px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
         }
 
         .trending-item a {
-            color: #0a0a0a;
+            color: #fff;
             text-decoration: none;
             font-weight: 500;
+            flex: 1;
+            transition: letter-spacing 0.3s ease;
         }
 
-        .trending-item a:hover {
-            color: #4a90e2;
+        .trending-item:hover a {
+            letter-spacing: 0.5px;
         }
 
         .quick-stats {
-            background: #0a0a0a;
-            color: #fff;
-            padding: 25px;
-            border: 1px solid #0a0a0a;
+            background: #0f0f0f;
+            border: 1px solid #222;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.5s;
         }
 
         .quick-stats h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 28px;
+            font-weight: 700;
         }
 
         .stat-item {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            position: relative;
         }
 
         .stat-item:last-child {
@@ -184,16 +260,67 @@
 
         .stat-label {
             font-size: 0.85rem;
-            color: #999;
-            margin-bottom: 5px;
+            color: #666;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #4a90e2;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: countUp 2s ease forwards;
+        }
+
+        .stat-bar {
+            height: 4px;
+            background: #222;
+            margin-top: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            animation: fillBar 2s ease forwards;
+            transform-origin: left;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes fillBar {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
         }
 
         @media (max-width: 968px) {
@@ -203,42 +330,33 @@
 
             .sidebar-content {
                 position: static;
-                width: 100%;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .news-section {
+                padding: 40px 16px;
             }
 
             .section-header h2 {
                 font-size: 2rem;
             }
-        }
-
-        @media (max-width: 640px) {
-            .cloud-gaming-section {
-                padding: 30px 15px;
-            }
-
-            .section-header h2 {
-                font-size: 1.75rem;
-            }
-
-            .article-card h3 {
-                font-size: 1.25rem;
-            }
 
             .article-card {
-                padding: 20px;
-            }
-
-            .trending-widget, .quick-stats {
-                padding: 20px;
+                padding: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <section class="cloud-gaming-section">
+    <section class="news-section">
         <div class="section-header">
-            <h2>Latest Cloud Gaming News</h2>
-            <p>Stay updated with the newest developments in cloud gaming technology</p>
+            <h2>Latest Updates</h2>
+            <p>Breaking news from the cloud gaming universe</p>
         </div>
 
         <div class="layout-container">
@@ -246,82 +364,67 @@
                 <article class="article-card">
                     <div class="article-meta">
                         <span class="article-category">Breaking</span>
-                        <span class="article-date">January 15, 2026</span>
+                        <span class="article-date">2h ago</span>
                     </div>
-                    <h3>NVIDIA GeForce Now Expands to 120fps Streaming for Ultimate Members</h3>
-                    <p>NVIDIA announces a major upgrade to its GeForce Now Ultimate tier, bringing 120fps streaming capabilities to supported games. This enhancement significantly reduces input lag and provides smoother gameplay, especially for competitive titles. The update is rolling out across all regions with RTX 4080-powered servers.</p>
-                    <a href="#" class="read-more">Read Full Article →</a>
-                </article>
-
-                <article class="article-card">
-                    <div class="article-meta">
-                        <span class="article-category">Analysis</span>
-                        <span class="article-date">January 14, 2026</span>
-                    </div>
-                    <h3>Xbox Cloud Gaming Reaches 30 Million Active Users Milestone</h3>
-                    <p>Microsoft's Xbox Cloud Gaming service has surpassed 30 million monthly active users, marking a 45% increase from last year. The growth is attributed to expanded device support, improved streaming quality, and the integration of popular AAA titles into Game Pass Ultimate. Industry analysts predict continued growth through 2026.</p>
-                    <a href="#" class="read-more">Read Full Article →</a>
-                </article>
-
-                <article class="article-card">
-                    <div class="article-meta">
-                        <span class="article-category">Tech</span>
-                        <span class="article-date">January 13, 2026</span>
-                    </div>
-                    <h3>Amazon Luna Introduces AI-Powered Latency Optimization</h3>
-                    <p>Amazon Luna unveils new AI-driven technology that dynamically adjusts streaming parameters based on network conditions. The system predicts bandwidth fluctuations and preemptively optimizes video encoding, resulting in 30% fewer streaming interruptions. Beta testing shows promising results across various internet speeds.</p>
-                    <a href="#" class="read-more">Read Full Article →</a>
+                    <h3>GeForce NOW Ultimate Hits 120fps Streaming</h3>
+                    <a href="#" class="read-more">Read Story</a>
                 </article>
 
                 <article class="article-card">
                     <div class="article-meta">
                         <span class="article-category">Industry</span>
-                        <span class="article-date">January 12, 2026</span>
+                        <span class="article-date">5h ago</span>
                     </div>
-                    <h3>PlayStation Plus Premium Adds 15 New Cloud-Enabled Titles</h3>
-                    <p>Sony expands its cloud gaming library with 15 new titles available for streaming on PlayStation Plus Premium. The lineup includes several PS5 exclusives, making them accessible to players without the console. The expansion demonstrates Sony's commitment to making premium gaming experiences more accessible.</p>
-                    <a href="#" class="read-more">Read Full Article →</a>
+                    <h3>Xbox Cloud Gaming Reaches 30M Active Users</h3>
+                    <a href="#" class="read-more">Read Story</a>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-meta">
+                        <span class="article-category">Tech</span>
+                        <span class="article-date">1d ago</span>
+                    </div>
+                    <h3>Amazon Luna Unveils AI Latency Optimization</h3>
+                    <a href="#" class="read-more">Read Story</a>
                 </article>
             </div>
 
             <aside class="sidebar-content">
                 <div class="trending-widget">
-                    <h3>Trending Topics</h3>
+                    <h3>🔥 Trending Now</h3>
                     <div class="trending-item">
                         <span class="trending-number">1</span>
-                        <a href="#">5G and Cloud Gaming Performance</a>
+                        <a href="#">5G Cloud Gaming</a>
                     </div>
                     <div class="trending-item">
                         <span class="trending-number">2</span>
-                        <a href="#">Best Cloud Gaming Services 2026</a>
+                        <a href="#">Best Services 2026</a>
                     </div>
                     <div class="trending-item">
                         <span class="trending-number">3</span>
-                        <a href="#">Reducing Latency in Cloud Gaming</a>
+                        <a href="#">Latency Reduction</a>
                     </div>
                     <div class="trending-item">
                         <span class="trending-number">4</span>
-                        <a href="#">Cloud Gaming vs Local Gaming</a>
-                    </div>
-                    <div class="trending-item">
-                        <span class="trending-number">5</span>
-                        <a href="#">Future of Game Streaming</a>
+                        <a href="#">Cloud vs Local</a>
                     </div>
                 </div>
 
                 <div class="quick-stats">
-                    <h3>Industry Stats</h3>
+                    <h3>Live Stats</h3>
                     <div class="stat-item">
                         <div class="stat-label">Global Users</div>
                         <div class="stat-value">87.2M</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 87%;"></div>
+                        </div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-label">Market Growth</div>
+                        <div class="stat-label">Growth Rate</div>
                         <div class="stat-value">+42%</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Avg. Latency</div>
-                        <div class="stat-value">38ms</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 42%;"></div>
+                        </div>
                     </div>
                 </div>
             </aside>
