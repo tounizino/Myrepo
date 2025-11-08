@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Nexus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(155deg, #0f0c29 0%, #302b63 35%, #24243e 100%);
+            color: #f2f4ff;
+            overflow-x: hidden;
+        }
+
+        .community-section {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 90px 32px;
+        }
+
+        .community-header {
+            margin-bottom: 52px;
+            opacity: 0;
+            animation: fadeSlide 0.7s ease forwards;
+        }
+
+        .community-header h2 {
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -1.4px;
+            background: linear-gradient(135deg, #e94eff 0%, #7b43ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .community-header p {
+            color: #c4acff;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.08em;
+        }
+
+        .community-layout {
+            display: flex;
+            gap: 32px;
+        }
+
+        .community-main {
+            flex: 2;
+            display: grid;
+            gap: 28px;
+        }
+
+        .event-card {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 24px;
+            align-items: center;
+            padding: 28px;
+            border: 1px solid rgba(233, 78, 255, 0.22);
+            background: linear-gradient(135deg, rgba(18, 16, 40, 0.9), rgba(9, 8, 20, 0.9));
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .event-card:nth-child(1) { animation-delay: 0.1s; }
+        .event-card:nth-child(2) { animation-delay: 0.2s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #e94eff 0%, #7b43ff 100%);
+            transform: scaleY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .event-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .event-card:hover {
+            border-color: rgba(233, 78, 255, 0.5);
+        }
+
+        .event-date-block {
+            text-align: center;
+            padding: 16px;
+            background: rgba(233, 78, 255, 0.08);
+            border: 1px solid rgba(233, 78, 255, 0.25);
+        }
+
+        .event-day {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e94eff;
+            line-height: 1;
+        }
+
+        .event-month {
+            font-size: 0.78rem;
+            color: #c4acff;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .event-body h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f2f4ff;
+        }
+
+        .event-meta {
+            font-size: 0.8rem;
+            color: #c4acff;
+            margin-bottom: 10px;
+            letter-spacing: 0.06em;
+        }
+
+        .event-description {
+            font-size: 0.88rem;
+            color: rgba(242, 244, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        .event-action a {
+            padding: 12px 24px;
+            border: 1px solid rgba(233, 78, 255, 0.5);
+            background: rgba(233, 78, 255, 0.12);
+            color: #e94eff;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .event-action a:hover {
+            background: linear-gradient(135deg, rgba(233, 78, 255, 0.4), rgba(123, 67, 255, 0.4));
+            color: #fff;
+        }
+
+        .community-sidebar {
+            flex: 1;
+            display: grid;
+            gap: 28px;
+        }
+
+        .cta-card,
+        .stats-card,
+        .channels-card {
+            padding: 28px;
+            border: 1px solid rgba(233, 78, 255, 0.22);
+            background: linear-gradient(135deg, rgba(18, 16, 40, 0.9), rgba(9, 8, 20, 0.9));
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .cta-card { animation-delay: 0.15s; }
+        .stats-card { animation-delay: 0.25s; }
+        .channels-card { animation-delay: 0.35s; }
+
+        .cta-card::after,
+        .stats-card::after,
+        .channels-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(233, 78, 255, 0.2), transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-card p {
+            font-size: 0.88rem;
+            color: rgba(242, 244, 255, 0.8);
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .cta-card a {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 1px solid rgba(123, 67, 255, 0.6);
+            background: linear-gradient(135deg, #7b43ff 0%, #e94eff 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-card a:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(233, 78, 255, 0.12);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-entry:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #c4acff;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #e94eff;
+        }
+
+        .channel-list {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .channel-list li {
+            font-size: 0.88rem;
+            color: rgba(242, 244, 255, 0.8);
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .channel-list li::before {
+            content: '#';
+            position: absolute;
+            left: 0;
+            color: #7b43ff;
+            font-weight: 700;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .community-layout {
+                flex-direction: column;
+            }
+
+            .event-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .event-date-block {
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .community-section {
+                padding: 60px 20px;
+            }
+
+            .event-card,
+            .cta-card,
+            .stats-card,
+            .channels-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="community-section">
+        <header class="community-header">
+            <h2>Community Nexus</h2>
+            <p>Connect · Compete · Collaborate</p>
+        </header>
+
+        <div class="community-layout">
+            <div class="community-main">
+                <article class="event-card">
+                    <div class="event-date-block">
+                        <div class="event-day">12</div>
+                        <div class="event-month">Feb</div>
+                    </div>
+                    <div class="event-body">
+                        <h3>Cloud Royale Invitational</h3>
+                        <div class="event-meta">6PM GMT · Twitch & Kick</div>
+                        <p class="event-description">Top streamers compete in Apex, Valorant & Fortnite via cloud servers</p>
+                    </div>
+                    <div class="event-action">
+                        <a href="#">Register</a>
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date-block">
+                        <div class="event-day">18</div>
+                        <div class="event-month">Feb</div>
+                    </div>
+                    <div class="event-body">
+                        <h3>Latency Lab Workshop</h3>
+                        <div class="event-meta">4PM PST · Discord Live</div>
+                        <p class="event-description">Network engineers share sub-30ms streaming best practices</p>
+                    </div>
+                    <div class="event-action">
+                        <a href="#">Save Seat</a>
+                    </div>
+                </article>
+
+                <article class="event-card">
+                    <div class="event-date-block">
+                        <div class="event-day">3-7</div>
+                        <div class="event-month">Mar</div>
+                    </div>
+                    <div class="event-body">
+                        <h3>Creator Collaboration Week</h3>
+                        <div class="event-meta">Global · Multi-platform</div>
+                        <p class="event-description">Matchmaking for new creators to join stream teams</p>
+                    </div>
+                    <div class="event-action">
+                        <a href="#">Apply</a>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="community-sidebar">
+                <div class="cta-card">
+                    <h3 class="sidebar-title">Join Discord</h3>
+                    <p>Access latency clinics, platform betas, and co-marketing opportunities</p>
+                    <a href="#">Enter Server</a>
+                </div>
+
+                <div class="stats-card">
+                    <h3 class="sidebar-title">Nexus Stats</h3>
+                    <div class="stat-entry">
+                        <span class="stat-label">Members</span>
+                        <span class="stat-value">38.6K</span>
+                    </div>
+                    <div class="stat-entry">
+                        <span class="stat-label">Chapters</span>
+                        <span class="stat-value">42</span>
+                    </div>
+                    <div class="stat-entry">
+                        <span class="stat-label">Events/mo</span>
+                        <span class="stat-value">18</span>
+                    </div>
+                </div>
+
+                <div class="channels-card">
+                    <h3 class="sidebar-title">Top Channels</h3>
+                    <ul class="channel-list">
+                        <li>latency-lab — Network troubleshooting</li>
+                        <li>creator-collabs — Find co-stream partners</li>
+                        <li>gear-marketplace — Buy & sell</li>
+                        <li>beta-access — New releases</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>
