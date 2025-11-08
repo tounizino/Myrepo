@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Platform Comparison - Section 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #151515;
+            background: #ffffff;
+        }
+
+        .comparison-section {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .section-title {
+            margin-bottom: 36px;
+        }
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+        }
+
+        .main-column {
+            flex: 2;
+        }
+
+        .secondary-column {
+            flex: 1;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .comparison-table thead th {
+            text-align: left;
+            padding: 16px;
+            background: #f1f1f1;
+            border: 1px solid #d6d6d6;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .comparison-table tbody td {
+            padding: 18px 16px;
+            border: 1px solid #d6d6d6;
+            vertical-align: top;
+        }
+
+        .platform-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0a0a0a;
+        }
+
+        .feature-highlight {
+            color: #2f7bf6;
+            font-weight: 600;
+        }
+
+        .rating-list {
+            list-style: none;
+        }
+
+        .rating-list li {
+            padding: 6px 0;
+            color: #444;
+        }
+
+        .secondary-column h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0a0a0a;
+        }
+
+        .recommendation-card,
+        .requirements-card {
+            background: #f5f6f7;
+            border: 1px solid #d6d6d6;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .recommendation-card strong,
+        .requirements-card strong {
+            font-size: 1.05rem;
+            color: #0a0a0a;
+        }
+
+        .recommendation-card p,
+        .requirements-card p {
+            margin-top: 12px;
+            color: #444;
+        }
+
+        .bullet-list {
+            margin-top: 12px;
+            padding-left: 18px;
+            color: #333;
+        }
+
+        .bullet-list li {
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 20px;
+            border: 1px solid #2f7bf6;
+            background: #2f7bf6;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 18px;
+            letter-spacing: 0.02em;
+        }
+
+        .cta-button:hover {
+            background: #1f5fc3;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .comparison-section {
+                padding: 40px 18px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+
+            .comparison-table thead {
+                display: none;
+            }
+
+            .comparison-table, .comparison-table tbody, .comparison-table tr, .comparison-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .comparison-table tr {
+                margin-bottom: 20px;
+                border: 1px solid #d6d6d6;
+            }
+
+            .comparison-table td {
+                border: none;
+                border-bottom: 1px solid #d6d6d6;
+                position: relative;
+                padding: 14px 16px;
+            }
+
+            .comparison-table td:last-child {
+                border-bottom: none;
+            }
+
+            .table-label {
+                display: block;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #555;
+                margin-bottom: 6px;
+                text-transform: uppercase;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="comparison-section">
+        <header class="section-title">
+            <h2>Cloud Gaming Platform Comparison</h2>
+            <p>Evaluate the leading streaming platforms to pick the service that matches your play style, budget, and hardware access.</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="main-column">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Strengths</th>
+                            <th>Limitations</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="table-label">Platform</span>
+                                <div class="platform-name">NVIDIA GeForce NOW Ultimate</div>
+                                <ul class="rating-list">
+                                    <li>Serving regions: North America, Europe, Asia-Pacific</li>
+                                    <li>From $19.99 / month</li>
+                                    <li>Rating: ★★★★★ (4.8)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Strengths</span>
+                                <ul class="bullet-list">
+                                    <li class="feature-highlight">120fps streaming with RTX 4080-class hardware</li>
+                                    <li>Expansive BYO-library support (Steam, Epic, Ubisoft)</li>
+                                    <li>Ultra-low latency with adaptive sync</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Limitations</span>
+                                <ul class="bullet-list">
+                                    <li>Requires strong broadband (min. 35 Mbps for 4K)</li>
+                                    <li>Game library depends on owned licenses</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Best For</span>
+                                <ul class="bullet-list">
+                                    <li>4K competitive players</li>
+                                    <li>PC gamers with existing libraries</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="table-label">Platform</span>
+                                <div class="platform-name">Xbox Cloud Gaming (Game Pass Ultimate)</div>
+                                <ul class="rating-list">
+                                    <li>Serving regions: 28+ countries</li>
+                                    <li>$16.99 / month</li>
+                                    <li>Rating: ★★★★☆ (4.3)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Strengths</span>
+                                <ul class="bullet-list">
+                                    <li class="feature-highlight">Library of 400+ Game Pass titles</li>
+                                    <li>Seamless cross-save between console, PC, mobile</li>
+                                    <li>Game streaming on Smart TVs and browsers</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Limitations</span>
+                                <ul class="bullet-list">
+                                    <li>1080p / 60fps cap</li>
+                                    <li>Some regions still in beta</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Best For</span>
+                                <ul class="bullet-list">
+                                    <li>Game Pass subscribers</li>
+                                    <li>Casual players and families</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="table-label">Platform</span>
+                                <div class="platform-name">Amazon Luna+</div>
+                                <ul class="rating-list">
+                                    <li>Serving regions: US, Canada, UK, Germany</li>
+                                    <li>$9.99 / month (Luna+ channel)</li>
+                                    <li>Rating: ★★★★☆ (4.1)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Strengths</span>
+                                <ul class="bullet-list">
+                                    <li class="feature-highlight">Channel-based subscriptions for flexibility</li>
+                                    <li>Strong integration with Twitch and Fire devices</li>
+                                    <li>AI-enhanced latency smoothing (2026 update)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Limitations</span>
+                                <ul class="bullet-list">
+                                    <li>Smaller flagship game lineup</li>
+                                    <li>Limited 4K availability</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Best For</span>
+                                <ul class="bullet-list">
+                                    <li>Family-friendly gaming</li>
+                                    <li>Amazon ecosystem users</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="table-label">Platform</span>
+                                <div class="platform-name">PlayStation Plus Premium</div>
+                                <ul class="rating-list">
+                                    <li>Serving regions: NA, EU, Asia</li>
+                                    <li>$19.99 / month</li>
+                                    <li>Rating: ★★★★☆ (4.2)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Strengths</span>
+                                <ul class="bullet-list">
+                                    <li class="feature-highlight">Exclusive access to PlayStation classics</li>
+                                    <li>Cloud saves sync between consoles and cloud</li>
+                                    <li>New releases available for streaming</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Limitations</span>
+                                <ul class="bullet-list">
+                                    <li>Streaming primarily to PlayStation and PC</li>
+                                    <li>Unavailable on mobile browsers</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="table-label">Best For</span>
+                                <ul class="bullet-list">
+                                    <li>PlayStation fans</li>
+                                    <li>Retro PlayStation catalog seekers</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <aside class="secondary-column">
+                <div class="recommendation-card">
+                    <strong>Editor’s Pick (Q1 2026)</strong>
+                    <p>GeForce NOW Ultimate remains the top choice for enthusiasts requiring ultra-high frame rates and uncompromised visuals. Its expanded data center rollout in 2026 reduced queue times by 36% in core regions.</p>
+                    <a class="cta-button" href="#">See setup guide</a>
+                </div>
+
+                <div class="requirements-card">
+                    <strong>Baseline Requirements</strong>
+                    <ul class="bullet-list">
+                        <li>Stable internet: 25 Mbps (1080p), 45 Mbps (4K)</li>
+                        <li>Ethernet or Wi-Fi 6 preferred for latency control</li>
+                        <li>Bluetooth 5.0 controllers for consistent input</li>
+                    </ul>
+                </div>
+
+                <div class="requirements-card">
+                    <strong>Emerging Alternatives</strong>
+                    <p>Watch out for Blacknut, Antstream Arcade, and Shadow PC's updated streaming tiers. These platforms are investing in global expansions with competitive pricing for mid-core gamers.</p>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>

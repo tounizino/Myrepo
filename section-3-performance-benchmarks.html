@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Performance Benchmarks - Section 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "system-ui", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1c1c1c;
+            background: #fff;
+        }
+
+        .benchmark-section {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 60px 22px;
+        }
+
+        .header-block {
+            margin-bottom: 44px;
+        }
+
+        .header-block h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d0d0d;
+            margin-bottom: 10px;
+        }
+
+        .header-block p {
+            font-size: 1.1rem;
+            color: #606060;
+        }
+
+        .layout-grid {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .primary-area {
+            flex: 2;
+        }
+
+        .sidebar-area {
+            flex: 1;
+        }
+
+        .benchmark-card {
+            border: 1px solid #d0d0d0;
+            background: #fafafa;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .benchmark-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0d0d0d;
+            margin-bottom: 20px;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: #2c2c2c;
+            font-size: 0.98rem;
+        }
+
+        .metric-value {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .metric-number {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #0066ff;
+        }
+
+        .metric-bar {
+            width: 160px;
+            height: 10px;
+            background: #e4e4e4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: #0066ff;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #00c851;
+            margin-right: 6px;
+        }
+
+        .status-warning {
+            background: #ff9800;
+        }
+
+        .status-critical {
+            background: #ff3547;
+        }
+
+        .latency-breakdown {
+            margin-top: 20px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        .sidebar-widget {
+            border: 1px solid #d0d0d0;
+            background: #fafafa;
+            padding: 26px;
+            margin-bottom: 24px;
+        }
+
+        .sidebar-widget h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0d0d0d;
+            margin-bottom: 18px;
+        }
+
+        .realtime-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            margin-bottom: 12px;
+        }
+
+        .pulse {
+            width: 12px;
+            height: 12px;
+            background: #00c851;
+            animation: pulse-animation 1.5s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .realtime-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .quality-tier {
+            padding: 18px;
+            background: #fff;
+            border: 1px solid #d0d0d0;
+            margin-bottom: 14px;
+        }
+
+        .quality-tier strong {
+            display: block;
+            font-size: 1.05rem;
+            color: #0d0d0d;
+            margin-bottom: 8px;
+        }
+
+        .quality-tier p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .dark-panel {
+            background: #1a1a1a;
+            color: #fff;
+            border: 1px solid #1a1a1a;
+            padding: 26px;
+        }
+
+        .dark-panel h3 {
+            color: #fff;
+        }
+
+        .dark-panel p {
+            color: #c0c0c0;
+            margin-bottom: 12px;
+        }
+
+        .dark-panel ul {
+            list-style: none;
+            color: #c0c0c0;
+        }
+
+        .dark-panel li {
+            padding: 6px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .dark-panel li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+        }
+
+        @media (max-width: 992px) {
+            .layout-grid {
+                flex-direction: column;
+            }
+
+            .metric-bar {
+                width: 100px;
+            }
+
+            .benchmark-section {
+                padding: 40px 18px;
+            }
+
+            .header-block h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-block h2 {
+                font-size: 1.75rem;
+            }
+
+            .metric-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .metric-bar {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .benchmark-card, .sidebar-widget, .dark-panel {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="benchmark-section">
+        <header class="header-block">
+            <h2>Performance Benchmarks</h2>
+            <p>Real-world streaming metrics across platforms and connection types</p>
+        </header>
+
+        <div class="layout-grid">
+            <div class="primary-area">
+                <div class="benchmark-card">
+                    <h3>Average Latency by Platform (2026 Q1)</h3>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator"></span>
+                            GeForce NOW Ultimate
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">32ms</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 82%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator"></span>
+                            Xbox Cloud Gaming
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">44ms</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator"></span>
+                            Amazon Luna+
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">38ms</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 74%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator"></span>
+                            PlayStation Plus Premium
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">41ms</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 68%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="latency-breakdown">
+                        <strong style="display: block; margin-bottom: 10px; color: #2c2c2c;">Latency Breakdown (GeForce NOW)</strong>
+                        <div class="breakdown-item">
+                            <span>Network round-trip:</span>
+                            <span>18ms</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Encoding overhead:</span>
+                            <span>7ms</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Decoding & rendering:</span>
+                            <span>7ms</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benchmark-card">
+                    <h3>Streaming Quality Metrics</h3>
+                    <div class="metric-row">
+                        <div class="metric-label">Average bitrate (4K)</div>
+                        <div class="metric-value">
+                            <span class="metric-number">45 Mbps</span>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">Frame stability (120fps)</div>
+                        <div class="metric-value">
+                            <span class="metric-number">97.3%</span>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 97%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">Packet loss tolerance</div>
+                        <div class="metric-value">
+                            <span class="metric-number">&lt; 0.5%</span>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">HDR10 support</div>
+                        <div class="metric-value">
+                            <span class="metric-number">Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benchmark-card">
+                    <h3>Connection Speed Impact</h3>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator status-critical"></span>
+                            15 Mbps (Below minimum)
+                        </div>
+                        <div class="metric-value">
+                            <span style="color: #ff3547; font-weight: 600;">Frequent buffering</span>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator status-warning"></span>
+                            25 Mbps (1080p/60fps)
+                        </div>
+                        <div class="metric-value">
+                            <span style="color: #ff9800; font-weight: 600;">Occasional drops</span>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator"></span>
+                            50 Mbps (4K/60fps)
+                        </div>
+                        <div class="metric-value">
+                            <span style="color: #00c851; font-weight: 600;">Stable streaming</span>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label">
+                            <span class="status-indicator"></span>
+                            100+ Mbps (4K/120fps)
+                        </div>
+                        <div class="metric-value">
+                            <span style="color: #00c851; font-weight: 600;">Optimal experience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="sidebar-area">
+                <div class="sidebar-widget">
+                    <h3>Live Status Monitor</h3>
+                    <div class="realtime-indicator">
+                        <div class="pulse"></div>
+                        <span class="realtime-text">Data updated 2 minutes ago</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #555;">Performance metrics are aggregated from 12,500+ test sessions across North America, Europe, and Asia-Pacific regions.</p>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Quality Tiers Explained</h3>
+                    <div class="quality-tier">
+                        <strong>Entry (720p/30fps)</strong>
+                        <p>Casual games, mobile devices, slower connections</p>
+                    </div>
+                    <div class="quality-tier">
+                        <strong>Standard (1080p/60fps)</strong>
+                        <p>Mainstream gaming, most AAA titles, balanced experience</p>
+                    </div>
+                    <div class="quality-tier">
+                        <strong>Premium (4K/60fps)</strong>
+                        <p>High-fidelity visuals, story-driven games, 4K displays</p>
+                    </div>
+                    <div class="quality-tier">
+                        <strong>Ultimate (4K/120fps)</strong>
+                        <p>Competitive gaming, ultra-low latency, enthusiast tier</p>
+                    </div>
+                </div>
+
+                <div class="dark-panel">
+                    <h3>Testing Methodology</h3>
+                    <p>Our benchmarks use controlled environments with standardized equipment:</p>
+                    <ul>
+                        <li>Wired gigabit ethernet connections</li>
+                        <li>Peak and off-peak hour sampling</li>
+                        <li>Multiple geographic test nodes</li>
+                        <li>Consistent game scenarios</li>
+                        <li>Professional-grade latency tools</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Library Explorer - Section 5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            background: #fff;
+            color: #1e1e1e;
+        }
+
+        .library-section {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 60px 22px;
+        }
+
+        .library-header {
+            margin-bottom: 40px;
+        }
+
+        .library-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0b0b0b;
+            margin-bottom: 12px;
+        }
+
+        .library-header p {
+            font-size: 1.05rem;
+            color: #5a5a5a;
+        }
+
+        .library-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .library-main {
+            flex: 2;
+        }
+
+        .library-sidebar {
+            flex: 1;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 10px 18px;
+            border: 1px solid #d3d3d3;
+            background: #f9f9f9;
+            color: #2a2a2a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-button:hover {
+            background: #1565c0;
+            color: #fff;
+            border-color: #1565c0;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            border: 1px solid #d3d3d3;
+            background: #fafafa;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+            border-color: #1565c0;
+        }
+
+        .game-thumbnail {
+            width: 100%;
+            height: 160px;
+            background: #1565c0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .game-card:nth-child(2n) .game-thumbnail {
+            background: #0c7bdc;
+        }
+
+        .game-card:nth-child(3n) .game-thumbnail {
+            background: #0d1b2a;
+        }
+
+        .game-card:nth-child(4n) .game-thumbnail {
+            background: #102641;
+        }
+
+        .game-info {
+            padding: 16px;
+        }
+
+        .game-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0b0b0b;
+            margin-bottom: 6px;
+        }
+
+        .game-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #757575;
+            margin-bottom: 10px;
+        }
+
+        .genre-tag {
+            background: #e3e3e3;
+            padding: 2px 8px;
+            color: #2a2a2a;
+            font-weight: 600;
+        }
+
+        .platform-tag {
+            color: #1565c0;
+            font-weight: 600;
+        }
+
+        .popular-widget {
+            border: 1px solid #d3d3d3;
+            background: #fafafa;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .popular-widget h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0b0b0b;
+            margin-bottom: 18px;
+        }
+
+        .popular-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e3e3e3;
+        }
+
+        .popular-item:last-child {
+            border-bottom: none;
+        }
+
+        .popular-rank {
+            width: 30px;
+            height: 30px;
+            background: #1565c0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .popular-details h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0b0b0b;
+            margin-bottom: 2px;
+        }
+
+        .popular-details p {
+            font-size: 0.8rem;
+            color: #757575;
+        }
+
+        .stats-widget {
+            border: 1px solid #d3d3d3;
+            background: #0d1b2a;
+            color: #fff;
+            padding: 24px;
+        }
+
+        .stats-widget h3 {
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .stats-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-label-text {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .stat-value-text {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .library-container {
+                flex-direction: column;
+            }
+
+            .game-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .library-section {
+                padding: 40px 16px;
+            }
+
+            .library-header h2 {
+                font-size: 2rem;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                gap: 8px;
+            }
+
+            .filter-button {
+                font-size: 0.85rem;
+                padding: 8px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="library-section">
+        <header class="library-header">
+            <h2>Game Library Explorer</h2>
+            <p>Discover trending titles across all major cloud gaming platforms with instant access.</p>
+        </header>
+
+        <div class="library-container">
+            <div class="library-main">
+                <div class="filter-bar">
+                    <button class="filter-button">All Platforms</button>
+                    <button class="filter-button">GeForce NOW</button>
+                    <button class="filter-button">Xbox Cloud</button>
+                    <button class="filter-button">Luna</button>
+                    <button class="filter-button">PS Plus</button>
+                </div>
+
+                <div class="game-grid">
+                    <article class="game-card">
+                        <div class="game-thumbnail">CY</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Cyberpunk 2077</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">RPG</span>
+                                <span class="platform-tag">GeForce NOW</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Open-world adventure with ray-traced visuals. Now streaming at 4K/120fps on Ultimate tier.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">ST</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Starfield</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Space RPG</span>
+                                <span class="platform-tag">Xbox Cloud</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Epic space exploration included with Game Pass. Stream on any device with cloud saves.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">BG</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Baldur's Gate 3</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">RPG</span>
+                                <span class="platform-tag">GeForce NOW</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Award-winning fantasy RPG with deep narrative. Perfect for cloud streaming sessions.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">FC</div>
+                        <div class="game-info">
+                            <h3 class="game-title">FC 25</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Sports</span>
+                                <span class="platform-tag">Luna</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Next-gen football simulation available via Luna's Ubisoft+ channel.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">SP</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Spider-Man 2</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Action</span>
+                                <span class="platform-tag">PS Plus</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">PlayStation exclusive streaming on Premium tier. Enhanced performance mode available.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">DI</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Diablo IV</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Action RPG</span>
+                                <span class="platform-tag">Xbox Cloud</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Dungeon crawler with cross-progression across Xbox, PC, and cloud.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">FH</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Forza Horizon 5</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Racing</span>
+                                <span class="platform-tag">Xbox Cloud</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Open-world racing with stunning Mexico landscape. Game Pass flagship title.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">HZ</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Horizon Forbidden West</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Adventure</span>
+                                <span class="platform-tag">PS Plus</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Post-apocalyptic adventure with incredible visuals optimized for cloud streaming.</p>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">RE</div>
+                        <div class="game-info">
+                            <h3 class="game-title">Resident Evil 4</h3>
+                            <div class="game-meta">
+                                <span class="genre-tag">Horror</span>
+                                <span class="platform-tag">GeForce NOW</span>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #555;">Survival horror remake with ray tracing and high frame rate support.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <aside class="library-sidebar">
+                <div class="popular-widget">
+                    <h3>Most Played This Week</h3>
+                    <div class="popular-item">
+                        <div class="popular-rank">1</div>
+                        <div class="popular-details">
+                            <h4>Fortnite</h4>
+                            <p>Battle Royale • Free</p>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-rank">2</div>
+                        <div class="popular-details">
+                            <h4>Call of Duty: Warzone</h4>
+                            <p>FPS • Free</p>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-rank">3</div>
+                        <div class="popular-details">
+                            <h4>Destiny 2</h4>
+                            <p>Looter Shooter • Free</p>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-rank">4</div>
+                        <div class="popular-details">
+                            <h4>Genshin Impact</h4>
+                            <p>Action RPG • Free</p>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-rank">5</div>
+                        <div class="popular-details">
+                            <h4>Apex Legends</h4>
+                            <p>Battle Royale • Free</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-widget">
+                    <h3>Library Stats</h3>
+                    <div class="stats-row">
+                        <span class="stat-label-text">Total Games Available</span>
+                        <span class="stat-value-text">2,847</span>
+                    </div>
+                    <div class="stats-row">
+                        <span class="stat-label-text">New This Month</span>
+                        <span class="stat-value-text">142</span>
+                    </div>
+                    <div class="stats-row">
+                        <span class="stat-label-text">Free-to-Play</span>
+                        <span class="stat-value-text">387</span>
+                    </div>
+                    <div class="stats-row">
+                        <span class="stat-label-text">4K Supported</span>
+                        <span class="stat-value-text">1,156</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>

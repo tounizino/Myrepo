@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Latest News - Section 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        .cloud-gaming-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .layout-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 2;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            position: sticky;
+            top: 20px;
+        }
+
+        .article-card {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            transition: transform 0.2s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-2px);
+            border-color: #4a90e2;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .article-category {
+            background: #4a90e2;
+            color: #fff;
+            padding: 4px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-date {
+            padding: 4px 0;
+        }
+
+        .article-card h3 {
+            font-size: 1.5rem;
+            color: #0a0a0a;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .article-card p {
+            color: #444;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #4a90e2;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .read-more:hover {
+            border-bottom-color: #4a90e2;
+        }
+
+        .trending-widget {
+            background: #f8f9fa;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .trending-widget h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #0a0a0a;
+            font-weight: 600;
+        }
+
+        .trending-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: #4a90e2;
+            color: #fff;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .trending-item a {
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .trending-item a:hover {
+            color: #4a90e2;
+        }
+
+        .quick-stats {
+            background: #0a0a0a;
+            color: #fff;
+            padding: 25px;
+            border: 1px solid #0a0a0a;
+        }
+
+        .quick-stats h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .stat-item {
+            margin-bottom: 20px;
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4a90e2;
+        }
+
+        @media (max-width: 968px) {
+            .layout-container {
+                flex-direction: column;
+            }
+
+            .sidebar-content {
+                position: static;
+                width: 100%;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cloud-gaming-section {
+                padding: 30px 15px;
+            }
+
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+
+            .article-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .article-card {
+                padding: 20px;
+            }
+
+            .trending-widget, .quick-stats {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="cloud-gaming-section">
+        <div class="section-header">
+            <h2>Latest Cloud Gaming News</h2>
+            <p>Stay updated with the newest developments in cloud gaming technology</p>
+        </div>
+
+        <div class="layout-container">
+            <div class="main-content">
+                <article class="article-card">
+                    <div class="article-meta">
+                        <span class="article-category">Breaking</span>
+                        <span class="article-date">January 15, 2026</span>
+                    </div>
+                    <h3>NVIDIA GeForce Now Expands to 120fps Streaming for Ultimate Members</h3>
+                    <p>NVIDIA announces a major upgrade to its GeForce Now Ultimate tier, bringing 120fps streaming capabilities to supported games. This enhancement significantly reduces input lag and provides smoother gameplay, especially for competitive titles. The update is rolling out across all regions with RTX 4080-powered servers.</p>
+                    <a href="#" class="read-more">Read Full Article →</a>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-meta">
+                        <span class="article-category">Analysis</span>
+                        <span class="article-date">January 14, 2026</span>
+                    </div>
+                    <h3>Xbox Cloud Gaming Reaches 30 Million Active Users Milestone</h3>
+                    <p>Microsoft's Xbox Cloud Gaming service has surpassed 30 million monthly active users, marking a 45% increase from last year. The growth is attributed to expanded device support, improved streaming quality, and the integration of popular AAA titles into Game Pass Ultimate. Industry analysts predict continued growth through 2026.</p>
+                    <a href="#" class="read-more">Read Full Article →</a>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-meta">
+                        <span class="article-category">Tech</span>
+                        <span class="article-date">January 13, 2026</span>
+                    </div>
+                    <h3>Amazon Luna Introduces AI-Powered Latency Optimization</h3>
+                    <p>Amazon Luna unveils new AI-driven technology that dynamically adjusts streaming parameters based on network conditions. The system predicts bandwidth fluctuations and preemptively optimizes video encoding, resulting in 30% fewer streaming interruptions. Beta testing shows promising results across various internet speeds.</p>
+                    <a href="#" class="read-more">Read Full Article →</a>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-meta">
+                        <span class="article-category">Industry</span>
+                        <span class="article-date">January 12, 2026</span>
+                    </div>
+                    <h3>PlayStation Plus Premium Adds 15 New Cloud-Enabled Titles</h3>
+                    <p>Sony expands its cloud gaming library with 15 new titles available for streaming on PlayStation Plus Premium. The lineup includes several PS5 exclusives, making them accessible to players without the console. The expansion demonstrates Sony's commitment to making premium gaming experiences more accessible.</p>
+                    <a href="#" class="read-more">Read Full Article →</a>
+                </article>
+            </div>
+
+            <aside class="sidebar-content">
+                <div class="trending-widget">
+                    <h3>Trending Topics</h3>
+                    <div class="trending-item">
+                        <span class="trending-number">1</span>
+                        <a href="#">5G and Cloud Gaming Performance</a>
+                    </div>
+                    <div class="trending-item">
+                        <span class="trending-number">2</span>
+                        <a href="#">Best Cloud Gaming Services 2026</a>
+                    </div>
+                    <div class="trending-item">
+                        <span class="trending-number">3</span>
+                        <a href="#">Reducing Latency in Cloud Gaming</a>
+                    </div>
+                    <div class="trending-item">
+                        <span class="trending-number">4</span>
+                        <a href="#">Cloud Gaming vs Local Gaming</a>
+                    </div>
+                    <div class="trending-item">
+                        <span class="trending-number">5</span>
+                        <a href="#">Future of Game Streaming</a>
+                    </div>
+                </div>
+
+                <div class="quick-stats">
+                    <h3>Industry Stats</h3>
+                    <div class="stat-item">
+                        <div class="stat-label">Global Users</div>
+                        <div class="stat-value">87.2M</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Market Growth</div>
+                        <div class="stat-value">+42%</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Avg. Latency</div>
+                        <div class="stat-value">38ms</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>

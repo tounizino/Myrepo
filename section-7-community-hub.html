@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Community Hub - Section 7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #161616;
+            background: #fff;
+        }
+
+        .community-section {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .community-header {
+            margin-bottom: 42px;
+        }
+
+        .community-header h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0c0c0c;
+            margin-bottom: 12px;
+        }
+
+        .community-header p {
+            font-size: 1.05rem;
+            color: #505050;
+        }
+
+        .community-layout {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .community-main {
+            flex: 2;
+        }
+
+        .community-sidebar {
+            flex: 1;
+        }
+
+        .event-card,
+        .spotlight-card {
+            border: 1px solid #d8d8d8;
+            background: #f7f7f7;
+            padding: 26px;
+            margin-bottom: 26px;
+        }
+
+        .event-card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #0c0c0c;
+            margin-bottom: 18px;
+        }
+
+        .event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 18px 0;
+            border-bottom: 1px solid #e2e2e2;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-details {
+            max-width: 70%;
+        }
+
+        .event-details strong {
+            font-size: 1.05rem;
+            color: #0c0c0c;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .event-details span {
+            display: block;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .event-details p {
+            font-size: 0.9rem;
+            color: #404040;
+        }
+
+        .event-action {
+            text-align: right;
+        }
+
+        .event-action a {
+            display: inline-block;
+            padding: 10px 18px;
+            border: 1px solid #0c7bdc;
+            background: #0c7bdc;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+        }
+
+        .event-action a:hover {
+            background: #095da5;
+        }
+
+        .spotlight-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0c0c0c;
+            margin-bottom: 18px;
+        }
+
+        .spotlight-item {
+            border-bottom: 1px solid #e2e2e2;
+            padding: 16px 0;
+        }
+
+        .spotlight-item:last-child {
+            border-bottom: none;
+        }
+
+        .spotlight-title {
+            font-weight: 600;
+            color: #0c0c0c;
+            margin-bottom: 6px;
+        }
+
+        .spotlight-description {
+            font-size: 0.88rem;
+            color: #404040;
+            margin-bottom: 6px;
+        }
+
+        .spotlight-meta {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .community-sidebar h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0c0c0c;
+            margin-bottom: 18px;
+        }
+
+        .cta-card {
+            border: 1px solid #d8d8d8;
+            background: #102641;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 26px;
+        }
+
+        .cta-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .cta-card p {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            color: #d0d7e5;
+        }
+
+        .cta-card a {
+            display: inline-block;
+            border: 1px solid #0c7bdc;
+            background: #0c7bdc;
+            color: #fff;
+            padding: 10px 18px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .cta-card a:hover {
+            background: #095da5;
+        }
+
+        .community-stats {
+            border: 1px solid #d8d8d8;
+            background: #f7f7f7;
+            padding: 24px;
+        }
+
+        .stat-entry {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e2e2;
+        }
+
+        .stat-entry:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #606060;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0c7bdc;
+        }
+
+        .discord-highlight {
+            border: 1px solid #d8d8d8;
+            background: #f7f7f7;
+            padding: 24px;
+            margin-top: 26px;
+        }
+
+        .discord-highlight h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .discord-highlight ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #3a3a3a;
+        }
+
+        .discord-highlight li {
+            padding: 8px 0 8px 18px;
+            position: relative;
+        }
+
+        .discord-highlight li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0c7bdc;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .community-layout {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .community-section {
+                padding: 40px 18px;
+            }
+
+            .community-header h2 {
+                font-size: 2rem;
+            }
+
+            .event-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .event-details {
+                max-width: 100%;
+            }
+
+            .event-action {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="community-section">
+        <header class="community-header">
+            <h2>Cloud Gaming Community Hub</h2>
+            <p>Connect with global players, join competitive events, and collaborate on streaming projects.</p>
+        </header>
+
+        <div class="community-layout">
+            <div class="community-main">
+                <article class="event-card">
+                    <h3>Upcoming Events</h3>
+
+                    <div class="event-item">
+                        <div class="event-details">
+                            <strong>Cloud Royale Invitational</strong>
+                            <span>February 12, 2026 · 6PM GMT · Twitch & Kick</span>
+                            <p>Top streamers compete across Apex Legends, Valorant, and Fortnite via cloud servers.</p>
+                        </div>
+                        <div class="event-action">
+                            <a href="#">Register</a>
+                        </div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-details">
+                            <strong>Latency Lab Workshop</strong>
+                            <span>February 18, 2026 · 4PM PST · Discord Live</span>
+                            <p>Network engineers share best practices for sub-30ms streaming and monitor tuning.</p>
+                        </div>
+                        <div class="event-action">
+                            <a href="#">Save Seat</a>
+                        </div>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-details">
+                            <strong>Creator Collaboration Week</strong>
+                            <span>March 3-7, 2026 · Global · Multi-platform</span>
+                            <p>Matchmaking program for new creators to join mid-sized stream teams and co-produce shows.</p>
+                        </div>
+                        <div class="event-action">
+                            <a href="#">Apply</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="spotlight-card">
+                    <h3>Community Spotlights</h3>
+
+                    <div class="spotlight-item">
+                        <div class="spotlight-title">Creator Studio: CloudlineTV</div>
+                        <p class="spotlight-description">Weekly cloud gaming news recap averaging 25k viewers per episode, featuring live benchmarks.</p>
+                        <span class="spotlight-meta">Featured on: YouTube, TikTok, Threads</span>
+                    </div>
+
+                    <div class="spotlight-item">
+                        <div class="spotlight-title">Build Guide: Latency Legends</div>
+                        <p class="spotlight-description">Community-sourced router configurations achieving 18ms average response times.</p>
+                        <span class="spotlight-meta">Guide Version 8.2 · Updated January 2026</span>
+                    </div>
+
+                    <div class="spotlight-item">
+                        <div class="spotlight-title">Tournament: StreamSync Series</div>
+                        <p class="spotlight-description">Monthly bracket focused on Stadia Legacy fans transitioning to multi-platform play.</p>
+                        <span class="spotlight-meta">Prize Pool: $12,500 · Sponsored by NZXT Cloud</span>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="community-sidebar">
+                <div class="cta-card">
+                    <h3>Join Our Discord</h3>
+                    <p>Access exclusive latency clinics, platform betas, and co-marketing opportunities.</p>
+                    <a href="#">Enter Server</a>
+                </div>
+
+                <div class="community-stats">
+                    <h3>Community Stats</h3>
+                    <div class="stat-entry">
+                        <div class="stat-label">Active Members</div>
+                        <div class="stat-value">38,612</div>
+                    </div>
+                    <div class="stat-entry">
+                        <div class="stat-label">Global Chapters</div>
+                        <div class="stat-value">42</div>
+                    </div>
+                    <div class="stat-entry">
+                        <div class="stat-label">Monthly Events</div>
+                        <div class="stat-value">18</div>
+                    </div>
+                </div>
+
+                <div class="discord-highlight">
+                    <h3>Discord Channels</h3>
+                    <ul>
+                        <li>#latency-lab — troubleshoot with network pros</li>
+                        <li>#creator-collabs — find co-stream partners</li>
+                        <li>#gear-marketplace — buy & sell accessories</li>
+                        <li>#beta-access — sign up for new releases</li>
+                        <li>#cloud-memes — relax with the community</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>

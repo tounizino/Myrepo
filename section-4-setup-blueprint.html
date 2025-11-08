@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Setup Blueprint - Section 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Manrope", "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
+            background: #ffffff;
+            color: #161616;
+        }
+
+        .setup-section {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .setup-header {
+            margin-bottom: 36px;
+        }
+
+        .setup-header h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0c0c0c;
+            margin-bottom: 10px;
+        }
+
+        .setup-header p {
+            font-size: 1.05rem;
+            color: #585858;
+        }
+
+        .setup-layout {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+        }
+
+        .setup-main {
+            flex: 2;
+        }
+
+        .setup-aside {
+            flex: 1;
+        }
+
+        .timeline-step {
+            border: 1px solid #d7d7d7;
+            background: #f6f7f8;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 24px;
+        }
+
+        .step-index {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0c6dff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0c0c0c;
+        }
+
+        .step-content p {
+            color: #404040;
+            margin-bottom: 12px;
+        }
+
+        .step-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .action-pill {
+            padding: 10px 16px;
+            border: 1px solid #0c6dff;
+            color: #0c6dff;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .step-details ul {
+            padding-left: 20px;
+            color: #303030;
+        }
+
+        .step-details li {
+            margin-bottom: 8px;
+        }
+
+        .toolkit-card {
+            border: 1px solid #d7d7d7;
+            background: #f6f7f8;
+            padding: 26px;
+            margin-bottom: 24px;
+        }
+
+        .toolkit-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #0c0c0c;
+        }
+
+        .toolkit-list {
+            list-style: none;
+        }
+
+        .toolkit-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #d7d7d7;
+        }
+
+        .toolkit-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: #0c0c0c;
+        }
+
+        .tool-meta {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .checklist-card {
+            border: 1px solid #d7d7d7;
+            background: #0f1a2d;
+            color: #ffffff;
+            padding: 26px;
+        }
+
+        .checklist-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .checklist-card ul {
+            list-style: none;
+            font-size: 0.95rem;
+        }
+
+        .checklist-card li {
+            padding: 8px 0 8px 18px;
+            position: relative;
+        }
+
+        .checklist-card li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #0c6dff;
+            font-weight: 700;
+        }
+
+        .network-recommendation {
+            border: 1px solid #d7d7d7;
+            background: #f6f7f8;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .network-recommendation h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .network-recommendation p {
+            color: #3a3a3a;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 1024px) {
+            .setup-layout {
+                flex-direction: column;
+            }
+
+            .setup-section {
+                padding: 48px 18px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .timeline-step {
+                grid-template-columns: 1fr;
+            }
+
+            .step-index {
+                justify-content: flex-start;
+            }
+
+            .setup-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="setup-section">
+        <header class="setup-header">
+            <h2>Cloud Gaming Setup Blueprint</h2>
+            <p>Build a professional-grade streaming setup with a clear 4-step implementation plan and curated toolkit.</p>
+        </header>
+
+        <div class="setup-layout">
+            <div class="setup-main">
+                <article class="timeline-step">
+                    <div class="step-index">01</div>
+                    <div class="step-content">
+                        <h3>Assess Connectivity & Hardware</h3>
+                        <p>Run speed and stability diagnostics to ensure your network matches your target quality tier.</p>
+                        <div class="step-details">
+                            <ul>
+                                <li>Use services like CloudPing.info to test latency to major providers.</li>
+                                <li>Prefer Ethernet or Wi-Fi 6E to sustain 4K/120fps streams.</li>
+                                <li>Verify controller compatibility (Xbox Wireless, DualSense, Luna Controller).</li>
+                            </ul>
+                        </div>
+                        <div class="step-actions">
+                            <span class="action-pill">Test Speed</span>
+                            <span class="action-pill">Controller Check</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="timeline-step">
+                    <div class="step-index">02</div>
+                    <div class="step-content">
+                        <h3>Select Your Streaming Platform</h3>
+                        <p>Match your library priorities and device ecosystem to the right provider.</p>
+                        <div class="step-details">
+                            <ul>
+                                <li>GeForce NOW: Bring-your-own games with RTX 4080-class servers.</li>
+                                <li>Xbox Cloud Gaming: Game Pass library plus native console integration.</li>
+                                <li>PlayStation Plus Premium: Essential for Sony exclusives and classics.</li>
+                            </ul>
+                        </div>
+                        <div class="step-actions">
+                            <span class="action-pill">Compare Plans</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="timeline-step">
+                    <div class="step-index">03</div>
+                    <div class="step-content">
+                        <h3>Optimize Streaming Environment</h3>
+                        <p>Ensure consistent performance by governing bandwidth and display calibration.</p>
+                        <div class="step-details">
+                            <ul>
+                                <li>Enable Quality of Service (QoS) with priority for gaming packets.</li>
+                                <li>Disable background downloads on consoles and PCs.</li>
+                                <li>Calibrate HDR with provider-recommended settings (HDR10 / Dolby Vision).</li>
+                            </ul>
+                        </div>
+                        <div class="step-actions">
+                            <span class="action-pill">QoS Guide</span>
+                            <span class="action-pill">Display Setup</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="timeline-step">
+                    <div class="step-index">04</div>
+                    <div class="step-content">
+                        <h3>Integrate Companion Services</h3>
+                        <p>Automate highlights, overlays, and community sync for a studio-grade presence.</p>
+                        <div class="step-details">
+                                <ul>
+                                <li>Configure OBS overlays tailored to cloud gaming latency.</li>
+                                <li>Link Discord Stage channels for co-streaming events.</li>
+                                <li>Schedule backups for game captures using cloud storage.</li>
+                            </ul>
+                        </div>
+                        <div class="step-actions">
+                            <span class="action-pill">OBS Profiles</span>
+                            <span class="action-pill">Discord Automation</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="setup-aside">
+                <div class="toolkit-card">
+                    <h3>Pro Toolkit</h3>
+                    <ul class="toolkit-list">
+                        <li>
+                            <div class="tool-name">NetDuma R3 Router Firmware</div>
+                            <div class="tool-meta">Smart queue management with ping heatmaps</div>
+                        </li>
+                        <li>
+                            <div class="tool-name">OBS Studio 31.0 Cloud Profile</div>
+                            <div class="tool-meta">Optimized encoder presets for streamed input</div>
+                        </li>
+                        <li>
+                            <div class="tool-name">Razer Kishi Ultra</div>
+                            <div class="tool-meta">Low-latency mobile controller with USB-C passthrough</div>
+                        </li>
+                        <li>
+                            <div class="tool-name">NVIDIA Reflex Analyzer</div>
+                            <div class="tool-meta">Measure end-to-end latency on supported monitors</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="checklist-card">
+                    <h3>Launch Checklist</h3>
+                    <ul>
+                        <li>Update GPU firmware and controller drivers</li>
+                        <li>Verify secure login and MFA for all platforms</li>
+                        <li>Enable session recording for highlight recaps</li>
+                        <li>Schedule weekly maintenance window</li>
+                    </ul>
+                </div>
+
+                <div class="network-recommendation">
+                    <h4>Network Tip</h4>
+                    <p>For multi-player households, assign a dedicated 5 GHz SSID to your gaming devices and cap smart home gadgets to 2.4 GHz to avoid interference during peak sessions.</p>
+                </div>
+            </aside>
+        </div>
+    </section>
+</body>
+</html>
