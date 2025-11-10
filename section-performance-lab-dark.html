@@ -1,11 +1,10 @@
-<!-- Performance Lab - Dark Mode Theme -->
-<div class="gaming-featured-container performance-lab performance-lab--dark">
+<!-- Performance Lab - Dark Palette (Original Layout) -->
+<div class="gaming-featured-container performance-lab-dark">
   <div class="section-header">
     <h2 class="section-title">
-      <span class="title-square"></span>
-      <span>Performance Lab</span>
+      <span class="title-square"></span> Performance Lab
     </h2>
-    <p class="section-subtitle">Elite benchmarking, tuning recipes, and stability insights for serious cloud gamers.</p>
+    <p class="section-subtitle">Dial in elite streaming performance with real-world benchmarks and tuning guides</p>
   </div>
 
   <div class="split-layout">
@@ -75,316 +74,265 @@
 </div>
 
 <style>
-/* ===== Performance Lab – Dark Theme ===== */
-.performance-lab--dark {
-  --bg-base: #060b16;
-  --bg-surface: #0b1424;
-  --bg-elevated: rgba(13, 23, 39, 0.75);
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --border: rgba(45, 64, 94, 0.55);
-  --accent: #22d3ee;
-  --accent-strong: #0ea5e9;
-  --card-shadow: 0 18px 40px rgba(2, 6, 23, 0.55);
-
+/* ===== Performance Lab - Dark Palette ===== */
+.gaming-featured-container.performance-lab-dark {
   max-width: 1400px;
   margin: 0 auto 48px auto;
-  padding: 42px;
-  border-radius: 24px;
-  background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 55%),
-              linear-gradient(135deg, rgba(6, 12, 24, 0.95), rgba(7, 11, 21, 1));
-  color: var(--text-primary);
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #1f2937;
+  background: transparent;
 }
 
-.performance-lab--dark::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.18), transparent 60%),
-              radial-gradient(circle at 20% 80%, rgba(94, 234, 212, 0.12), transparent 55%);
-  pointer-events: none;
-  z-index: 0;
+.gaming-featured-container.performance-lab-dark h2,
+.gaming-featured-container.performance-lab-dark h3,
+.gaming-featured-container.performance-lab-dark h4,
+.gaming-featured-container.performance-lab-dark p,
+.gaming-featured-container.performance-lab-dark ul,
+.gaming-featured-container.performance-lab-dark ol {
+  margin: 0;
+  padding: 0;
 }
 
-.performance-lab--dark > * {
-  position: relative;
-  z-index: 1;
-}
-
-.performance-lab--dark .section-header {
-  margin-bottom: 32px;
-}
-
-.performance-lab--dark .section-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  display: inline-flex;
+.gaming-featured-container.performance-lab-dark .section-title {
+  font-size: 1.25rem;
+  display: flex;
   align-items: center;
-  gap: 16px;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
+  gap: 10px;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  color: #0f172a;
 }
 
-.performance-lab--dark .title-square {
-  width: 15px;
-  height: 15px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-  box-shadow: 0 0 18px rgba(34, 211, 238, 0.65);
+.gaming-featured-container.performance-lab-dark .title-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  background: #1f2937;
 }
 
-.performance-lab--dark .section-subtitle {
-  margin-top: 12px;
-  max-width: 760px;
-  color: var(--text-secondary);
+.gaming-featured-container.performance-lab-dark .section-subtitle {
   font-size: 0.95rem;
-  line-height: 1.7;
+  color: #4b5563;
 }
 
-.performance-lab--dark .split-layout {
-  display: grid;
-  grid-template-columns: 1.8fr 1fr;
-  gap: 28px;
+.gaming-featured-container.performance-lab-dark .section-header {
+  margin-bottom: 24px;
 }
 
-.performance-lab--dark .lab-feature {
+.gaming-featured-container.performance-lab-dark .split-layout {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  background: rgba(15, 23, 42, 0.85);
-  border-radius: 22px;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.gaming-featured-container.performance-lab-dark .lab-feature {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
   overflow: hidden;
-  border: 1px solid rgba(34, 211, 238, 0.08);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(12px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
-.performance-lab--dark .feature-media {
+.gaming-featured-container.performance-lab-dark .feature-media {
   position: relative;
-  min-height: 280px;
+  min-height: 260px;
   overflow: hidden;
 }
 
-.performance-lab--dark .feature-media img {
+.gaming-featured-container.performance-lab-dark .feature-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
-  filter: saturate(1.05) contrast(1.1);
 }
 
-.performance-lab--dark .lab-feature:hover .feature-media img {
-  transform: scale(1.08);
+.gaming-featured-container.performance-lab-dark .lab-feature:hover .feature-media img {
+  transform: scale(1.05);
 }
 
-.performance-lab--dark .benchmark-tag {
+.gaming-featured-container.performance-lab-dark .benchmark-tag {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  bottom: 14px;
+  left: 14px;
+  background: #1f2937;
+  color: #ffffff;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  color: #e0f7fa;
-  background: rgba(34, 211, 238, 0.22);
-  border: 1px solid rgba(34, 211, 238, 0.45);
-  backdrop-filter: blur(6px);
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
 }
 
-.performance-lab--dark .feature-content {
-  padding: 28px 26px;
+.gaming-featured-container.performance-lab-dark .feature-content {
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
-.performance-lab--dark .category-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(34, 211, 238, 0.14);
-  border: 1px solid rgba(34, 211, 238, 0.35);
-  color: var(--accent);
+.gaming-featured-container.performance-lab-dark .category-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  background: #e5e7eb;
+  color: #1f2937;
+  font-weight: 600;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.gaming-featured-container.performance-lab-dark h3 {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.gaming-featured-container.performance-lab-dark h3 a {
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.gaming-featured-container.performance-lab-dark h3 a:hover {
+  color: #1f2937;
+}
+
+.gaming-featured-container.performance-lab-dark .feature-content p {
+  color: #4b5563;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.gaming-featured-container.performance-lab-dark .feature-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  background: #f8fafc;
+}
+
+.gaming-featured-container.performance-lab-dark .stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gaming-featured-container.performance-lab-dark .label {
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.performance-lab--dark h3 {
-  font-size: 1.28rem;
-  line-height: 1.5;
-  color: var(--text-primary);
+  color: #6b7280;
   font-weight: 700;
 }
 
-.performance-lab--dark h3 a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.performance-lab--dark h3 a:hover {
-  color: var(--accent);
-}
-
-.performance-lab--dark p {
-  color: var(--text-secondary);
-  font-size: 0.94rem;
-  line-height: 1.75;
-}
-
-.performance-lab--dark .feature-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  padding: 18px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(8, 15, 28, 0.65) 100%);
-  border: 1px solid rgba(34, 211, 238, 0.18);
-}
-
-.performance-lab--dark .stat-block {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.performance-lab--dark .label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: rgba(148, 163, 184, 0.9);
-  text-transform: uppercase;
-}
-
-.performance-lab--dark .value {
-  font-size: 1.18rem;
+.gaming-featured-container.performance-lab-dark .value {
+  font-size: 1rem;
   font-weight: 800;
-  color: var(--accent);
+  color: #1f2937;
 }
 
-.performance-lab--dark .cta {
+.gaming-featured-container.performance-lab-dark .cta {
   margin-top: auto;
-  align-self: flex-start;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(34, 211, 238, 0.35);
-  background: rgba(34, 211, 238, 0.16);
-  color: #ccfbf1;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
   font-weight: 700;
+  color: #1f2937;
   text-decoration: none;
-  transition: all 0.25s ease;
 }
 
-.performance-lab--dark .cta:hover {
-  background: rgba(34, 211, 238, 0.32);
-  box-shadow: 0 12px 30px rgba(34, 211, 238, 0.28);
+.gaming-featured-container.performance-lab-dark .cta:hover {
+  text-decoration: underline;
 }
 
-.performance-lab--dark .lab-sidebar {
+.gaming-featured-container.performance-lab-dark .lab-sidebar {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
-.performance-lab--dark .sidebar-card {
-  background: rgba(15, 23, 42, 0.7);
-  border-radius: 18px;
-  padding: 20px;
-  border: 1px solid rgba(34, 211, 238, 0.1);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(14px);
-}
-
-.performance-lab--dark .sidebar-card h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 14px;
-}
-
-.performance-lab--dark .sidebar-card ul,
-.performance-lab--dark .sidebar-card ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.gaming-featured-container.performance-lab-dark .sidebar-card {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  color: var(--text-secondary);
-  font-size: 0.88rem;
 }
 
-.performance-lab--dark .sidebar-card ul li {
+.gaming-featured-container.performance-lab-dark .sidebar-card.highlight {
+  background: #f8fafc;
+  border: 1px solid #1f2937;
+}
+
+.gaming-featured-container.performance-lab-dark .sidebar-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.gaming-featured-container.performance-lab-dark .sidebar-card ul,
+.gaming-featured-container.performance-lab-dark .sidebar-card ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #4b5563;
+  font-size: 0.85rem;
+}
+
+.gaming-featured-container.performance-lab-dark .sidebar-card ol {
+  counter-reset: step-counter;
+}
+
+.gaming-featured-container.performance-lab-dark .sidebar-card ol li {
+  position: relative;
+  padding-left: 24px;
+  line-height: 1.4;
+}
+
+.gaming-featured-container.performance-lab-dark .sidebar-card ol li::before {
+  counter-increment: step-counter;
+  content: counter(step-counter) ".";
+  position: absolute;
+  left: 0;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.gaming-featured-container.performance-lab-dark .sidebar-card ul li {
   display: flex;
   justify-content: space-between;
 }
 
-.performance-lab--dark .highlight {
-  border-color: rgba(14, 165, 233, 0.35);
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(8, 17, 32, 0.85));
+.gaming-featured-container.performance-lab-dark .sidebar-card strong {
+  color: #111827;
 }
 
-.performance-lab--dark .highlight ol {
-  counter-reset: checklist;
-}
-
-.performance-lab--dark .highlight ol li {
-  position: relative;
-  padding-left: 28px;
-}
-
-.performance-lab--dark .highlight ol li::before {
-  counter-increment: checklist;
-  content: counter(checklist);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(34, 211, 238, 0.22);
-  border: 1px solid rgba(34, 211, 238, 0.45);
-  display: grid;
-  place-items: center;
-  color: var(--accent);
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-
-/* Responsive */
 @media (max-width: 1200px) {
-  .performance-lab--dark .lab-feature {
+  .gaming-featured-container.performance-lab-dark .lab-feature {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 992px) {
-  .performance-lab--dark {
-    padding: 32px 24px;
+  .gaming-featured-container.performance-lab-dark {
+    padding: 0 16px;
   }
-  
-  .performance-lab--dark .split-layout {
+  .gaming-featured-container.performance-lab-dark .split-layout {
     grid-template-columns: 1fr;
+  }
+  .gaming-featured-container.performance-lab-dark .feature-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 620px) {
-  .performance-lab--dark {
-    padding: 26px 18px;
-  }
-  
-  .performance-lab--dark .feature-stats {
+@media (max-width: 640px) {
+  .gaming-featured-container.performance-lab-dark .feature-stats {
     grid-template-columns: 1fr;
   }
 }

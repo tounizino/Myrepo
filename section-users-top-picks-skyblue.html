@@ -1,5 +1,5 @@
-<!-- User's Top Picks - Sky Blue Theme with Interactive Filters -->
-<div class="gaming-featured-container users-top-picks users-top-picks--skyblue">
+<!-- User's Top Picks - Sky Blue Palette (Original Layout) -->
+<div class="gaming-featured-container users-top-picks-skyblue">
   
   <div class="header-row">
     <h2 class="section-title">
@@ -98,342 +98,278 @@
 </div>
 
 <style>
-/* ===== User's Top Picks - Sky Blue Theme ===== */
-.users-top-picks--skyblue {
+/* ===== User's Top Picks - Sky Blue Palette ===== */
+.gaming-featured-container.users-top-picks-skyblue {
   max-width: 1400px;
   margin: 0 auto 48px auto;
   padding: 0;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color: #0c4a6e;
-  background: linear-gradient(165deg, #e0f2fe 0%, #bae6fd 45%, #7dd3fc 100%);
-  padding: 48px;
-  border-radius: 24px;
-  position: relative;
-  overflow: hidden;
+  color: #0369a1;
+  background: transparent;
 }
 
-.users-top-picks--skyblue::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(125, 211, 252, 0.4), transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.35), transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.users-top-picks--skyblue > * {
-  position: relative;
-  z-index: 1;
-}
-
-.users-top-picks--skyblue h2,
-.users-top-picks--skyblue h3,
-.users-top-picks--skyblue h4,
-.users-top-picks--skyblue p,
-.users-top-picks--skyblue ul {
+.gaming-featured-container.users-top-picks-skyblue h2,
+.gaming-featured-container.users-top-picks-skyblue h3,
+.gaming-featured-container.users-top-picks-skyblue h4,
+.gaming-featured-container.users-top-picks-skyblue p,
+.gaming-featured-container.users-top-picks-skyblue ul {
   margin: 0;
   padding: 0;
 }
 
-.users-top-picks--skyblue .section-title {
-  font-size: 1.35rem;
+.gaming-featured-container.users-top-picks-skyblue .section-title {
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   margin: 0;
-  font-weight: 800;
+  font-weight: 700;
   color: #075985;
 }
 
-.users-top-picks--skyblue .title-square {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.5);
+.gaming-featured-container.users-top-picks-skyblue .title-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  background: #0ea5e9;
 }
 
-.users-top-picks--skyblue .header-row {
+.gaming-featured-container.users-top-picks-skyblue .header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-  gap: 18px;
+  margin-bottom: 20px;
+  gap: 16px;
 }
 
-.users-top-picks--skyblue .filters {
+.gaming-featured-container.users-top-picks-skyblue .filters {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.users-top-picks--skyblue .filter {
-  padding: 7px 16px;
-  border-radius: 999px;
-  border: 2px solid rgba(14, 165, 233, 0.45);
-  background: rgba(255, 255, 255, 0.85);
-  color: #0284c7;
+.gaming-featured-container.users-top-picks-skyblue .filter {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #0ea5e9;
+  background: #ffffff;
+  color: #0ea5e9;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(8px);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
 }
 
-.users-top-picks--skyblue .filter.active,
-.users-top-picks--skyblue .filter:hover {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
-  transform: translateY(-2px);
+.gaming-featured-container.users-top-picks-skyblue .filter.active,
+.gaming-featured-container.users-top-picks-skyblue .filter:hover {
+  background: #0ea5e9;
+  color: #ffffff;
 }
 
-/* Layout */
-.users-top-picks--skyblue .leaderboard-layout {
+.gaming-featured-container.users-top-picks-skyblue .leaderboard-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 24px;
 }
 
-/* Ranking Column */
-.users-top-picks--skyblue .ranking-column {
+.gaming-featured-container.users-top-picks-skyblue .ranking-column {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.users-top-picks--skyblue .ranking-card {
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(14, 165, 233, 0.25);
-  border-radius: 18px;
-  padding: 16px;
+.gaming-featured-container.users-top-picks-skyblue .ranking-card {
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  border-radius: 3px;
+  padding: 14px;
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: translateX(0);
   max-height: 500px;
   overflow: hidden;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 25px rgba(7, 89, 133, 0.15);
 }
 
-.users-top-picks--skyblue .ranking-card.hidden {
+.gaming-featured-container.users-top-picks-skyblue .ranking-card.hidden {
   opacity: 0;
-  transform: translateX(-20px) scale(0.95);
+  transform: translateX(-20px);
   max-height: 0;
-  padding: 0 16px;
+  padding: 0 14px;
   margin: 0;
-  border-width: 0;
 }
 
-.users-top-picks--skyblue .ranking-card:not(.hidden):hover {
-  transform: translateX(6px) scale(1.02);
-  box-shadow: 0 16px 45px rgba(7, 89, 133, 0.25);
-  border-color: rgba(14, 165, 233, 0.65);
+.gaming-featured-container.users-top-picks-skyblue .ranking-card:hover {
+  transform: translateX(4px);
 }
 
-.users-top-picks--skyblue .ranking-card.top {
-  background: linear-gradient(135deg, rgba(240, 249, 255, 0.98) 0%, rgba(224, 242, 254, 0.95) 100%);
-  border: 2px solid #0ea5e9;
-  box-shadow: 0 12px 35px rgba(14, 165, 233, 0.25);
+.gaming-featured-container.users-top-picks-skyblue .ranking-card.top {
+  background: #bae6fd;
+  border: 1px solid #0ea5e9;
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.08);
 }
 
-.users-top-picks--skyblue .rank-number {
+.gaming-featured-container.users-top-picks-skyblue .rank-number {
   font-size: 1.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #0ea5e9;
   min-width: 48px;
 }
 
-.users-top-picks--skyblue .rank-info h3,
-.users-top-picks--skyblue .rank-info h4 {
+.gaming-featured-container.users-top-picks-skyblue .rank-info h3,
+.gaming-featured-container.users-top-picks-skyblue .rank-info h4 {
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.3;
   margin-bottom: 6px;
   color: #0c4a6e;
 }
 
-.users-top-picks--skyblue .rank-info a {
+.gaming-featured-container.users-top-picks-skyblue .rank-info a {
   color: #0c4a6e;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.users-top-picks--skyblue .rank-info a:hover {
-  color: #0284c7;
+.gaming-featured-container.users-top-picks-skyblue .rank-info a:hover {
+  color: #0ea5e9;
 }
 
-.users-top-picks--skyblue .rank-info p {
+.gaming-featured-container.users-top-picks-skyblue .rank-info p {
   color: #0369a1;
   font-size: 0.88rem;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-.users-top-picks--skyblue .meta {
+.gaming-featured-container.users-top-picks-skyblue .meta {
   font-size: 0.75rem;
   color: #0284c7;
-  font-weight: 600;
 }
 
-/* Spotlight Card */
-.users-top-picks--skyblue .spotlight-card {
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(14, 165, 233, 0.35);
-  border-radius: 20px;
+.gaming-featured-container.users-top-picks-skyblue .spotlight-card {
+  background: #ffffff;
+  border: 1px solid #bae6fd;
+  border-radius: 3px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 16px 45px rgba(7, 89, 133, 0.2);
 }
 
-.users-top-picks--skyblue .spotlight-image {
+.gaming-featured-container.users-top-picks-skyblue .spotlight-image {
   position: relative;
   height: 220px;
   overflow: hidden;
 }
 
-.users-top-picks--skyblue .spotlight-image img {
+.gaming-featured-container.users-top-picks-skyblue .spotlight-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.users-top-picks--skyblue .spotlight-card:hover .spotlight-image img {
-  transform: scale(1.08);
+.gaming-featured-container.users-top-picks-skyblue .spotlight-card:hover .spotlight-image img {
+  transform: scale(1.05);
 }
 
-.users-top-picks--skyblue .spotlight-image .badge {
+.gaming-featured-container.users-top-picks-skyblue .spotlight-image .badge {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 5px 12px;
-  background: rgba(14, 165, 233, 0.95);
-  color: #fff;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background: #0ea5e9;
+  color: #ffffff;
   font-size: 0.68rem;
   font-weight: 700;
-  border-radius: 999px;
+  border-radius: 3px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45);
 }
 
-.users-top-picks--skyblue .spotlight-content {
-  padding: 20px;
+.gaming-featured-container.users-top-picks-skyblue .spotlight-content {
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
-.users-top-picks--skyblue .category-tag {
+.gaming-featured-container.users-top-picks-skyblue .category-tag {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 4px 8px;
   font-size: 0.7rem;
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-  color: #0284c7;
-  font-weight: 700;
-  border-radius: 999px;
-  border: 2px solid rgba(14, 165, 233, 0.35);
+  background: #e0f2fe;
+  color: #0ea5e9;
+  font-weight: 600;
+  border-radius: 3px;
   width: fit-content;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
-.users-top-picks--skyblue .spotlight-content h3 {
+.gaming-featured-container.users-top-picks-skyblue .spotlight-content h3 {
   font-size: 1.15rem;
   font-weight: 700;
   color: #0c4a6e;
-  line-height: 1.4;
 }
 
-.users-top-picks--skyblue .spotlight-content a {
+.gaming-featured-container.users-top-picks-skyblue .spotlight-content a {
   color: #0c4a6e;
   text-decoration: none;
 }
 
-.users-top-picks--skyblue .spotlight-content a:hover {
-  color: #0284c7;
+.gaming-featured-container.users-top-picks-skyblue .spotlight-content a:hover {
+  color: #0ea5e9;
 }
 
-.users-top-picks--skyblue .spotlight-content p {
+.gaming-featured-container.users-top-picks-skyblue .spotlight-content p {
   color: #0369a1;
   font-size: 0.9rem;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
-.users-top-picks--skyblue .quick-stats {
+.gaming-featured-container.users-top-picks-skyblue .quick-stats {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   color: #0369a1;
   font-size: 0.85rem;
 }
 
-.users-top-picks--skyblue .cta {
+.gaming-featured-container.users-top-picks-skyblue .cta {
   display: inline-block;
   margin-top: auto;
-  padding: 10px 18px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  color: #fff;
+  color: #0ea5e9;
   text-decoration: none;
-  border-radius: 999px;
-  align-self: flex-start;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
 }
 
-.users-top-picks--skyblue .cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
+.gaming-featured-container.users-top-picks-skyblue .cta:hover {
+  text-decoration: underline;
 }
 
-/* ====== Responsive ====== */
 @media (max-width: 992px) {
-  .users-top-picks--skyblue {
-    padding: 32px 24px;
+  .gaming-featured-container.users-top-picks-skyblue {
+    padding: 0 16px;
   }
-  
-  .users-top-picks--skyblue .header-row {
+  .gaming-featured-container.users-top-picks-skyblue .header-row {
     flex-direction: column;
     align-items: flex-start;
   }
-  
-  .users-top-picks--skyblue .leaderboard-layout {
+  .gaming-featured-container.users-top-picks-skyblue .leaderboard-layout {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 640px) {
-  .users-top-picks--skyblue {
-    padding: 24px 18px;
-  }
-  
-  .users-top-picks--skyblue .filters {
+  .gaming-featured-container.users-top-picks-skyblue .filters {
     width: 100%;
     justify-content: flex-start;
   }
-  
-  .users-top-picks--skyblue .ranking-card {
+  .gaming-featured-container.users-top-picks-skyblue .ranking-card {
     flex-direction: column;
   }
-  
-  .users-top-picks--skyblue .rank-number {
+  .gaming-featured-container.users-top-picks-skyblue .rank-number {
     font-size: 1.2rem;
     min-width: auto;
   }
@@ -443,7 +379,7 @@
 <script>
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
-    const container = document.querySelector('.users-top-picks--skyblue');
+    const container = document.querySelector('.users-top-picks-skyblue');
     if (!container) return;
 
     const filterButtons = container.querySelectorAll('.filter');
@@ -452,29 +388,20 @@
     filterButtons.forEach(function(button) {
       button.addEventListener('click', function() {
         const platform = this.getAttribute('data-platform');
-        
-        // Update active button
+
         filterButtons.forEach(function(btn) {
           btn.classList.remove('active');
         });
         this.classList.add('active');
 
-        // Filter cards with smooth animation
         rankingCards.forEach(function(card, index) {
           const cardPlatforms = card.getAttribute('data-platforms');
-          
-          if (platform === 'all') {
+          if (platform === 'all' || (cardPlatforms && cardPlatforms.includes(platform))) {
             setTimeout(function() {
               card.classList.remove('hidden');
-            }, index * 50);
+            }, index * 40);
           } else {
-            if (cardPlatforms && cardPlatforms.includes(platform)) {
-              setTimeout(function() {
-                card.classList.remove('hidden');
-              }, index * 50);
-            } else {
-              card.classList.add('hidden');
-            }
+            card.classList.add('hidden');
           }
         });
       });
