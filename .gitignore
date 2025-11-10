@@ -1,0 +1,30 @@
+# Build results
+bin/
+obj/
+*/bin/
+*/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider/JetBrains
+.idea/
+
+# Logs
+*.log
+
+# Publish outputs
+publish/
+*.publish.xml
+
+# Backup files
+*~
+*.bak
+*.tmp

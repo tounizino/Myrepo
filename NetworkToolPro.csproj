@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <AssemblyName>NetworkToolPro</AssemblyName>
+    <Version>1.0.0</Version>
+    <Authors>NetworkToolPro</Authors>
+    <Company>NetworkToolPro</Company>
+    <Product>Network Tool Pro</Product>
+    <Description>Ultimate network diagnostic and configuration tool for Windows</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="7.0.2" />
+  </ItemGroup>
+
+</Project>
