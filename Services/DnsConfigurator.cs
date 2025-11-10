@@ -24,11 +24,10 @@ public sealed class DnsConfigurator
                 Description = adapter["Description"]?.ToString() ?? "Unknown",
                 InterfaceIndex = Convert.ToInt32(adapter["InterfaceIndex"] ?? -1),
                 SettingId = adapter["SettingID"]?.ToString() ?? string.Empty,
-                DhcpEnabled = Convert.ToBoolean(adapter["DHCPEnabled"] ?? false)
+                DhcpEnabled = Convert.ToBoolean(adapter["DHCPEnabled"] ?? false),
+                IpAddresses = ((string[]?)adapter["IPAddress"])?.ToList() ?? new List<string>(),
+                DnsServers = ((string[]?)adapter["DNSServerSearchOrder"])?.ToList() ?? new List<string>()
             };
-
-            adapterInfo.IpAddresses = ((string[]?)adapter["IPAddress"])?.ToList() ?? new List<string>();
-            adapterInfo.DnsServers = ((string[]?)adapter["DNSServerSearchOrder"])?.ToList() ?? new List<string>();
 
             adapters.Add(adapterInfo);
         }
@@ -58,7 +57,7 @@ public sealed class DnsConfigurator
                 newDns["DNSServerSearchOrder"] = dnsServers.Count == 0 ? null : dnsServers.ToArray();
 
                 var result = managementObject.InvokeMethod("SetDNSServerSearchOrder", newDns, null);
-                var returnValue = Convert.ToInt32(result?"ReturnValue" ?? 1);
+                var returnValue = Convert.ToInt32(result?["ReturnValue"] ?? 1);
 
                 return new DnsOperationResult(returnValue == 0, returnValue, DescribeReturnCode(returnValue));
             }
