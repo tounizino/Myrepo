@@ -1,0 +1,332 @@
+<!-- Featured Games on the Cloud - Masonry Grid Layout -->
+<div class="gaming-featured-container featured-games-v1">
+  
+  <h2 class="section-title">
+    <span class="title-square teal"></span> Featured Games on the Cloud
+  </h2>
+  
+  <div class="masonry-grid">
+    <!-- Large Featured Game -->
+    <article class="game-card large">
+      <div class="game-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/game1.jpg" alt="Cyberpunk 2077 Cloud Gaming" loading="lazy">
+        <div class="platform-badges">
+          <span class="platform-badge geforce">GeForce NOW</span>
+          <span class="platform-badge gamepass">Game Pass</span>
+        </div>
+      </div>
+      <div class="game-content">
+        <span class="category-tag teal">AAA Title</span>
+        <h3><a href="#">Cyberpunk 2077: Ultimate Cloud Gaming Performance Guide</a></h3>
+        <p class="game-desc">Get the best visual experience and performance settings for streaming Cyberpunk 2077 across all major cloud gaming platforms.</p>
+        <div class="game-meta">
+          <span class="rating">⭐ 4.8/5</span> · 
+          <span class="players">52K players</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Medium Cards -->
+    <article class="game-card medium">
+      <div class="game-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/game2.jpg" alt="Starfield Cloud Gaming" loading="lazy">
+        <div class="platform-badges">
+          <span class="platform-badge gamepass">Game Pass</span>
+        </div>
+      </div>
+      <div class="game-content">
+        <span class="category-tag teal">RPG</span>
+        <h3><a href="#">Starfield: Cloud Settings & Performance Tips</a></h3>
+        <div class="game-meta">
+          <span class="rating">⭐ 4.6/5</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="game-card medium">
+      <div class="game-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/game3.jpg" alt="Fortnite Cloud Gaming" loading="lazy">
+        <div class="platform-badges">
+          <span class="platform-badge xbox">Xbox Cloud</span>
+          <span class="platform-badge geforce">GeForce NOW</span>
+        </div>
+      </div>
+      <div class="game-content">
+        <span class="category-tag teal">Battle Royale</span>
+        <h3><a href="#">Fortnite: Competitive Cloud Gaming Settings</a></h3>
+        <div class="game-meta">
+          <span class="rating">⭐ 4.9/5</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Small Cards -->
+    <article class="game-card small">
+      <div class="game-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/game4.jpg" alt="FIFA Cloud Gaming" loading="lazy">
+      </div>
+      <div class="game-content">
+        <h4><a href="#">FIFA 24 Cloud Setup</a></h4>
+        <span class="game-type">Sports</span>
+      </div>
+    </article>
+
+    <article class="game-card small">
+      <div class="game-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/game5.jpg" alt="Destiny 2 Cloud Gaming" loading="lazy">
+      </div>
+      <div class="game-content">
+        <h4><a href="#">Destiny 2: Low-Latency Guide</a></h4>
+        <span class="game-type">Shooter</span>
+      </div>
+    </article>
+
+    <article class="game-card small">
+      <div class="game-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/game6.jpg" alt="Baldur's Gate 3 Cloud" loading="lazy">
+      </div>
+      <div class="game-content">
+        <h4><a href="#">Baldur's Gate 3 on Cloud</a></h4>
+        <span class="game-type">RPG</span>
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+/* ===== Featured Games Section Styles ===== */
+.gaming-featured-container.featured-games-v1 {
+  max-width: 1400px;
+  margin: 0 auto 40px auto;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #222;
+}
+
+.gaming-featured-container.featured-games-v1 h2,
+.gaming-featured-container.featured-games-v1 h3,
+.gaming-featured-container.featured-games-v1 h4,
+.gaming-featured-container.featured-games-v1 p {
+  margin: 0;
+  padding: 0;
+}
+
+.gaming-featured-container.featured-games-v1 .section-title {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px 0;
+  font-weight: 700;
+}
+
+.gaming-featured-container.featured-games-v1 .title-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.gaming-featured-container.featured-games-v1 .title-square.teal {
+  background: #14b8a6;
+}
+
+.gaming-featured-container.featured-games-v1 .masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 18px;
+}
+
+/* Card Sizes */
+.gaming-featured-container.featured-games-v1 .game-card.large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gaming-featured-container.featured-games-v1 .game-card.medium {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.gaming-featured-container.featured-games-v1 .game-card.small {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* Card Base Styles */
+.gaming-featured-container.featured-games-v1 .game-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gaming-featured-container.featured-games-v1 .game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.gaming-featured-container.featured-games-v1 .game-image {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+
+.gaming-featured-container.featured-games-v1 .game-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gaming-featured-container.featured-games-v1 .game-card:hover .game-image img {
+  transform: scale(1.08);
+}
+
+/* Platform Badges */
+.gaming-featured-container.featured-games-v1 .platform-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gaming-featured-container.featured-games-v1 .platform-badge {
+  padding: 4px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.gaming-featured-container.featured-games-v1 .platform-badge.geforce {
+  background: rgba(118, 185, 0, 0.9);
+}
+
+.gaming-featured-container.featured-games-v1 .platform-badge.gamepass {
+  background: rgba(16, 124, 16, 0.9);
+}
+
+.gaming-featured-container.featured-games-v1 .platform-badge.xbox {
+  background: rgba(16, 124, 16, 0.9);
+}
+
+/* Content Areas */
+.gaming-featured-container.featured-games-v1 .game-content {
+  padding: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gaming-featured-container.featured-games-v1 .game-card.large .game-content {
+  padding: 16px;
+  gap: 10px;
+}
+
+.gaming-featured-container.featured-games-v1 .category-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  background: #ccfbf1;
+  color: #14b8a6;
+  font-weight: 600;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.gaming-featured-container.featured-games-v1 h3 {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.gaming-featured-container.featured-games-v1 h4 {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.gaming-featured-container.featured-games-v1 .game-content a {
+  color: #111;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gaming-featured-container.featured-games-v1 .game-content a:hover {
+  color: #14b8a6;
+}
+
+.gaming-featured-container.featured-games-v1 .game-desc {
+  color: #6b7280;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.gaming-featured-container.featured-games-v1 .game-meta {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  padding-top: 6px;
+  margin-top: auto;
+}
+
+.gaming-featured-container.featured-games-v1 .game-type {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 992px) {
+  .gaming-featured-container.featured-games-v1 {
+    padding: 0 16px;
+  }
+  
+  .gaming-featured-container.featured-games-v1 .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+    gap: 12px;
+  }
+  
+  .gaming-featured-container.featured-games-v1 .game-card.large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  .gaming-featured-container.featured-games-v1 .game-card.medium {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  
+  .gaming-featured-container.featured-games-v1 .game-card.small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .gaming-featured-container.featured-games-v1 .masonry-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+  }
+  
+  .gaming-featured-container.featured-games-v1 .game-card.large,
+  .gaming-featured-container.featured-games-v1 .game-card.medium,
+  .gaming-featured-container.featured-games-v1 .game-card.small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+</style>
