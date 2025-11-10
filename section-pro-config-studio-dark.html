@@ -1,0 +1,480 @@
+<!-- Pro Config Studio - Dark Neon Theme -->
+<div class="gaming-featured-container pro-configs pro-configs--dark">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-square"></span>
+      <span>Pro Config Studio</span>
+    </h2>
+    <p class="section-subtitle">Elite configuration presets in a neon-dark command center. Toggle video, controls, and network specs with animated tabs.</p>
+  </div>
+
+  <div class="studio-layout">
+    <aside class="preset-gallery" aria-label="Config gallery">
+      <h3 class="gallery-title">Preset Library</h3>
+      <ul class="preset-list">
+        <li class="active">
+          <div class="preset-info">
+            <span class="preset-name">Diablo IV Ultra Preset</span>
+            <span class="preset-platform">GeForce NOW</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+        <li>
+          <div class="preset-info">
+            <span class="preset-name">Valorant Competitive Bundle</span>
+            <span class="preset-platform">Shadow PC</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+        <li>
+          <div class="preset-info">
+            <span class="preset-name">Elden Ring Cinematic</span>
+            <span class="preset-platform">Xbox Cloud</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+        <li>
+          <div class="preset-info">
+            <span class="preset-name">Rocket League Zero Lag</span>
+            <span class="preset-platform">Amazon Luna</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+      </ul>
+      <a class="view-all" href="#">Browse Full Library →</a>
+    </aside>
+
+    <article class="config-detail" aria-labelledby="config-detail-title">
+      <div class="config-media">
+        <img src="https://cloudloadout.com/wp-content/uploads/pro-config.jpg" alt="Pro configuration dashboard" loading="lazy">
+      </div>
+      <div class="config-content">
+        <span class="category-tag">Featured Config</span>
+        <h3 id="config-detail-title"><a href="#">Diablo IV Ultra Preset for GeForce NOW Ultimate</a></h3>
+        <p class="description">Cinematic HDR paired with reflex-grade latency. Perfect for high-refresh cloud sessions with adaptive streaming pipelines.</p>
+
+        <div class="config-stats">
+          <div class="stat">
+            <span class="label">Latency Target</span>
+            <span class="value">12 ms</span>
+          </div>
+          <div class="stat">
+            <span class="label">Bitrate Cap</span>
+            <span class="value">78 Mbps</span>
+          </div>
+          <div class="stat">
+            <span class="label">Color Profile</span>
+            <span class="value">HDR10+</span>
+          </div>
+        </div>
+
+        <div class="config-tabs" role="tablist">
+          <button class="tab active" type="button" data-tab="video">Video</button>
+          <button class="tab" type="button" data-tab="controls">Controls</button>
+          <button class="tab" type="button" data-tab="network">Network</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="tab-panel active" data-content="video">
+            <div class="row"><span class="key">Resolution</span><span class="value">3840 × 2160</span></div>
+            <div class="row"><span class="key">Frame Rate</span><span class="value">120 fps</span></div>
+            <div class="row"><span class="key">Reflex Mode</span><span class="value">On + Boost</span></div>
+            <div class="row"><span class="key">Gamma / HDR</span><span class="value">1.1 / 65%</span></div>
+          </div>
+          <div class="tab-panel" data-content="controls">
+            <div class="row"><span class="key">Controller</span><span class="value">Xbox Elite Series 2</span></div>
+            <div class="row"><span class="key">Response Curve</span><span class="value">Precision Hybrid</span></div>
+            <div class="row"><span class="key">Trigger Range</span><span class="value">0% – 85%</span></div>
+            <div class="row"><span class="key">Haptics</span><span class="value">Dynamic Pulse</span></div>
+          </div>
+          <div class="tab-panel" data-content="network">
+            <div class="row"><span class="key">Max Bitrate</span><span class="value">78 Mbps</span></div>
+            <div class="row"><span class="key">Packet Priority</span><span class="value">QoS High</span></div>
+            <div class="row"><span class="key">Buffer Mode</span><span class="value">Adaptive</span></div>
+            <div class="row"><span class="key">Preferred DNS</span><span class="value">1.1.1.1</span></div>
+          </div>
+        </div>
+
+        <div class="config-actions">
+          <a class="primary" href="#">Download Preset</a>
+          <a class="secondary" href="#">View Controller Layout</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+/* ===== Pro Config Studio – Dark Theme ===== */
+.pro-configs--dark {
+  --bg: #030712;
+  --panel: rgba(17, 24, 39, 0.85);
+  --panel-strong: rgba(24, 31, 55, 0.95);
+  --text: #f8fafc;
+  --text-soft: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #8b5cf6;
+  --accent-strong: #c084fc;
+  --accent-cyan: #22d3ee;
+  --border: rgba(139, 92, 246, 0.35);
+
+  max-width: 1400px;
+  margin: 0 auto 56px auto;
+  padding: 48px;
+  border-radius: 26px;
+  background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 55%),
+              radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.16), transparent 60%),
+              linear-gradient(135deg, rgba(2, 6, 23, 0.95), rgba(8, 16, 32, 1));
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+}
+
+.pro-configs--dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(139, 92, 246, 0.12), rgba(22, 78, 199, 0.08));
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.pro-configs--dark > * { position: relative; z-index: 1; }
+
+.pro-configs--dark .section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pro-configs--dark .title-square {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-cyan) 100%);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.6);
+}
+
+.pro-configs--dark .section-subtitle {
+  margin-top: 8px;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  max-width: 720px;
+  line-height: 1.7;
+}
+
+.pro-configs--dark .studio-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr;
+  gap: 28px;
+}
+
+.pro-configs--dark .preset-gallery {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 20px 42px rgba(3, 7, 18, 0.6);
+  backdrop-filter: blur(18px);
+}
+
+.pro-configs--dark .gallery-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pro-configs--dark .preset-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.pro-configs--dark .preset-list li {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.pro-configs--dark .preset-list li.active {
+  border-color: rgba(139, 92, 246, 0.65);
+  box-shadow: 0 20px 45px rgba(76, 29, 149, 0.45);
+  background: linear-gradient(135deg, rgba(76, 29, 149, 0.4), rgba(15, 23, 42, 0.85));
+}
+
+.pro-configs--dark .preset-list li:hover {
+  transform: translateY(-4px);
+  border-color: rgba(139, 92, 246, 0.55);
+}
+
+.pro-configs--dark .preset-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pro-configs--dark .preset-platform {
+  font-size: 0.72rem;
+  color: var(--accent-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pro-configs--dark .download,
+.pro-configs--dark .view-all {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.pro-configs--dark .config-detail {
+  background: var(--panel-strong);
+  border-radius: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  overflow: hidden;
+  box-shadow: 0 22px 48px rgba(3, 7, 18, 0.65);
+}
+
+.pro-configs--dark .config-media {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.pro-configs--dark .config-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.pro-configs--dark .config-detail:hover .config-media img {
+  transform: scale(1.06);
+}
+
+.pro-configs--dark .config-content {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pro-configs--dark .category-tag {
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pro-configs--dark h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.pro-configs--dark h3 a { color: inherit; text-decoration: none; }
+.pro-configs--dark h3 a:hover { color: var(--accent-cyan); }
+
+.pro-configs--dark .description {
+  color: var(--text-soft);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.pro-configs--dark .config-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pro-configs--dark .stat {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 14px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  padding: 14px 16px;
+}
+
+.pro-configs--dark .stat .label {
+  font-size: 0.72rem;
+  color: rgba(226, 232, 240, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pro-configs--dark .stat .value {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--accent-strong);
+}
+
+.pro-configs--dark .config-tabs {
+  display: inline-flex;
+  gap: 10px;
+  padding: 6px;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 999px;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+}
+
+.pro-configs--dark .tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.28s ease;
+}
+
+.pro-configs--dark .tab.active {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(34, 211, 238, 0.8));
+  color: #fdf4ff;
+  box-shadow: 0 12px 28px rgba(139, 92, 246, 0.35);
+}
+
+.pro-configs--dark .tab:hover:not(.active) { color: var(--accent-strong); }
+
+.pro-configs--dark .tab-panels {
+  position: relative;
+  min-height: 180px;
+}
+
+.pro-configs--dark .tab-panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pro-configs--dark .tab-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  position: relative;
+}
+
+.pro-configs--dark .row {
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-soft);
+}
+
+.pro-configs--dark .row .value {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.pro-configs--dark .config-actions {
+  display: flex;
+  gap: 14px;
+}
+
+.pro-configs--dark .config-actions a {
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+.pro-configs--dark .config-actions .primary {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(217, 119, 242, 0.9));
+  color: #fdf4ff;
+  box-shadow: 0 14px 32px rgba(139, 92, 246, 0.4);
+}
+
+.pro-configs--dark .config-actions .primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(139, 92, 246, 0.5);
+}
+
+.pro-configs--dark .config-actions .secondary {
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--accent-strong);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.pro-configs--dark .config-actions .secondary:hover {
+  background: rgba(34, 211, 238, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .pro-configs--dark .config-detail { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 992px) {
+  .pro-configs--dark { padding: 32px 28px; }
+  .pro-configs--dark .studio-layout { grid-template-columns: 1fr; }
+  .pro-configs--dark .tab-panel { grid-template-columns: 1fr; }
+  .pro-configs--dark .config-actions { flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  .pro-configs--dark { padding: 24px 18px; }
+}
+</style>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.pro-configs--dark');
+    if (!container) return;
+
+    const tabs = container.querySelectorAll('.tab');
+    const panels = container.querySelectorAll('.tab-panel');
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        const target = tab.getAttribute('data-tab');
+
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        panels.forEach(function(panel) { panel.classList.remove('active'); });
+
+        tab.classList.add('active');
+        const activePanel = container.querySelector('.tab-panel[data-content="' + target + '"]');
+        if (activePanel) {
+          activePanel.classList.add('active');
+        }
+      });
+    });
+  });
+})();
+</script>

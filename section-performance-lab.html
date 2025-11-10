@@ -1,0 +1,348 @@
+<!-- Performance Lab - Split Feature Layout -->
+<div class="gaming-featured-container performance-lab-v1">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-square blue"></span> Performance Lab
+    </h2>
+    <p class="section-subtitle">Dial in elite streaming performance with real-world benchmarks and tuning guides</p>
+  </div>
+
+  <div class="split-layout">
+    <!-- Main Feature -->
+    <article class="lab-feature">
+      <div class="feature-media">
+        <img src="https://cloudloadout.com/wp-content/uploads/performance-lab.jpg" alt="Performance benchmarking" loading="lazy">
+        <div class="benchmark-tag">Benchmark v2.7</div>
+      </div>
+      <div class="feature-content">
+        <span class="category-tag blue">Performance Deep Dive</span>
+        <h3><a href="#">GeForce NOW Ultimate: 4K120 Streaming Benchmark Analysis</a></h3>
+        <p>We stress-tested GeForce NOW Ultimate at 4K/120 to validate bitrate, latency, and frame pacing stability across fiber and cable networks.</p>
+        <div class="feature-stats">
+          <div class="stat-block">
+            <span class="label">Avg Latency</span>
+            <span class="value">14 ms</span>
+          </div>
+          <div class="stat-block">
+            <span class="label">Peak Bitrate</span>
+            <span class="value">82 Mbps</span>
+          </div>
+          <div class="stat-block">
+            <span class="label">Frame Stability</span>
+            <span class="value">98.2%</span>
+          </div>
+        </div>
+        <a class="cta" href="#">View Full Lab Notes</a>
+      </div>
+    </article>
+
+    <!-- Sidebar Insights -->
+    <aside class="lab-sidebar">
+      <div class="sidebar-card">
+        <h4>Latency Leaderboard</h4>
+        <ul>
+          <li>
+            <span>Wired Fiber 1 Gbps</span>
+            <strong>12 ms</strong>
+          </li>
+          <li>
+            <span>Wi-Fi 6E 5 GHz</span>
+            <strong>17 ms</strong>
+          </li>
+          <li>
+            <span>Wi-Fi 6 2.4 GHz</span>
+            <strong>24 ms</strong>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Recommended Hardware</h4>
+        <ul>
+          <li><span>Router</span><strong>ASUS RT-AXE7800</strong></li>
+          <li><span>Controller</span><strong>Xbox Elite Series 2</strong></li>
+          <li><span>Display</span><strong>LG C3 OLED</strong></li>
+        </ul>
+      </div>
+      <div class="sidebar-card highlight">
+        <h4>Tuning Checklist</h4>
+        <ol>
+          <li>Enable Adaptive QoS & prioritize console</li>
+          <li>Set bitrate cap to 120 Mbps</li>
+          <li>Lock GeForce NOW to 120 fps in app</li>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style>
+/* ===== Performance Lab Styles ===== */
+.gaming-featured-container.performance-lab-v1 {
+  max-width: 1400px;
+  margin: 0 auto 48px auto;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #222;
+}
+
+.gaming-featured-container.performance-lab-v1 h2,
+.gaming-featured-container.performance-lab-v1 h3,
+.gaming-featured-container.performance-lab-v1 h4,
+.gaming-featured-container.performance-lab-v1 p,
+.gaming-featured-container.performance-lab-v1 ul,
+.gaming-featured-container.performance-lab-v1 ol {
+  margin: 0;
+  padding: 0;
+}
+
+.gaming-featured-container.performance-lab-v1 .section-title {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.gaming-featured-container.performance-lab-v1 .title-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.gaming-featured-container.performance-lab-v1 .title-square.blue {
+  background: #2563eb;
+}
+
+.gaming-featured-container.performance-lab-v1 .section-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.gaming-featured-container.performance-lab-v1 .section-header {
+  margin-bottom: 24px;
+}
+
+/* Layout */
+.gaming-featured-container.performance-lab-v1 .split-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Main Feature */
+.gaming-featured-container.performance-lab-v1 .lab-feature {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gaming-featured-container.performance-lab-v1 .feature-media {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+}
+
+.gaming-featured-container.performance-lab-v1 .feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gaming-featured-container.performance-lab-v1 .lab-feature:hover .feature-media img {
+  transform: scale(1.05);
+}
+
+.gaming-featured-container.performance-lab-v1 .benchmark-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(37, 99, 235, 0.85);
+  color: #fff;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+.gaming-featured-container.performance-lab-v1 .feature-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gaming-featured-container.performance-lab-v1 .category-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  background: #dbeafe;
+  color: #2563eb;
+  font-weight: 600;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.gaming-featured-container.performance-lab-v1 h3 {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.gaming-featured-container.performance-lab-v1 h3 a {
+  color: #111;
+  text-decoration: none;
+}
+
+.gaming-featured-container.performance-lab-v1 h3 a:hover {
+  color: #2563eb;
+}
+
+.gaming-featured-container.performance-lab-v1 .feature-content p {
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.gaming-featured-container.performance-lab-v1 .feature-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 14px;
+  border: 1px dashed #bfdbfe;
+  border-radius: 3px;
+  background: #eff6ff;
+}
+
+.gaming-featured-container.performance-lab-v1 .stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gaming-featured-container.performance-lab-v1 .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.gaming-featured-container.performance-lab-v1 .value {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.gaming-featured-container.performance-lab-v1 .cta {
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.gaming-featured-container.performance-lab-v1 .cta:hover {
+  text-decoration: underline;
+}
+
+/* Sidebar */
+.gaming-featured-container.performance-lab-v1 .lab-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card.highlight {
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 80%);
+  border: 1px solid #bfdbfe;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card ul,
+.gaming-featured-container.performance-lab-v1 .sidebar-card ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card ol {
+  counter-reset: step-counter;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card ol li {
+  position: relative;
+  padding-left: 24px;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card ol li::before {
+  counter-increment: step-counter;
+  content: counter(step-counter) ".";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card ul li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.gaming-featured-container.performance-lab-v1 .sidebar-card strong {
+  color: #0f172a;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 1200px) {
+  .gaming-featured-container.performance-lab-v1 .lab-feature {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .gaming-featured-container.performance-lab-v1 {
+    padding: 0 16px;
+  }
+  
+  .gaming-featured-container.performance-lab-v1 .split-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .gaming-featured-container.performance-lab-v1 .feature-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .gaming-featured-container.performance-lab-v1 .feature-stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

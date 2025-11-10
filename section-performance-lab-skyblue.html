@@ -1,0 +1,376 @@
+<!-- Performance Lab - Sky Blue Theme -->
+<div class="gaming-featured-container performance-lab performance-lab--sky">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-square"></span>
+      <span>Performance Lab</span>
+    </h2>
+    <p class="section-subtitle">Cloud streaming benchmarks and tuning strategies presented in a bright, sky-blue visual language.</p>
+  </div>
+
+  <div class="split-layout">
+    <article class="lab-feature">
+      <div class="feature-media">
+        <img src="https://cloudloadout.com/wp-content/uploads/performance-lab.jpg" alt="Performance benchmarking" loading="lazy">
+        <div class="benchmark-tag">Benchmark v2.7</div>
+      </div>
+      <div class="feature-content">
+        <span class="category-tag">Performance Deep Dive</span>
+        <h3><a href="#">GeForce NOW Ultimate: 4K120 Streaming Benchmark Analysis</a></h3>
+        <p>We stress-tested GeForce NOW Ultimate at 4K/120 to validate bitrate, latency, and frame pacing stability across fiber and cable networks.</p>
+        <div class="feature-stats">
+          <div class="stat-block">
+            <span class="label">Avg Latency</span>
+            <span class="value">14 ms</span>
+          </div>
+          <div class="stat-block">
+            <span class="label">Peak Bitrate</span>
+            <span class="value">82 Mbps</span>
+          </div>
+          <div class="stat-block">
+            <span class="label">Frame Stability</span>
+            <span class="value">98.2%</span>
+          </div>
+        </div>
+        <a class="cta" href="#">View Full Lab Notes</a>
+      </div>
+    </article>
+
+    <aside class="lab-sidebar">
+      <div class="sidebar-card">
+        <h4>Latency Leaderboard</h4>
+        <ul>
+          <li>
+            <span>Wired Fiber 1 Gbps</span>
+            <strong>12 ms</strong>
+          </li>
+          <li>
+            <span>Wi-Fi 6E 5 GHz</span>
+            <strong>17 ms</strong>
+          </li>
+          <li>
+            <span>Wi-Fi 6 2.4 GHz</span>
+            <strong>24 ms</strong>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Recommended Hardware</h4>
+        <ul>
+          <li><span>Router</span><strong>ASUS RT-AXE7800</strong></li>
+          <li><span>Controller</span><strong>Xbox Elite Series 2</strong></li>
+          <li><span>Display</span><strong>LG C3 OLED</strong></li>
+        </ul>
+      </div>
+      <div class="sidebar-card highlight">
+        <h4>Tuning Checklist</h4>
+        <ol>
+          <li>Enable Adaptive QoS & prioritize console</li>
+          <li>Set bitrate cap to 120 Mbps</li>
+          <li>Lock GeForce NOW to 120 fps in app</li>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style>
+/* ===== Performance Lab – Sky Blue Theme ===== */
+.performance-lab--sky {
+  max-width: 1400px;
+  margin: 0 auto 48px auto;
+  padding: 52px;
+  border-radius: 28px;
+  background: linear-gradient(155deg, #e0f2fe 0%, #bae6fd 45%, #7dd3fc 100%);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+.performance-lab--sky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 20%, rgba(14, 165, 233, 0.35), transparent 55%),
+              radial-gradient(circle at 80% 70%, rgba(2, 132, 199, 0.3), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.performance-lab--sky > * {
+  position: relative;
+  z-index: 1;
+}
+
+.performance-lab--sky .section-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  letter-spacing: 0.02em;
+  color: #075985;
+}
+
+.performance-lab--sky .title-square {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(125deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.45);
+}
+
+.performance-lab--sky .section-subtitle {
+  margin-top: 14px;
+  max-width: 760px;
+  color: #0369a1;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.performance-lab--sky .split-layout {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 28px;
+}
+
+.performance-lab--sky .lab-feature {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  box-shadow: 0 18px 45px rgba(7, 89, 133, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.performance-lab--sky .feature-media {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.performance-lab--sky .feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.performance-lab--sky .lab-feature:hover .feature-media img {
+  transform: scale(1.08);
+}
+
+.performance-lab--sky .benchmark-tag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.92);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 28px rgba(14, 165, 233, 0.35);
+}
+
+.performance-lab--sky .feature-content {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.performance-lab--sky .category-tag {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: #0284c7;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+}
+
+.performance-lab--sky h3 {
+  font-size: 1.35rem;
+  color: #0c4a6e;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.performance-lab--sky h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.performance-lab--sky h3 a:hover {
+  color: #0284c7;
+}
+
+.performance-lab--sky p {
+  color: #0369a1;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.performance-lab--sky .feature-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(14, 165, 233, 0.12);
+  border: 2px solid rgba(14, 165, 233, 0.2);
+}
+
+.performance-lab--sky .stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.performance-lab--sky .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0ea5e9;
+  text-transform: uppercase;
+}
+
+.performance-lab--sky .value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0369a1;
+}
+
+.performance-lab--sky .cta {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #fff;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(14, 165, 233, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.performance-lab--sky .cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(14, 165, 233, 0.45);
+}
+
+.performance-lab--sky .lab-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.performance-lab--sky .sidebar-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 22px;
+  padding: 22px;
+  border: 2px solid rgba(14, 165, 233, 0.18);
+  box-shadow: 0 16px 38px rgba(7, 89, 133, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.performance-lab--sky .sidebar-card h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0c4a6e;
+  margin-bottom: 16px;
+}
+
+.performance-lab--sky .sidebar-card ul,
+.performance-lab--sky .sidebar-card ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #0369a1;
+  font-size: 0.92rem;
+}
+
+.performance-lab--sky .sidebar-card ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.performance-lab--sky .sidebar-card ul strong {
+  color: #0ea5e9;
+}
+
+.performance-lab--sky .highlight {
+  background: linear-gradient(135deg, rgba(224, 242, 254, 0.95), rgba(191, 219, 254, 0.88));
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.performance-lab--sky .highlight ol {
+  counter-reset: checklist;
+}
+
+.performance-lab--sky .highlight ol li {
+  position: relative;
+  padding-left: 32px;
+}
+
+.performance-lab--sky .highlight ol li::before {
+  counter-increment: checklist;
+  content: counter(checklist);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .performance-lab--sky .lab-feature {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .performance-lab--sky {
+    padding: 36px 26px;
+  }
+  
+  .performance-lab--sky .split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .performance-lab--sky {
+    padding: 28px 18px;
+  }
+  
+  .performance-lab--sky .feature-stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

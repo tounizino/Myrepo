@@ -1,0 +1,411 @@
+<!-- User's Top Picks - Dark Palette (Original Layout) -->
+<div class="gaming-featured-container users-top-picks-dark">
+  
+  <div class="header-row">
+    <h2 class="section-title">
+      <span class="title-square"></span> User's Top Picks
+    </h2>
+    <div class="filters">
+      <button class="filter active" data-platform="all" type="button">All Platforms</button>
+      <button class="filter" data-platform="pc" type="button">PC</button>
+      <button class="filter" data-platform="mobile" type="button">Mobile</button>
+      <button class="filter" data-platform="tv" type="button">TV</button>
+    </div>
+  </div>
+
+  <div class="leaderboard-layout">
+    <div class="ranking-column" aria-label="User rankings">
+      <article class="ranking-card top" data-platforms="pc,mobile">
+        <div class="rank-number">#1</div>
+        <div class="rank-info">
+          <h3><a href="#">Apex Legends - Cloud Competitive Build</a></h3>
+          <p>Optimized settings for low-latency gameplay with controller and mouse profiles.</p>
+          <div class="meta">
+            <span class="votes">4,982 votes</span> · <span class="updated">Updated Oct 10, 2025</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="tv">
+        <div class="rank-number">#2</div>
+        <div class="rank-info">
+          <h4><a href="#">Gran Turismo 7: HDR Streaming Preset</a></h4>
+          <div class="meta">
+            <span class="votes">3,876 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="mobile">
+        <div class="rank-number">#3</div>
+        <div class="rank-info">
+          <h4><a href="#">Honkai Star Rail: Mobile Performance Mode</a></h4>
+          <div class="meta">
+            <span class="votes">3,102 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="pc">
+        <div class="rank-number">#4</div>
+        <div class="rank-info">
+          <h4><a href="#">Rainbow Six Siege: Tactical Cloud Setup</a></h4>
+          <div class="meta">
+            <span class="votes">2,840 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="mobile,pc">
+        <div class="rank-number">#5</div>
+        <div class="rank-info">
+          <h4><a href="#">Genshin Impact: Touch Controls Enhanced</a></h4>
+          <div class="meta">
+            <span class="votes">2,458 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="tv">
+        <div class="rank-number">#6</div>
+        <div class="rank-info">
+          <h4><a href="#">Forza Horizon 5: TV Streaming Setup</a></h4>
+          <div class="meta">
+            <span class="votes">2,234 votes</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <aside class="spotlight-card" aria-label="Spotlight pick">
+      <div class="spotlight-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/top-pick.jpg" alt="User spotlight game" loading="lazy">
+        <span class="badge">Community Highlight</span>
+      </div>
+      <div class="spotlight-content">
+        <span class="category-tag">Fan Favorite</span>
+        <h3><a href="#">Forza Horizon 5: Ultra Stream Settings for TV</a></h3>
+        <p>Discover the exact combination of bandwidth, controller, and HDR settings that our community voted as the smoothest way to stream Forza on large screens.</p>
+        <ul class="quick-stats">
+          <li><strong>Avg Latency:</strong> 18 ms</li>
+          <li><strong>Recommended Bitrate:</strong> 32 Mbps</li>
+          <li><strong>Best Platform:</strong> Xbox Cloud on LG C2</li>
+        </ul>
+        <a class="cta" href="#">See Full Breakdown</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style>
+/* ===== User's Top Picks - Dark Palette ===== */
+.gaming-featured-container.users-top-picks-dark {
+  max-width: 1400px;
+  margin: 0 auto 48px auto;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #1f2937;
+  background: transparent;
+}
+
+.gaming-featured-container.users-top-picks-dark h2,
+.gaming-featured-container.users-top-picks-dark h3,
+.gaming-featured-container.users-top-picks-dark h4,
+.gaming-featured-container.users-top-picks-dark p,
+.gaming-featured-container.users-top-picks-dark ul {
+  margin: 0;
+  padding: 0;
+}
+
+.gaming-featured-container.users-top-picks-dark .section-title {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-weight: 700;
+  color: #111827;
+}
+
+.gaming-featured-container.users-top-picks-dark .title-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  background: #1f2937;
+}
+
+.gaming-featured-container.users-top-picks-dark .header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.gaming-featured-container.users-top-picks-dark .filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gaming-featured-container.users-top-picks-dark .filter {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #1f2937;
+  background: #ffffff;
+  color: #1f2937;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gaming-featured-container.users-top-picks-dark .filter.active,
+.gaming-featured-container.users-top-picks-dark .filter:hover {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+.gaming-featured-container.users-top-picks-dark .leaderboard-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.gaming-featured-container.users-top-picks-dark .ranking-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gaming-featured-container.users-top-picks-dark .ranking-card {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  padding: 14px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateX(0);
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.gaming-featured-container.users-top-picks-dark .ranking-card.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+  max-height: 0;
+  padding: 0 14px;
+  margin: 0;
+}
+
+.gaming-featured-container.users-top-picks-dark .ranking-card:hover {
+  transform: translateX(4px);
+}
+
+.gaming-featured-container.users-top-picks-dark .ranking-card.top {
+  background: #e2e8f0;
+  border: 1px solid #1f2937;
+  box-shadow: 0 10px 20px rgba(31, 41, 55, 0.08);
+}
+
+.gaming-featured-container.users-top-picks-dark .rank-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  min-width: 48px;
+}
+
+.gaming-featured-container.users-top-picks-dark .rank-info h3,
+.gaming-featured-container.users-top-picks-dark .rank-info h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+.gaming-featured-container.users-top-picks-dark .rank-info a {
+  color: #0f172a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.gaming-featured-container.users-top-picks-dark .rank-info a:hover {
+  color: #1f2937;
+}
+
+.gaming-featured-container.users-top-picks-dark .rank-info p {
+  color: #4b5563;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.gaming-featured-container.users-top-picks-dark .meta {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-card:hover .spotlight-image img {
+  transform: scale(1.05);
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-image .badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  background: #1f2937;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-content {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gaming-featured-container.users-top-picks-dark .category-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  background: #e5e7eb;
+  color: #1f2937;
+  font-weight: 600;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-content a {
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-content a:hover {
+  color: #1f2937;
+}
+
+.gaming-featured-container.users-top-picks-dark .spotlight-content p {
+  color: #4b5563;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.gaming-featured-container.users-top-picks-dark .quick-stats {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #4b5563;
+  font-size: 0.85rem;
+}
+
+.gaming-featured-container.users-top-picks-dark .cta {
+  display: inline-block;
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-decoration: none;
+}
+
+.gaming-featured-container.users-top-picks-dark .cta:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .gaming-featured-container.users-top-picks-dark {
+    padding: 0 16px;
+  }
+  .gaming-featured-container.users-top-picks-dark .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .gaming-featured-container.users-top-picks-dark .leaderboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .gaming-featured-container.users-top-picks-dark .filters {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .gaming-featured-container.users-top-picks-dark .ranking-card {
+    flex-direction: column;
+  }
+  .gaming-featured-container.users-top-picks-dark .rank-number {
+    font-size: 1.2rem;
+    min-width: auto;
+  }
+}
+</style>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.users-top-picks-dark');
+    if (!container) return;
+
+    const filterButtons = container.querySelectorAll('.filter');
+    const rankingCards = container.querySelectorAll('.ranking-card');
+
+    filterButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const platform = this.getAttribute('data-platform');
+
+        filterButtons.forEach(function(btn) {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        rankingCards.forEach(function(card, index) {
+          const cardPlatforms = card.getAttribute('data-platforms');
+          if (platform === 'all' || (cardPlatforms && cardPlatforms.includes(platform))) {
+            setTimeout(function() {
+              card.classList.remove('hidden');
+            }, index * 40);
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+})();
+</script>

@@ -1,0 +1,478 @@
+<!-- Pro Config Studio - Sky Blue Theme -->
+<div class="gaming-featured-container pro-configs pro-configs--sky">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-square"></span>
+      <span>Pro Config Studio</span>
+    </h2>
+    <p class="section-subtitle">Bright sky-blue interface with interactive tabs for video, controls, and network presets.</p>
+  </div>
+
+  <div class="studio-layout">
+    <aside class="preset-gallery" aria-label="Config gallery">
+      <h3 class="gallery-title">Preset Library</h3>
+      <ul class="preset-list">
+        <li class="active">
+          <div class="preset-info">
+            <span class="preset-name">Diablo IV Ultra Preset</span>
+            <span class="preset-platform">GeForce NOW</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+        <li>
+          <div class="preset-info">
+            <span class="preset-name">Valorant Competitive Bundle</span>
+            <span class="preset-platform">Shadow PC</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+        <li>
+          <div class="preset-info">
+            <span class="preset-name">Elden Ring Cinematic</span>
+            <span class="preset-platform">Xbox Cloud</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+        <li>
+          <div class="preset-info">
+            <span class="preset-name">Rocket League Zero Lag</span>
+            <span class="preset-platform">Amazon Luna</span>
+          </div>
+          <a class="download" href="#">Download JSON</a>
+        </li>
+      </ul>
+      <a class="view-all" href="#">Browse Full Library →</a>
+    </aside>
+
+    <article class="config-detail" aria-labelledby="config-detail-title">
+      <div class="config-media">
+        <img src="https://cloudloadout.com/wp-content/uploads/pro-config.jpg" alt="Pro configuration dashboard" loading="lazy">
+      </div>
+      <div class="config-content">
+        <span class="category-tag">Featured Config</span>
+        <h3 id="config-detail-title"><a href="#">Diablo IV Ultra Preset for GeForce NOW Ultimate</a></h3>
+        <p class="description">A daylight-ready preset boasting crisp visuals, responsive input, and bandwidth targeting tuned for sky-blue clarity.</p>
+
+        <div class="config-stats">
+          <div class="stat">
+            <span class="label">Latency Target</span>
+            <span class="value">12 ms</span>
+          </div>
+          <div class="stat">
+            <span class="label">Bitrate Cap</span>
+            <span class="value">78 Mbps</span>
+          </div>
+          <div class="stat">
+            <span class="label">Color Profile</span>
+            <span class="value">HDR10+</span>
+          </div>
+        </div>
+
+        <div class="config-tabs" role="tablist">
+          <button class="tab active" type="button" data-tab="video">Video</button>
+          <button class="tab" type="button" data-tab="controls">Controls</button>
+          <button class="tab" type="button" data-tab="network">Network</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="tab-panel active" data-content="video">
+            <div class="row"><span class="key">Resolution</span><span class="value">3840 × 2160</span></div>
+            <div class="row"><span class="key">Frame Rate</span><span class="value">120 fps</span></div>
+            <div class="row"><span class="key">Reflex Mode</span><span class="value">On + Boost</span></div>
+            <div class="row"><span class="key">Gamma / HDR</span><span class="value">1.1 / 65%</span></div>
+          </div>
+          <div class="tab-panel" data-content="controls">
+            <div class="row"><span class="key">Controller</span><span class="value">Xbox Elite Series 2</span></div>
+            <div class="row"><span class="key">Response Curve</span><span class="value">Precision Hybrid</span></div>
+            <div class="row"><span class="key">Trigger Range</span><span class="value">0% – 85%</span></div>
+            <div class="row"><span class="key">Haptics</span><span class="value">Dynamic Pulse</span></div>
+          </div>
+          <div class="tab-panel" data-content="network">
+            <div class="row"><span class="key">Max Bitrate</span><span class="value">78 Mbps</span></div>
+            <div class="row"><span class="key">Packet Priority</span><span class="value">QoS High</span></div>
+            <div class="row"><span class="key">Buffer Mode</span><span class="value">Adaptive</span></div>
+            <div class="row"><span class="key">Preferred DNS</span><span class="value">1.1.1.1</span></div>
+          </div>
+        </div>
+
+        <div class="config-actions">
+          <a class="primary" href="#">Download Preset</a>
+          <a class="secondary" href="#">View Controller Layout</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<style>
+/* ===== Pro Config Studio – Sky Blue Theme ===== */
+.pro-configs--sky {
+  --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 45%, #7dd3fc 100%);
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-strong: rgba(255, 255, 255, 0.98);
+  --accent: #0284c7;
+  --accent-soft: #0ea5e9;
+  --text: #0f172a;
+  --text-secondary: #0369a1;
+  --border: rgba(14, 165, 233, 0.3);
+
+  max-width: 1400px;
+  margin: 0 auto 56px auto;
+  padding: 52px;
+  border-radius: 28px;
+  background: var(--bg-gradient);
+  color: var(--text);
+  position: relative;
+  overflow: hidden;
+}
+
+.pro-configs--sky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.45), transparent 55%),
+              radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.35), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pro-configs--sky > * { position: relative; z-index: 1; }
+
+.pro-configs--sky .section-title {
+  font-size: 1.42rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: #075985;
+}
+
+.pro-configs--sky .title-square {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.45);
+}
+
+.pro-configs--sky .section-subtitle {
+  margin-top: 12px;
+  color: #0369a1;
+  max-width: 720px;
+  line-height: 1.7;
+}
+
+.pro-configs--sky .studio-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.6fr;
+  gap: 28px;
+}
+
+.pro-configs--sky .preset-gallery {
+  background: var(--surface);
+  border-radius: 22px;
+  padding: 26px;
+  border: 2px solid var(--border);
+  box-shadow: 0 20px 45px rgba(7, 89, 133, 0.18);
+  backdrop-filter: blur(15px);
+}
+
+.pro-configs--sky .gallery-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0c4a6e;
+}
+
+.pro-configs--sky .preset-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 22px 0;
+}
+
+.pro-configs--sky .preset-list li {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 18px;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.pro-configs--sky .preset-list li.active {
+  border-color: rgba(14, 165, 233, 0.6);
+  box-shadow: 0 16px 36px rgba(7, 89, 133, 0.25);
+  background: linear-gradient(135deg, rgba(224, 242, 254, 0.98), rgba(191, 219, 254, 0.92));
+}
+
+.pro-configs--sky .preset-list li:hover {
+  transform: translateY(-3px);
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+.pro-configs--sky .preset-name {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0c4a6e;
+}
+
+.pro-configs--sky .preset-platform {
+  font-size: 0.72rem;
+  color: #0ea5e9;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pro-configs--sky .download,
+.pro-configs--sky .view-all {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0284c7;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.pro-configs--sky .config-detail {
+  background: var(--surface-strong);
+  border-radius: 24px;
+  border: 2px solid rgba(14, 165, 233, 0.25);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(7, 89, 133, 0.22);
+}
+
+.pro-configs--sky .config-media {
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.pro-configs--sky .config-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.pro-configs--sky .config-detail:hover .config-media img {
+  transform: scale(1.06);
+}
+
+.pro-configs--sky .config-content {
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pro-configs--sky .category-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border: 2px solid rgba(14, 165, 233, 0.25);
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pro-configs--sky h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0c4a6e;
+  line-height: 1.5;
+}
+
+.pro-configs--sky h3 a { color: inherit; text-decoration: none; }
+.pro-configs--sky h3 a:hover { color: var(--accent); }
+
+.pro-configs--sky .description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.pro-configs--sky .config-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pro-configs--sky .stat {
+  background: rgba(14, 165, 233, 0.12);
+  border-radius: 16px;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  padding: 16px;
+}
+
+.pro-configs--sky .stat .label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0284c7;
+}
+
+.pro-configs--sky .stat .value {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #0369a1;
+}
+
+.pro-configs--sky .config-tabs {
+  display: inline-flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  padding: 6px;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+}
+
+.pro-configs--sky .tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: #0c4a6e;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pro-configs--sky .tab.active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.95), rgba(2, 132, 199, 0.9));
+  color: #f8fbff;
+  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.35);
+}
+
+.pro-configs--sky .tab:hover:not(.active) { color: var(--accent); }
+
+.pro-configs--sky .tab-panels {
+  position: relative;
+  min-height: 180px;
+}
+
+.pro-configs--sky .tab-panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pro-configs--sky .tab-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  position: relative;
+}
+
+.pro-configs--sky .row {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 14px;
+  border: 2px solid rgba(14, 165, 233, 0.2);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.pro-configs--sky .row .value {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.pro-configs--sky .config-actions {
+  display: flex;
+  gap: 14px;
+}
+
+.pro-configs--sky .config-actions a {
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+.pro-configs--sky .config-actions .primary {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #f0f9ff;
+  box-shadow: 0 12px 28px rgba(14, 165, 233, 0.35);
+}
+
+.pro-configs--sky .config-actions .primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(14, 165, 233, 0.45);
+}
+
+.pro-configs--sky .config-actions .secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--accent);
+  border: 2px solid rgba(14, 165, 233, 0.3);
+}
+
+.pro-configs--sky .config-actions .secondary:hover {
+  background: rgba(224, 242, 254, 0.9);
+}
+
+@media (max-width: 1200px) {
+  .pro-configs--sky .config-detail { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 992px) {
+  .pro-configs--sky { padding: 36px 28px; }
+  .pro-configs--sky .studio-layout { grid-template-columns: 1fr; }
+  .pro-configs--sky .tab-panel { grid-template-columns: 1fr; }
+  .pro-configs--sky .config-actions { flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  .pro-configs--sky { padding: 26px 18px; }
+}
+</style>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.pro-configs--sky');
+    if (!container) return;
+
+    const tabs = container.querySelectorAll('.tab');
+    const panels = container.querySelectorAll('.tab-panel');
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        const target = tab.getAttribute('data-tab');
+
+        tabs.forEach(function(btn) { btn.classList.remove('active'); });
+        panels.forEach(function(panel) { panel.classList.remove('active'); });
+
+        tab.classList.add('active');
+        const activePanel = container.querySelector('.tab-panel[data-content="' + target + '"]');
+        if (activePanel) {
+          activePanel.classList.add('active');
+        }
+      });
+    });
+  });
+})();
+</script>
