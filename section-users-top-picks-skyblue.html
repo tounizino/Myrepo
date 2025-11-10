@@ -1,0 +1,484 @@
+<!-- User's Top Picks - Sky Blue Theme with Interactive Filters -->
+<div class="gaming-featured-container users-top-picks users-top-picks--skyblue">
+  
+  <div class="header-row">
+    <h2 class="section-title">
+      <span class="title-square"></span> User's Top Picks
+    </h2>
+    <div class="filters">
+      <button class="filter active" data-platform="all" type="button">All Platforms</button>
+      <button class="filter" data-platform="pc" type="button">PC</button>
+      <button class="filter" data-platform="mobile" type="button">Mobile</button>
+      <button class="filter" data-platform="tv" type="button">TV</button>
+    </div>
+  </div>
+
+  <div class="leaderboard-layout">
+    <div class="ranking-column" aria-label="User rankings">
+      <article class="ranking-card top" data-platforms="pc,mobile">
+        <div class="rank-number">#1</div>
+        <div class="rank-info">
+          <h3><a href="#">Apex Legends - Cloud Competitive Build</a></h3>
+          <p>Optimized settings for low-latency gameplay with controller and mouse profiles.</p>
+          <div class="meta">
+            <span class="votes">4,982 votes</span> · <span class="updated">Updated Oct 10, 2025</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="tv">
+        <div class="rank-number">#2</div>
+        <div class="rank-info">
+          <h4><a href="#">Gran Turismo 7: HDR Streaming Preset</a></h4>
+          <div class="meta">
+            <span class="votes">3,876 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="mobile">
+        <div class="rank-number">#3</div>
+        <div class="rank-info">
+          <h4><a href="#">Honkai Star Rail: Mobile Performance Mode</a></h4>
+          <div class="meta">
+            <span class="votes">3,102 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="pc">
+        <div class="rank-number">#4</div>
+        <div class="rank-info">
+          <h4><a href="#">Rainbow Six Siege: Tactical Cloud Setup</a></h4>
+          <div class="meta">
+            <span class="votes">2,840 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="mobile,pc">
+        <div class="rank-number">#5</div>
+        <div class="rank-info">
+          <h4><a href="#">Genshin Impact: Touch Controls Enhanced</a></h4>
+          <div class="meta">
+            <span class="votes">2,458 votes</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ranking-card" data-platforms="tv">
+        <div class="rank-number">#6</div>
+        <div class="rank-info">
+          <h4><a href="#">Forza Horizon 5: TV Streaming Setup</a></h4>
+          <div class="meta">
+            <span class="votes">2,234 votes</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <aside class="spotlight-card" aria-label="Spotlight pick">
+      <div class="spotlight-image">
+        <img src="https://cloudloadout.com/wp-content/uploads/top-pick.jpg" alt="User spotlight game" loading="lazy">
+        <span class="badge">Community Highlight</span>
+      </div>
+      <div class="spotlight-content">
+        <span class="category-tag">Fan Favorite</span>
+        <h3><a href="#">Forza Horizon 5: Ultra Stream Settings for TV</a></h3>
+        <p>Discover the exact combination of bandwidth, controller, and HDR settings that our community voted as the smoothest way to stream Forza on large screens.</p>
+        <ul class="quick-stats">
+          <li><strong>Avg Latency:</strong> 18 ms</li>
+          <li><strong>Recommended Bitrate:</strong> 32 Mbps</li>
+          <li><strong>Best Platform:</strong> Xbox Cloud on LG C2</li>
+        </ul>
+        <a class="cta" href="#">See Full Breakdown</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style>
+/* ===== User's Top Picks - Sky Blue Theme ===== */
+.users-top-picks--skyblue {
+  max-width: 1400px;
+  margin: 0 auto 48px auto;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #0c4a6e;
+  background: linear-gradient(165deg, #e0f2fe 0%, #bae6fd 45%, #7dd3fc 100%);
+  padding: 48px;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.users-top-picks--skyblue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(125, 211, 252, 0.4), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.35), transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.users-top-picks--skyblue > * {
+  position: relative;
+  z-index: 1;
+}
+
+.users-top-picks--skyblue h2,
+.users-top-picks--skyblue h3,
+.users-top-picks--skyblue h4,
+.users-top-picks--skyblue p,
+.users-top-picks--skyblue ul {
+  margin: 0;
+  padding: 0;
+}
+
+.users-top-picks--skyblue .section-title {
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-weight: 800;
+  color: #075985;
+}
+
+.users-top-picks--skyblue .title-square {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.5);
+}
+
+.users-top-picks--skyblue .header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 18px;
+}
+
+.users-top-picks--skyblue .filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.users-top-picks--skyblue .filter {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(14, 165, 233, 0.45);
+  background: rgba(255, 255, 255, 0.85);
+  color: #0284c7;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.users-top-picks--skyblue .filter.active,
+.users-top-picks--skyblue .filter:hover {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Layout */
+.users-top-picks--skyblue .leaderboard-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* Ranking Column */
+.users-top-picks--skyblue .ranking-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.users-top-picks--skyblue .ranking-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(14, 165, 233, 0.25);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  max-height: 500px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(7, 89, 133, 0.15);
+}
+
+.users-top-picks--skyblue .ranking-card.hidden {
+  opacity: 0;
+  transform: translateX(-20px) scale(0.95);
+  max-height: 0;
+  padding: 0 16px;
+  margin: 0;
+  border-width: 0;
+}
+
+.users-top-picks--skyblue .ranking-card:not(.hidden):hover {
+  transform: translateX(6px) scale(1.02);
+  box-shadow: 0 16px 45px rgba(7, 89, 133, 0.25);
+  border-color: rgba(14, 165, 233, 0.65);
+}
+
+.users-top-picks--skyblue .ranking-card.top {
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.98) 0%, rgba(224, 242, 254, 0.95) 100%);
+  border: 2px solid #0ea5e9;
+  box-shadow: 0 12px 35px rgba(14, 165, 233, 0.25);
+}
+
+.users-top-picks--skyblue .rank-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  min-width: 48px;
+}
+
+.users-top-picks--skyblue .rank-info h3,
+.users-top-picks--skyblue .rank-info h4 {
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  color: #0c4a6e;
+}
+
+.users-top-picks--skyblue .rank-info a {
+  color: #0c4a6e;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.users-top-picks--skyblue .rank-info a:hover {
+  color: #0284c7;
+}
+
+.users-top-picks--skyblue .rank-info p {
+  color: #0369a1;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.users-top-picks--skyblue .meta {
+  font-size: 0.75rem;
+  color: #0284c7;
+  font-weight: 600;
+}
+
+/* Spotlight Card */
+.users-top-picks--skyblue .spotlight-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(14, 165, 233, 0.35);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 45px rgba(7, 89, 133, 0.2);
+}
+
+.users-top-picks--skyblue .spotlight-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.users-top-picks--skyblue .spotlight-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.users-top-picks--skyblue .spotlight-card:hover .spotlight-image img {
+  transform: scale(1.08);
+}
+
+.users-top-picks--skyblue .spotlight-image .badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  background: rgba(14, 165, 233, 0.95);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45);
+}
+
+.users-top-picks--skyblue .spotlight-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.users-top-picks--skyblue .category-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: #0284c7;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid rgba(14, 165, 233, 0.35);
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.users-top-picks--skyblue .spotlight-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0c4a6e;
+  line-height: 1.4;
+}
+
+.users-top-picks--skyblue .spotlight-content a {
+  color: #0c4a6e;
+  text-decoration: none;
+}
+
+.users-top-picks--skyblue .spotlight-content a:hover {
+  color: #0284c7;
+}
+
+.users-top-picks--skyblue .spotlight-content p {
+  color: #0369a1;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.users-top-picks--skyblue .quick-stats {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #0369a1;
+  font-size: 0.85rem;
+}
+
+.users-top-picks--skyblue .cta {
+  display: inline-block;
+  margin-top: auto;
+  padding: 10px 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  align-self: flex-start;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
+}
+
+.users-top-picks--skyblue .cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 992px) {
+  .users-top-picks--skyblue {
+    padding: 32px 24px;
+  }
+  
+  .users-top-picks--skyblue .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .users-top-picks--skyblue .leaderboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .users-top-picks--skyblue {
+    padding: 24px 18px;
+  }
+  
+  .users-top-picks--skyblue .filters {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .users-top-picks--skyblue .ranking-card {
+    flex-direction: column;
+  }
+  
+  .users-top-picks--skyblue .rank-number {
+    font-size: 1.2rem;
+    min-width: auto;
+  }
+}
+</style>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.users-top-picks--skyblue');
+    if (!container) return;
+
+    const filterButtons = container.querySelectorAll('.filter');
+    const rankingCards = container.querySelectorAll('.ranking-card');
+
+    filterButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const platform = this.getAttribute('data-platform');
+        
+        // Update active button
+        filterButtons.forEach(function(btn) {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        // Filter cards with smooth animation
+        rankingCards.forEach(function(card, index) {
+          const cardPlatforms = card.getAttribute('data-platforms');
+          
+          if (platform === 'all') {
+            setTimeout(function() {
+              card.classList.remove('hidden');
+            }, index * 50);
+          } else {
+            if (cardPlatforms && cardPlatforms.includes(platform)) {
+              setTimeout(function() {
+                card.classList.remove('hidden');
+              }, index * 50);
+            } else {
+              card.classList.add('hidden');
+            }
+          }
+        });
+      });
+    });
+  });
+})();
+</script>

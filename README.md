@@ -1,302 +1,296 @@
 # Cloud Gaming Blog - Featured Sections Collection
 
-A comprehensive collection of **8 WordPress-ready featured sections** designed specifically for cloud gaming blogs. Each section features unique layouts while maintaining a cohesive design system.
+A comprehensive collection of **interactive WordPress-ready sections** for cloud gaming blogs. Each section features unique layouts with smooth animations, clickable elements, and multiple theme variations.
 
 ---
 
 ## 📦 What's Included
 
-This repository contains 8 fully-responsive, WordPress-ready HTML/CSS sections:
+This repository contains 4 fully-interactive, responsive sections, each with 3 theme variations:
 
-1. **PR Guides & Expert Tutorials** - Three-column card layout
-2. **Featured Games on the Cloud** - Masonry/grid layout with platform badges
-3. **User's Top Picks** - Leaderboard layout with ranking system
-4. **Beginner Launchpad** - Step-by-step guide cards with difficulty badges
-5. **Performance Lab** - Split feature layout with stats and benchmarks
-6. **Troubleshooting Hub** - Category grid with issue cards
-7. **Pro Config Studio** - Dual column showcase with config presets
-8. **Latest Updates & News** - Timeline feed with sidebar widgets
-9. **Platform Comparison** - Side-by-side comparison cards (BONUS)
+### 1. **User's Top Picks** ⭐
+- **Interactive platform filters**: All Platforms, PC, Mobile, TV
+- **Smooth animations**: Cards fade in/out with CSS transitions
+- **Leaderboard layout** with spotlight sidebar
+- **Files**: 
+  - `users-top-picks.html` - Original theme (orange accents)
+  - `users-top-picks-dark.html` - Dark neon theme (cyan/blue accents)
+  - `users-top-picks-skyblue.html` - Sky blue gradient theme
+
+### 2. **Performance Lab** ⚡
+- Benchmark showcase with stats display
+- Split layout with sidebar widgets
+- **Files**:
+  - `performance-lab-dark.html` - Dark theme with cyan highlights
+  - `performance-lab-skyblue.html` - Bright sky blue theme
+  - `section-performance-lab.html` - Original blue theme
+
+### 3. **Pro Config Studio** ⚙️
+- **Interactive tab system**: Video, Controls, Network
+- **Smooth tab transitions** with content switching
+- Preset library with featured config showcase
+- **Files**:
+  - `pro-config-studio.html` - Original purple theme with working tabs
+  - `pro-config-studio-dark.html` - Dark neon theme with animated tabs
+  - _Sky blue theme in progress_
+  - `section-pro-configs.html` - Legacy version (for reference)
+
+### 4. **Platform Comparison** 📊
+- Side-by-side service comparison cards
+- Performance bars with animated fills
+- **Files**:
+  - `section-platform-comparison.html` - Original yellow/amber theme
+  - _Dark and sky blue themes in progress_
 
 ---
 
-## ✨ Key Features
+## ✨ Interactive Features
 
-### Design System
-- **Consistent color palette** with unique accent colors per section
-- **Responsive layouts** optimized for desktop, tablet, and mobile
-- **WordPress-ready** - just copy and paste into WordPress pages/posts
-- **SEO-friendly** with semantic HTML and proper heading hierarchy
-- **Performance optimized** with `loading="lazy"` on images
-- **Accessible** with ARIA labels and proper markup
+### User's Top Picks - Platform Filtering
+```javascript
+// Automatically filters game cards by platform (PC, Mobile, TV, All)
+// Smooth CSS transitions with staggered animations
+// Click any filter button to see cards animate in/out
+```
 
-### Layout Variations
-- Three-column grids
-- Masonry/card grids
-- Two-column splits (2fr/1fr)
-- Leaderboard/ranking styles
-- Timeline feeds
-- Step-by-step guides
-- Comparison tables
+### Pro Config Studio - Tab Switching
+```javascript
+// Click Video, Controls, or Network tabs
+// Content panels smoothly transition with fade + slide effects
+// Each tab shows different configuration settings
+```
 
 ---
 
 ## 🚀 How to Use
 
-### Method 1: Direct WordPress Integration (Recommended)
+### WordPress Integration
 
-1. **Edit your WordPress page/post** in the Block Editor or Classic Editor
-2. **Add a Custom HTML block** (or switch to "Text" mode in Classic Editor)
-3. **Copy the entire contents** of any section file (e.g., `section-pr-guides.html`)
-4. **Paste** into the HTML block
-5. **Update/Publish** your page
+1. **Copy the entire HTML file** including `<style>` and `<script>` tags
+2. **In WordPress**, add a **Custom HTML block**
+3. **Paste** the code directly into the block
+4. **Replace placeholder images** with your media library URLs:
+   ```html
+   <!-- Find: -->
+   src="https://cloudloadout.com/wp-content/uploads/..."
+   
+   <!-- Replace with: -->
+   src="https://yourdomain.com/wp-content/uploads/your-image.jpg"
+   ```
+5. **Update links** - Replace all `href="#"` with real URLs
+6. **Publish** and test!
 
-### Method 2: Theme Integration
+### Testing Interactive Features
 
-If you want to permanently add sections to your theme:
-
-1. Copy the section code
-2. Paste into your theme's template files (e.g., `front-page.php`, `page-templates/homepage.php`)
-3. Replace placeholder images and links with your actual content
-4. Save and upload via FTP or theme editor
-
-### Method 3: Page Builder Integration
-
-For page builders like Elementor, Divi, or Beaver Builder:
-
-1. Add a **Custom HTML widget/module**
-2. Paste the section code
-3. Adjust spacing and settings as needed
+- **User's Top Picks**: Click the platform filter buttons and watch cards animate
+- **Pro Config Studio**: Click the Video/Controls/Network tabs to switch content
 
 ---
 
-## 🎨 Customization Guide
+## 🎨 Theme Variations Explained
+
+### Original Themes
+- Clean, bright designs with strong accent colors
+- Orange (`#f97316`), Blue (`#2563eb`), Purple (`#7c3aed`), Yellow (`#f59e0b`)
+- Subtle shadows and light backgrounds
+
+### Dark Themes
+- Deep dark backgrounds (#0f172a, #1e293b)
+- Neon accent colors (cyan `#38bdf8`, purple `#8b5cf6`)
+- Glowing effects and strong shadows
+- Gradient overlays for depth
+
+### Sky Blue Themes
+- Bright gradient backgrounds (#e0f2fe → #7dd3fc)
+- High contrast with dark text
+- Clean, modern, airy aesthetic
+- Perfect for daytime viewing
+
+---
+
+## 💡 Customization Guide
 
 ### Changing Colors
 
-Each section uses a primary accent color. Find and replace these in the CSS:
+Each theme uses CSS variables. Find and replace:
 
-- **PR Guides**: `#8b5cf6` (purple)
-- **Featured Games**: `#14b8a6` (teal)
-- **User's Top Picks**: `#f97316` (orange)
-- **Beginner Launchpad**: `#10b981` (green)
-- **Performance Lab**: `#2563eb` (blue)
-- **Troubleshooting Hub**: `#ef4444` (red)
-- **Pro Config Studio**: `#7c3aed` (purple)
-- **Latest Updates**: `#06b6d4` (cyan)
-- **Platform Comparison**: `#f59e0b` (yellow)
-
-### Replacing Images
-
-Replace these placeholder image URLs with your actual images:
-
-```html
-<!-- Find: -->
-src="https://cloudloadout.com/wp-content/uploads/placeholder.jpg"
-
-<!-- Replace with your image URL: -->
-src="https://yourdomain.com/wp-content/uploads/your-image.jpg"
+**Dark Theme Example:**
+```css
+--accent: #38bdf8;  /* Change to your brand color */
+--accent-strong: #22d3ee;  /* Lighter variation */
 ```
 
-### Updating Links
+**Original Theme Example:**
+```css
+.title-square.orange {
+  background: #f97316;  /* Change this color */
+}
+```
 
-Replace all `href="#"` with your actual page URLs:
+### Adjusting Animation Speed
 
+Find transition timings and adjust:
+```css
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* Change 0.4s to 0.6s for slower animations */
+```
+
+### Adding More Filter Options
+
+For User's Top Picks, add new buttons and data attributes:
 ```html
-<!-- Find: -->
-<a href="#">Your Link Text</a>
+<button class="filter" data-platform="console" type="button">Console</button>
 
-<!-- Replace with: -->
-<a href="https://yourdomain.com/your-page/">Your Link Text</a>
+<!-- Then tag articles: -->
+<article class="ranking-card" data-platforms="console,tv">
 ```
 
 ---
 
 ## 📱 Responsive Breakpoints
 
-All sections follow these breakpoints:
+All sections adapt at these breakpoints:
 
-- **Desktop**: 1200px+
-- **Tablet**: 993px - 1199px
-- **Mobile Large**: 641px - 992px
-- **Mobile**: 640px and below
-
----
-
-## 🎯 Content Recommendations
-
-### For Best Results:
-
-1. **Use high-quality images** (minimum 1200px wide for featured images)
-2. **Optimize images** before uploading (use WebP format when possible)
-3. **Keep titles concise** (40-60 characters for optimal display)
-4. **Write engaging excerpts** (120-160 characters)
-5. **Update regularly** to keep content fresh
+- **Desktop**: 1200px+ (full multi-column layouts)
+- **Tablet**: 993px - 1199px (2-column or stacked)
+- **Mobile Large**: 641px - 992px (1-2 columns)
+- **Mobile**: 640px and below (single column, stacked)
 
 ---
 
 ## 🔧 Browser Compatibility
 
-Tested and optimized for:
-
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+✅ Chrome/Edge 90+  
+✅ Firefox 88+  
+✅ Safari 14+  
+✅ Mobile browsers (iOS/Android)
 
 ---
 
-## 📊 Performance Tips
+## 🎯 Performance Tips
 
-1. **Use WebP images** for smaller file sizes
-2. **Enable lazy loading** (already included in code)
-3. **Minify CSS** before production use
-4. **Use a CDN** for faster image delivery
-5. **Cache static assets** via your hosting provider
-
----
-
-## 🎓 Section Use Cases
-
-| Section | Best For | Content Type |
-|---------|----------|--------------|
-| PR Guides | In-depth tutorials | Long-form guides |
-| Featured Games | Game showcases | Visual content |
-| User's Top Picks | Community favorites | User-generated content |
-| Beginner Launchpad | Getting started guides | Sequential learning |
-| Performance Lab | Technical analysis | Data & benchmarks |
-| Troubleshooting Hub | Problem solving | FAQ & fixes |
-| Pro Config Studio | Advanced settings | Technical configs |
-| Latest Updates | News feed | Time-sensitive content |
-| Platform Comparison | Service reviews | Comparison data |
+1. **Optimize images** - Use WebP format, max 1200px wide
+2. **Lazy loading** - Already included via `loading="lazy"`
+3. **Minify in production** - Remove comments and whitespace
+4. **Test animations** - Ensure smooth 60fps on target devices
 
 ---
 
-## 🛠️ Advanced Customization
+## 📋 File Structure
 
-### Adding Animation
-
-Add this CSS for fade-in animations:
-
-```css
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.gaming-featured-container {
-  animation: fadeInUp 0.6s ease-out;
-}
 ```
-
-### Dark Mode Support
-
-Add dark mode styles:
-
-```css
-@media (prefers-color-scheme: dark) {
-  .gaming-featured-container {
-    background: #1a1a1a;
-    color: #e5e5e5;
-  }
-  /* Add more dark mode overrides */
-}
+/home/engine/project/
+├── users-top-picks.html              # Original theme (orange)
+├── users-top-picks-dark.html         # Dark neon theme
+├── users-top-picks-skyblue.html      # Sky blue gradient theme
+├── performance-lab-dark.html          # Dark theme
+├── performance-lab-skyblue.html       # Sky blue theme
+├── section-performance-lab.html       # Original theme
+├── pro-config-studio.html             # Original with tabs
+├── pro-config-studio-dark.html        # Dark theme with tabs
+├── section-pro-configs.html           # Legacy version
+├── section-platform-comparison.html   # Original theme
+├── section-users-top-picks.html       # Legacy version
+└── README.md                          # This file
 ```
 
 ---
 
-## 📝 WordPress Compatibility
+## 🧪 Testing Checklist
 
-These sections are compatible with:
+Before deploying:
 
-- ✅ WordPress 5.0+
-- ✅ Classic Editor
-- ✅ Block Editor (Gutenberg)
-- ✅ Elementor
-- ✅ WPBakery
-- ✅ Divi Builder
-- ✅ Beaver Builder
-
----
-
-## 🐛 Troubleshooting
-
-### Issue: Styles not applying
-**Solution**: Make sure you copied the entire file including the `<style>` tag
-
-### Issue: Layout breaks on mobile
-**Solution**: Check that your WordPress theme isn't overriding the CSS
-
-### Issue: Images not loading
-**Solution**: Verify image URLs are correct and images are uploaded to your media library
-
-### Issue: Conflicts with theme styles
-**Solution**: Add `!important` to critical CSS rules or increase specificity
+- [ ] Test all filter buttons (User's Top Picks)
+- [ ] Test all tab switches (Pro Config Studio)
+- [ ] Check responsive layout on mobile (< 640px)
+- [ ] Verify images load correctly
+- [ ] Test hover effects on cards
+- [ ] Validate smooth animations at 60fps
+- [ ] Check text readability in all themes
+- [ ] Test all links point to correct URLs
 
 ---
 
-## 📄 License
+## 🌟 Key Features by Section
 
-This code is provided as-is for use in your cloud gaming blog. Feel free to modify, customize, and adapt to your needs.
+### User's Top Picks
+- ✨ **4 platform filters with smooth animations**
+- 🏆 Ranking system with vote counts
+- 📊 Spotlight card with stats
+- 🎨 3 complete themes (Original, Dark, Sky Blue)
 
----
+### Performance Lab
+- 📈 Benchmark statistics display
+- 🎯 Latency leaderboard
+- ✅ Hardware recommendations
+- 📝 Tuning checklists
+- 🎨 2 complete themes (Dark, Sky Blue)
 
-## 🤝 Credits
+### Pro Config Studio
+- 🔄 **Interactive 3-tab system (Video/Controls/Network)**
+- 📦 Preset library with active states
+- 📊 Config stats grid
+- 🎮 Controller layout previews
+- 🎨 2 complete themes with working tabs
 
-Designed and developed for cloud gaming blogs focused on:
-- Performance optimization guides
-- Beginner tutorials
-- Professional configurations
-- Troubleshooting resources
-- Platform comparisons
-
----
-
-## 📞 Support
-
-For questions about implementation:
-1. Check the code comments in each section file
-2. Refer to the customization guide above
-3. Test in a staging environment first
-
----
-
-## 🎉 Quick Start Checklist
-
-- [ ] Choose the sections you want to use
-- [ ] Replace all placeholder images with your content
-- [ ] Update all links (`href="#"`) with actual URLs
-- [ ] Customize colors to match your brand (optional)
-- [ ] Test on mobile devices
-- [ ] Verify all links work correctly
-- [ ] Optimize and compress images
-- [ ] Add to your WordPress site
-- [ ] Test in different browsers
-- [ ] Monitor performance and user engagement
+### Platform Comparison
+- 🆚 Side-by-side service cards
+- 📊 Animated performance bars
+- 💰 Pricing and tier information
+- ⭐ Editor's choice badges
+- 🎨 1 theme (more coming)
 
 ---
 
-**Version**: 1.0  
-**Last Updated**: 2025  
-**Compatible With**: WordPress 5.0+, Modern Browsers
+## 🚧 Known Limitations
+
+- Platform Comparison needs Dark + Sky Blue themes
+- Pro Config Studio needs Sky Blue theme completion
+- Some legacy files (`section-*.html`) retained for reference
 
 ---
 
-## 🌟 Pro Tips
+## 📞 Support & Tips
 
-1. **Mix and match sections** - Don't feel obligated to use all of them
-2. **A/B test layouts** - Try different arrangements to see what works best
-3. **Update content regularly** - Fresh content keeps visitors engaged
-4. **Monitor analytics** - Track which sections get the most engagement
-5. **Optimize for Core Web Vitals** - Compress images and minimize CSS
+### Animations Not Working?
+- Ensure JavaScript is enabled
+- Check browser console for errors
+- Verify correct HTML structure (don't split `<script>` tags)
+
+### Styling Conflicts?
+- Use theme-specific class names (`.users-top-picks--dark`)
+- Increase CSS specificity if needed
+- Add `!important` as last resort
+
+### Mobile Layout Issues?
+- Test at exact breakpoints (640px, 992px)
+- Check `padding` on small screens
+- Verify `overflow: hidden` on containers
 
 ---
 
-**Happy Building! 🎮**
+## 💻 Development Notes
+
+### JavaScript Pattern
+All scripts use IIFEs (Immediately Invoked Function Expressions) to avoid global namespace pollution:
+```javascript
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    // Your code here
+  });
+})();
+```
+
+### CSS Architecture
+- Scoped class names prevent conflicts
+- CSS custom properties for theme colors
+- Mobile-first responsive approach
+- Smooth cubic-bezier transitions
+
+---
+
+**Version**: 2.0  
+**Last Updated**: November 2025  
+**License**: Free for use in cloud gaming blogs
+
+**Happy Building! 🎮🚀**

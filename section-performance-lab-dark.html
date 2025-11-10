@@ -1,0 +1,391 @@
+<!-- Performance Lab - Dark Mode Theme -->
+<div class="gaming-featured-container performance-lab performance-lab--dark">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-square"></span>
+      <span>Performance Lab</span>
+    </h2>
+    <p class="section-subtitle">Elite benchmarking, tuning recipes, and stability insights for serious cloud gamers.</p>
+  </div>
+
+  <div class="split-layout">
+    <article class="lab-feature">
+      <div class="feature-media">
+        <img src="https://cloudloadout.com/wp-content/uploads/performance-lab.jpg" alt="Performance benchmarking" loading="lazy">
+        <div class="benchmark-tag">Benchmark v2.7</div>
+      </div>
+      <div class="feature-content">
+        <span class="category-tag">Performance Deep Dive</span>
+        <h3><a href="#">GeForce NOW Ultimate: 4K120 Streaming Benchmark Analysis</a></h3>
+        <p>We stress-tested GeForce NOW Ultimate at 4K/120 to validate bitrate, latency, and frame pacing stability across fiber and cable networks.</p>
+        <div class="feature-stats">
+          <div class="stat-block">
+            <span class="label">Avg Latency</span>
+            <span class="value">14 ms</span>
+          </div>
+          <div class="stat-block">
+            <span class="label">Peak Bitrate</span>
+            <span class="value">82 Mbps</span>
+          </div>
+          <div class="stat-block">
+            <span class="label">Frame Stability</span>
+            <span class="value">98.2%</span>
+          </div>
+        </div>
+        <a class="cta" href="#">View Full Lab Notes</a>
+      </div>
+    </article>
+
+    <aside class="lab-sidebar">
+      <div class="sidebar-card">
+        <h4>Latency Leaderboard</h4>
+        <ul>
+          <li>
+            <span>Wired Fiber 1 Gbps</span>
+            <strong>12 ms</strong>
+          </li>
+          <li>
+            <span>Wi-Fi 6E 5 GHz</span>
+            <strong>17 ms</strong>
+          </li>
+          <li>
+            <span>Wi-Fi 6 2.4 GHz</span>
+            <strong>24 ms</strong>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <h4>Recommended Hardware</h4>
+        <ul>
+          <li><span>Router</span><strong>ASUS RT-AXE7800</strong></li>
+          <li><span>Controller</span><strong>Xbox Elite Series 2</strong></li>
+          <li><span>Display</span><strong>LG C3 OLED</strong></li>
+        </ul>
+      </div>
+      <div class="sidebar-card highlight">
+        <h4>Tuning Checklist</h4>
+        <ol>
+          <li>Enable Adaptive QoS & prioritize console</li>
+          <li>Set bitrate cap to 120 Mbps</li>
+          <li>Lock GeForce NOW to 120 fps in app</li>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<style>
+/* ===== Performance Lab – Dark Theme ===== */
+.performance-lab--dark {
+  --bg-base: #060b16;
+  --bg-surface: #0b1424;
+  --bg-elevated: rgba(13, 23, 39, 0.75);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: rgba(45, 64, 94, 0.55);
+  --accent: #22d3ee;
+  --accent-strong: #0ea5e9;
+  --card-shadow: 0 18px 40px rgba(2, 6, 23, 0.55);
+
+  max-width: 1400px;
+  margin: 0 auto 48px auto;
+  padding: 42px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 55%),
+              linear-gradient(135deg, rgba(6, 12, 24, 0.95), rgba(7, 11, 21, 1));
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.performance-lab--dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.18), transparent 60%),
+              radial-gradient(circle at 20% 80%, rgba(94, 234, 212, 0.12), transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.performance-lab--dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+.performance-lab--dark .section-header {
+  margin-bottom: 32px;
+}
+
+.performance-lab--dark .section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.performance-lab--dark .title-square {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.65);
+}
+
+.performance-lab--dark .section-subtitle {
+  margin-top: 12px;
+  max-width: 760px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.performance-lab--dark .split-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 28px;
+}
+
+.performance-lab--dark .lab-feature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(34, 211, 238, 0.08);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.performance-lab--dark .feature-media {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.performance-lab--dark .feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: saturate(1.05) contrast(1.1);
+}
+
+.performance-lab--dark .lab-feature:hover .feature-media img {
+  transform: scale(1.08);
+}
+
+.performance-lab--dark .benchmark-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e0f7fa;
+  background: rgba(34, 211, 238, 0.22);
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.performance-lab--dark .feature-content {
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.performance-lab--dark .category-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.14);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: var(--accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.performance-lab--dark h3 {
+  font-size: 1.28rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.performance-lab--dark h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.performance-lab--dark h3 a:hover {
+  color: var(--accent);
+}
+
+.performance-lab--dark p {
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.performance-lab--dark .feature-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(8, 15, 28, 0.65) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+}
+
+.performance-lab--dark .stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.performance-lab--dark .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.9);
+  text-transform: uppercase;
+}
+
+.performance-lab--dark .value {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.performance-lab--dark .cta {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  background: rgba(34, 211, 238, 0.16);
+  color: #ccfbf1;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.performance-lab--dark .cta:hover {
+  background: rgba(34, 211, 238, 0.32);
+  box-shadow: 0 12px 30px rgba(34, 211, 238, 0.28);
+}
+
+.performance-lab--dark .lab-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.performance-lab--dark .sidebar-card {
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(14px);
+}
+
+.performance-lab--dark .sidebar-card h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.performance-lab--dark .sidebar-card ul,
+.performance-lab--dark .sidebar-card ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.performance-lab--dark .sidebar-card ul li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.performance-lab--dark .highlight {
+  border-color: rgba(14, 165, 233, 0.35);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(8, 17, 32, 0.85));
+}
+
+.performance-lab--dark .highlight ol {
+  counter-reset: checklist;
+}
+
+.performance-lab--dark .highlight ol li {
+  position: relative;
+  padding-left: 28px;
+}
+
+.performance-lab--dark .highlight ol li::before {
+  counter-increment: checklist;
+  content: counter(checklist);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(34, 211, 238, 0.22);
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .performance-lab--dark .lab-feature {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .performance-lab--dark {
+    padding: 32px 24px;
+  }
+  
+  .performance-lab--dark .split-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .performance-lab--dark {
+    padding: 26px 18px;
+  }
+  
+  .performance-lab--dark .feature-stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
