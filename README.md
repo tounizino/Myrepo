@@ -53,7 +53,7 @@ Network Tool Pro is a comprehensive, professional-grade networking utility for W
 - Administrator privileges (required for DNS configuration only)
 
 ### Download & Run
-1. Download `NetworkToolPro.exe` from the releases
+1. Download the latest `NetworkToolPro-x64.exe` from [GitHub Releases](https://github.com/your-org/your-repo/releases) *(or build locally using `build.bat` if no release is available yet)*
 2. Double-click to run
 3. For DNS configuration features, right-click and select "Run as Administrator"
 
