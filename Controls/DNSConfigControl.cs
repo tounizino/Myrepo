@@ -1,17 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NetworkToolPro.Services;
+using NetworkToolPro.UI;
 
 namespace NetworkToolPro
 {
     public class DNSConfigControl : UserControl
     {
         private readonly DnsConfigurator dnsConfigurator;
+        private Panel selectionPanel;
+        private Panel presetsPanel;
+        private Panel manualPanel;
+        private Panel currentPanel;
         private ComboBox adapterComboBox;
         private TextBox primaryDnsTextBox;
         private TextBox secondaryDnsTextBox;
@@ -20,207 +26,346 @@ namespace NetworkToolPro
         private Button refreshButton;
         private ListView currentDnsListView;
         private Label statusLabel;
-        private Panel presetsPanel;
 
         public DNSConfigControl()
         {
             dnsConfigurator = new DnsConfigurator();
+            this.Dock = DockStyle.Fill;
+            this.AutoScroll = true;
             InitializeUI();
             LoadAdapters();
         }
 
         private void InitializeUI()
         {
-            this.BackColor = Color.White;
+            this.BackColor = ThemeManager.BackgroundPrimary;
             this.Padding = new Padding(20);
+
+            selectionPanel = CreateSelectionPanel();
+            selectionPanel.Location = new Point(20, 20);
+            selectionPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.Controls.Add(selectionPanel);
+
+            currentPanel = CreateCurrentDnsPanel();
+            currentPanel.Location = new Point(20, selectionPanel.Bottom + 15);
+            currentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.Controls.Add(currentPanel);
+
+            presetsPanel = CreatePresetsPanel();
+            presetsPanel.Location = new Point(20, currentPanel.Bottom + 15);
+            presetsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            this.Controls.Add(presetsPanel);
+
+            manualPanel = CreateManualPanel();
+            manualPanel.Location = new Point(20, presetsPanel.Bottom + 15);
+            manualPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            this.Controls.Add(manualPanel);
+        }
+
+        private Panel CreateSelectionPanel()
+        {
+            var panel = new Panel
+            {
+                Size = new Size(this.Width - 40, 140),
+                BackColor = ThemeManager.BackgroundSecondary,
+                Padding = new Padding(20)
+            };
+            ThemeManager.ApplyCardStyle(panel);
 
             var titleLabel = new Label
             {
-                Text = "DNS Configuration Manager",
-                Location = new Point(20, 20),
-                Size = new Size(300, 25),
-                Font = new Font("Segoe UI", 12, FontStyle.Bold)
+                Text = "🌐 Adapter Selection",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = ThemeManager.TextPrimary,
+                Location = new Point(20, 15),
+                AutoSize = true
             };
-            this.Controls.Add(titleLabel);
+            panel.Controls.Add(titleLabel);
 
             var adapterLabel = new Label
             {
                 Text = "Select Network Adapter:",
-                Location = new Point(20, 60),
+                Location = new Point(20, 55),
                 Size = new Size(200, 20),
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = ThemeManager.TextSecondary
             };
-            this.Controls.Add(adapterLabel);
+            panel.Controls.Add(adapterLabel);
 
             adapterComboBox = new ComboBox
             {
-                Location = new Point(20, 85),
-                Size = new Size(550, 25),
+                Location = new Point(20, 80),
+                Size = new Size(panel.Width - 170, 28),
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                Font = new Font("Segoe UI", 9)
+                Font = new Font("Segoe UI", 10),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
             };
             adapterComboBox.SelectedIndexChanged += (s, e) => UpdateCurrentDns();
-            this.Controls.Add(adapterComboBox);
+            panel.Controls.Add(adapterComboBox);
 
             refreshButton = new Button
             {
-                Text = "Refresh",
-                Location = new Point(580, 83),
-                Size = new Size(90, 28),
-                BackColor = Color.FromArgb(108, 117, 125),
-                ForeColor = Color.White,
+                Text = "🔄 Refresh",
+                Location = new Point(panel.Width - 130, 78),
+                Size = new Size(110, 32),
+                BackColor = Color.FromArgb(241, 245, 249),
+                ForeColor = ThemeManager.TextSecondary,
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 9)
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Cursor = Cursors.Hand
             };
             refreshButton.FlatAppearance.BorderSize = 0;
             refreshButton.Click += (s, e) => LoadAdapters();
-            this.Controls.Add(refreshButton);
+            panel.Controls.Add(refreshButton);
 
-            var currentDnsLabel = new Label
+            return panel;
+        }
+
+        private Panel CreateCurrentDnsPanel()
+        {
+            var panel = new Panel
             {
-                Text = "Current DNS Servers:",
-                Location = new Point(20, 125),
-                Size = new Size(200, 20),
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+                Size = new Size(this.Width - 40, 180),
+                BackColor = ThemeManager.BackgroundSecondary,
+                Padding = new Padding(20)
             };
-            this.Controls.Add(currentDnsLabel);
+            ThemeManager.ApplyCardStyle(panel);
+
+            var titleLabel = new Label
+            {
+                Text = "📋 Current DNS Configuration",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = ThemeManager.TextPrimary,
+                Location = new Point(20, 15),
+                AutoSize = true
+            };
+            panel.Controls.Add(titleLabel);
 
             currentDnsListView = new ListView
             {
-                Location = new Point(20, 150),
-                Size = new Size(650, 80),
+                Location = new Point(20, 60),
+                Size = new Size(panel.Width - 40, panel.Height - 80),
                 View = View.Details,
                 FullRowSelect = true,
                 GridLines = true,
-                Font = new Font("Consolas", 9)
+                Font = new Font("Consolas", 9),
+                BorderStyle = BorderStyle.FixedSingle,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom
             };
-            currentDnsListView.Columns.Add("Priority", 80);
-            currentDnsListView.Columns.Add("DNS Server", 200);
-            this.Controls.Add(currentDnsListView);
+            currentDnsListView.Columns.Add("Priority", 120);
+            currentDnsListView.Columns.Add("DNS Server Address", 300);
+            panel.Controls.Add(currentDnsListView);
 
-            var newDnsLabel = new Label
+            return panel;
+        }
+
+        private Panel CreatePresetsPanel()
+        {
+            var panel = new Panel
             {
-                Text = "Set Custom DNS Servers:",
-                Location = new Point(20, 245),
-                Size = new Size(200, 20),
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+                Size = new Size(this.Width - 40, 220),
+                BackColor = ThemeManager.BackgroundSecondary,
+                Padding = new Padding(20)
             };
-            this.Controls.Add(newDnsLabel);
+            ThemeManager.ApplyCardStyle(panel);
+
+            var titleLabel = new Label
+            {
+                Text = "⚡ Quick DNS Presets",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = ThemeManager.TextPrimary,
+                Location = new Point(20, 15),
+                AutoSize = true
+            };
+            panel.Controls.Add(titleLabel);
+
+            var y = 60;
+            AddPresetCard(panel, "🌍 Google DNS", "8.8.8.8 | 8.8.4.4",  
+                "Fast, reliable, global coverage", "8.8.8.8", "8.8.4.4", 20, y);
+            
+            AddPresetCard(panel, "☁️ Cloudflare", "1.1.1.1 | 1.0.0.1",
+                "Privacy-focused, very fast", "1.1.1.1", "1.0.0.1", 270, y);
+            
+            AddPresetCard(panel, "🔒 OpenDNS", "208.67.222.222 | 208.67.220.220",
+                "Family filtering, security", "208.67.222.222", "208.67.220.220", 520, y);
+
+            y = 130;
+            AddPresetCard(panel, "🛡️ Quad9", "9.9.9.9 | 149.112.112.112",
+                "Blocks malicious domains", "9.9.9.9", "149.112.112.112", 20, y);
+            
+            AddPresetCard(panel, "🚫 AdGuard", "94.140.14.14 | 94.140.15.15",
+                "Blocks ads and trackers", "94.140.14.14", "94.140.15.15", 270, y);
+
+            return panel;
+        }
+
+        private void AddPresetCard(Panel parent, string name, string servers, string description, 
+            string primary, string secondary, int x, int y)
+        {
+            var card = new Panel
+            {
+                Location = new Point(x, y),
+                Size = new Size(230, 60),
+                BackColor = Color.FromArgb(249, 250, 252),
+                Cursor = Cursors.Hand,
+                Tag = new { Primary = primary, Secondary = secondary }
+            };
+
+            card.Paint += (s, e) =>
+            {
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                using var pen = new Pen(ThemeManager.BorderLight);
+                e.Graphics.DrawRectangle(pen, 0, 0, card.Width - 1, card.Height - 1);
+            };
+
+            card.MouseEnter += (s, e) => card.BackColor = Color.FromArgb(239, 246, 255);
+            card.MouseLeave += (s, e) => card.BackColor = Color.FromArgb(249, 250, 252);
+            card.Click += (s, e) =>
+            {
+                var data = (dynamic)card.Tag;
+                primaryDnsTextBox.Text = data.Primary;
+                secondaryDnsTextBox.Text = data.Secondary;
+                statusLabel.Text = $"Preset selected: {name}";
+                statusLabel.ForeColor = ThemeManager.AccentPrimary;
+            };
+
+            var nameLabel = new Label
+            {
+                Text = name,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = ThemeManager.TextPrimary,
+                Location = new Point(8, 6),
+                AutoSize = true
+            };
+            nameLabel.Click += card.Click;
+            card.Controls.Add(nameLabel);
+
+            var serverLabel = new Label
+            {
+                Text = servers,
+                Font = new Font("Segoe UI", 8),
+                ForeColor = ThemeManager.AccentPrimary,
+                Location = new Point(8, 24),
+                AutoSize = true
+            };
+            serverLabel.Click += card.Click;
+            card.Controls.Add(serverLabel);
+
+            var descLabel = new Label
+            {
+                Text = description,
+                Font = new Font("Segoe UI", 7),
+                ForeColor = ThemeManager.TextMuted,
+                Location = new Point(8, 40),
+                AutoSize = true
+            };
+            descLabel.Click += card.Click;
+            card.Controls.Add(descLabel);
+
+            parent.Controls.Add(card);
+        }
+
+        private Panel CreateManualPanel()
+        {
+            var panel = new Panel
+            {
+                Size = new Size(this.Width - 40, 200),
+                BackColor = ThemeManager.BackgroundSecondary,
+                Padding = new Padding(20)
+            };
+            ThemeManager.ApplyCardStyle(panel);
+
+            var titleLabel = new Label
+            {
+                Text = "✏️ Manual Configuration",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = ThemeManager.TextPrimary,
+                Location = new Point(20, 15),
+                AutoSize = true
+            };
+            panel.Controls.Add(titleLabel);
 
             var primaryLabel = new Label
             {
-                Text = "Primary DNS:",
-                Location = new Point(20, 275),
-                Size = new Size(100, 20)
+                Text = "Primary DNS Server:",
+                Location = new Point(20, 60),
+                Size = new Size(150, 20),
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = ThemeManager.TextSecondary
             };
-            this.Controls.Add(primaryLabel);
+            panel.Controls.Add(primaryLabel);
 
             primaryDnsTextBox = new TextBox
             {
-                Location = new Point(120, 272),
-                Size = new Size(200, 25),
-                Font = new Font("Segoe UI", 9)
+                Location = new Point(20, 85),
+                Size = new Size(300, 28),
+                Font = new Font("Segoe UI", 10),
+                BorderStyle = BorderStyle.FixedSingle
             };
-            this.Controls.Add(primaryDnsTextBox);
+            panel.Controls.Add(primaryDnsTextBox);
 
             var secondaryLabel = new Label
             {
-                Text = "Secondary DNS:",
-                Location = new Point(340, 275),
-                Size = new Size(100, 20)
+                Text = "Secondary DNS Server (Optional):",
+                Location = new Point(350, 60),
+                Size = new Size(220, 20),
+                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                ForeColor = ThemeManager.TextSecondary
             };
-            this.Controls.Add(secondaryLabel);
+            panel.Controls.Add(secondaryLabel);
 
             secondaryDnsTextBox = new TextBox
             {
-                Location = new Point(450, 272),
-                Size = new Size(200, 25),
-                Font = new Font("Segoe UI", 9)
+                Location = new Point(350, 85),
+                Size = new Size(300, 28),
+                Font = new Font("Segoe UI", 10),
+                BorderStyle = BorderStyle.FixedSingle
             };
-            this.Controls.Add(secondaryDnsTextBox);
+            panel.Controls.Add(secondaryDnsTextBox);
 
             applyButton = new Button
             {
-                Text = "Apply DNS Settings",
-                Location = new Point(20, 310),
-                Size = new Size(150, 32),
-                BackColor = Color.FromArgb(40, 167, 69),
+                Text = "✓ Apply DNS Settings",
+                Location = new Point(20, 135),
+                Size = new Size(200, 40),
+                BackColor = ThemeManager.AccentSuccess,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+                Font = new Font("Segoe UI", 11, FontStyle.Bold),
+                Cursor = Cursors.Hand
             };
             applyButton.FlatAppearance.BorderSize = 0;
             applyButton.Click += async (s, e) => await ApplyDnsAsync();
-            this.Controls.Add(applyButton);
+            panel.Controls.Add(applyButton);
 
             clearButton = new Button
             {
-                Text = "Reset to DHCP",
-                Location = new Point(180, 310),
-                Size = new Size(150, 32),
-                BackColor = Color.FromArgb(220, 53, 69),
+                Text = "↺ Reset to DHCP",
+                Location = new Point(240, 135),
+                Size = new Size(180, 40),
+                BackColor = ThemeManager.AccentDanger,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+                Font = new Font("Segoe UI", 11, FontStyle.Bold),
+                Cursor = Cursors.Hand
             };
             clearButton.FlatAppearance.BorderSize = 0;
             clearButton.Click += async (s, e) => await ResetToDhcpAsync();
-            this.Controls.Add(clearButton);
-
-            presetsPanel = new Panel
-            {
-                Location = new Point(20, 360),
-                Size = new Size(650, 70),
-                BorderStyle = BorderStyle.FixedSingle
-            };
-
-            var presetsLabel = new Label
-            {
-                Text = "Quick Presets:",
-                Location = new Point(5, 5),
-                Size = new Size(100, 20),
-                Font = new Font("Segoe UI", 9, FontStyle.Bold)
-            };
-            presetsPanel.Controls.Add(presetsLabel);
-
-            AddPresetButton("Google DNS", "8.8.8.8", "8.8.4.4", 5, 30);
-            AddPresetButton("Cloudflare", "1.1.1.1", "1.0.0.1", 115, 30);
-            AddPresetButton("OpenDNS", "208.67.222.222", "208.67.220.220", 225, 30);
-            AddPresetButton("Quad9", "9.9.9.9", "149.112.112.112", 335, 30);
-            AddPresetButton("AdGuard", "94.140.14.14", "94.140.15.15", 445, 30);
-
-            this.Controls.Add(presetsPanel);
+            panel.Controls.Add(clearButton);
 
             statusLabel = new Label
             {
                 Text = "⚠ Administrator privileges required to change DNS settings",
-                Location = new Point(20, 440),
-                Size = new Size(650, 23),
+                Location = new Point(450, 140),
+                Size = new Size(panel.Width - 470, 35),
                 Font = new Font("Segoe UI", 9, FontStyle.Italic),
-                ForeColor = Color.FromArgb(255, 193, 7)
+                ForeColor = ThemeManager.AccentWarning,
+                Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
             };
-            this.Controls.Add(statusLabel);
-        }
+            panel.Controls.Add(statusLabel);
 
-        private void AddPresetButton(string name, string primary, string secondary, int x, int y)
-        {
-            var button = new Button
-            {
-                Text = name,
-                Location = new Point(x, y),
-                Size = new Size(100, 28),
-                BackColor = Color.FromArgb(0, 122, 204),
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 8)
-            };
-            button.FlatAppearance.BorderSize = 0;
-            button.Click += (s, e) =>
-            {
-                primaryDnsTextBox.Text = primary;
-                secondaryDnsTextBox.Text = secondary;
-            };
-            presetsPanel.Controls.Add(button);
+            return panel;
         }
 
         private void LoadAdapters(int? interfaceIndexToSelect = null)
@@ -228,6 +373,7 @@ namespace NetworkToolPro
             try
             {
                 statusLabel.Text = "Loading adapters...";
+                statusLabel.ForeColor = ThemeManager.TextMuted;
 
                 var currentSelection = interfaceIndexToSelect ?? (adapterComboBox.SelectedItem as DnsAdapterInfo)?.InterfaceIndex;
 
@@ -259,10 +405,12 @@ namespace NetworkToolPro
 
                 UpdateCurrentDns();
                 statusLabel.Text = $"Found {adapters.Count} network adapter(s)";
+                statusLabel.ForeColor = ThemeManager.AccentSuccess;
             }
             catch (Exception ex)
             {
                 statusLabel.Text = $"Error: {ex.Message}";
+                statusLabel.ForeColor = ThemeManager.AccentDanger;
                 MessageBox.Show($"Error loading adapters: {ex.Message}\n\nMake sure you are running as Administrator.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -285,8 +433,9 @@ namespace NetworkToolPro
                 }
                 else
                 {
-                    var item = new ListViewItem("N/A");
-                    item.SubItems.Add("Using DHCP (automatic)");
+                    var item = new ListViewItem("Automatic");
+                    item.SubItems.Add("Using DHCP (automatic configuration)");
+                    item.ForeColor = ThemeManager.TextMuted;
                     currentDnsListView.Items.Add(item);
                 }
             }
@@ -296,20 +445,23 @@ namespace NetworkToolPro
         {
             if (adapterComboBox.SelectedItem is not DnsAdapterInfo adapter)
             {
-                MessageBox.Show("Please select a network adapter.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a network adapter.", "Validation", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             var primary = primaryDnsTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(primary))
             {
-                MessageBox.Show("Please enter at least a primary DNS server.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter at least a primary DNS server.", "Validation", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!IPAddress.TryParse(primary, out _))
             {
-                MessageBox.Show("Primary DNS must be a valid IPv4 or IPv6 address.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Primary DNS must be a valid IPv4 or IPv6 address.", "Validation", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -319,7 +471,8 @@ namespace NetworkToolPro
             {
                 if (!IPAddress.TryParse(secondary, out _))
                 {
-                    MessageBox.Show("Secondary DNS must be a valid IPv4 or IPv6 address.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Secondary DNS must be a valid IPv4 or IPv6 address.", "Validation", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -330,26 +483,33 @@ namespace NetworkToolPro
             {
                 applyButton.Enabled = false;
                 statusLabel.Text = "Applying DNS settings...";
+                statusLabel.ForeColor = ThemeManager.TextMuted;
 
                 var result = await dnsConfigurator.SetDnsServersAsync(adapter, dnsServers);
 
                 if (result.IsSuccess)
                 {
-                    MessageBox.Show($"DNS settings applied successfully!\n\nAdapter: {adapter.Caption}\nPrimary: {primary}\nSecondary: {secondary}",
+                    statusLabel.Text = "✓ DNS settings applied successfully!";
+                    statusLabel.ForeColor = ThemeManager.AccentSuccess;
+                    MessageBox.Show($"✓ DNS settings applied successfully!\n\n" +
+                        $"Adapter: {adapter.Caption}\n" +
+                        $"Primary DNS: {primary}\n" +
+                        $"Secondary DNS: {(string.IsNullOrWhiteSpace(secondary) ? "None" : secondary)}",
                         "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAdapters(adapter.InterfaceIndex);
                 }
                 else
                 {
+                    statusLabel.Text = $"✗ Failed: {result.Message}";
+                    statusLabel.ForeColor = ThemeManager.AccentDanger;
                     MessageBox.Show($"Failed to apply DNS settings.\n\n{result.Message}",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                statusLabel.Text = result.Message;
             }
             catch (Exception ex)
             {
-                statusLabel.Text = $"Error: {ex.Message}";
+                statusLabel.Text = $"✗ Error: {ex.Message}";
+                statusLabel.ForeColor = ThemeManager.AccentDanger;
                 MessageBox.Show($"Error applying DNS: {ex.Message}\n\nMake sure you are running as Administrator.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -363,7 +523,8 @@ namespace NetworkToolPro
         {
             if (adapterComboBox.SelectedItem is not DnsAdapterInfo adapter)
             {
-                MessageBox.Show("Please select a network adapter.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a network adapter.", "Validation", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -377,26 +538,30 @@ namespace NetworkToolPro
             {
                 clearButton.Enabled = false;
                 statusLabel.Text = "Resetting DNS to DHCP...";
+                statusLabel.ForeColor = ThemeManager.TextMuted;
 
                 var result = await dnsConfigurator.SetDnsServersAsync(adapter, Array.Empty<string>());
 
                 if (result.IsSuccess)
                 {
+                    statusLabel.Text = "✓ DNS reset to automatic (DHCP)";
+                    statusLabel.ForeColor = ThemeManager.AccentSuccess;
                     MessageBox.Show("DNS settings reset to automatic (DHCP).",
                         "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAdapters(adapter.InterfaceIndex);
                 }
                 else
                 {
+                    statusLabel.Text = $"✗ Failed: {result.Message}";
+                    statusLabel.ForeColor = ThemeManager.AccentDanger;
                     MessageBox.Show($"Failed to reset DNS settings.\n\n{result.Message}",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                statusLabel.Text = result.Message;
             }
             catch (Exception ex)
             {
-                statusLabel.Text = $"Error: {ex.Message}";
+                statusLabel.Text = $"✗ Error: {ex.Message}";
+                statusLabel.ForeColor = ThemeManager.AccentDanger;
                 MessageBox.Show($"Error resetting DNS: {ex.Message}",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
