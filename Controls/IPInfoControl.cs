@@ -51,13 +51,24 @@ namespace NetworkToolPro
             detailsPanel.Location = new Point(20, adaptersPanel.Bottom + 15);
             detailsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(detailsPanel);
+
+            this.SizeChanged += (s, e) => UpdateLayoutSizes();
+            UpdateLayoutSizes();
+        }
+
+        private void UpdateLayoutSizes()
+        {
+            int width = Math.Max(600, this.ClientSize.Width - 40);
+            summaryPanel.Size = new Size(width, 180);
+            adaptersPanel.Size = new Size(width, 280);
+            detailsPanel.Size = new Size(width, Math.Max(150, this.ClientSize.Height - 515));
         }
 
         private Panel CreateSummaryPanel()
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 180),
+                Size = new Size(1040, 180),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
@@ -157,7 +168,7 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 280),
+                Size = new Size(1040, 280),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
@@ -203,7 +214,7 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, this.Height - 450),
+                Size = new Size(1040, 280),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };

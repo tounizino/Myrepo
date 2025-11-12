@@ -60,13 +60,25 @@ namespace NetworkToolPro
             manualPanel.Location = new Point(20, presetsPanel.Bottom + 15);
             manualPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(manualPanel);
+
+            this.SizeChanged += (s, e) => UpdateLayoutSizes();
+            UpdateLayoutSizes();
+        }
+
+        private void UpdateLayoutSizes()
+        {
+            int width = Math.Max(600, this.ClientSize.Width - 40);
+            selectionPanel.Size = new Size(width, 140);
+            currentPanel.Size = new Size(width, 180);
+            presetsPanel.Size = new Size(width, 220);
+            manualPanel.Size = new Size(width, Math.Max(200, this.ClientSize.Height - 575));
         }
 
         private Panel CreateSelectionPanel()
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 140),
+                Size = new Size(1040, 140),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
@@ -126,7 +138,7 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 180),
+                Size = new Size(1040, 180),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
@@ -164,7 +176,7 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 220),
+                Size = new Size(1040, 220),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
@@ -209,7 +221,7 @@ namespace NetworkToolPro
                 Size = new Size(230, 60),
                 BackColor = Color.FromArgb(249, 250, 252),
                 Cursor = Cursors.Hand,
-                Tag = new { Primary = primary, Secondary = secondary }
+                Tag = (Primary: primary, Secondary: secondary)
             };
 
             card.Paint += (s, e) =>
@@ -223,11 +235,13 @@ namespace NetworkToolPro
             card.MouseLeave += (s, e) => card.BackColor = Color.FromArgb(249, 250, 252);
             card.Click += (s, e) =>
             {
-                var data = (dynamic)card.Tag;
-                primaryDnsTextBox.Text = data.Primary;
-                secondaryDnsTextBox.Text = data.Secondary;
-                statusLabel.Text = $"Preset selected: {name}";
-                statusLabel.ForeColor = ThemeManager.AccentPrimary;
+                if (card.Tag is ValueTuple<string, string> data)
+                {
+                    primaryDnsTextBox.Text = data.Item1;
+                    secondaryDnsTextBox.Text = data.Item2;
+                    statusLabel.Text = $"Preset selected: {name}";
+                    statusLabel.ForeColor = ThemeManager.AccentPrimary;
+                }
             };
 
             var nameLabel = new Label
@@ -270,7 +284,7 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 200),
+                Size = new Size(1040, 200),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };

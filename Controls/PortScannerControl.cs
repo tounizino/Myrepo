@@ -27,10 +27,10 @@ namespace NetworkToolPro
         private ListView resultsListView;
         private ProgressBar progressBar;
         private Label statusLabel;
-        private Label openPortsLabel;
-        private Label closedPortsLabel;
-        private Label totalScannedLabel;
-        private Label scanTimeLabel;
+        private Panel openPortsCard;
+        private Panel closedPortsCard;
+        private Panel totalScannedCard;
+        private Panel scanTimeCard;
         private NumericUpDown timeoutNumeric;
         private NumericUpDown concurrencyNumeric;
         
@@ -65,13 +65,29 @@ namespace NetworkToolPro
             resultsPanel.Location = new Point(20, statsPanel.Bottom + 15);
             resultsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             this.Controls.Add(resultsPanel);
+
+            this.SizeChanged += (s, e) => UpdateLayoutSizes();
+            UpdateLayoutSizes();
+        }
+
+        private void UpdateLayoutSizes()
+        {
+            int width = Math.Max(600, this.ClientSize.Width - 40);
+            configPanel.Size = new Size(width, 260);
+            configPanel.Location = new Point(20, 20);
+
+            statsPanel.Size = new Size(width, 120);
+            statsPanel.Location = new Point(20, configPanel.Bottom + 15);
+
+            resultsPanel.Size = new Size(width, Math.Max(200, this.ClientSize.Height - (statsPanel.Bottom + 35)));
+            resultsPanel.Location = new Point(20, statsPanel.Bottom + 15);
         }
 
         private Panel CreateConfigurationPanel()
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 260),
+                Size = new Size(760, 260),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(25)
             };
@@ -217,23 +233,23 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, 100),
+                Size = new Size(1040, 120),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
             ThemeManager.ApplyCardStyle(panel);
 
-            openPortsLabel = CreateStatCard("✓", "0", "Open Ports", new Point(20, 15), ThemeManager.AccentSuccess);
-            panel.Controls.Add(openPortsLabel);
+            openPortsCard = CreateStatCard("✓", "0", "Open Ports", new Point(20, 15), ThemeManager.AccentSuccess);
+            panel.Controls.Add(openPortsCard);
 
-            closedPortsLabel = CreateStatCard("✗", "0", "Closed Ports", new Point(220, 15), ThemeManager.AccentDanger);
-            panel.Controls.Add(closedPortsLabel);
+            closedPortsCard = CreateStatCard("✗", "0", "Closed Ports", new Point(220, 15), ThemeManager.AccentDanger);
+            panel.Controls.Add(closedPortsCard);
 
-            totalScannedLabel = CreateStatCard("📊", "0", "Total Scanned", new Point(420, 15), ThemeManager.AccentSecondary);
-            panel.Controls.Add(totalScannedLabel);
+            totalScannedCard = CreateStatCard("📊", "0", "Total Scanned", new Point(420, 15), ThemeManager.AccentSecondary);
+            panel.Controls.Add(totalScannedCard);
 
-            scanTimeLabel = CreateStatCard("⏱", "0.0s", "Scan Time", new Point(620, 15), ThemeManager.AccentWarning);
-            panel.Controls.Add(scanTimeLabel);
+            scanTimeCard = CreateStatCard("⏱", "0.0s", "Scan Time", new Point(620, 15), ThemeManager.AccentWarning);
+            panel.Controls.Add(scanTimeCard);
 
             statusLabel = new Label
             {
@@ -300,7 +316,7 @@ namespace NetworkToolPro
         {
             var panel = new Panel
             {
-                Size = new Size(this.Width - 40, this.Height - 420),
+                Size = new Size(1040, 320),
                 BackColor = ThemeManager.BackgroundSecondary,
                 Padding = new Padding(20)
             };
@@ -410,10 +426,10 @@ namespace NetworkToolPro
             stopButton.Enabled = true;
             exportButton.Enabled = false;
 
-            UpdateStatCard(openPortsLabel, "0");
-            UpdateStatCard(closedPortsLabel, "0");
-            UpdateStatCard(totalScannedLabel, "0");
-            UpdateStatCard(scanTimeLabel, "0.0s");
+            UpdateStatCard(openPortsCard, "0");
+            UpdateStatCard(closedPortsCard, "0");
+            UpdateStatCard(totalScannedCard, "0");
+            UpdateStatCard(scanTimeCard, "0.0s");
 
             cts = new CancellationTokenSource();
             scanStartTime = DateTime.Now;
@@ -479,7 +495,7 @@ namespace NetworkToolPro
             }
 
             var elapsed = (DateTime.Now - scanStartTime).TotalSeconds;
-            UpdateStatCard(scanTimeLabel, $"{elapsed:F1}s");
+            UpdateStatCard(scanTimeCard, $"{elapsed:F1}s");
 
             if (progress.TotalElapsed.HasValue)
             {
@@ -521,9 +537,9 @@ namespace NetworkToolPro
             var openCount = resultsListView.Items.Cast<ListViewItem>().Count(i => i.SubItems[1].Text == "Open");
             var closedCount = resultsListView.Items.Cast<ListViewItem>().Count(i => i.SubItems[1].Text == "Closed");
 
-            UpdateStatCard(openPortsLabel, openCount.ToString());
-            UpdateStatCard(closedPortsLabel, closedCount.ToString());
-            UpdateStatCard(totalScannedLabel, (openCount + closedCount).ToString());
+            UpdateStatCard(openPortsCard, openCount.ToString());
+            UpdateStatCard(closedPortsCard, closedCount.ToString());
+            UpdateStatCard(totalScannedCard, (openCount + closedCount).ToString());
         }
 
         private void UpdateStatCard(Panel card, string value)

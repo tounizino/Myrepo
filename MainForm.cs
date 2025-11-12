@@ -20,6 +20,7 @@ namespace NetworkToolPro
         private Panel footerPanel;
         private Label versionLabel;
         private Label statusBarLabel;
+        private Label copyrightLabel;
 
         public MainForm()
         {
@@ -152,7 +153,7 @@ namespace NetworkToolPro
             };
             footerPanel.Controls.Add(statusBarLabel);
 
-            Label copyrightLabel = new Label
+            copyrightLabel = new Label
             {
                 Text = "© 2024 Network Tool Pro",
                 Font = new Font("Segoe UI", 9, FontStyle.Regular),
@@ -219,15 +220,12 @@ namespace NetworkToolPro
 
             this.Resize += (s, e) =>
             {
-                versionLabel.Location = new Point(this.ClientSize.Width - 80, 25);
-                foreach (Control control in footerPanel.Controls)
-                {
-                    if (control is Label lbl && lbl.Text.Contains("©"))
-                    {
-                        lbl.Location = new Point(this.ClientSize.Width - lbl.Width - 15, 8);
-                    }
-                }
+                versionLabel.Location = new Point(Math.Max(30, this.ClientSize.Width - versionLabel.Width - 30), 25);
+                copyrightLabel.Location = new Point(Math.Max(30, this.ClientSize.Width - copyrightLabel.Width - 30), 8);
             };
+
+            versionLabel.Location = new Point(Math.Max(30, this.ClientSize.Width - versionLabel.Width - 30), 25);
+            copyrightLabel.Location = new Point(Math.Max(30, this.ClientSize.Width - copyrightLabel.Width - 30), 8);
         }
 
         public void UpdateStatusBar(string message)

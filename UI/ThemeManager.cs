@@ -36,10 +36,11 @@ public static class ThemeManager
 
     public static Panel CreateGradientPanel(Color start, Color end)
     {
-        var panel = new Panel
-        {
-            DoubleBuffered = true
-        };
+        var panel = new Panel();
+        
+        typeof(Panel).GetProperty("DoubleBuffered", 
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?
+            .SetValue(panel, true, null);
 
         panel.Paint += (s, e) =>
         {
@@ -52,11 +53,10 @@ public static class ThemeManager
 
     public static void EnableDoubleBuffering(Control control)
     {
-        const int doubleBufferFlag = 0x02000000;
-        control.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(control, true, null);
+        control.GetType().GetProperty("DoubleBuffered", 
+            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(control, true, null);
         control.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
         control.UpdateStyles();
-        control.CreateParams.ExStyle |= doubleBufferFlag;
     }
 
     public static Label CreateLabel(string text, Font font, Color color, ContentAlignment alignment = ContentAlignment.MiddleLeft)
