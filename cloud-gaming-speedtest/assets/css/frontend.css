@@ -1,0 +1,1024 @@
+/**
+ * Cloud Gaming Speed Test Frontend Styles
+ * No border-radius, no box-shadow, sharp & animated
+ */
+
+.cgst-component {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+    position: relative;
+}
+
+.cgst-component * {
+    box-sizing: border-box;
+}
+
+/* HEADER */
+.cgst-header {
+    margin-bottom: 30px;
+}
+
+.cgst-return-home {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    transition: all 0.2s ease;
+}
+
+.cgst-headline {
+    padding: 20px;
+    border: 2px solid;
+    margin-bottom: 20px;
+}
+
+.cgst-title-group h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cgst-intro-text {
+    margin: 0;
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+.cgst-info-strip {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.cgst-pill {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border: 1px solid;
+    transition: all 0.3s ease;
+}
+
+.cgst-pill-secondary {
+    opacity: 0.7;
+}
+
+/* BODY */
+.cgst-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* TEST PANEL */
+.cgst-test-panel {
+    border: 2px solid;
+    padding: 30px;
+    text-align: center;
+}
+
+.cgst-gauge {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 25px;
+}
+
+.cgst-gauge-ring {
+    width: 100%;
+    height: 100%;
+    border: 8px solid;
+    position: relative;
+    overflow: hidden;
+    animation: cgst-pulse 3s ease-in-out infinite;
+}
+
+@keyframes cgst-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.cgst-gauge-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    transition: height 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.cgst-gauge-pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 50%;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%) rotate(0deg);
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.cgst-gauge-readout {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.cgst-gauge-value {
+    display: block;
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.cgst-gauge-unit {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cgst-gauge-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    opacity: 0.7;
+}
+
+/* PROGRESS */
+.cgst-progress {
+    margin: 20px 0;
+}
+
+.cgst-progress-bar {
+    height: 6px;
+    border: 1px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.cgst-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.cgst-progress-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.cgst-progress-steps span {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    padding: 4px;
+    text-align: center;
+    border: 1px solid;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.cgst-progress-steps span.is-active {
+    opacity: 1;
+    animation: cgst-step-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes cgst-step-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* START BUTTON */
+.cgst-start-button {
+    position: relative;
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cgst-start-button:hover {
+    transform: translateY(-2px);
+}
+
+.cgst-start-button:active {
+    transform: translateY(0);
+}
+
+.cgst-start-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cgst-start-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    transition: left 0.5s ease;
+}
+
+.cgst-start-button:hover .cgst-start-glow {
+    left: 100%;
+}
+
+.cgst-start-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* METRICS PANEL */
+.cgst-metrics-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.cgst-metric {
+    border: 2px solid;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.cgst-metric:hover {
+    transform: translateY(-3px);
+}
+
+.cgst-metric-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+.cgst-metric-value {
+    display: block;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.cgst-metric-unit {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 4px;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.cgst-metric-note {
+    margin: 10px 0 0 0;
+    font-size: 11px;
+    line-height: 1.4;
+    opacity: 0.6;
+}
+
+/* RESULTS */
+.cgst-results[hidden] {
+    display: none;
+}
+
+.cgst-results {
+    margin-top: 30px;
+}
+
+.cgst-status-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    border: 3px solid;
+    margin-bottom: 20px;
+}
+
+.cgst-status-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.cgst-status-banner h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.cgst-status-banner p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.cgst-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.cgst-results-card {
+    border: 2px solid;
+    padding: 20px;
+}
+
+.cgst-results-card h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cgst-recommendations {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cgst-recommendations li {
+    padding: 10px 0;
+    font-size: 14px;
+    border-bottom: 1px solid;
+    opacity: 0.8;
+}
+
+.cgst-recommendations li:last-child {
+    border-bottom: none;
+}
+
+.cgst-recommendations li:before {
+    content: "▸ ";
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.cgst-quality-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cgst-quality-item {
+    border: 1px solid;
+    padding: 12px;
+    opacity: 0.8;
+}
+
+.cgst-quality-label {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.cgst-quality-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.cgst-quality-meta span {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.cgst-quality-note {
+    margin: 0;
+    font-size: 11px;
+    opacity: 0.6;
+    line-height: 1.4;
+}
+
+/* RESOURCES */
+.cgst-resources {
+    border: 2px solid;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.cgst-resources h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cgst-resources ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.cgst-resources li {
+    margin: 0;
+    border-bottom: 1px solid;
+}
+
+.cgst-resources li:last-child {
+    border-bottom: none;
+}
+
+.cgst-resources a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.cgst-resources a:hover {
+    padding-left: 10px;
+}
+
+.cgst-resource-arrow {
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.cgst-resources a:hover .cgst-resource-arrow {
+    transform: translateX(5px);
+}
+
+.cgst-footer-note {
+    margin: 0;
+    padding-top: 15px;
+    border-top: 1px solid;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* NETWORK SUMMARY */
+.cgst-network-summary {
+    border: 2px solid;
+    padding: 20px;
+}
+
+.cgst-network-summary h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cgst-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.cgst-summary-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cgst-summary-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+.cgst-summary-value {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* THEME: DARK */
+.cgst-theme-dark {
+    background: #0a0a0f;
+    color: #e0e0e0;
+}
+
+.cgst-theme-dark .cgst-return-home {
+    color: #00ffcc;
+    border: 2px solid #00ffcc;
+}
+
+.cgst-theme-dark .cgst-return-home:hover {
+    background: #00ffcc;
+    color: #0a0a0f;
+}
+
+.cgst-theme-dark .cgst-headline {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-pill {
+    background: #00ffcc;
+    color: #0a0a0f;
+    border-color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-pill-secondary {
+    background: transparent;
+    color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-test-panel {
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    border-color: #00d4ff;
+}
+
+.cgst-theme-dark .cgst-gauge-ring {
+    border-color: rgba(0, 255, 204, 0.3);
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.cgst-theme-dark .cgst-gauge-fill {
+    background: linear-gradient(to top, #00ffcc, #00d4ff);
+}
+
+.cgst-theme-dark .cgst-gauge-pointer {
+    background: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-gauge-value {
+    color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-progress-bar {
+    background: rgba(0, 255, 204, 0.1);
+    border-color: rgba(0, 255, 204, 0.3);
+}
+
+.cgst-theme-dark .cgst-progress-fill {
+    background: linear-gradient(90deg, #00ffcc, #00d4ff);
+}
+
+.cgst-theme-dark .cgst-progress-steps span {
+    border-color: rgba(0, 255, 204, 0.3);
+    color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-start-button {
+    color: #00ffcc;
+    border-color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-start-button:hover {
+    background: #00ffcc;
+    color: #0a0a0f;
+}
+
+.cgst-theme-dark .cgst-start-glow {
+    background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+}
+
+.cgst-theme-dark .cgst-metric {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-color: #00d4ff;
+}
+
+.cgst-theme-dark .cgst-metric-value {
+    color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-status-banner {
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    border-color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-results-card {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-color: #00d4ff;
+}
+
+.cgst-theme-dark .cgst-recommendations li {
+    border-bottom-color: rgba(0, 255, 204, 0.2);
+}
+
+.cgst-theme-dark .cgst-recommendations li:before {
+    color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-quality-item {
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.cgst-theme-dark .cgst-resources {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    border-color: #00d4ff;
+}
+
+.cgst-theme-dark .cgst-resources li {
+    border-bottom-color: rgba(0, 255, 204, 0.2);
+}
+
+.cgst-theme-dark .cgst-resources a {
+    color: #00ffcc;
+}
+
+.cgst-theme-dark .cgst-resources a:hover {
+    color: #00d4ff;
+}
+
+.cgst-theme-dark .cgst-footer-note {
+    border-top-color: rgba(0, 255, 204, 0.2);
+}
+
+.cgst-theme-dark .cgst-network-summary {
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    border-color: #00d4ff;
+}
+
+/* THEME: SKY */
+.cgst-theme-sky {
+    background: #f0f8ff;
+    color: #1a3a52;
+}
+
+.cgst-theme-sky .cgst-return-home {
+    color: #0066cc;
+    border: 2px solid #0066cc;
+}
+
+.cgst-theme-sky .cgst-return-home:hover {
+    background: #0066cc;
+    color: #ffffff;
+}
+
+.cgst-theme-sky .cgst-headline {
+    background: linear-gradient(135deg, #87ceeb, #5fb3d4);
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-pill {
+    background: #0066cc;
+    color: #ffffff;
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-pill-secondary {
+    background: transparent;
+    color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-test-panel {
+    background: linear-gradient(135deg, #b5d9ff, #87ceeb);
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-gauge-ring {
+    border-color: rgba(0, 102, 204, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.cgst-theme-sky .cgst-gauge-fill {
+    background: linear-gradient(to top, #0066cc, #00aaff);
+}
+
+.cgst-theme-sky .cgst-gauge-pointer {
+    background: #0066cc;
+}
+
+.cgst-theme-sky .cgst-gauge-value {
+    color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-progress-bar {
+    background: rgba(0, 102, 204, 0.1);
+    border-color: rgba(0, 102, 204, 0.3);
+}
+
+.cgst-theme-sky .cgst-progress-fill {
+    background: linear-gradient(90deg, #0066cc, #00aaff);
+}
+
+.cgst-theme-sky .cgst-progress-steps span {
+    border-color: rgba(0, 102, 204, 0.3);
+    color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-start-button {
+    color: #0066cc;
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-start-button:hover {
+    background: #0066cc;
+    color: #ffffff;
+}
+
+.cgst-theme-sky .cgst-start-glow {
+    background: linear-gradient(90deg, transparent, #0066cc, transparent);
+}
+
+.cgst-theme-sky .cgst-metric {
+    background: linear-gradient(135deg, #d4ebff, #b5d9ff);
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-metric-value {
+    color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-status-banner {
+    background: linear-gradient(135deg, #b5d9ff, #87ceeb);
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-results-card {
+    background: linear-gradient(135deg, #d4ebff, #b5d9ff);
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-recommendations li {
+    border-bottom-color: rgba(0, 102, 204, 0.2);
+}
+
+.cgst-theme-sky .cgst-recommendations li:before {
+    color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-quality-item {
+    border-color: rgba(0, 102, 204, 0.3);
+}
+
+.cgst-theme-sky .cgst-resources {
+    background: linear-gradient(135deg, #d4ebff, #b5d9ff);
+    border-color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-resources li {
+    border-bottom-color: rgba(0, 102, 204, 0.2);
+}
+
+.cgst-theme-sky .cgst-resources a {
+    color: #0066cc;
+}
+
+.cgst-theme-sky .cgst-resources a:hover {
+    color: #0044aa;
+}
+
+.cgst-theme-sky .cgst-footer-note {
+    border-top-color: rgba(0, 102, 204, 0.2);
+}
+
+.cgst-theme-sky .cgst-network-summary {
+    background: linear-gradient(135deg, #b5d9ff, #87ceeb);
+    border-color: #0066cc;
+}
+
+/* THEME: LIGHT */
+.cgst-theme-light {
+    background: #ffffff;
+    color: #2c3e50;
+}
+
+.cgst-theme-light .cgst-return-home {
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+.cgst-theme-light .cgst-return-home:hover {
+    background: #3498db;
+    color: #ffffff;
+}
+
+.cgst-theme-light .cgst-headline {
+    background: linear-gradient(135deg, #ecf0f1, #d5dbdd);
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-pill {
+    background: #3498db;
+    color: #ffffff;
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-pill-secondary {
+    background: transparent;
+    color: #3498db;
+}
+
+.cgst-theme-light .cgst-test-panel {
+    background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-gauge-ring {
+    border-color: rgba(52, 152, 219, 0.4);
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.cgst-theme-light .cgst-gauge-fill {
+    background: linear-gradient(to top, #3498db, #2ecc71);
+}
+
+.cgst-theme-light .cgst-gauge-pointer {
+    background: #3498db;
+}
+
+.cgst-theme-light .cgst-gauge-value {
+    color: #3498db;
+}
+
+.cgst-theme-light .cgst-progress-bar {
+    background: rgba(52, 152, 219, 0.1);
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.cgst-theme-light .cgst-progress-fill {
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+}
+
+.cgst-theme-light .cgst-progress-steps span {
+    border-color: rgba(52, 152, 219, 0.3);
+    color: #3498db;
+}
+
+.cgst-theme-light .cgst-start-button {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-start-button:hover {
+    background: #3498db;
+    color: #ffffff;
+}
+
+.cgst-theme-light .cgst-start-glow {
+    background: linear-gradient(90deg, transparent, #3498db, transparent);
+}
+
+.cgst-theme-light .cgst-metric {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-metric-value {
+    color: #3498db;
+}
+
+.cgst-theme-light .cgst-status-banner {
+    background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-results-card {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-recommendations li {
+    border-bottom-color: rgba(52, 152, 219, 0.2);
+}
+
+.cgst-theme-light .cgst-recommendations li:before {
+    color: #3498db;
+}
+
+.cgst-theme-light .cgst-quality-item {
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.cgst-theme-light .cgst-resources {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-color: #3498db;
+}
+
+.cgst-theme-light .cgst-resources li {
+    border-bottom-color: rgba(52, 152, 219, 0.2);
+}
+
+.cgst-theme-light .cgst-resources a {
+    color: #3498db;
+}
+
+.cgst-theme-light .cgst-resources a:hover {
+    color: #2980b9;
+}
+
+.cgst-theme-light .cgst-footer-note {
+    border-top-color: rgba(52, 152, 219, 0.2);
+}
+
+.cgst-theme-light .cgst-network-summary {
+    background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+    border-color: #3498db;
+}
+
+/* STATUS CLASSES */
+.cgst-status-excellent .cgst-status-banner {
+    border-color: #2ecc71 !important;
+}
+
+.cgst-status-good .cgst-status-banner {
+    border-color: #3498db !important;
+}
+
+.cgst-status-fair .cgst-status-banner {
+    border-color: #f39c12 !important;
+}
+
+.cgst-status-poor .cgst-status-banner {
+    border-color: #e67e22 !important;
+}
+
+.cgst-status-bad .cgst-status-banner {
+    border-color: #e74c3c !important;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .cgst-component {
+        margin: 20px auto;
+    }
+    
+    .cgst-title-group h2 {
+        font-size: 22px;
+    }
+    
+    .cgst-gauge {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .cgst-gauge-value {
+        font-size: 36px;
+    }
+    
+    .cgst-metrics-panel {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .cgst-results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cgst-status-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cgst-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* LOADING ANIMATIONS */
+@keyframes cgst-spin {
+    to { transform: rotate(360deg); }
+}
+
+.cgst-loading .cgst-start-button:before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: cgst-spin 0.6s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
