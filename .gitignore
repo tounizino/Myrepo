@@ -1,0 +1,28 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Node / build artifacts
+node_modules/
+dist/
+build/
+
+# Composer
+vendor/
+composer.lock
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# WordPress specific
+wp-content/cache/
+wp-content/uploads/
+wp-config.php
+
+# OS generated
+ehthumbs.db
+Icon?
