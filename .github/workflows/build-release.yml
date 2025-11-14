@@ -1,0 +1,87 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Windows Executable
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '6.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build Release
+      run: dotnet build -c Release --no-restore
+      
+    - name: Publish Windows x64
+      run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/win-x64
+      
+    - name: Publish Windows x86
+      run: dotnet publish -c Release -r win-x86 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/win-x86
+      
+    - name: Create Release Package
+      run: |
+        mkdir release-package
+        copy publish\win-x64\NetworkToolPro.exe release-package\NetworkToolPro-x64.exe
+        copy publish\win-x86\NetworkToolPro.exe release-package\NetworkToolPro-x86.exe
+        copy README.md release-package\
+        copy QUICK_START.md release-package\
+        copy USER_GUIDE.md release-package\
+      shell: cmd
+      
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: NetworkToolPro-Windows
+        path: release-package/
+        
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          release-package/NetworkToolPro-x64.exe
+          release-package/NetworkToolPro-x86.exe
+          release-package/README.md
+          release-package/QUICK_START.md
+          release-package/USER_GUIDE.md
+        body: |
+          ## Network Tool Pro Release
+          
+          ### Downloads
+          - **NetworkToolPro-x64.exe** - For 64-bit Windows (recommended)
+          - **NetworkToolPro-x86.exe** - For 32-bit Windows
+          
+          ### Features
+          - 🔍 **Port Scanner** - Multi-threaded port scanning
+          - 📊 **IP Information** - Network adapter details and public IP
+          - ⚙️ **DNS Configuration** - Easy DNS management with presets
+          
+          ### How to Use
+          1. Download NetworkToolPro-x64.exe (or x86 for 32-bit)
+          2. Run the executable (no installation needed)
+          3. For DNS features, right-click and "Run as Administrator"
+          
+          See QUICK_START.md for detailed instructions.
+          
+          ### Requirements
+          - Windows 10 or Windows 11
+          - No additional software needed (self-contained)
+          
+          ### Note
+          If Windows Defender blocks the file, this is a false positive. The application is safe and open source.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
