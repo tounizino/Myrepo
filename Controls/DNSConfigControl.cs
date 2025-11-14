@@ -233,7 +233,8 @@ namespace NetworkToolPro
 
             card.MouseEnter += (s, e) => card.BackColor = Color.FromArgb(239, 246, 255);
             card.MouseLeave += (s, e) => card.BackColor = Color.FromArgb(249, 250, 252);
-            card.Click += (s, e) =>
+
+            void HandleClick(object? sender, EventArgs e)
             {
                 if (card.Tag is ValueTuple<string, string> data)
                 {
@@ -242,7 +243,9 @@ namespace NetworkToolPro
                     statusLabel.Text = $"Preset selected: {name}";
                     statusLabel.ForeColor = ThemeManager.AccentPrimary;
                 }
-            };
+            }
+
+            card.Click += HandleClick;
 
             var nameLabel = new Label
             {
@@ -252,7 +255,7 @@ namespace NetworkToolPro
                 Location = new Point(8, 6),
                 AutoSize = true
             };
-            nameLabel.Click += card.Click;
+            nameLabel.Click += HandleClick;
             card.Controls.Add(nameLabel);
 
             var serverLabel = new Label
@@ -263,7 +266,7 @@ namespace NetworkToolPro
                 Location = new Point(8, 24),
                 AutoSize = true
             };
-            serverLabel.Click += card.Click;
+            serverLabel.Click += HandleClick;
             card.Controls.Add(serverLabel);
 
             var descLabel = new Label
@@ -274,7 +277,7 @@ namespace NetworkToolPro
                 Location = new Point(8, 40),
                 AutoSize = true
             };
-            descLabel.Click += card.Click;
+            descLabel.Click += HandleClick;
             card.Controls.Add(descLabel);
 
             parent.Controls.Add(card);

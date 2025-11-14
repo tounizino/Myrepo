@@ -55,8 +55,16 @@ public static class ThemeManager
     {
         control.GetType().GetProperty("DoubleBuffered", 
             System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(control, true, null);
-        control.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
-        control.UpdateStyles();
+
+        var setStyleMethod = typeof(Control).GetMethod("SetStyle", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+        setStyleMethod?.Invoke(control, new object[]
+        {
+            ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint,
+            true
+        });
+
+        var updateStylesMethod = typeof(Control).GetMethod("UpdateStyles", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+        updateStylesMethod?.Invoke(control, null);
     }
 
     public static Label CreateLabel(string text, Font font, Color color, ContentAlignment alignment = ContentAlignment.MiddleLeft)
