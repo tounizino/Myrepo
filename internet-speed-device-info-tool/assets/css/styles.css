@@ -1,0 +1,429 @@
+:root {
+    --isdit-primary: #2c7be5;
+    --isdit-secondary: #1c3faa;
+    --isdit-text: #1a1a1a;
+    --isdit-light: #f7f9fc;
+    --isdit-dark: #0f172a;
+    --isdit-muted: #64748b;
+}
+
+.isdit-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 2rem auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.15);
+    max-width: 1280px;
+}
+
+.isdit-wrapper .isdit-header {
+    position: relative;
+    padding: 2.5rem 2rem;
+    background: linear-gradient(135deg, rgba(44, 123, 229, 0.85), rgba(28, 63, 170, 0.85));
+    color: #fff;
+}
+
+.isdit-wrapper.theme-dark .isdit-header {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(37, 99, 235, 0.65));
+}
+
+.isdit-wrapper.theme-light .isdit-header {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(205, 221, 255, 0.85));
+    color: #111827;
+}
+
+.isdit-wrapper.theme-skyblue .isdit-header {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.95), rgba(37, 148, 239, 0.85));
+}
+
+.isdit-header h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.isdit-content {
+    background: #ffffff;
+    padding: 2rem;
+    display: grid;
+    gap: 2rem;
+}
+
+.isdit-wrapper.theme-dark .isdit-content {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+.isdit-wrapper.theme-light .isdit-content {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.isdit-wrapper.theme-skyblue .isdit-content {
+    background: linear-gradient(180deg, rgba(240, 249, 255, 0.9), rgba(255, 255, 255, 0.95));
+    color: #0f172a;
+}
+
+.isdit-speed-test {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+}
+
+.isdit-wrapper.theme-dark .isdit-speed-test {
+    background: rgba(15, 23, 42, 0.4);
+}
+
+.isdit-wrapper.theme-light .isdit-speed-test,
+.isdit-wrapper.theme-skyblue .isdit-speed-test {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.isdit-speed-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.speed-result {
+    background: rgba(15, 23, 42, 0.05);
+    border-radius: 14px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.speed-result:hover {
+    transform: translateY(-3px);
+}
+
+.isdit-wrapper.theme-dark .speed-result {
+    background: rgba(15, 23, 42, 0.65);
+    color: #e2e8f0;
+}
+
+.isdit-wrapper.theme-light .speed-result,
+.isdit-wrapper.theme-skyblue .speed-result {
+    background: rgba(15, 23, 42, 0.05);
+    color: inherit;
+}
+
+.speed-result .label {
+    display: block;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--isdit-muted);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.isdit-wrapper.theme-dark .speed-result .label {
+    color: #94a3b8;
+}
+
+.speed-result .value {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.isdit-wrapper.theme-dark .speed-result .value {
+    background: linear-gradient(135deg, #38bdf8, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.speed-result .unit {
+    font-size: 0.85rem;
+    color: var(--isdit-muted);
+}
+
+.isdit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 1.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: auto;
+    min-width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.isdit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.35);
+}
+
+.isdit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.isdit-wrapper.theme-skyblue .isdit-button {
+    background: linear-gradient(135deg, #38bdf8, #2594ef);
+}
+
+.isdit-wrapper.theme-light .isdit-button {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+.isdit-progress {
+    width: 100%;
+    height: 10px;
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.isdit-progress .progress-bar {
+    height: 100%;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    width: 0;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.isdit-speed-test .isdit-button {
+    align-self: center;
+}
+
+.isdit-status {
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--isdit-muted);
+    min-height: 1.25rem;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.isdit-status.isdit-status--loading {
+    color: #2563eb;
+}
+
+.isdit-status.isdit-status--success {
+    color: #16a34a;
+}
+
+.isdit-status.isdit-status--error {
+    color: #dc2626;
+}
+
+.isdit-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.isdit-card {
+    background: rgba(15, 23, 42, 0.05);
+    border-radius: 18px;
+    padding: 1.6rem;
+    min-height: 240px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.isdit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 42px rgba(15, 23, 42, 0.12);
+}
+
+.isdit-wrapper.theme-dark .isdit-card {
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.isdit-wrapper.theme-light .isdit-card,
+.isdit-wrapper.theme-skyblue .isdit-card {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.isdit-card h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.isdit-wrapper.theme-dark .isdit-card h3 {
+    color: #f1f5f9;
+}
+
+.isdit-card .card-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.isdit-card .card-content ul li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    font-size: 0.92rem;
+}
+
+.isdit-card .card-content ul li:last-child {
+    border-bottom: none;
+}
+
+.isdit-card .card-content ul li strong {
+    color: #475569;
+    font-weight: 600;
+}
+
+.isdit-wrapper.theme-dark .isdit-card .card-content ul li strong {
+    color: #cbd5e1;
+}
+
+.isdit-card .card-content ul li span {
+    float: right;
+    color: #1e293b;
+}
+
+.isdit-wrapper.theme-dark .isdit-card .card-content ul li span {
+    color: #e2e8f0;
+}
+
+.isdit-map {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    background: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.isdit-wrapper.theme-dark .isdit-map {
+    background: #1e293b;
+}
+
+.isdit-map--empty {
+    background: rgba(148, 163, 184, 0.1);
+    color: var(--isdit-muted);
+    font-style: italic;
+}
+
+.isdit-wrapper.theme-dark .isdit-map--empty {
+    background: rgba(30, 41, 59, 0.5);
+    color: #94a3b8;
+}
+
+@media (max-width: 1024px) {
+    .isdit-info-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .isdit-wrapper {
+        margin: 1rem;
+        border-radius: 14px;
+    }
+    
+    .isdit-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .isdit-content {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .isdit-speed-results {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .isdit-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .speed-result .value {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .isdit-header {
+        padding: 1.5rem;
+    }
+    
+    .isdit-header h2 {
+        font-size: 1.4rem;
+    }
+    
+    .isdit-content {
+        padding: 1rem;
+    }
+    
+    .isdit-speed-test {
+        padding: 1.5rem;
+    }
+    
+    .speed-result {
+        padding: 1rem;
+    }
+    
+    .speed-result .value {
+        font-size: 1.5rem;
+    }
+    
+    .isdit-button {
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+.isdit-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.isdit-error {
+    padding: 1rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    color: #dc2626;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.isdit-success {
+    padding: 1rem;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 8px;
+    color: #16a34a;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
