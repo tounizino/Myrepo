@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Featured Posts - Embed Code Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .generator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .generator-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .generator-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .generator-header p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        .controls-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1E293B;
+        }
+
+        .control-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: #2563EB;
+        }
+
+        .theme-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .theme-option {
+            padding: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #F8FAFC;
+        }
+
+        .theme-option:hover {
+            border-color: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .theme-option.active {
+            border-color: #2563EB;
+            background: #EFF6FF;
+        }
+
+        .theme-option .color-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            margin: 0 auto 0.5rem;
+        }
+
+        .embed-code-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .embed-code-section h2 {
+            margin-bottom: 1rem;
+            color: #1E293B;
+        }
+
+        .code-block {
+            background: #1E293B;
+            color: #E2E8F0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #2563EB;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #1D4ED8;
+        }
+
+        .copy-btn.copied {
+            background: #10B981;
+        }
+
+        .info-box {
+            background: #EFF6FF;
+            border-left: 4px solid #2563EB;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-top: 1rem;
+        }
+
+        .info-box strong {
+            color: #1E40AF;
+        }
+
+        .preview-wrapper {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="generator-container">
+        <div class="generator-header">
+            <h1>🎮 Cloud Gaming Featured Posts</h1>
+            <p>Generate your copy & paste embed code in seconds</p>
+        </div>
+
+        <div class="controls-panel">
+            <h2 style="margin-bottom: 1.5rem; color: #1E293B;">Customize Your Widget</h2>
+            
+            <div class="control-group">
+                <label for="widget-title">Widget Title</label>
+                <input type="text" id="widget-title" value="Featured Gaming Stories" placeholder="Enter title...">
+            </div>
+
+            <div class="control-group">
+                <label>Theme</label>
+                <div class="theme-preview">
+                    <div class="theme-option active" data-theme="sky">
+                        <div class="color-circle" style="background: linear-gradient(135deg, #0EA5E9, #38BDF8);"></div>
+                        <div>Sky Blue</div>
+                    </div>
+                    <div class="theme-option" data-theme="blue">
+                        <div class="color-circle" style="background: linear-gradient(135deg, #2563EB, #3B82F6);"></div>
+                        <div>Blue</div>
+                    </div>
+                    <div class="theme-option" data-theme="dark">
+                        <div class="color-circle" style="background: linear-gradient(135deg, #0F172A, #60A5FA);"></div>
+                        <div>Dark</div>
+                    </div>
+                    <div class="theme-option" data-theme="light">
+                        <div class="color-circle" style="background: linear-gradient(135deg, #FFFFFF, #1E40AF);"></div>
+                        <div>Light</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="api-url">Posts API URL (optional)</label>
+                <input type="text" id="api-url" placeholder="https://yoursite.com/wp-json/wp/v2/posts?per_page=3&_embed">
+                <small style="color: #64748B; display: block; margin-top: 0.5rem;">
+                    Leave empty to use demo data. For WordPress, append <code>?per_page=3&amp;_embed</code> for best results.
+                </small>
+            </div>
+        </div>
+
+        <div class="embed-code-section">
+            <h2>📋 Your Embed Code</h2>
+            <p style="color: #64748B; margin-bottom: 1rem;">Copy and paste this code into your website. Everything is included – no external files needed.</p>
+            
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode('embed-code', event)">Copy Code</button>
+                <pre id="embed-code"></pre>
+            </div>
+
+            <div class="info-box">
+                <strong>Tip:</strong> Add this inside any HTML block, widget, or template. Works instantly on WordPress, Wix, Shopify, Webflow, Squarespace, Ghost, and more.
+            </div>
+        </div>
+
+        <div class="preview-wrapper">
+            <h2 style="color: #1E293B; margin-bottom: 1rem;">🎨 Live Preview</h2>
+            <div id="preview-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const CSS_BLOCK = String.raw`
+:root {
+  --cgw-sky-primary: #0EA5E9;
+  --cgw-sky-secondary: #38BDF8;
+  --cgw-sky-accent: #0284C7;
+  --cgw-sky-bg: #F0F9FF;
+  --cgw-sky-card: #FFFFFF;
+  --cgw-sky-text: #0F172A;
+  --cgw-sky-text-muted: #475569;
+  --cgw-sky-border: #BAE6FD;
+
+  --cgw-blue-primary: #2563EB;
+  --cgw-blue-secondary: #3B82F6;
+  --cgw-blue-accent: #1D4ED8;
+  --cgw-blue-bg: #EFF6FF;
+  --cgw-blue-card: #FFFFFF;
+  --cgw-blue-text: #1E293B;
+  --cgw-blue-text-muted: #64748B;
+  --cgw-blue-border: #BFDBFE;
+
+  --cgw-dark-primary: #60A5FA;
+  --cgw-dark-secondary: #3B82F6;
+  --cgw-dark-accent: #93C5FD;
+  --cgw-dark-bg: #0F172A;
+  --cgw-dark-card: #1E293B;
+  --cgw-dark-text: #F1F5F9;
+  --cgw-dark-text-muted: #94A3B8;
+  --cgw-dark-border: #334155;
+
+  --cgw-light-primary: #1E40AF;
+  --cgw-light-secondary: #2563EB;
+  --cgw-light-accent: #1D4ED8;
+  --cgw-light-bg: #FFFFFF;
+  --cgw-light-card: #F8FAFC;
+  --cgw-light-text: #0F172A;
+  --cgw-light-text-muted: #64748B;
+  --cgw-light-border: #E2E8F0;
+}
+
+.cgw-widget-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.cgw-featured-posts {
+  width: 100%;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+.cgw-theme-sky {
+  background: var(--cgw-sky-bg);
+  color: var(--cgw-sky-text);
+  border-color: var(--cgw-sky-border);
+}
+
+.cgw-theme-blue {
+  background: var(--cgw-blue-bg);
+  color: var(--cgw-blue-text);
+  border-color: var(--cgw-blue-border);
+}
+
+.cgw-theme-dark {
+  background: var(--cgw-dark-bg);
+  color: var(--cgw-dark-text);
+  border-color: var(--cgw-dark-border);
+}
+
+.cgw-theme-light {
+  background: var(--cgw-light-bg);
+  color: var(--cgw-light-text);
+  border-color: var(--cgw-light-border);
+}
+
+.cgw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cgw-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.cgw-posts-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .cgw-posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cgw-posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.cgw-post-card {
+  display: flex;
+  flex-direction: column;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.cgw-theme-sky .cgw-post-card {
+  background: var(--cgw-sky-card);
+  border-color: var(--cgw-sky-border);
+}
+
+.cgw-theme-blue .cgw-post-card {
+  background: var(--cgw-blue-card);
+  border-color: var(--cgw-blue-border);
+}
+
+.cgw-theme-dark .cgw-post-card {
+  background: var(--cgw-dark-card);
+  border-color: var(--cgw-dark-border);
+}
+
+.cgw-theme-light .cgw-post-card {
+  background: var(--cgw-light-card);
+  border-color: var(--cgw-light-border);
+}
+
+.cgw-post-card:hover {
+  transform: translateY(-4px);
+}
+
+.cgw-thumbnail {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.cgw-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.cgw-post-card:hover .cgw-thumbnail img {
+  transform: scale(1.05);
+}
+
+.cgw-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cgw-theme-sky .cgw-placeholder {
+  background: #E0F2FE;
+  color: var(--cgw-sky-primary);
+}
+
+.cgw-theme-blue .cgw-placeholder {
+  background: #DBEAFE;
+  color: var(--cgw-blue-primary);
+}
+
+.cgw-theme-dark .cgw-placeholder {
+  background: #293548;
+  color: var(--cgw-dark-primary);
+}
+
+.cgw-theme-light .cgw-placeholder {
+  background: #F1F5F9;
+  color: var(--cgw-light-primary);
+}
+
+.cgw-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cgw-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.cgw-theme-sky .cgw-category {
+  background: var(--cgw-sky-primary);
+  color: #FFFFFF;
+}
+
+.cgw-theme-blue .cgw-category {
+  background: var(--cgw-blue-primary);
+  color: #FFFFFF;
+}
+
+.cgw-theme-dark .cgw-category {
+  background: var(--cgw-dark-primary);
+  color: #0F172A;
+}
+
+.cgw-theme-light .cgw-category {
+  background: var(--cgw-light-primary);
+  color: #FFFFFF;
+}
+
+.cgw-post-title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.cgw-post-title a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cgw-post-title a:hover {
+  opacity: 0.7;
+}
+
+.cgw-theme-sky .cgw-post-title a {
+  color: var(--cgw-sky-text);
+}
+
+.cgw-theme-blue .cgw-post-title a {
+  color: var(--cgw-blue-text);
+}
+
+.cgw-theme-dark .cgw-post-title a {
+  color: var(--cgw-dark-text);
+}
+
+.cgw-theme-light .cgw-post-title a {
+  color: var(--cgw-light-text);
+}
+
+.cgw-excerpt {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.cgw-theme-sky .cgw-excerpt {
+  color: var(--cgw-sky-text-muted);
+}
+
+.cgw-theme-blue .cgw-excerpt {
+  color: var(--cgw-blue-text-muted);
+}
+
+.cgw-theme-dark .cgw-excerpt {
+  color: var(--cgw-dark-text-muted);
+}
+
+.cgw-theme-light .cgw-excerpt {
+  color: var(--cgw-light-text-muted);
+}
+
+.cgw-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cgw-theme-sky .cgw-footer {
+  border-top-color: var(--cgw-sky-border);
+}
+
+.cgw-theme-blue .cgw-footer {
+  border-top-color: var(--cgw-blue-border);
+}
+
+.cgw-theme-dark .cgw-footer {
+  border-top-color: var(--cgw-dark-border);
+}
+
+.cgw-theme-light .cgw-footer {
+  border-top-color: var(--cgw-light-border);
+}
+
+.cgw-meta {
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cgw-theme-sky .cgw-meta {
+  color: var(--cgw-sky-text-muted);
+}
+
+.cgw-theme-blue .cgw-meta {
+  color: var(--cgw-blue-text-muted);
+}
+
+.cgw-theme-dark .cgw-meta {
+  color: var(--cgw-dark-text-muted);
+}
+
+.cgw-theme-light .cgw-meta {
+  color: var(--cgw-light-text-muted);
+}
+
+.cgw-cta {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.cgw-cta:hover {
+  opacity: 0.7;
+}
+
+.cgw-theme-sky .cgw-cta {
+  color: var(--cgw-sky-primary);
+}
+
+.cgw-theme-blue .cgw-cta {
+  color: var(--cgw-blue-primary);
+}
+
+.cgw-theme-dark .cgw-cta {
+  color: var(--cgw-dark-primary);
+}
+
+.cgw-theme-light .cgw-cta {
+  color: var(--cgw-light-primary);
+}
+`;        
+
+        const DEMO_POSTS = [
+            {
+                title: 'The Future of Cloud Gaming: What to Expect in 2024',
+                excerpt: 'Discover the latest innovations and trends shaping the cloud gaming landscape this year. From improved latency to new platforms...',
+                category: 'Game Reviews',
+                date: '2024-01-15T00:00:00',
+                readTime: '5 min read',
+                link: '#',
+                image: ''
+            },
+            {
+                title: '5G and Cloud Gaming: A Perfect Match',
+                excerpt: 'How 5G technology is revolutionizing cloud gaming experiences with ultra-low latency and improved streaming quality...',
+                category: 'Technology',
+                date: '2024-01-12T00:00:00',
+                readTime: '4 min read',
+                link: '#',
+                image: ''
+            },
+            {
+                title: 'Top 10 Games to Play on Cloud Gaming Platforms',
+                excerpt: 'Our curated list of the best games optimized for cloud gaming, featuring AAA titles and indie favorites...',
+                category: 'News',
+                date: '2024-01-10T00:00:00',
+                readTime: '8 min read',
+                link: '#',
+                image: ''
+            }
+        ];
+
+        let currentTheme = 'sky';
+        let currentTitle = 'Featured Gaming Stories';
+        let currentApiUrl = '';
+
+        const sanitizeForJS = (value) => {
+            if (!value) return '';
+            return value
+                .replace(/\\/g, '\\\\')
+                .replace(/`/g, '\\`')
+                .replace(/\$/g, '\\$')
+                .replace(/'/g, '\\'')
+                .replace(/\r?\n/g, ' ');
+        };
+
+        const injectStyles = () => {
+            if (!document.getElementById('cgw-preview-styles')) {
+                const style = document.createElement('style');
+                style.id = 'cgw-preview-styles';
+                style.textContent = CSS_BLOCK;
+                document.head.appendChild(style);
+            }
+        };
+
+        const stripHTML = (value) => {
+            if (!value) return '';
+            const temp = document.createElement('div');
+            temp.innerHTML = value;
+            return (temp.textContent || temp.innerText || '').trim();
+        };
+
+        const computeReadingTime = (content) => {
+            const wordCount = stripHTML(content).split(/\s+/).filter(Boolean).length || 0;
+            const minutes = Math.max(1, Math.ceil(wordCount / 200));
+            return `${minutes} min read`;
+        };
+
+        const formatPosts = (posts, fallbackCount = 3) => {
+            if (!Array.isArray(posts) || !posts.length) {
+                return DEMO_POSTS.slice(0, fallbackCount);
+            }
+
+            return posts.slice(0, fallbackCount).map((post) => {
+                const title = post?.title?.rendered || post?.title || 'Untitled';
+                const excerptRaw = post?.excerpt?.rendered || post?.excerpt || '';
+                const contentRaw = post?.content?.rendered || post?.content || '';
+                const categories = post?._embedded?.['wp:term']?.[0] || [];
+                const primaryCategory = categories.find((cat) => !!cat?.name)?.name || post?.category || 'Cloud Gaming';
+                const featuredMedia = post?._embedded?.['wp:featuredmedia']?.[0];
+
+                const imageUrl = post?.image
+                    || post?.featured_media_url
+                    || post?.jetpack_featured_media_url
+                    || featuredMedia?.source_url
+                    || '';
+
+                const cleanExcerpt = stripHTML(excerptRaw).slice(0, 160);
+                const dateObj = post?.date ? new Date(post.date) : null;
+                const formattedDate = dateObj ? dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+                return {
+                    title,
+                    excerpt: cleanExcerpt,
+                    category: primaryCategory,
+                    date: formattedDate,
+                    readTime: computeReadingTime(contentRaw || excerptRaw || DEMO_POSTS[0].excerpt),
+                    link: post?.link || '#',
+                    image: imageUrl
+                };
+            });
+        };
+
+        const buildPostCards = (posts) => {
+            return posts.map((post) => `
+                <article class="cgw-post-card">
+                    <a class="cgw-thumbnail" href="${post.link}" ${post.link === '#' ? 'aria-disabled="true" tabindex="-1"' : ''}>
+                        ${post.image
+                            ? `<img src="${post.image}" alt="${post.title}" loading="lazy">`
+                            : '<div class="cgw-placeholder"><span>Cloud Gaming</span></div>'
+                        }
+                    </a>
+                    <div class="cgw-content">
+                        <span class="cgw-category">${post.category || 'Cloud Gaming'}</span>
+                        <h3 class="cgw-post-title">
+                            <a href="${post.link}">${post.title}</a>
+                        </h3>
+                        <p class="cgw-excerpt">${post.excerpt || ''}</p>
+                        <footer class="cgw-footer">
+                            <span class="cgw-meta">
+                                ${post.date || ''} ${post.date ? '<span aria-hidden="true">•</span>' : ''} ${post.readTime}
+                            </span>
+                            <a class="cgw-cta" href="${post.link}">Read more ↗</a>
+                        </footer>
+                    </div>
+                </article>
+            `).join('');
+        };
+
+        const renderPreview = (config, posts) => {
+            injectStyles();
+            const previewHost = document.getElementById('preview-container');
+            previewHost.innerHTML = '';
+
+            const wrapper = document.createElement('div');
+            const uniqueId = `preview-${config.containerId}`;
+            wrapper.id = uniqueId;
+            wrapper.className = 'cgw-widget-container';
+            previewHost.appendChild(wrapper);
+
+            const formattedPosts = formatPosts(posts, config.postsToShow || 3);
+
+            wrapper.innerHTML = `
+                <section class="cgw-featured-posts cgw-theme-${config.theme}">
+                    <header class="cgw-header">
+                        <h2 class="cgw-title">${config.title}</h2>
+                    </header>
+                    <div class="cgw-posts-grid">
+                        ${buildPostCards(formattedPosts)}
+                    </div>
+                </section>
+            `;
+        };
+
+        const copyCode = (elementId, event) => {
+            const codeElement = document.getElementById(elementId);
+            const textToCopy = codeElement.textContent;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        };
+
+        window.copyCode = copyCode;
+
+        const generateEmbedCode = () => {
+            const containerId = `cgw-widget-${Math.random().toString(36).slice(2, 8)}`;
+            const sanitizedTitle = sanitizeForJS(currentTitle || 'Featured Gaming Stories');
+            const sanitizedApi = sanitizeForJS(currentApiUrl || '');
+            const theme = currentTheme;
+
+            const embedCode = `<!-- Cloud Gaming Featured Posts Widget -->
+<div id="${containerId}" class="cgw-widget-container"></div>
+
+<script>
+(function(){
+  const widgetConfig = {
+    containerId: '${containerId}',
+    theme: '${theme}',
+    title: '${sanitizedTitle || 'Featured Gaming Stories'}',
+    apiUrl: '${sanitizedApi}',
+    postsToShow: 3
+  };
+
+  const css = \
+\\`${CSS_BLOCK}
+  \\`;
+
+  if (!document.getElementById('cgw-styles')) {
+    const style = document.createElement('style');
+    style.id = 'cgw-styles';
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  const demoData = ${JSON.stringify(DEMO_POSTS, null, 2).replace(/\n/g, '\n  ')};
+
+  const stripHTML = (value) => {
+    if (!value) return '';
+    const temp = document.createElement('div');
+    temp.innerHTML = value;
+    return (temp.textContent || temp.innerText || '').trim();
+  };
+
+  const computeReadingTime = (content) => {
+    const wordCount = stripHTML(content).split(/\s+/).filter(Boolean).length || 0;
+    const minutes = Math.max(1, Math.ceil(wordCount / 200));
+    return minutes + ' min read';
+  };
+
+  const formatPosts = (posts, fallbackCount = 3) => {
+    if (!Array.isArray(posts) || !posts.length) {
+      return demoData.slice(0, fallbackCount);
+    }
+
+    return posts.slice(0, fallbackCount).map((post) => {
+      const title = post?.title?.rendered || post?.title || 'Untitled';
+      const excerptRaw = post?.excerpt?.rendered || post?.excerpt || '';
+      const contentRaw = post?.content?.rendered || post?.content || '';
+      const categories = post?._embedded?.['wp:term']?.[0] || [];
+      const primaryCategory = categories.find((cat) => !!cat?.name)?.name || post?.category || 'Cloud Gaming';
+      const featuredMedia = post?._embedded?.['wp:featuredmedia']?.[0];
+
+      const imageUrl = post?.image
+        || post?.featured_media_url
+        || post?.jetpack_featured_media_url
+        || featuredMedia?.source_url
+        || '';
+
+      const cleanExcerpt = stripHTML(excerptRaw).slice(0, 160);
+      const dateObj = post?.date ? new Date(post.date) : null;
+      const formattedDate = dateObj ? dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+      return {
+        title,
+        excerpt: cleanExcerpt,
+        category: primaryCategory,
+        date: formattedDate,
+        readTime: computeReadingTime(contentRaw || excerptRaw || demoData[0].excerpt),
+        link: post?.link || '#',
+        image: imageUrl
+      };
+    });
+  };
+
+  const buildPostCards = (posts) => {
+    return posts.map((post) => \\`
+      <article class="cgw-post-card">
+        <a class="cgw-thumbnail" href="\\${post.link}" \\${post.link === '#' ? 'aria-disabled="true" tabindex="-1"' : ''}>
+          \\${post.image
+            ? \\`<img src="\\${post.image}" alt="\\${post.title}" loading="lazy">\\`
+            : '<div class="cgw-placeholder"><span>Cloud Gaming</span></div>'
+          }
+        </a>
+        <div class="cgw-content">
+          <span class="cgw-category">\\${post.category || 'Cloud Gaming'}</span>
+          <h3 class="cgw-post-title">
+            <a href="\\${post.link}">\\${post.title}</a>
+          </h3>
+          <p class="cgw-excerpt">\\${post.excerpt || ''}</p>
+          <footer class="cgw-footer">
+            <span class="cgw-meta">
+              \\${post.date || ''} \\${post.date ? '<span aria-hidden="true">•</span>' : ''} \\${post.readTime}
+            </span>
+            <a class="cgw-cta" href="\\${post.link}">Read more ↗</a>
+          </footer>
+        </div>
+      </article>
+    \\`).join('');
+  };
+
+  const renderWidget = (posts) => {
+    const container = document.getElementById(widgetConfig.containerId);
+    if (!container) return;
+
+    const formattedPosts = formatPosts(posts, widgetConfig.postsToShow || 3);
+
+    container.innerHTML = \\`
+      <section class="cgw-featured-posts cgw-theme-\\${widgetConfig.theme}">
+        <header class="cgw-header">
+          <h2 class="cgw-title">\\${widgetConfig.title}</h2>
+        </header>
+        <div class="cgw-posts-grid">
+          \\${buildPostCards(formattedPosts)}
+        </div>
+      </section>
+    \\`;
+  };
+
+  if (widgetConfig.apiUrl) {
+    fetch(widgetConfig.apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const posts = Array.isArray(data) ? data : data?.posts || [];
+        renderWidget(posts);
+      })
+      .catch(() => renderWidget(demoData));
+  } else {
+    renderWidget(demoData);
+  }
+})();
+<\/script>`;
+
+            document.getElementById('embed-code').textContent = embedCode;
+
+            // Preview rendering
+            if (currentApiUrl) {
+                fetch(currentApiUrl)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const posts = Array.isArray(data) ? data : data?.posts || [];
+                        renderPreview({
+                            containerId,
+                            theme,
+                            title: currentTitle || 'Featured Gaming Stories',
+                            apiUrl: currentApiUrl,
+                            postsToShow: 3
+                        }, posts);
+                    })
+                    .catch(() => {
+                        renderPreview({
+                            containerId,
+                            theme,
+                            title: currentTitle || 'Featured Gaming Stories',
+                            postsToShow: 3
+                        }, DEMO_POSTS);
+                    });
+            } else {
+                renderPreview({
+                    containerId,
+                    theme,
+                    title: currentTitle || 'Featured Gaming Stories',
+                    postsToShow: 3
+                }, DEMO_POSTS);
+            }
+        };
+
+        // Theme selection listeners
+        document.querySelectorAll('.theme-option').forEach((option) => {
+            option.addEventListener('click', function () {
+                document.querySelectorAll('.theme-option').forEach((opt) => opt.classList.remove('active'));
+                this.classList.add('active');
+                currentTheme = this.dataset.theme || 'sky';
+                generateEmbedCode();
+            });
+        });
+
+        document.getElementById('widget-title').addEventListener('input', (event) => {
+            currentTitle = event.target.value || 'Featured Gaming Stories';
+            generateEmbedCode();
+        });
+
+        document.getElementById('api-url').addEventListener('input', (event) => {
+            currentApiUrl = event.target.value.trim();
+            generateEmbedCode();
+        });
+
+        // Initial render
+        generateEmbedCode();
+    </script>
+</body>
+</html>
