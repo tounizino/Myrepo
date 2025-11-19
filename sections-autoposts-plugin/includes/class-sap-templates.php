@@ -70,76 +70,80 @@ class SAP_Templates {
 
         self::wrap_open('featured', $settings);
         ?>
-        <div class="sap-featured-layout">
-            <div class="sap-featured__main-column">
+        <div class="gaming-featured-container v27">
+            <div class="column-left">
                 <?php if (!empty($settings['title'])) : ?>
-                    <h2 class="sap-section__title">
-                        <span class="sap-title-square" style="background-color:<?php echo esc_attr($settings['accent_color']); ?>;"></span>
+                    <h2 class="section-title">
+                        <span class="title-square blue" style="background-color:<?php echo esc_attr($settings['accent_color']); ?>;"></span>
                         <?php echo esc_html($settings['title']); ?>
                     </h2>
                 <?php endif; ?>
 
-                <div class="sap-featured__grid">
-                    <?php if (!empty($main_posts)) : ?>
-                        <article class="sap-featured__hero">
-                            <a href="<?php echo esc_url($main_posts[0]['permalink']); ?>">
-                                <img src="<?php echo esc_url($main_posts[0]['image']['url']); ?>" alt="<?php echo esc_attr($main_posts[0]['image']['alt']); ?>">
-                            </a>
-                            <div class="sap-featured__hero-content">
-                                <?php if (!empty($main_posts[0]['category'])) : ?>
-                                    <span class="sap-category-tag"><?php echo esc_html($main_posts[0]['category']['name']); ?></span>
-                                <?php endif; ?>
-                                <h3><a href="<?php echo esc_url($main_posts[0]['permalink']); ?>"><?php echo esc_html($main_posts[0]['title']); ?></a></h3>
-                                <p><?php echo esc_html($main_posts[0]['excerpt']); ?></p>
-                            </div>
-                        </article>
-                    <?php endif; ?>
+                <div class="featured-content">
+                    <div class="featured-grid">
+                        <?php if (!empty($main_posts)) : ?>
+                            <article class="featured-main">
+                                <div class="image-wrap">
+                                    <img src="<?php echo esc_url($main_posts[0]['image']['url']); ?>" alt="<?php echo esc_attr($main_posts[0]['image']['alt']); ?>">
+                                </div>
+                                <div class="featured-overlay">
+                                    <?php if (!empty($main_posts[0]['category'])) : ?>
+                                        <span class="category-tag"><?php echo esc_html($main_posts[0]['category']['name']); ?></span>
+                                    <?php endif; ?>
+                                    <h2><a href="<?php echo esc_url($main_posts[0]['permalink']); ?>"><?php echo esc_html($main_posts[0]['title']); ?></a></h2>
+                                    <p class="lead"><?php echo esc_html($main_posts[0]['excerpt']); ?></p>
+                                </div>
+                            </article>
+                        <?php endif; ?>
 
-                    <?php if (!empty($secondary_posts)) : ?>
-                        <div class="sap-featured__side-list">
-                            <?php foreach ($secondary_posts as $post) : ?>
-                                <article class="sap-side-item">
-                                    <div class="sap-side-item__row">
-                                        <a href="<?php echo esc_url($post['permalink']); ?>">
+                        <?php if (!empty($secondary_posts)) : ?>
+                            <div class="side-list">
+                                <?php foreach ($secondary_posts as $post) : ?>
+                                    <article class="side-item">
+                                        <div class="top-row">
                                             <img src="<?php echo esc_url($post['image']['url']); ?>" alt="<?php echo esc_attr($post['image']['alt']); ?>">
-                                        </a>
-                                        <div class="sap-side-item__text">
-                                            <?php if (!empty($post['category'])) : ?>
-                                                <span class="sap-category-tag"><?php echo esc_html($post['category']['name']); ?></span>
-                                            <?php endif; ?>
-                                            <h4><a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a></h4>
+                                            <div class="side-text">
+                                                <?php if (!empty($post['category'])) : ?>
+                                                    <span class="category-tag"><?php echo esc_html($post['category']['name']); ?></span>
+                                                <?php endif; ?>
+                                                <h4><a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a></h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p class="sap-excerpt"><?php echo esc_html($post['excerpt']); ?></p>
-                                </article>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
+                                        <p class="excerpt"><?php echo esc_html($post['excerpt']); ?></p>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
 
-            <div class="sap-featured__widget-column">
+            <div class="column-right">
                 <?php if (!empty($settings['secondary_title'])) : ?>
-                    <h2 class="sap-section__title">
-                        <span class="sap-title-square" style="background-color:<?php echo esc_attr($settings['secondary_accent_color']); ?>;"></span>
+                    <h2 class="section-title">
+                        <span class="title-square green" style="background-color:<?php echo esc_attr($settings['secondary_accent_color']); ?>;"></span>
                         <?php echo esc_html($settings['secondary_title']); ?>
                     </h2>
                 <?php endif; ?>
 
-                <div class="sap-widget">
-                    <ul class="sap-widget__list">
-                        <?php foreach ($widget_posts as $post) : ?>
-                            <li>
-                                <?php if (!empty($post['badge'])) : ?>
-                                    <span class="sap-badge sap-badge--<?php echo esc_attr($post['badge']['type']); ?>">
-                                        <?php echo esc_html($post['badge']['label']); ?>
-                                    </span>
-                                <?php endif; ?>
-                                <a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a>
-                                <div class="sap-meta"><?php echo esc_html($post['date']['display']); ?> · <?php echo esc_html($post['reading_time']); ?></div>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                <div class="widget-outer">
+                    <div class="gaming-widget">
+                        <ul class="widget-list">
+                            <?php foreach ($widget_posts as $post) : ?>
+                                <li>
+                                    <?php if (!empty($post['badge'])) : ?>
+                                        <div class="badge-wrap">
+                                            <span class="featured-badge <?php echo esc_attr($post['badge']['type']); ?>">
+                                                <?php echo strtoupper(esc_html($post['badge']['label'])); ?>
+                                            </span>
+                                        </div>
+                                    <?php endif; ?>
+                                    <a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a>
+                                    <div class="meta"><span class="date"><?php echo esc_html($post['date']['display']); ?></span> · <span class="read-time"><?php echo esc_html($post['reading_time']); ?></span></div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,29 +161,33 @@ class SAP_Templates {
 
         self::wrap_open('beginners', $settings);
         ?>
-        <?php if (!empty($settings['title'])) : ?>
-            <h2 class="sap-section__title">
-                <span class="sap-title-square" style="background-color:<?php echo esc_attr($settings['accent_color']); ?>;"></span>
-                <?php echo esc_html($settings['title']); ?>
-            </h2>
-        <?php endif; ?>
+        <div class="cloud-gaming-beginners">
+            <div class="beginners-section section-v5">
+                <?php if (!empty($settings['title'])) : ?>
+                    <h2 class="section-title">
+                        <span class="title-square green" style="background-color:<?php echo esc_attr($settings['accent_color']); ?>;"></span>
+                        <?php echo esc_html($settings['title']); ?>
+                    </h2>
+                <?php endif; ?>
 
-        <div class="sap-beginners__grid">
-            <?php foreach ($posts as $index => $post) :
-                $step_num = str_pad($index + 1, 2, '0', STR_PAD_LEFT);
-                ?>
-                <article class="sap-beginner-card">
-                    <div class="sap-step-number"><?php echo esc_html($step_num); ?></div>
-                    <div class="sap-beginner-content">
-                        <?php if (!empty($post['category'])) : ?>
-                            <span class="sap-category-tag"><?php echo esc_html($post['category']['name']); ?></span>
-                        <?php endif; ?>
-                        <h3><a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a></h3>
-                        <p><?php echo esc_html($post['excerpt']); ?></p>
-                        <div class="sap-meta"><?php echo esc_html($post['modified']['display']); ?></div>
-                    </div>
-                </article>
-            <?php endforeach; ?>
+                <div class="beginners-grid">
+                    <?php foreach ($posts as $index => $post) :
+                        $step_num = str_pad($index + 1, 2, '0', STR_PAD_LEFT);
+                        ?>
+                        <article class="beginner-card">
+                            <div class="step-number"><?php echo esc_html($step_num); ?></div>
+                            <div class="beginner-content">
+                                <?php if (!empty($post['category'])) : ?>
+                                    <span class="category-tag"><?php echo esc_html($post['category']['name']); ?></span>
+                                <?php endif; ?>
+                                <h3><a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a></h3>
+                                <p><?php echo esc_html($post['excerpt']); ?></p>
+                                <div class="meta"><?php echo esc_html($post['modified']['display']); ?></div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
         <?php
         self::wrap_close();
@@ -358,37 +366,41 @@ class SAP_Templates {
 
         self::wrap_open('latest_posts', $settings);
         ?>
-        <?php if (!empty($settings['title'])) : ?>
-            <h2 class="sap-section__title">
-                <span class="sap-title-square" style="background-color:<?php echo esc_attr($settings['accent_color']); ?>;"></span>
-                <?php echo esc_html($settings['title']); ?>
-            </h2>
-        <?php endif; ?>
+        <div class="gaming-latest-container v27">
+            <?php if (!empty($settings['title'])) : ?>
+                <h2 class="section-title">
+                    <span class="title-square blue" style="background-color:<?php echo esc_attr($settings['accent_color']); ?>;"></span>
+                    <?php echo esc_html($settings['title']); ?>
+                </h2>
+            <?php endif; ?>
 
-        <div class="sap-latest-grid" data-items-per-page="<?php echo esc_attr($per_page); ?>">
-            <?php foreach ($posts as $post) : ?>
-                <article class="sap-latest-card">
-                    <?php if (!empty($post['badge'])) : ?>
-                        <span class="sap-badge-overlay sap-badge--<?php echo esc_attr($post['badge']['type']); ?>">
-                            <?php echo esc_html($post['badge']['label']); ?>
-                        </span>
-                    <?php endif; ?>
-                    <a href="<?php echo esc_url($post['permalink']); ?>" class="sap-card-image">
-                        <img src="<?php echo esc_url($post['image']['url']); ?>" alt="<?php echo esc_attr($post['image']['alt']); ?>">
-                    </a>
-                    <div class="sap-card-body">
-                        <?php if (!empty($post['category'])) : ?>
-                            <span class="sap-category-tag"><?php echo esc_html($post['category']['name']); ?></span>
-                        <?php endif; ?>
-                        <h3><a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a></h3>
-                        <p><?php echo esc_html($post['excerpt']); ?></p>
-                        <div class="sap-meta"><?php echo esc_html($post['date']['display']); ?> · <?php echo esc_html($post['reading_time']); ?></div>
-                    </div>
-                </article>
-            <?php endforeach; ?>
+            <div class="latest-grid sap-latest-grid" data-items-per-page="<?php echo esc_attr($per_page); ?>">
+                <?php foreach ($posts as $post) : ?>
+                    <article class="latest-card sap-latest-card">
+                        <div class="card-image-wrap">
+                            <img src="<?php echo esc_url($post['image']['url']); ?>" alt="<?php echo esc_attr($post['image']['alt']); ?>">
+                            <?php if (!empty($post['badge'])) : ?>
+                                <span class="card-badge <?php echo esc_attr($post['badge']['type']); ?>"><?php echo esc_html($post['badge']['label']); ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="card-body">
+                            <?php if (!empty($post['category'])) : ?>
+                                <span class="card-category"><?php echo esc_html($post['category']['name']); ?></span>
+                            <?php endif; ?>
+                            <h3 class="card-title"><a href="<?php echo esc_url($post['permalink']); ?>"><?php echo esc_html($post['title']); ?></a></h3>
+                            <p class="card-excerpt"><?php echo esc_html($post['excerpt']); ?></p>
+                            <div class="card-meta">
+                                <span class="date"><?php echo esc_html($post['date']['display']); ?></span>
+                                <span class="separator">·</span>
+                                <span class="read-time"><?php echo esc_html($post['reading_time']); ?></span>
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="latest-pagination sap-pagination" id="sap-pagination-<?php echo esc_attr(uniqid()); ?>"></div>
         </div>
-
-        <div class="sap-pagination" id="sap-pagination-<?php echo esc_attr(uniqid()); ?>"></div>
         <?php
         self::wrap_close();
     }

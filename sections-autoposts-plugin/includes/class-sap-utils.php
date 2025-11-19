@@ -16,6 +16,7 @@ class SAP_Utils {
         $classes = array(
             'sap-section',
             'sap-section--' . sanitize_html_class($section_key),
+            'sap-wrap-' . sanitize_html_class($section_key),
             'sap-theme-' . sanitize_html_class($settings['theme'])
         );
 
