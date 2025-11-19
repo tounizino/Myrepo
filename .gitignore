@@ -1,0 +1,21 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+
+# Composer / PHP
+/vendor/
+composer.lock
+
+# Node / Frontend
+/node_modules/
+/dist/
+/build/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Misc
+*.cache
