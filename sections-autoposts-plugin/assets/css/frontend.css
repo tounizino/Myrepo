@@ -1,0 +1,825 @@
+/* ===== SCOPED RESET FOR ALL SECTIONS ===== */
+.sap-section h1,
+.sap-section h2,
+.sap-section h3,
+.sap-section h4,
+.sap-section h5,
+.sap-section h6,
+.sap-section p,
+.sap-section ul,
+.sap-section li,
+.sap-section a,
+.sap-section article,
+.sap-section div {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    box-sizing: border-box !important;
+}
+
+.sap-section * {
+    box-sizing: border-box !important;
+}
+
+/* ===== BASE SECTION WRAPPER ===== */
+.sap-section {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    color: #222 !important;
+    background: transparent !important;
+    position: relative !important;
+}
+
+.sap-section__inner {
+    margin: 0 auto !important;
+    width: 100% !important;
+}
+
+/* ===== SECTION 1: FEATURED POSTS + WIDGET ===== */
+.sap-wrap-featured .gaming-featured-container {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 28px !important;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
+    color: #222 !important;
+    background: transparent !important;
+}
+
+.sap-wrap-featured .column-left,
+.sap-wrap-featured .column-right {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.sap-wrap-featured .section-title {
+    font-size: 1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 12px 0 !important;
+    font-weight: 700 !important;
+}
+
+.sap-wrap-featured .title-square {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 3px !important;
+    display: inline-block !important;
+}
+
+.sap-wrap-featured .title-square.blue { background: #0077ff !important; }
+.sap-wrap-featured .title-square.green { background: #ff3366 !important; }
+
+.sap-wrap-featured .featured-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+}
+
+.sap-wrap-featured .featured-grid {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+    gap: 18px !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    align-items: stretch !important;
+}
+
+.sap-wrap-featured .featured-main {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    overflow: hidden !important;
+    border-radius: 3px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.sap-wrap-featured .image-wrap {
+    overflow: hidden !important;
+}
+
+.sap-wrap-featured .image-wrap img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    transition: transform 0.6s ease !important;
+}
+
+.sap-wrap-featured .image-wrap:hover img {
+    transform: scale(1.08) !important;
+}
+
+.sap-wrap-featured .featured-overlay {
+    padding: 14px !important;
+    background: #fff !important;
+}
+
+.sap-wrap-featured .category-tag {
+    display: inline-block !important;
+    margin-bottom: 6px !important;
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+    background: #e6f2ff !important;
+    color: #0077ff !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+}
+
+.sap-wrap-featured .featured-overlay h2 {
+    margin: 8px 0 6px 0 !important;
+    font-size: 1.2rem !important;
+}
+
+.sap-wrap-featured .featured-overlay h3 {
+    margin: 8px 0 6px 0 !important;
+    font-size: 1.1rem !important;
+}
+
+.sap-wrap-featured .featured-overlay a {
+    color: #111 !important;
+    text-decoration: none !important;
+}
+
+.sap-wrap-featured .featured-overlay a:hover {
+    color: #0077ff !important;
+}
+
+.sap-wrap-featured .featured-overlay .lead {
+    margin: 0 !important;
+    color: #4b5563 !important;
+    font-size: 0.95rem !important;
+}
+
+.sap-wrap-featured .side-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+}
+
+.sap-wrap-featured .side-item {
+    background: #D6EAF8 !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 3px !important;
+    padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+}
+
+.sap-wrap-featured .top-row {
+    display: flex !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+}
+
+.sap-wrap-featured .side-item img {
+    width: 92px !important;
+    height: 70px !important;
+    object-fit: cover !important;
+    border-radius: 3px !important;
+    flex-shrink: 0 !important;
+}
+
+.sap-wrap-featured .side-text h4 {
+    margin: 0 !important;
+    font-size: 0.87rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+}
+
+.sap-wrap-featured .side-text a {
+    color: #111 !important;
+    text-decoration: none !important;
+}
+
+.sap-wrap-featured .side-text a:hover {
+    color: #0077ff !important;
+    text-decoration: underline !important;
+}
+
+.sap-wrap-featured .excerpt {
+    margin: 0 !important;
+    color: #56606b !important;
+    font-size: 0.81rem !important;
+    line-height: 1.2 !important;
+}
+
+.sap-wrap-featured .widget-outer {
+    display: flex !important;
+    flex-direction: column !important;
+    background: #d6eaf8 !important;
+    border: 1px solid #bcd8ee !important;
+    padding: 10px !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    border-radius: 3px !important;
+}
+
+.sap-wrap-featured .gaming-widget {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+}
+
+.sap-wrap-featured .widget-list {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    overflow: auto !important;
+}
+
+.sap-wrap-featured .widget-list li {
+    padding: 12px 6px !important;
+    border-bottom: 1px solid #c6dbe9 !important;
+    list-style: none !important;
+}
+
+.sap-wrap-featured .widget-list li:last-child {
+    border-bottom: none !important;
+}
+
+.sap-wrap-featured .widget-list a {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #111 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    margin-bottom: 6px !important;
+}
+
+.sap-wrap-featured .widget-list a:hover {
+    text-decoration: underline !important;
+    color: #0077ff !important;
+}
+
+.sap-wrap-featured .meta {
+    font-size: 0.78rem !important;
+    color: #42505a !important;
+}
+
+.sap-wrap-featured .badge-wrap {
+    margin-bottom: 6px !important;
+}
+
+.sap-wrap-featured .featured-badge {
+    display: inline-block !important;
+    padding: 3px 8px !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border-radius: 3px !important;
+}
+
+.sap-wrap-featured .featured-badge.new {
+    background: #0077ff !important;
+    color: #fff !important;
+}
+
+.sap-wrap-featured .featured-badge.hot {
+    background: #ff3366 !important;
+    color: #fff !important;
+}
+
+.sap-wrap-featured .featured-badge.update {
+    background: #00c896 !important;
+    color: #fff !important;
+}
+
+/* Dark theme for featured */
+.sap-theme-dark.sap-wrap-featured .featured-main,
+.sap-theme-dark.sap-wrap-featured .featured-overlay {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+.sap-theme-dark.sap-wrap-featured .featured-overlay a {
+    color: #e2e8f0 !important;
+}
+
+.sap-theme-dark.sap-wrap-featured .side-item {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+.sap-theme-dark.sap-wrap-featured .widget-outer {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+.sap-theme-dark.sap-wrap-featured .widget-list a {
+    color: #e2e8f0 !important;
+}
+
+/* ===== RESPONSIVE FOR FEATURED ===== */
+@media (max-width: 992px) {
+    .sap-wrap-featured .gaming-featured-container {
+        grid-template-columns: 1fr !important;
+        padding: 0 16px !important;
+    }
+    
+    .sap-wrap-featured .featured-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .sap-wrap-featured .side-list {
+        flex-direction: row !important;
+        gap: 10px !important;
+        overflow: auto !important;
+    }
+    
+    .sap-wrap-featured .side-item {
+        min-width: 240px !important;
+        flex: 0 0 auto !important;
+        height: auto !important;
+    }
+}
+
+/* ===== SECTION 2: BEGINNERS CORNER ===== */
+.sap-wrap-beginners {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+    background: #f9fafb !important;
+    padding: 20px !important;
+    margin: 0 !important;
+}
+
+.sap-wrap-beginners .beginners-section {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 16px !important;
+}
+
+.sap-wrap-beginners .section-title {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 20px 0 !important;
+    color: #111 !important;
+}
+
+.sap-wrap-beginners .title-square {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 3px !important;
+    display: inline-block !important;
+}
+
+.sap-wrap-beginners .title-square.green {
+    background: #10b981 !important;
+}
+
+.sap-wrap-beginners .beginners-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+}
+
+.sap-wrap-beginners .beginner-card {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-left: 4px solid #10b981 !important;
+    border-radius: 3px !important;
+    padding: 20px !important;
+    display: flex !important;
+    gap: 20px !important;
+    align-items: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.sap-wrap-beginners .beginner-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    border-left-color: #059669 !important;
+}
+
+.sap-wrap-beginners .step-number {
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    color: #10b981 !important;
+    min-width: 80px !important;
+    text-align: center !important;
+    opacity: 0.3 !important;
+}
+
+.sap-wrap-beginners .beginner-content {
+    flex: 1 !important;
+}
+
+.sap-wrap-beginners .beginner-content h3 {
+    font-size: 1.1rem !important;
+    margin: 8px 0 !important;
+}
+
+.sap-wrap-beginners .beginner-content a {
+    color: #111 !important;
+    text-decoration: none !important;
+}
+
+.sap-wrap-beginners .beginner-content a:hover {
+    color: #10b981 !important;
+}
+
+.sap-wrap-beginners .beginner-content p {
+    color: #6b7280 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    margin: 8px 0 !important;
+}
+
+.sap-wrap-beginners .category-tag {
+    display: inline-block !important;
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+    background: #e6f2ff !important;
+    color: #0077ff !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+    margin-bottom: 6px !important;
+}
+
+.sap-wrap-beginners .meta {
+    font-size: 0.78rem !important;
+    color: #6b7280 !important;
+    margin-top: 8px !important;
+}
+
+/* Dark theme for beginners */
+.sap-theme-dark.sap-wrap-beginners {
+    background: #0f172a !important;
+}
+
+.sap-theme-dark.sap-wrap-beginners .beginner-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+.sap-theme-dark.sap-wrap-beginners .beginner-content a {
+    color: #e2e8f0 !important;
+}
+
+.sap-theme-dark.sap-wrap-beginners .section-title {
+    color: #e2e8f0 !important;
+}
+
+@media (max-width: 640px) {
+    .sap-wrap-beginners .beginner-card {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+    
+    .sap-wrap-beginners .step-number {
+        min-width: auto !important;
+    }
+}
+
+/* ===== SECTION 6: LATEST POSTS GRID ===== */
+.sap-wrap-latest_posts .gaming-latest-container {
+    max-width: 1400px !important;
+    margin: 0 auto 40px auto !important;
+    padding: 0 !important;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
+    color: #222 !important;
+    background: transparent !important;
+}
+
+.sap-wrap-latest_posts .section-title {
+    font-size: 1.25rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 20px 0 !important;
+    font-weight: 700 !important;
+}
+
+.sap-wrap-latest_posts .title-square {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 3px !important;
+    display: inline-block !important;
+}
+
+.sap-wrap-latest_posts .title-square.blue {
+    background: #0077ff !important;
+}
+
+.sap-wrap-latest_posts .latest-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    margin-bottom: 30px !important;
+}
+
+.sap-wrap-latest_posts .latest-card {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.sap-wrap-latest_posts .latest-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.sap-wrap-latest_posts .card-image-wrap {
+    position: relative !important;
+    overflow: hidden !important;
+    height: 180px !important;
+}
+
+.sap-wrap-latest_posts .card-image-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s ease !important;
+}
+
+.sap-wrap-latest_posts .card-image-wrap:hover img {
+    transform: scale(1.08) !important;
+}
+
+.sap-wrap-latest_posts .card-badge {
+    position: absolute !important;
+    top: 10px !important;
+    left: 10px !important;
+    padding: 4px 10px !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border-radius: 3px !important;
+    color: #fff !important;
+}
+
+.sap-wrap-latest_posts .card-badge.new {
+    background: #0077ff !important;
+}
+
+.sap-wrap-latest_posts .card-badge.hot {
+    background: #ff3366 !important;
+}
+
+.sap-wrap-latest_posts .card-badge.update {
+    background: #00c896 !important;
+}
+
+.sap-wrap-latest_posts .card-body {
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+
+.sap-wrap-latest_posts .card-category {
+    display: inline-block !important;
+    margin-bottom: 8px !important;
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+    background: #e6f2ff !important;
+    color: #0077ff !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+    width: fit-content !important;
+}
+
+.sap-wrap-latest_posts .card-title {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+}
+
+.sap-wrap-latest_posts .card-title a {
+    color: #111 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.sap-wrap-latest_posts .card-title a:hover {
+    color: #0077ff !important;
+}
+
+.sap-wrap-latest_posts .card-excerpt {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+    color: #4b5563 !important;
+    margin-bottom: 12px !important;
+    flex: 1 !important;
+}
+
+.sap-wrap-latest_posts .card-meta {
+    font-size: 0.78rem !important;
+    color: #6b7280 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-top: auto !important;
+}
+
+.sap-wrap-latest_posts .card-meta .separator {
+    color: #d1d5db !important;
+}
+
+.sap-wrap-latest_posts .latest-pagination {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 30px !important;
+}
+
+.sap-wrap-latest_posts .latest-pagination button {
+    padding: 8px 14px !important;
+    border: 1px solid #e5e7eb !important;
+    background: #fff !important;
+    color: #374151 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.sap-wrap-latest_posts .latest-pagination button:hover {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+}
+
+.sap-wrap-latest_posts .latest-pagination button.active {
+    background: #0077ff !important;
+    color: #fff !important;
+    border-color: #0077ff !important;
+}
+
+.sap-wrap-latest_posts .latest-pagination button:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+/* Dark theme for latest posts */
+.sap-theme-dark.sap-wrap-latest_posts .latest-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+.sap-theme-dark.sap-wrap-latest_posts .card-title a {
+    color: #e2e8f0 !important;
+}
+
+.sap-theme-dark.sap-wrap-latest_posts .latest-pagination button {
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+
+@media (max-width: 992px) {
+    .sap-wrap-latest_posts .latest-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .sap-wrap-latest_posts {
+        padding: 0 16px !important;
+    }
+    
+    .sap-wrap-latest_posts .latest-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .sap-wrap-latest_posts .card-image-wrap {
+        height: 200px !important;
+    }
+}
+
+/* ===== GENERIC STYLES FOR OTHER SECTIONS ===== */
+.sap-section .sap-section__title {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 20px 0 !important;
+}
+
+.sap-section .sap-title-square {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 3px !important;
+    display: inline-block !important;
+}
+
+.sap-section .sap-category-tag {
+    display: inline-block !important;
+    padding: 4px 8px !important;
+    font-size: 0.7rem !important;
+    background: #e6f2ff !important;
+    color: #0077ff !important;
+    font-weight: 600 !important;
+    border-radius: 3px !important;
+    margin-bottom: 6px !important;
+}
+
+.sap-section .sap-meta {
+    font-size: 0.78rem !important;
+    color: #6b7280 !important;
+}
+
+.sap-section .sap-badge {
+    display: inline-block !important;
+    padding: 4px 10px !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border-radius: 3px !important;
+    color: #fff !important;
+}
+
+.sap-section .sap-badge--new {
+    background: #0077ff !important;
+}
+
+.sap-section .sap-badge--hot {
+    background: #ff3366 !important;
+}
+
+.sap-section .sap-badge--update {
+    background: #00c896 !important;
+}
+
+/* Community, Games, News, Platforms, Pro Guides, Troubleshooting sections */
+.sap-section article {
+    background: #fff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 3px !important;
+    transition: all 0.3s ease !important;
+}
+
+.sap-section article:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.sap-section article img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 3px !important;
+}
+
+.sap-section article a {
+    color: #111 !important;
+    text-decoration: none !important;
+}
+
+.sap-section article a:hover {
+    color: #0077ff !important;
+}
+
+/* Dark theme generic */
+.sap-theme-dark .sap-section__title {
+    color: #e2e8f0 !important;
+}
+
+.sap-theme-dark.sap-section article {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+.sap-theme-dark.sap-section article a {
+    color: #e2e8f0 !important;
+}
+
+.sap-theme-dark.sap-section .sap-meta {
+    color: #cbd5e1 !important;
+}
+
+/* Force specificity */
+.sap-section a {
+    text-decoration: none !important;
+}
+
+.sap-section h1,
+.sap-section h2,
+.sap-section h3,
+.sap-section h4 {
+    line-height: 1.3 !important;
+}
+
+.sap-section p {
+    line-height: 1.5 !important;
+}
