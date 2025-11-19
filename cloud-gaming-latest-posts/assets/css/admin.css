@@ -1,0 +1,100 @@
+/* ===== Cloud Gaming Latest Posts Grid - Admin Styles ===== */
+
+.cglp-admin-page {
+  max-width: 1200px;
+}
+
+.cglp-admin-page h1 {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cglp-settings-form {
+  background: #fff;
+  border: 1px solid #ccd0d4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.cglp-settings-form h2 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cglp-settings-form table.form-table {
+  margin-top: 20px;
+}
+
+.cglp-settings-form .form-table th {
+  padding: 15px 10px 15px 0;
+  font-weight: 600;
+}
+
+.cglp-settings-form .form-table td {
+  padding: 15px 10px;
+}
+
+.cglp-settings-form input[type="text"],
+.cglp-settings-form input[type="number"] {
+  padding: 8px 12px;
+  border: 1px solid #8c8f94;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.cglp-settings-form input[type="text"]:focus,
+.cglp-settings-form input[type="number"]:focus {
+  border-color: #2271b1;
+  box-shadow: 0 0 0 1px #2271b1;
+  outline: 2px solid transparent;
+}
+
+.cglp-settings-form .description {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #646970;
+  font-style: italic;
+}
+
+.cglp-usage {
+  background: #fff;
+  border: 1px solid #ccd0d4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.cglp-usage h2 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 18px;
+}
+
+.cglp-usage p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.cglp-usage code {
+  background: #f0f0f1;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 13px;
+  color: #d63638;
+}
+
+.cglp-usage ul {
+  margin: 15px 0;
+  padding-left: 25px;
+}
+
+.cglp-usage ul li {
+  margin: 8px 0;
+  line-height: 1.6;
+}
