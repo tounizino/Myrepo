@@ -1,0 +1,25 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+
+# Node
+node_modules/
+
+# Composer
+vendor/
+composer.lock
+
+# WordPress
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/debug.log
+
+# Build Artifacts
+/dist/
+/build/
+coverage/
