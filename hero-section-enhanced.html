@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout - Hero Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+    <style>
+        :root[data-theme="dark"] {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --bg-tertiary: #252b4a;
+            --bg-card: rgba(30, 40, 60, 0.7);
+            --bg-card-hover: rgba(40, 50, 75, 0.9);
+            --text-primary: #e8f4fb;
+            --text-secondary: #aed6f1;
+            --text-muted: #7f8c8d;
+            --accent-primary: #5dade2;
+            --accent-secondary: #85c1e9;
+            --accent-glow: rgba(93, 173, 226, 0.3);
+            --border-color: #34495e;
+            --border-focus: #5dade2;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+            --gradient-overlay: linear-gradient(135deg, rgba(93, 173, 226, 0.1) 0%, rgba(26, 26, 46, 0.1) 100%);
+        }
+
+        :root[data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-card-hover: rgba(248, 250, 252, 1);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --accent-glow: rgba(59, 130, 246, 0.2);
+            --border-color: #e2e8f0;
+            --border-focus: #3b82f6;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --gradient-overlay: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 197, 253, 0.05) 100%);
+        }
+
+        :root[data-theme="skyblue"] {
+            --bg-primary: #e0f2fe;
+            --bg-secondary: #f0f9ff;
+            --bg-tertiary: #bae6fd;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-card-hover: rgba(240, 249, 255, 0.95);
+            --text-primary: #0c4a6e;
+            --text-secondary: #075985;
+            --text-muted: #0369a1;
+            --accent-primary: #0284c7;
+            --accent-secondary: #0ea5e9;
+            --accent-glow: rgba(2, 132, 199, 0.25);
+            --border-color: #7dd3fc;
+            --border-focus: #0284c7;
+            --shadow-sm: 0 2px 10px rgba(2, 132, 199, 0.1);
+            --shadow-md: 0 4px 20px rgba(2, 132, 199, 0.15);
+            --shadow-lg: 0 8px 30px rgba(2, 132, 199, 0.2);
+            --gradient-overlay: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(14, 165, 233, 0.08) 100%);
+        }
+
+        * {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+            background: var(--bg-primary) !important;
+            min-height: 100vh !important;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            position: relative !important;
+            overflow-x: hidden !important;
+        }
+
+        body::before {
+            content: '' !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: var(--gradient-overlay) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+        }
+
+        .hero-section {
+            max-width: 900px !important;
+            margin: 0 auto !important;
+            padding: 4rem 2rem !important;
+            text-align: center !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        .theme-switcher {
+            position: fixed !important;
+            top: 2rem !important;
+            right: 2rem !important;
+            display: flex !important;
+            gap: 0.5rem !important;
+            background: var(--bg-card) !important;
+            padding: 0.5rem !important;
+            border-radius: 50px !important;
+            box-shadow: var(--shadow-md) !important;
+            border: 2px solid var(--border-color) !important;
+            backdrop-filter: blur(20px) !important;
+            z-index: 1000 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .theme-switcher:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: var(--shadow-lg) !important;
+        }
+
+        .theme-btn {
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            border: 2px solid transparent !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 1rem !important;
+            position: relative !important;
+        }
+
+        .theme-btn.active {
+            border-color: var(--accent-primary) !important;
+            transform: scale(1.1) !important;
+            box-shadow: 0 0 0 3px var(--accent-glow) !important;
+        }
+
+        .theme-btn:hover:not(.active) {
+            transform: scale(1.05) !important;
+            opacity: 0.8 !important;
+        }
+
+        .theme-btn.dark {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%) !important;
+            color: #5dade2 !important;
+        }
+
+        .theme-btn.light {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+            color: #3b82f6 !important;
+            box-shadow: inset 0 0 0 1px #e2e8f0 !important;
+        }
+
+        .theme-btn.skyblue {
+            background: linear-gradient(135deg, #bae6fd 0%, #e0f2fe 100%) !important;
+            color: #0284c7 !important;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 var(--accent-glow), var(--shadow-sm);
+            }
+            50% {
+                box-shadow: 0 0 0 20px rgba(93, 173, 226, 0), var(--shadow-md);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .hero-logo {
+            width: 100px !important;
+            height: 100px !important;
+            background: var(--bg-card) !important;
+            border: 3px solid var(--accent-primary) !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 2.8rem !important;
+            margin-bottom: 2.5rem !important;
+            animation: float 3s ease-in-out infinite, pulse-glow 2.5s ease-in-out infinite !important;
+            position: relative !important;
+            backdrop-filter: blur(20px) !important;
+            box-shadow: var(--shadow-lg) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .hero-logo:hover {
+            animation-play-state: paused !important;
+            transform: scale(1.05) !important;
+        }
+
+        .hero-logo i.fa-cloud {
+            color: var(--accent-primary) !important;
+            filter: drop-shadow(0 2px 4px var(--accent-glow)) !important;
+        }
+
+        .hero-title {
+            font-size: 3.5rem !important;
+            font-weight: 800 !important;
+            color: var(--text-primary) !important;
+            margin-bottom: 1.2rem !important;
+            letter-spacing: -0.03em !important;
+            line-height: 1.1 !important;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            position: relative !important;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem !important;
+            color: var(--text-secondary) !important;
+            max-width: 620px !important;
+            margin: 0 auto 3.5rem !important;
+            line-height: 1.7 !important;
+            font-weight: 400 !important;
+        }
+
+        .search-wrapper {
+            max-width: 700px !important;
+            margin: 0 auto 4rem !important;
+            position: relative !important;
+        }
+
+        .search-container {
+            display: flex !important;
+            gap: 1rem !important;
+            align-items: stretch !important;
+            flex-wrap: wrap !important;
+        }
+
+        .search-input-wrapper {
+            flex: 1 !important;
+            min-width: 280px !important;
+            position: relative !important;
+        }
+
+        .search-form {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .search-input {
+            width: 100% !important;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem !important;
+            background: var(--bg-card) !important;
+            border: 2px solid var(--border-color) !important;
+            border-radius: 16px !important;
+            color: var(--text-primary) !important;
+            font-size: 1rem !important;
+            outline: none !important;
+            font-family: inherit !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: var(--shadow-sm) !important;
+            backdrop-filter: blur(20px) !important;
+            font-weight: 500 !important;
+        }
+
+        .search-input:focus {
+            border-color: var(--border-focus) !important;
+            box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-md) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted) !important;
+            font-weight: 400 !important;
+        }
+
+        .search-icon {
+            position: absolute !important;
+            left: 1.2rem !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: var(--text-muted) !important;
+            font-size: 1.1rem !important;
+            pointer-events: none !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .search-input:focus ~ .search-icon {
+            color: var(--accent-primary) !important;
+            transform: translateY(-50%) scale(1.1) !important;
+        }
+
+        .search-button {
+            padding: 1.1rem 2.5rem !important;
+            background: var(--accent-primary) !important;
+            color: var(--bg-primary) !important;
+            border: none !important;
+            border-radius: 16px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.6rem !important;
+            white-space: nowrap !important;
+            box-shadow: var(--shadow-md) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            min-width: 140px !important;
+        }
+
+        .search-button::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent) !important;
+            transition: left 0.5s ease !important;
+        }
+
+        .search-button:hover::before {
+            left: 100% !important;
+        }
+
+        .search-button:hover {
+            background: var(--accent-secondary) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 6px 25px var(--accent-glow), var(--shadow-lg) !important;
+        }
+
+        .search-button:active {
+            transform: translateY(-1px) !important;
+        }
+
+        .search-button i {
+            font-size: 1rem !important;
+        }
+
+        .search-results {
+            position: absolute !important;
+            top: calc(100% + 1rem) !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: var(--bg-card) !important;
+            border: 2px solid var(--border-color) !important;
+            border-radius: 20px !important;
+            max-height: 450px !important;
+            overflow-y: auto !important;
+            display: none !important;
+            z-index: 1001 !important;
+            box-shadow: var(--shadow-lg) !important;
+            backdrop-filter: blur(30px) !important;
+            animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-results.active {
+            display: block !important;
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px !important;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: transparent !important;
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--border-color) !important;
+            border-radius: 10px !important;
+        }
+
+        .search-results::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary) !important;
+        }
+
+        .search-result-item {
+            padding: 1.2rem 1.5rem !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            cursor: pointer !important;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            text-decoration: none !important;
+            display: block !important;
+            text-align: left !important;
+            position: relative !important;
+        }
+
+        .search-result-item::before {
+            content: '' !important;
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            height: 100% !important;
+            width: 4px !important;
+            background: var(--accent-primary) !important;
+            transform: scaleY(0) !important;
+            transition: transform 0.2s ease !important;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none !important;
+        }
+
+        .search-result-item:hover {
+            background: var(--bg-card-hover) !important;
+            padding-left: 1.8rem !important;
+        }
+
+        .search-result-item:hover::before {
+            transform: scaleY(1) !important;
+        }
+
+        .result-title {
+            color: var(--text-primary) !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            margin-bottom: 0.4rem !important;
+            line-height: 1.4 !important;
+        }
+
+        .result-excerpt {
+            color: var(--text-secondary) !important;
+            font-size: 0.9rem !important;
+            line-height: 1.6 !important;
+        }
+
+        .no-results,
+        .loading {
+            padding: 3rem 2rem !important;
+            text-align: center !important;
+            color: var(--text-secondary) !important;
+            font-size: 1rem !important;
+        }
+
+        .loading {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 1rem !important;
+        }
+
+        .loading::before {
+            content: '' !important;
+            width: 40px !important;
+            height: 40px !important;
+            border: 4px solid var(--border-color) !important;
+            border-top-color: var(--accent-primary) !important;
+            border-radius: 50% !important;
+            animation: spin 0.8s linear infinite !important;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .features-container {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 3rem !important;
+            flex-wrap: wrap !important;
+            margin-top: 1rem !important;
+        }
+
+        .feature-item {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.6rem !important;
+            text-decoration: none !important;
+            color: inherit !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            padding: 1rem 1.5rem !important;
+            border-radius: 16px !important;
+            position: relative !important;
+        }
+
+        .feature-item::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: var(--bg-card) !important;
+            border-radius: 16px !important;
+            opacity: 0 !important;
+            transition: opacity 0.3s ease !important;
+            z-index: -1 !important;
+        }
+
+        .feature-item:hover::before {
+            opacity: 1 !important;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: translateY(-5px) scale(1.1) !important;
+            color: var(--accent-primary) !important;
+        }
+
+        .feature-icon {
+            font-size: 1.6rem !important;
+            color: var(--text-secondary) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) !important;
+        }
+
+        .feature-title {
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            color: var(--text-secondary) !important;
+            text-align: center !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .feature-item:hover .feature-title {
+            color: var(--text-primary) !important;
+        }
+
+        @media (max-width: 768px) {
+            .theme-switcher {
+                top: 1rem !important;
+                right: 1rem !important;
+                padding: 0.4rem !important;
+                gap: 0.4rem !important;
+            }
+
+            .theme-btn {
+                width: 34px !important;
+                height: 34px !important;
+                font-size: 0.9rem !important;
+            }
+
+            .hero-section {
+                padding: 3rem 1.5rem !important;
+            }
+
+            .hero-logo {
+                width: 85px !important;
+                height: 85px !important;
+                font-size: 2.3rem !important;
+                margin-bottom: 2rem !important;
+            }
+
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem !important;
+                margin-bottom: 2.5rem !important;
+            }
+
+            .search-wrapper {
+                margin-bottom: 3rem !important;
+            }
+
+            .search-container {
+                flex-direction: column !important;
+                gap: 0.8rem !important;
+            }
+
+            .search-input-wrapper {
+                min-width: 100% !important;
+            }
+
+            .search-button {
+                width: 100% !important;
+                padding: 1.2rem !important;
+            }
+
+            .features-container {
+                gap: 2rem !important;
+            }
+
+            .feature-item {
+                padding: 0.8rem 1.2rem !important;
+            }
+
+            .feature-icon {
+                font-size: 1.4rem !important;
+            }
+
+            .feature-title {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .theme-switcher {
+                padding: 0.3rem !important;
+                gap: 0.3rem !important;
+            }
+
+            .theme-btn {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 0.8rem !important;
+            }
+
+            .hero-section {
+                padding: 2.5rem 1rem !important;
+            }
+
+            .hero-logo {
+                width: 75px !important;
+                height: 75px !important;
+                font-size: 2rem !important;
+            }
+
+            .hero-title {
+                font-size: 2rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem !important;
+            }
+
+            .search-input {
+                font-size: 0.95rem !important;
+                padding: 1rem 1.2rem 1rem 3rem !important;
+            }
+
+            .search-button {
+                font-size: 0.95rem !important;
+                padding: 1.1rem !important;
+            }
+
+            .features-container {
+                gap: 1.5rem !important;
+            }
+
+            .feature-item {
+                padding: 0.6rem 1rem !important;
+            }
+
+            .feature-icon {
+                font-size: 1.3rem !important;
+            }
+
+            .feature-title {
+                font-size: 0.75rem !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switcher">
+        <button class="theme-btn dark active" data-theme="dark" aria-label="Dark theme" title="Dark Theme">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button class="theme-btn light" data-theme="light" aria-label="Light theme" title="Light Theme">
+            <i class="fas fa-sun"></i>
+        </button>
+        <button class="theme-btn skyblue" data-theme="skyblue" aria-label="Sky blue theme" title="Sky Blue Theme">
+            <i class="fas fa-cloud-sun"></i>
+        </button>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-logo">
+            <i class="fas fa-cloud"></i>
+        </div>
+
+        <h1 class="hero-title">Cloud Loadout</h1>
+        
+        <p class="hero-subtitle">
+            Your ultimate hub for gaming optimization. Discover pro configs, performance tweaks, 
+            and expert guides to elevate your gameplay to the next level.
+        </p>
+
+        <div class="search-wrapper">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <form class="search-form" id="searchForm">
+                        <input
+                            type="text"
+                            class="search-input"
+                            placeholder="Search guides, configs, setups..."
+                            id="searchInput"
+                            autocomplete="off"
+                            aria-label="Search"
+                        >
+                        <i class="fas fa-magnifying-glass search-icon"></i>
+                    </form>
+                </div>
+                <button type="submit" class="search-button" id="searchButton">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Search</span>
+                </button>
+            </div>
+            <div class="search-results" id="searchResults" role="list"></div>
+        </div>
+
+        <div class="features-container">
+            <a href="/performance" class="feature-item">
+                <i class="fas fa-gauge-high feature-icon"></i>
+                <div class="feature-title">Performance</div>
+            </a>
+
+            <a href="/getting-started" class="feature-item">
+                <i class="fas fa-rocket feature-icon"></i>
+                <div class="feature-title">Guides</div>
+            </a>
+
+            <a href="/pro-config" class="feature-item">
+                <i class="fas fa-sliders feature-icon"></i>
+                <div class="feature-title">Configs</div>
+            </a>
+
+            <a href="/troubleshooting" class="feature-item">
+                <i class="fas fa-wrench feature-icon"></i>
+                <div class="feature-title">Troubleshooting</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // Theme Switcher
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const root = document.documentElement;
+            
+            // Load saved theme or default to dark
+            const savedTheme = localStorage.getItem('cloudLoadoutTheme') || 'dark';
+            setTheme(savedTheme);
+
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    setTheme(theme);
+                    localStorage.setItem('cloudLoadoutTheme', theme);
+                });
+            });
+
+            function setTheme(theme) {
+                root.setAttribute('data-theme', theme);
+                themeButtons.forEach(btn => {
+                    if (btn.getAttribute('data-theme') === theme) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            // Search Functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const searchForm = document.getElementById('searchForm');
+            const searchButton = document.getElementById('searchButton');
+            let searchTimeout;
+
+            async function performSearch(query) {
+                if (query.trim().length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+
+                searchResults.innerHTML = '<div class="loading">Searching...</div>';
+                searchResults.classList.add('active');
+
+                try {
+                    const searchParams = new URLSearchParams({
+                        search: query,
+                        per_page: 10,
+                        _embed: 'true',
+                        orderby: 'relevance'
+                    });
+
+                    const [postsResponse, pagesResponse] = await Promise.all([
+                        fetch('/wp-json/wp/v2/posts?' + searchParams),
+                        fetch('/wp-json/wp/v2/pages?' + searchParams)
+                    ]);
+
+                    if (!postsResponse.ok && !pagesResponse.ok) {
+                        throw new Error('Search failed');
+                    }
+
+                    const posts = postsResponse.ok ? await postsResponse.json() : [];
+                    const pages = pagesResponse.ok ? await pagesResponse.json() : [];
+                    const allResults = [...posts, ...pages];
+
+                    const queryLower = query.toLowerCase();
+                    const scoredResults = allResults.map(item => {
+                        const title = item.title.rendered.toLowerCase();
+                        const content = (item.content?.rendered || '').replace(/<[^>]*>/g, '').toLowerCase();
+                        const excerpt = (item.excerpt?.rendered || '').replace(/<[^>]*>/g, '').toLowerCase();
+
+                        let score = 0;
+                        if (title.includes(queryLower)) score += 10;
+                        if (title.startsWith(queryLower)) score += 5;
+                        if (excerpt.includes(queryLower)) score += 3;
+                        if (content.includes(queryLower)) score += 1;
+
+                        return { item, score };
+                    }).filter(r => r.score > 0)
+                      .sort((a, b) => b.score - a.score)
+                      .slice(0, 8);
+
+                    if (scoredResults.length === 0) {
+                        searchResults.innerHTML = '<div class="no-results">No results found. Try different keywords.</div>';
+                        return;
+                    }
+
+                    const results = scoredResults.map(({ item }) => {
+                        const excerpt = (item.excerpt?.rendered || item.content?.rendered || '')
+                            .replace(/<[^>]*>/g, '')
+                            .trim()
+                            .substring(0, 120) + '...';
+                        return {
+                            title: item.title.rendered,
+                            excerpt: excerpt || 'No description available.',
+                            url: item.link
+                        };
+                    });
+
+                    displayResults(results);
+
+                } catch (error) {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<div class="no-results">Search unavailable. Please try again later.</div>';
+                }
+            }
+
+            function displayResults(results) {
+                searchResults.innerHTML = results.map(post =>
+                    '<a href="' + post.url + '" class="search-result-item" role="listitem">' +
+                        '<div class="result-title">' + post.title + '</div>' +
+                        '<div class="result-excerpt">' + post.excerpt + '</div>' +
+                    '</a>'
+                ).join('');
+                searchResults.classList.add('active');
+            }
+
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    performSearch(e.target.value);
+                }, 300);
+            });
+
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.trim().length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = '/?s=' + encodeURIComponent(query);
+                }
+            });
+
+            searchButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = '/?s=' + encodeURIComponent(query);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-wrapper')) {
+                    searchResults.classList.remove('active');
+                }
+            });
+
+            // Keyboard navigation for search results
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.classList.remove('active');
+                    searchInput.blur();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
