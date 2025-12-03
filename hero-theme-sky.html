@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout - Sky Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+    <style>
+        * {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Oxygen, Ubuntu, Cantarell, sans-serif !important;
+            background: radial-gradient(circle at 20% 20%, rgba(107, 203, 255, 0.4), transparent 45%),
+                        radial-gradient(circle at 80% 30%, rgba(178, 235, 242, 0.4), transparent 40%),
+                        linear-gradient(160deg, #0b132b 0%, #1c2541 40%, #3a506b 70%, #5bc0be 100%) !important;
+            min-height: 100vh !important;
+            position: relative !important;
+            overflow-x: hidden !important;
+            color: #e9f3ff !important;
+        }
+
+        body::before {
+            content: '' !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: linear-gradient(120deg, rgba(91, 192, 190, 0.18), transparent 55%),
+                        linear-gradient(240deg, rgba(58, 80, 107, 0.22), transparent 60%) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+            backdrop-filter: blur(12px) !important;
+        }
+
+        .hero-section {
+            max-width: 960px !important;
+            margin: 0 auto !important;
+            padding: 5rem 2rem !important;
+            text-align: center !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-12px) rotate(3deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        .hero-logo {
+            width: 105px !important;
+            height: 105px !important;
+            background: linear-gradient(135deg, rgba(91, 192, 190, 0.25), rgba(91, 192, 190, 0.05)) !important;
+            border: 2px solid rgba(233, 243, 255, 0.45) !important;
+            border-radius: 50% !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 2.9rem !important;
+            margin-bottom: 2.2rem !important;
+            animation: float 4.5s ease-in-out infinite !important;
+            position: relative !important;
+            backdrop-filter: blur(16px) !important;
+            box-shadow: 0 10px 40px rgba(11, 19, 43, 0.35) !important;
+        }
+
+        .hero-logo::before {
+            content: '' !important;
+            position: absolute !important;
+            inset: -3px !important;
+            border-radius: 50% !important;
+            background: linear-gradient(130deg, rgba(233, 243, 255, 0.25), rgba(91, 192, 190, 0.4)) !important;
+            filter: blur(12px) !important;
+            opacity: 0 !important;
+            transition: opacity 0.4s ease !important;
+            z-index: -1 !important;
+        }
+
+        .hero-logo:hover::before {
+            opacity: 1 !important;
+        }
+
+        .hero-logo:hover {
+            animation-play-state: paused !important;
+            transform: scale(1.07) !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .hero-logo i.fa-cloud {
+            color: #d9f7ff !important;
+            filter: drop-shadow(0 4px 12px rgba(233, 243, 255, 0.4)) !important;
+        }
+
+        .hero-title {
+            font-size: 3.6rem !important;
+            font-weight: 800 !important;
+            background: linear-gradient(135deg, #ffffff 0%, #d9f7ff 45%, #5bc0be 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            margin-bottom: 1.1rem !important;
+            letter-spacing: -0.03em !important;
+            line-height: 1.1 !important;
+        }
+
+        .hero-subtitle {
+            font-size: 1.18rem !important;
+            color: rgba(233, 243, 255, 0.78) !important;
+            max-width: 640px !important;
+            margin: 0 auto 3.6rem !important;
+            line-height: 1.75 !important;
+            font-weight: 400 !important;
+        }
+
+        .search-wrapper {
+            max-width: 700px !important;
+            margin: 0 auto 4.4rem !important;
+            position: relative !important;
+        }
+
+        .search-container {
+            display: flex !important;
+            align-items: stretch !important;
+            gap: 0.8rem !important;
+        }
+
+        .search-input-wrapper {
+            flex: 1 !important;
+            position: relative !important;
+        }
+
+        .search-input {
+            width: 100% !important;
+            padding: 1.15rem 1.5rem 1.15rem 3.6rem !important;
+            background: rgba(233, 243, 255, 0.08) !important;
+            border: 1.5px solid rgba(233, 243, 255, 0.25) !important;
+            border-radius: 18px !important;
+            color: #ffffff !important;
+            font-size: 1rem !important;
+            outline: none !important;
+            font-family: inherit !important;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            backdrop-filter: blur(18px) !important;
+            box-shadow: 0 12px 30px rgba(11, 19, 43, 0.25) !important;
+        }
+
+        .search-input:focus {
+            border-color: rgba(91, 192, 190, 0.85) !important;
+            background: rgba(233, 243, 255, 0.16) !important;
+            box-shadow: 0 0 0 5px rgba(91, 192, 190, 0.25),
+                       0 20px 60px rgba(91, 192, 190, 0.28) !important;
+        }
+
+        .search-input::placeholder {
+            color: rgba(233, 243, 255, 0.5) !important;
+        }
+
+        .search-icon {
+            position: absolute !important;
+            left: 1.3rem !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: rgba(233, 243, 255, 0.55) !important;
+            font-size: 1.1rem !important;
+            pointer-events: none !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .search-input:focus ~ .search-icon {
+            color: #d9f7ff !important;
+        }
+
+        .search-button {
+            padding: 1.15rem 2.4rem !important;
+            background: linear-gradient(135deg, #5bc0be 0%, #17a2b8 50%, #64d6d3 100%) !important;
+            color: #0b132b !important;
+            border: none !important;
+            border-radius: 18px !important;
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.65rem !important;
+            white-space: nowrap !important;
+            box-shadow: 0 15px 35px rgba(17, 162, 184, 0.45) !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .search-button::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -120% !important;
+            width: 120% !important;
+            height: 100% !important;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent) !important;
+            transition: left 0.55s ease !important;
+        }
+
+        .search-button:hover::before {
+            left: 120% !important;
+        }
+
+        .search-button:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 20px 45px rgba(17, 162, 184, 0.55) !important;
+        }
+
+        .search-button:active {
+            transform: translateY(0) !important;
+        }
+
+        .search-button i {
+            font-size: 1rem !important;
+        }
+
+        .search-results {
+            position: absolute !important;
+            top: calc(100% + 0.8rem) !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: rgba(13, 27, 51, 0.92) !important;
+            border: 1.5px solid rgba(233, 243, 255, 0.25) !important;
+            border-radius: 18px !important;
+            max-height: 460px !important;
+            overflow-y: auto !important;
+            display: none !important;
+            z-index: 1001 !important;
+            box-shadow: 0 25px 70px rgba(11, 19, 43, 0.55) !important;
+            backdrop-filter: blur(22px) !important;
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 8px !important;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: rgba(233, 243, 255, 0.05) !important;
+            border-radius: 18px !important;
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background: rgba(91, 192, 190, 0.4) !important;
+            border-radius: 18px !important;
+        }
+
+        .search-results::-webkit-scrollbar-thumb:hover {
+            background: rgba(91, 192, 190, 0.6) !important;
+        }
+
+        .search-results.active {
+            display: block !important;
+            animation: slideDown 0.35s ease !important;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-result-item {
+            padding: 1.25rem 1.6rem !important;
+            border-bottom: 1px solid rgba(233, 243, 255, 0.08) !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            text-decoration: none !important;
+            display: block !important;
+            text-align: left !important;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none !important;
+        }
+
+        .search-result-item:hover {
+            background: rgba(91, 192, 190, 0.12) !important;
+            padding-left: 2rem !important;
+        }
+
+        .result-title {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            margin-bottom: 0.4rem !important;
+        }
+
+        .result-excerpt {
+            color: rgba(233, 243, 255, 0.75) !important;
+            font-size: 0.885rem !important;
+            line-height: 1.55 !important;
+        }
+
+        .no-results,
+        .loading {
+            padding: 2.6rem !important;
+            text-align: center !important;
+            color: rgba(233, 243, 255, 0.7) !important;
+            font-size: 0.96rem !important;
+        }
+
+        .features-container {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 3.2rem !important;
+            flex-wrap: wrap !important;
+            margin-top: 1.2rem !important;
+        }
+
+        .feature-item {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 0.7rem !important;
+            text-decoration: none !important;
+            color: inherit !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            padding: 1.25rem 1.4rem !important;
+            border-radius: 18px !important;
+            min-width: 100px !important;
+            background: rgba(233, 243, 255, 0.05) !important;
+            border: 1px solid rgba(233, 243, 255, 0.08) !important;
+            box-shadow: 0 12px 35px rgba(11, 19, 43, 0.35) !important;
+        }
+
+        .feature-item:hover {
+            background: rgba(91, 192, 190, 0.15) !important;
+            transform: translateY(-5px) !important;
+            border-color: rgba(91, 192, 190, 0.45) !important;
+        }
+
+        .feature-item:hover .feature-icon {
+            color: #ffffff !important;
+            transform: translateY(-2px) scale(1.1) !important;
+        }
+
+        .feature-icon {
+            font-size: 1.55rem !important;
+            color: rgba(233, 243, 255, 0.75) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        .feature-title {
+            font-size: 0.82rem !important;
+            font-weight: 500 !important;
+            color: rgba(233, 243, 255, 0.78) !important;
+            text-align: center !important;
+            letter-spacing: 0.02em !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3.6rem 1.6rem !important;
+            }
+
+            .hero-logo {
+                width: 90px !important;
+                height: 90px !important;
+                font-size: 2.4rem !important;
+                margin-bottom: 1.9rem !important;
+            }
+
+            .hero-title {
+                font-size: 2.6rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 1.07rem !important;
+                margin-bottom: 3.2rem !important;
+            }
+
+            .search-wrapper {
+                margin-bottom: 3.8rem !important;
+            }
+
+            .search-container {
+                flex-direction: column !important;
+                gap: 0.8rem !important;
+            }
+
+            .search-input {
+                padding: 1.05rem 1.2rem 1.05rem 3.3rem !important;
+            }
+
+            .search-button {
+                width: 100% !important;
+                justify-content: center !important;
+                padding: 1.15rem !important;
+            }
+
+            .features-container {
+                gap: 1.7rem !important;
+            }
+
+            .feature-item {
+                padding: 1.1rem 1.2rem !important;
+                min-width: 90px !important;
+            }
+
+            .feature-icon {
+                font-size: 1.35rem !important;
+            }
+
+            .feature-title {
+                font-size: 0.76rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 2.6rem 1.2rem !important;
+            }
+
+            .hero-logo {
+                width: 80px !important;
+                height: 80px !important;
+                font-size: 2.1rem !important;
+            }
+
+            .hero-title {
+                font-size: 2.1rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 0.98rem !important;
+            }
+
+            .search-input {
+                font-size: 0.96rem !important;
+                padding: 0.98rem 1.05rem 0.98rem 3rem !important;
+            }
+
+            .search-icon {
+                font-size: 1.02rem !important;
+                left: 1.05rem !important;
+            }
+
+            .features-container {
+                gap: 1.3rem !important;
+            }
+
+            .feature-item {
+                padding: 0.9rem 1rem !important;
+                min-width: 80px !important;
+            }
+
+            .feature-icon {
+                font-size: 1.28rem !important;
+            }
+
+            .feature-title {
+                font-size: 0.72rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="hero-logo">
+            <i class="fas fa-cloud"></i>
+        </div>
+
+        <h1 class="hero-title">Cloud Loadout</h1>
+        
+        <p class="hero-subtitle">
+            Your ultimate hub for gaming optimization. Discover pro configs, performance tweaks, 
+            and expert guides to elevate your gameplay to the next level.
+        </p>
+
+        <div class="search-wrapper">
+            <form class="search-container" id="searchForm">
+                <div class="search-input-wrapper">
+                    <input
+                        type="text"
+                        class="search-input"
+                        placeholder="Search guides, configs, setups..."
+                        id="searchInput"
+                        autocomplete="off"
+                    >
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <button type="submit" class="search-button">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Search</span>
+                </button>
+            </form>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <div class="features-container">
+            <a href="/performance" class="feature-item">
+                <i class="fas fa-gauge-high feature-icon"></i>
+                <div class="feature-title">Performance</div>
+            </a>
+
+            <a href="/getting-started" class="feature-item">
+                <i class="fas fa-rocket feature-icon"></i>
+                <div class="feature-title">Guides</div>
+            </a>
+
+            <a href="/pro-config" class="feature-item">
+                <i class="fas fa-sliders feature-icon"></i>
+                <div class="feature-title">Configs</div>
+            </a>
+
+            <a href="/troubleshooting" class="feature-item">
+                <i class="fas fa-wrench feature-icon"></i>
+                <div class="feature-title">Troubleshooting</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const searchForm = document.getElementById('searchForm');
+            let searchTimeout;
+
+            async function performSearch(query) {
+                if (query.trim().length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+
+                searchResults.innerHTML = '<div class="loading">Searching...</div>';
+                searchResults.classList.add('active');
+
+                try {
+                    const searchParams = new URLSearchParams({
+                        search: query,
+                        per_page: 10,
+                        _embed: 'true',
+                        orderby: 'relevance'
+                    });
+
+                    const [postsResponse, pagesResponse] = await Promise.all([
+                        fetch('/wp-json/wp/v2/posts?' + searchParams),
+                        fetch('/wp-json/wp/v2/pages?' + searchParams)
+                    ]);
+
+                    if (!postsResponse.ok && !pagesResponse.ok) {
+                        throw new Error('Search failed');
+                    }
+
+                    const posts = postsResponse.ok ? await postsResponse.json() : [];
+                    const pages = pagesResponse.ok ? await pagesResponse.json() : [];
+                    const allResults = [...posts, ...pages];
+
+                    const queryLower = query.toLowerCase();
+                    const scoredResults = allResults.map(item => {
+                        const title = item.title.rendered.toLowerCase();
+                        const content = (item.content?.rendered || '').replace(/<[^>]*>/g, '').toLowerCase();
+                        const excerpt = (item.excerpt?.rendered || '').replace(/<[^>]*>/g, '').toLowerCase();
+
+                        let score = 0;
+                        if (title.includes(queryLower)) score += 10;
+                        if (title.startsWith(queryLower)) score += 5;
+                        if (excerpt.includes(queryLower)) score += 3;
+                        if (content.includes(queryLower)) score += 1;
+
+                        return { item, score };
+                    }).filter(r => r.score > 0)
+                      .sort((a, b) => b.score - a.score)
+                      .slice(0, 8);
+
+                    if (scoredResults.length === 0) {
+                        searchResults.innerHTML = '<div class="no-results">No results found. Try different keywords.</div>';
+                        return;
+                    }
+
+                    const results = scoredResults.map(({ item }) => {
+                        const excerpt = (item.excerpt?.rendered || item.content?.rendered || '')
+                            .replace(/<[^>]*>/g, '')
+                            .trim()
+                            .substring(0, 120) + '...';
+                        return {
+                            title: item.title.rendered,
+                            excerpt: excerpt || 'No description available.',
+                            url: item.link
+                        };
+                    });
+
+                    displayResults(results);
+
+                } catch (error) {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<div class="no-results">Search unavailable. Please try again later.</div>';
+                }
+            }
+
+            function displayResults(results) {
+                searchResults.innerHTML = results.map(post =>
+                    '<a href="' + post.url + '" class="search-result-item">' +
+                        '<div class="result-title">' + post.title + '</div>' +
+                        '<div class="result-excerpt">' + post.excerpt + '</div>' +
+                    '</a>'
+                ).join('');
+                searchResults.classList.add('active');
+            }
+
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    performSearch(e.target.value);
+                }, 300);
+            });
+
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.trim().length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = '/?s=' + encodeURIComponent(query);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-wrapper')) {
+                    searchResults.classList.remove('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
