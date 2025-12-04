@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout - Sky Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+    <style>
+        .hero-wrapper-sky {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(140deg, #f4faff 0%, #e1f1ff 45%, #cfe9ff 70%, #f3fbff 100%);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            color: #214365;
+        }
+
+        .hero-wrapper-sky *,
+        .hero-wrapper-sky *::before,
+        .hero-wrapper-sky *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .hero-wrapper-sky::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(173, 216, 255, 0.45), transparent 55%),
+                radial-gradient(circle at 80% 30%, rgba(196, 231, 255, 0.4), transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.6), transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-wrapper-sky .hero-section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes float-sky {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-14px) rotate(2deg);
+            }
+        }
+
+        @keyframes glow-sky {
+            0%, 100% {
+                box-shadow: 0 12px 35px rgba(61, 169, 255, 0.18),
+                           0 6px 25px rgba(61, 169, 255, 0.22),
+                           inset 0 0 18px rgba(255, 255, 255, 0.85);
+            }
+            50% {
+                box-shadow: 0 18px 45px rgba(61, 169, 255, 0.28),
+                           0 10px 30px rgba(61, 169, 255, 0.25),
+                           inset 0 0 25px rgba(255, 255, 255, 1);
+            }
+        }
+
+        .hero-wrapper-sky .hero-logo {
+            width: 104px;
+            height: 104px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(214, 236, 255, 0.8));
+            border: 2px solid rgba(61, 169, 255, 0.3);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.9rem;
+            margin-bottom: 2.2rem;
+            animation: float-sky 4.5s ease-in-out infinite, glow-sky 4s ease-in-out infinite;
+            position: relative;
+            backdrop-filter: blur(16px);
+        }
+
+        .hero-wrapper-sky .hero-logo::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(61, 169, 255, 0.45), rgba(163, 213, 255, 0.65));
+            filter: blur(14px);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: -1;
+        }
+
+        .hero-wrapper-sky .hero-logo:hover::before {
+            opacity: 1;
+        }
+
+        .hero-wrapper-sky .hero-logo:hover {
+            animation-play-state: paused;
+            transform: scale(1.07);
+            transition: transform 0.35s ease;
+        }
+
+        .hero-wrapper-sky .hero-logo i.fa-cloud {
+            color: #2f89ff;
+            filter: drop-shadow(0 6px 16px rgba(61, 169, 255, 0.35));
+        }
+
+        .hero-wrapper-sky .hero-title {
+            font-size: 3.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1f3c6e 0%, #2f89ff 45%, #63b2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.1rem;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+        }
+
+        .hero-wrapper-sky .hero-subtitle {
+            font-size: 1.18rem;
+            color: rgba(33, 67, 101, 0.8);
+            max-width: 640px;
+            margin: 0 auto 3.6rem;
+            line-height: 1.75;
+            font-weight: 400;
+        }
+
+        .hero-wrapper-sky .search-wrapper {
+            max-width: 700px;
+            margin: 0 auto 4.4rem;
+            position: relative;
+        }
+
+        .hero-wrapper-sky .search-container {
+            display: flex;
+            align-items: stretch;
+            gap: 0.8rem;
+        }
+
+        .hero-wrapper-sky .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-wrapper-sky .search-input {
+            width: 100%;
+            padding: 1.15rem 1.6rem 1.15rem 3.6rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(63, 150, 255, 0.25);
+            border-radius: 18px;
+            color: #1f3c6e;
+            font-size: 1rem;
+            outline: none;
+            font-family: inherit;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 12px 30px rgba(50, 120, 200, 0.12);
+        }
+
+        .hero-wrapper-sky .search-input:focus {
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(47, 137, 255, 0.65);
+            box-shadow: 0 0 0 5px rgba(81, 170, 255, 0.25), 0 20px 60px rgba(81, 170, 255, 0.25);
+        }
+
+        .hero-wrapper-sky .search-input::placeholder {
+            color: rgba(33, 67, 101, 0.55);
+        }
+
+        .hero-wrapper-sky .search-icon {
+            position: absolute;
+            left: 1.35rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(33, 67, 101, 0.55);
+            font-size: 1.1rem;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .hero-wrapper-sky .search-input:focus ~ .search-icon {
+            color: #2f89ff;
+        }
+
+        .hero-wrapper-sky .search-button {
+            padding: 1.15rem 2.4rem;
+            background: linear-gradient(135deg, #2f89ff 0%, #63b2ff 55%, #83c7ff 100%);
+            color: #0f2a4a;
+            border: none;
+            border-radius: 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            white-space: nowrap;
+            box-shadow: 0 16px 40px rgba(47, 137, 255, 0.32);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-wrapper-sky .search-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+            transition: left 0.55s ease;
+        }
+
+        .hero-wrapper-sky .search-button:hover::before {
+            left: 120%;
+        }
+
+        .hero-wrapper-sky .search-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 48px rgba(47, 137, 255, 0.4);
+        }
+
+        .hero-wrapper-sky .search-button:active {
+            transform: translateY(0);
+        }
+
+        .hero-wrapper-sky .search-button i {
+            font-size: 1rem;
+        }
+
+        .hero-wrapper-sky .search-results {
+            position: absolute;
+            top: calc(100% + 0.8rem);
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.97);
+            border: 1.5px solid rgba(63, 150, 255, 0.25);
+            border-radius: 18px;
+            max-height: 460px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 25px 70px rgba(47, 137, 255, 0.22);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-wrapper-sky .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .hero-wrapper-sky .search-results::-webkit-scrollbar-track {
+            background: rgba(233, 243, 255, 0.4);
+            border-radius: 18px;
+        }
+
+        .hero-wrapper-sky .search-results::-webkit-scrollbar-thumb {
+            background: rgba(63, 150, 255, 0.35);
+            border-radius: 18px;
+        }
+
+        .hero-wrapper-sky .search-results::-webkit-scrollbar-thumb:hover {
+            background: rgba(63, 150, 255, 0.55);
+        }
+
+        .hero-wrapper-sky .search-results.active {
+            display: block;
+            animation: slideDown-sky 0.35s ease;
+        }
+
+        @keyframes slideDown-sky {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-wrapper-sky .search-result-item {
+            padding: 1.25rem 1.6rem;
+            border-bottom: 1px solid rgba(63, 150, 255, 0.15);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .hero-wrapper-sky .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .hero-wrapper-sky .search-result-item:hover {
+            background: rgba(99, 178, 255, 0.15);
+            padding-left: 2rem;
+        }
+
+        .hero-wrapper-sky .result-title {
+            color: #1f3c6e;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-wrapper-sky .result-excerpt {
+            color: rgba(33, 67, 101, 0.75);
+            font-size: 0.885rem;
+            line-height: 1.55;
+        }
+
+        .hero-wrapper-sky .no-results,
+        .hero-wrapper-sky .loading {
+            padding: 2.6rem;
+            text-align: center;
+            color: rgba(33, 67, 101, 0.7);
+            font-size: 0.96rem;
+        }
+
+        .hero-wrapper-sky .features-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3.2rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+
+        .hero-wrapper-sky .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 1.25rem 1.4rem;
+            border-radius: 18px;
+            min-width: 100px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(63, 150, 255, 0.2);
+            box-shadow: 0 12px 35px rgba(47, 137, 255, 0.18);
+        }
+
+        .hero-wrapper-sky .feature-item:hover {
+            background: rgba(99, 178, 255, 0.22);
+            transform: translateY(-5px);
+            border-color: rgba(47, 137, 255, 0.45);
+        }
+
+        .hero-wrapper-sky .feature-item:hover .feature-icon {
+            color: #1f3c6e;
+            transform: translateY(-2px) scale(1.08);
+        }
+
+        .hero-wrapper-sky .feature-icon {
+            font-size: 1.55rem;
+            color: rgba(33, 67, 101, 0.75);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-wrapper-sky .feature-title {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: rgba(33, 67, 101, 0.78);
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .hero-wrapper-sky .hero-section {
+                padding: 3.6rem 1.6rem;
+            }
+
+            .hero-wrapper-sky .hero-logo {
+                width: 92px;
+                height: 92px;
+                font-size: 2.4rem;
+                margin-bottom: 1.9rem;
+            }
+
+            .hero-wrapper-sky .hero-title {
+                font-size: 2.6rem;
+            }
+
+            .hero-wrapper-sky .hero-subtitle {
+                font-size: 1.07rem;
+                margin-bottom: 3.2rem;
+            }
+
+            .hero-wrapper-sky .search-wrapper {
+                margin-bottom: 3.8rem;
+            }
+
+            .hero-wrapper-sky .search-container {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .hero-wrapper-sky .search-input {
+                padding: 1.05rem 1.25rem 1.05rem 3.3rem;
+            }
+
+            .hero-wrapper-sky .search-button {
+                width: 100%;
+                justify-content: center;
+                padding: 1.15rem;
+            }
+
+            .hero-wrapper-sky .features-container {
+                gap: 1.7rem;
+            }
+
+            .hero-wrapper-sky .feature-item {
+                padding: 1.1rem 1.2rem;
+                min-width: 92px;
+            }
+
+            .hero-wrapper-sky .feature-icon {
+                font-size: 1.35rem;
+            }
+
+            .hero-wrapper-sky .feature-title {
+                font-size: 0.76rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-wrapper-sky .hero-section {
+                padding: 2.6rem 1.2rem;
+            }
+
+            .hero-wrapper-sky .hero-logo {
+                width: 80px;
+                height: 80px;
+                font-size: 2.1rem;
+            }
+
+            .hero-wrapper-sky .hero-title {
+                font-size: 2.1rem;
+            }
+
+            .hero-wrapper-sky .hero-subtitle {
+                font-size: 0.98rem;
+            }
+
+            .hero-wrapper-sky .search-input {
+                font-size: 0.96rem;
+                padding: 0.98rem 1.05rem 0.98rem 3.05rem;
+            }
+
+            .hero-wrapper-sky .search-icon {
+                font-size: 1.02rem;
+                left: 1.1rem;
+            }
+
+            .hero-wrapper-sky .features-container {
+                gap: 1.35rem;
+            }
+
+            .hero-wrapper-sky .feature-item {
+                padding: 0.92rem 1rem;
+                min-width: 82px;
+            }
+
+            .hero-wrapper-sky .feature-icon {
+                font-size: 1.28rem;
+            }
+
+            .hero-wrapper-sky .feature-title {
+                font-size: 0.72rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-wrapper-sky">
+        <div class="hero-section">
+            <div class="hero-logo">
+                <i class="fas fa-cloud"></i>
+            </div>
+
+            <h1 class="hero-title">Cloud Loadout</h1>
+            
+            <p class="hero-subtitle">
+                Your ultimate hub for gaming optimization. Discover pro configs, performance tweaks, 
+                and expert guides to elevate your gameplay to the next level.
+            </p>
+
+            <div class="search-wrapper">
+                <form class="search-container" id="cls-search-form">
+                    <div class="search-input-wrapper">
+                        <input
+                            type="text"
+                            class="search-input"
+                            placeholder="Search guides, configs, setups..."
+                            id="cls-search-input"
+                            autocomplete="off"
+                        >
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Search</span>
+                    </button>
+                </form>
+                <div class="search-results" id="cls-search-results"></div>
+            </div>
+
+            <div class="features-container">
+                <a href="/performance" class="feature-item">
+                    <i class="fas fa-gauge-high feature-icon"></i>
+                    <div class="feature-title">Performance</div>
+                </a>
+
+                <a href="/getting-started" class="feature-item">
+                    <i class="fas fa-rocket feature-icon"></i>
+                    <div class="feature-title">Guides</div>
+                </a>
+
+                <a href="/pro-config" class="feature-item">
+                    <i class="fas fa-sliders feature-icon"></i>
+                    <div class="feature-title">Configs</div>
+                </a>
+
+                <a href="/troubleshooting" class="feature-item">
+                    <i class="fas fa-wrench feature-icon"></i>
+                    <div class="feature-title">Troubleshooting</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const root = document.querySelector('.hero-wrapper-sky');
+            if (!root) {
+                return;
+            }
+
+            const searchInput = root.querySelector('#cls-search-input');
+            const searchResults = root.querySelector('#cls-search-results');
+            const searchForm = root.querySelector('#cls-search-form');
+            if (!searchInput || !searchResults || !searchForm) {
+                return;
+            }
+            let searchTimeout;
+
+            async function performSearch(query) {
+                if (query.trim().length < 2) {
+                    searchResults.classList.remove('active');
+                    return;
+                }
+
+                searchResults.innerHTML = '<div class="loading">Searching...</div>';
+                searchResults.classList.add('active');
+
+                try {
+                    const searchParams = new URLSearchParams({
+                        search: query,
+                        per_page: 10,
+                        _embed: 'true',
+                        orderby: 'relevance'
+                    });
+
+                    const [postsResponse, pagesResponse] = await Promise.all([
+                        fetch('/wp-json/wp/v2/posts?' + searchParams),
+                        fetch('/wp-json/wp/v2/pages?' + searchParams)
+                    ]);
+
+                    if (!postsResponse.ok && !pagesResponse.ok) {
+                        throw new Error('Search failed');
+                    }
+
+                    const posts = postsResponse.ok ? await postsResponse.json() : [];
+                    const pages = pagesResponse.ok ? await pagesResponse.json() : [];
+                    const allResults = [...posts, ...pages];
+
+                    const queryLower = query.toLowerCase();
+                    const scoredResults = allResults.map(item => {
+                        const title = item.title.rendered.toLowerCase();
+                        const content = (item.content?.rendered || '').replace(/<[^>]*>/g, '').toLowerCase();
+                        const excerpt = (item.excerpt?.rendered || '').replace(/<[^>]*>/g, '').toLowerCase();
+
+                        let score = 0;
+                        if (title.includes(queryLower)) score += 10;
+                        if (title.startsWith(queryLower)) score += 5;
+                        if (excerpt.includes(queryLower)) score += 3;
+                        if (content.includes(queryLower)) score += 1;
+
+                        return { item, score };
+                    }).filter(r => r.score > 0)
+                      .sort((a, b) => b.score - a.score)
+                      .slice(0, 8);
+
+                    if (scoredResults.length === 0) {
+                        searchResults.innerHTML = '<div class="no-results">No results found. Try different keywords.</div>';
+                        return;
+                    }
+
+                    const results = scoredResults.map(({ item }) => {
+                        const excerpt = (item.excerpt?.rendered || item.content?.rendered || '')
+                            .replace(/<[^>]*>/g, '')
+                            .trim()
+                            .substring(0, 120) + '...';
+                        return {
+                            title: item.title.rendered,
+                            excerpt: excerpt || 'No description available.',
+                            url: item.link
+                        };
+                    });
+
+                    displayResults(results);
+
+                } catch (error) {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<div class="no-results">Search unavailable. Please try again later.</div>';
+                }
+            }
+
+            function displayResults(results) {
+                searchResults.innerHTML = results.map(post =>
+                    '<a href="' + post.url + '" class="search-result-item">' +
+                        '<div class="result-title">' + post.title + '</div>' +
+                        '<div class="result-excerpt">' + post.excerpt + '</div>' +
+                    '</a>'
+                ).join('');
+                searchResults.classList.add('active');
+            }
+
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    performSearch(e.target.value);
+                }, 300);
+            });
+
+            searchInput.addEventListener('focus', function(e) {
+                if (e.target.value.trim().length >= 2) {
+                    performSearch(e.target.value);
+                }
+            });
+
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = '/?s=' + encodeURIComponent(query);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!root.contains(e.target)) {
+                    searchResults.classList.remove('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
