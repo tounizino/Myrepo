@@ -25,14 +25,14 @@ Three modern, responsive hero section designs for WordPress with advanced search
   - Accessible color contrasts
 
 ### 3. **Sky Theme** (`hero-theme-sky.html`)
-- **Design**: Vibrant gradient with oceanic colors
-- **Background**: Blue-teal gradient (#0b132b to #5bc0be)
-- **Best For**: Creative portfolios, gaming communities, dynamic brands
+- **Design**: Light sky blue palette with airy gradients
+- **Background**: Light sky gradient (#f4faff to #cfe9ff)
+- **Best For**: Fresh, clean sites, daytime aesthetics, calm professional look
 - **Key Features**:
-  - Multi-layered gradient backgrounds
+  - Multi-layered light gradients
   - Enhanced glassmorphism
-  - Vibrant, eye-catching colors
-  - Premium feel with shimmer effects
+  - Light, peaceful sky blue colors
+  - Premium feel with soft glow effects
 
 ## ✨ Key Features (All Themes)
 
@@ -83,7 +83,7 @@ Update the feature links (around line 521-540):
 Each theme has color variables in the CSS. Search for these and replace:
 - **Black Theme**: `#5dade2` (blue accent)
 - **Light Theme**: `#5dade2` (blue accent), `#2c3e50` (dark text)
-- **Sky Theme**: `#5bc0be` (teal accent), `#0b132b` (dark blue)
+- **Sky Theme**: `#2f89ff` (sky blue accent), `#1f3c6e` (deep sky text)
 
 #### Adjust Search Settings
 In the JavaScript section (around line 563):
@@ -166,8 +166,9 @@ These themes are provided as-is for use in WordPress projects. Feel free to modi
 - Check browser console for errors
 
 ### Styling Conflicts
-- All styles use `!important` to override theme conflicts
-- If needed, increase specificity or adjust z-index values
+- All styles are scoped to unique wrapper classes (`.hero-wrapper-black`, `.hero-wrapper-light`, `.hero-wrapper-sky`)
+- No `!important` used - clean CSS that won't conflict with other page elements
+- Each theme has unique IDs for JavaScript elements to prevent conflicts
 
 ### Mobile Issues
 - Ensure viewport meta tag is present in your theme

@@ -8,7 +8,7 @@ Pick the theme that best fits your brand:
 
 - **`hero-theme-black.html`** - Dark, premium, gaming-focused
 - **`hero-theme-light.html`** - Clean, professional, high readability  
-- **`hero-theme-sky.html`** - Vibrant, creative, eye-catching
+- **`hero-theme-sky.html`** - Light, airy, sky-blue experience
 
 ### Step 2: Copy & Paste
 

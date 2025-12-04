@@ -83,12 +83,12 @@ COLOR PALETTE:
 
 ```
 ┌─────────────────────────────────────────────┐
-│  [Vibrant gradient: navy → teal → aqua]    │
+│  [Light sky gradient: white → sky blue]    │
 │              🌥️  [Animated Logo]            │
-│              [Enhanced glow]                 │
+│              [Soft blue glow]                │
 │                                             │
 │           Cloud Loadout                     │
-│    (White to Cyan Gradient Text)            │
+│    (Navy to Sky Blue Gradient Text)         │
 │                                             │
 │   Your ultimate hub for gaming optimization │
 │                                             │
@@ -104,19 +104,19 @@ COLOR PALETTE:
 └─────────────────────────────────────────────┘
 
 COLOR PALETTE:
-- Background: #0b132b → #1c2541 → #3a506b → #5bc0be
-- Accent: #5bc0be (Teal/Cyan)
-- Text: #e9f3ff, rgba(233,243,255,0.78)
-- Input BG: rgba(233,243,255,0.08)
-- Borders: rgba(233,243,255,0.25)
-- Feature cards have glassmorphic boxes
+- Background: #f4faff → #e1f1ff → #cfe9ff (Light Sky Gradient)
+- Accent: #2f89ff (Sky Blue)
+- Text: #1f3c6e, rgba(33,67,101,0.8)
+- Input BG: rgba(255,255,255,0.9)
+- Borders: rgba(63,150,255,0.25)
+- Feature cards have light glassmorphic boxes
 ```
 
 **Best For**:
-- Creative portfolios
-- Gaming communities
-- Modern SaaS apps
-- Eye-catching landing pages
+- Fresh, clean websites
+- Daytime aesthetics
+- Calm professional look
+- Light & airy designs
 
 ---
 
