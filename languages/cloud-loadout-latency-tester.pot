@@ -1,0 +1,540 @@
+# Cloud Loadout Latency Tester
+msgid ""
+msgstr ""
+"Project-Id-Version: Cloud Loadout Latency Tester 1.0.0\n"
+"Report-Msgid-Bugs-To: support@cloudloadout.com\n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Admin Menu
+msgid "Cloud Loadout Latency Tester"
+msgstr ""
+
+msgid "Latency Tester"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Results"
+msgstr ""
+
+# General Labels
+msgid "Testing..."
+msgstr ""
+
+msgid "Test Completed"
+msgstr ""
+
+msgid "Test Failed"
+msgstr ""
+
+msgid "Excellent"
+msgstr ""
+
+msgid "Good"
+msgstr ""
+
+msgid "Fair"
+msgstr ""
+
+msgid "Poor"
+msgstr ""
+
+# Dashboard
+msgid "Monitor and manage latency tests for cloud gaming platforms"
+msgstr ""
+
+msgid "Quick Statistics"
+msgstr ""
+
+msgid "Total Tests"
+msgstr ""
+
+msgid "Average Latency"
+msgstr ""
+
+msgid "Tests Today"
+msgstr ""
+
+msgid "Platform Status"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "Recent Test Results"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Platform"
+msgstr ""
+
+msgid "Latency"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "No test results yet. Run some tests to see data here."
+msgstr ""
+
+msgid "Quick Actions"
+msgstr ""
+
+msgid "Configure Settings"
+msgstr ""
+
+msgid "View All Results"
+msgstr ""
+
+msgid "Run Sample Test"
+msgstr ""
+
+msgid "System Information"
+msgstr ""
+
+msgid "Plugin Version:"
+msgstr ""
+
+msgid "WordPress Version:"
+msgstr ""
+
+msgid "PHP Version:"
+msgstr ""
+
+msgid "Server IP:"
+msgstr ""
+
+# Settings Page
+msgid "Configure your Cloud Loadout Latency Tester plugin"
+msgstr ""
+
+msgid "General Settings"
+msgstr ""
+
+msgid "Test Timeout"
+msgstr ""
+
+msgid "Timeout for each latency test in milliseconds (1000-30000)"
+msgstr ""
+
+msgid "Test Count"
+msgstr ""
+
+msgid "Number of latency tests to perform (1-20)"
+msgstr ""
+
+msgid "Admin Theme"
+msgstr ""
+
+msgid "Light Theme"
+msgstr ""
+
+msgid "Dark Theme"
+msgstr ""
+
+msgid "Choose your preferred admin interface theme"
+msgstr ""
+
+msgid "Feature Options"
+msgstr ""
+
+msgid "Detailed Logs"
+msgstr ""
+
+msgid "Enable detailed test logs"
+msgstr ""
+
+msgid "Results Chart"
+msgstr ""
+
+msgid "Show results in chart format"
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Enable test analytics and reporting"
+msgstr ""
+
+msgid "Save Settings"
+msgstr ""
+
+msgid "Cloud Gaming Platforms"
+msgstr ""
+
+msgid "Configure which cloud gaming platforms to test and their server endpoints"
+msgstr ""
+
+msgid "Server Endpoints (one per line):"
+msgstr ""
+
+msgid "Test server URLs for this platform. Leave blank to use default servers."
+msgstr ""
+
+msgid "Popular Cloud Gaming Platforms"
+msgstr ""
+
+msgid "Usage Information"
+msgstr ""
+
+msgid "Shortcode Usage"
+msgstr ""
+
+msgid "Add the latency tester to any page or post"
+msgstr ""
+
+msgid "Latency Guidelines"
+msgstr ""
+
+msgid "Excellent for cloud gaming"
+msgstr ""
+
+msgid "Good performance"
+msgstr ""
+
+msgid "Fair, may notice some delay"
+msgstr ""
+
+msgid "Poor, gaming may be difficult"
+msgstr ""
+
+msgid "Troubleshooting"
+msgstr ""
+
+msgid "High Latency?"
+msgstr ""
+
+msgid "Check your internet connection and try wired ethernet instead of WiFi."
+msgstr ""
+
+msgid "Tests Failing?"
+msgstr ""
+
+msgid "Verify server endpoints are accessible and firewall settings allow HTTP requests."
+msgstr ""
+
+msgid "Inconsistent Results?"
+msgstr ""
+
+msgid "Run multiple tests and check for background applications using bandwidth."
+msgstr ""
+
+msgid "Settings saved successfully!"
+msgstr ""
+
+# Results Page
+msgid "View and analyze latency test results"
+msgstr ""
+
+msgid "Platform Performance Summary"
+msgstr ""
+
+msgid "No test data available yet."
+msgstr ""
+
+msgid "Filters & Actions"
+msgstr ""
+
+msgid "Filter by Platform:"
+msgstr ""
+
+msgid "All Platforms"
+msgstr ""
+
+msgid "Apply Filter"
+msgstr ""
+
+msgid "Clear Filter"
+msgstr ""
+
+msgid "Export CSV"
+msgstr ""
+
+msgid "Delete Selected"
+msgstr ""
+
+msgid "Clear All Results"
+msgstr ""
+
+msgid "Test History"
+msgstr ""
+
+msgid "Bulk Actions"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Showing %s-%s of %s"
+msgstr ""
+
+msgid "User IP"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "View Details"
+msgstr ""
+
+msgid "No test results found."
+msgstr ""
+
+msgid "Failed"
+msgstr ""
+
+msgid "Test Details"
+msgstr ""
+
+# Frontend
+msgid "Cloud Loadout Latency Tester"
+msgstr ""
+
+msgid "Test your connection to popular cloud gaming platforms"
+msgstr ""
+
+msgid "Select Gaming Platform:"
+msgstr ""
+
+msgid "Choose a platform..."
+msgstr ""
+
+msgid "Select Server:"
+msgstr ""
+
+msgid "Test Type:"
+msgstr ""
+
+msgid "Single Platform Test"
+msgstr ""
+
+msgid "Comprehensive Test (All Enabled Platforms)"
+msgstr ""
+
+msgid "Advanced Settings"
+msgstr ""
+
+msgid "Number of Tests:"
+msgstr ""
+
+msgid "Higher numbers give more accurate averages but take longer"
+msgstr ""
+
+msgid "Test Timeout (ms):"
+msgstr ""
+
+msgid "How long to wait for each test response"
+msgstr ""
+
+msgid "Start Latency Test"
+msgstr ""
+
+msgid "About Cloud Gaming Latency"
+msgstr ""
+
+msgid "What is Latency?"
+msgstr ""
+
+msgid "Latency (ping) measures the time it takes for data to travel from your device to the gaming server and back. Lower latency means more responsive gameplay."
+msgstr ""
+
+msgid "Latency Guidelines"
+msgstr ""
+
+msgid "Perfect for all cloud gaming"
+msgstr ""
+
+msgid "Great for most games"
+msgstr ""
+
+msgid "Some input lag expected"
+msgstr ""
+
+msgid "Gaming may be difficult"
+msgstr ""
+
+msgid "Tips for Better Performance"
+msgstr ""
+
+msgid "Use a wired Ethernet connection when possible"
+msgstr ""
+
+msgid "Close bandwidth-heavy applications"
+msgstr ""
+
+msgid "Test at different times of day"
+msgstr ""
+
+msgid "Choose the server location closest to you"
+msgstr ""
+
+msgid "Consider upgrading your internet plan"
+msgstr ""
+
+msgid "Popular Cloud Gaming Platforms"
+msgstr ""
+
+msgid "Game Pass Ultimate subscription required"
+msgstr ""
+
+msgid "Separate Luna channels subscription"
+msgstr ""
+
+msgid "High-end cloud PC experience"
+msgstr ""
+
+msgid "Growing cloud gaming service"
+msgstr ""
+
+msgid "PlayStation Plus Premium required"
+msgstr ""
+
+msgid "Free tier available, paid for premium"
+msgstr ""
+
+msgid "Windows 365 subscription service"
+msgstr ""
+
+# Widget
+msgid "Display a compact latency tester in your sidebar"
+msgstr ""
+
+msgid "Display a compact latency tester in your sidebar"
+msgstr ""
+
+msgid "Title:"
+msgstr ""
+
+msgid "Latency Test"
+msgstr ""
+
+msgid "Description:"
+msgstr ""
+
+msgid "Test your connection to cloud gaming platforms"
+msgstr ""
+
+msgid "Show advanced options"
+msgstr ""
+
+msgid "Platform:"
+msgstr ""
+
+msgid "Select Platform"
+msgstr ""
+
+msgid "Test Latency"
+msgstr ""
+
+msgid "Please select a platform"
+msgstr ""
+
+msgid "Connection error"
+msgstr ""
+
+msgid "Average Latency:"
+msgstr ""
+
+msgid "Tests:"
+msgstr ""
+
+msgid "Tip:"
+msgstr ""
+
+# Quality Assessment
+msgid "Perfect for competitive gaming"
+msgstr ""
+
+msgid "Great for most gaming scenarios"
+msgstr ""
+
+msgid "Suitable for casual gaming"
+msgstr ""
+
+msgid "May experience noticeable lag"
+msgstr ""
+
+# Recommendations
+msgid "Try using a wired Ethernet connection instead of WiFi"
+msgstr ""
+
+msgid "Close bandwidth-intensive applications (streaming, downloads)"
+msgstr ""
+
+msgid "Consider upgrading your internet plan for better speeds"
+msgstr ""
+
+msgid "Test your connection at different times of day"
+msgstr ""
+
+msgid "Contact your ISP to investigate high latency issues"
+msgstr ""
+
+msgid "Consider a gaming VPN service that offers better routing"
+msgstr ""
+
+msgid "Your connection is excellent for cloud gaming!"
+msgstr ""
+
+msgid "Try playing competitive multiplayer games"
+msgstr ""
+
+msgid "Focus on games that are less latency-sensitive"
+msgstr ""
+
+msgid "Avoid real-time competitive games with this connection"
+msgstr ""
+
+# Error Messages
+msgid "Please select a platform to test."
+msgstr ""
+
+msgid "Please select a server to test."
+msgstr ""
+
+msgid "Test failed. Please try again."
+msgstr ""
+
+# Notifications
+msgid "Settings saved successfully!"
+msgstr ""
+
+msgid "Sample test completed successfully!"
+msgstr ""
+
+msgid "Test failed. Please check your settings."
+msgstr ""
+
+msgid "Are you sure you want to reset all settings?"
+msgstr ""
+
+msgid "Settings exported successfully!"
+msgstr ""
+
+msgid "Failed to export settings"
+msgstr ""
+
+msgid "Selected test results deleted."
+msgstr ""
+
+msgid "All test results cleared"
+msgstr ""

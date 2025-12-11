@@ -1,0 +1,708 @@
+/**
+ * Cloud Loadout Latency Tester - Frontend Styles
+ * Professional, modern styling for the user-facing latency tester
+ */
+
+.cloudloadout-tester-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.cloudloadout-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.cloudloadout-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.cloudloadout-header p {
+    margin: 0;
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.cloudloadout-test-form {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e1e8ed;
+}
+
+.cloudloadout-form-group {
+    margin-bottom: 25px;
+}
+
+.cloudloadout-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.cloudloadout-form-group select,
+.cloudloadout-form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.cloudloadout-form-group select:focus,
+.cloudloadout-form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.cloudloadout-servers-list {
+    margin-top: 15px;
+}
+
+.cloudloadout-server-item {
+    margin-bottom: 12px;
+    padding: 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cloudloadout-server-item:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.cloudloadout-server-item input[type="radio"] {
+    margin-right: 12px;
+}
+
+.cloudloadout-server-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+.server-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: auto;
+}
+
+.server-location {
+    background: #667eea;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.server-url {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.cloudloadout-test-options {
+    display: none;
+}
+
+.cloudloadout-test-options.active {
+    display: block;
+}
+
+.cloudloadout-advanced-settings {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.cloudloadout-advanced-toggle {
+    background: none;
+    border: none;
+    color: #667eea;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.cloudloadout-advanced-toggle:hover {
+    color: #5a67d8;
+}
+
+.cloudloadout-test-count,
+.cloudloadout-test-timeout {
+    max-width: 150px;
+}
+
+.cloudloadout-start-test {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.cloudloadout-start-test:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.cloudloadout-start-test:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.cloudloadout-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cloudloadout-status.testing {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.cloudloadout-status.completed {
+    background: #d1edff;
+    color: #0c5460;
+    border: 1px solid #74b9ff;
+}
+
+.cloudloadout-status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.cloudloadout-results-container {
+    display: none;
+    margin-top: 30px;
+}
+
+.cloudloadout-results {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e1e8ed;
+}
+
+.result-summary {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.average-latency {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fa;
+}
+
+.average-latency.excellent {
+    color: #27ae60;
+    background: #d5f4e6;
+}
+
+.average-latency.good {
+    color: #f39c12;
+    background: #fef5e7;
+}
+
+.average-latency.fair {
+    color: #e67e22;
+    background: #fdedec;
+}
+
+.average-latency.poor {
+    color: #e74c3c;
+    background: #fadbd8;
+}
+
+.average-latency .label {
+    font-size: 0.4em;
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.latency-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.latency-stats .stat {
+    background: #667eea;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.detailed-results {
+    margin: 30px 0;
+}
+
+.detailed-results h5 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.test-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border-left: 4px solid #bdc3c7;
+}
+
+.test-result-item.success {
+    background: #d5f4e6;
+    border-left-color: #27ae60;
+}
+
+.test-result-item.error {
+    background: #fadbd8;
+    border-left-color: #e74c3c;
+}
+
+.test-number {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.latency-value {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+}
+
+.quality-assessment {
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.quality-assessment h5 {
+    margin: 0 0 15px 0;
+    font-size: 1.3em;
+}
+
+.quality-indicator {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.quality-indicator.excellent {
+    background: #27ae60;
+}
+
+.quality-indicator.good {
+    background: #f39c12;
+}
+
+.quality-indicator.fair {
+    background: #e67e22;
+}
+
+.quality-indicator.poor {
+    background: #e74c3c;
+}
+
+.quality-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.95;
+}
+
+.recommendations {
+    margin: 30px 0;
+}
+
+.recommendations h5 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendations li {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #667eea;
+}
+
+.cloudloadout-actions {
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cloudloadout-export-results,
+.cloudloadout-clear-results,
+.cloudloadout-retry-test,
+.cloudloadout-show-help {
+    padding: 10px 20px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.cloudloadout-export-results:hover,
+.cloudloadout-clear-results:hover,
+.cloudloadout-retry-test:hover,
+.cloudloadout-show-help:hover {
+    background: #667eea;
+    color: white;
+}
+
+.cloudloadout-notifications {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 400px;
+}
+
+.cloudloadout-notification {
+    background: white;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-left: 4px solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.3s ease;
+}
+
+.cloudloadout-notification.success {
+    border-left-color: #27ae60;
+}
+
+.cloudloadout-notification.error {
+    border-left-color: #e74c3c;
+}
+
+.cloudloadout-notification.warning {
+    border-left-color: #f39c12;
+}
+
+.cloudloadout-notification.info {
+    border-left-color: #3498db;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #7f8c8d;
+    margin-left: 10px;
+}
+
+.close-notification:hover {
+    color: #2c3e50;
+}
+
+.cloudloadout-help-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.help-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.help-content h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    font-size: 1.8em;
+}
+
+.help-section {
+    margin-bottom: 25px;
+}
+
+.help-section h4 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.help-section ul {
+    padding-left: 20px;
+}
+
+.help-section li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.close-help {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.close-help:hover {
+    background: #5a67d8;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Loading spinner */
+.cloudloadout-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .cloudloadout-tester-container {
+        padding: 10px;
+    }
+    
+    .cloudloadout-header h2 {
+        font-size: 2em;
+    }
+    
+    .cloudloadout-header p {
+        font-size: 1em;
+    }
+    
+    .cloudloadout-test-form {
+        padding: 20px;
+    }
+    
+    .server-name {
+        font-size: 14px;
+    }
+    
+    .server-location {
+        font-size: 11px;
+        padding: 2px 6px;
+    }
+    
+    .average-latency {
+        font-size: 2.5em;
+        padding: 15px;
+    }
+    
+    .latency-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cloudloadout-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cloudloadout-notifications {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+    
+    .help-content {
+        padding: 20px;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cloudloadout-header {
+        padding: 20px 0;
+    }
+    
+    .cloudloadout-test-form {
+        padding: 15px;
+    }
+    
+    .cloudloadout-results {
+        padding: 20px;
+    }
+    
+    .average-latency {
+        font-size: 2em;
+        padding: 10px;
+    }
+    
+    .test-result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .cloudloadout-server-item label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .cloudloadout-tester-container {
+        background: #1a1a1a;
+        color: #e1e8ed;
+    }
+    
+    .cloudloadout-test-form,
+    .cloudloadout-results {
+        background: #2c3e50;
+        border-color: #34495e;
+    }
+    
+    .cloudloadout-form-group input,
+    .cloudloadout-form-group select {
+        background: #34495e;
+        border-color: #4a6741;
+        color: #e1e8ed;
+    }
+    
+    .cloudloadout-form-group input:focus,
+    .cloudloadout-form-group select:focus {
+        border-color: #667eea;
+    }
+    
+    .cloudloadout-server-item {
+        border-color: #4a6741;
+        background: #34495e;
+    }
+    
+    .cloudloadout-server-item:hover {
+        background: #3a5a7a;
+    }
+    
+    .cloudloadout-advanced-settings {
+        background: #34495e;
+    }
+    
+    .cloudloadout-notification {
+        background: #2c3e50;
+        color: #e1e8ed;
+    }
+    
+    .help-content {
+        background: #2c3e50;
+        color: #e1e8ed;
+    }
+}
