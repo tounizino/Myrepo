@@ -1,0 +1,235 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FMHY Atlas 1.0.0\n"
+"POT-Creation-Date: 2025-12-11 00:00+0000\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: ChatGPT\n"
+"Plural-Forms: nplurals=6; plural=(n==0?0:n==1?1:n==2?2:(n%100>=3 && n%100<=10)?3:(n%100>=11 && n%100<=99)?4:5);\n"
+
+msgid "Dec 2025 Updates ❄️"
+msgstr "تحديثات ديسمبر 2025 ❄️"
+
+msgid "freemediaheckyeah"
+msgstr "freemediaheckyeah"
+
+msgid "The largest collection of free stuff on the internet!"
+msgstr "أكبر مجموعة من الموارد المجانية على الإنترنت!"
+
+msgid "See Beginners Guide"
+msgstr "عرض دليل المبتدئين"
+
+msgid "Posts"
+msgstr "المقالات"
+
+msgid "Contribute"
+msgstr "المساهمة"
+
+msgid "Discord"
+msgstr "ديسكورد"
+
+msgid "Or browse these pages ✨"
+msgstr "أو تصفّح هذه الصفحات ✨"
+
+msgid "📑 Changelog"
+msgstr "📑 سجل التغييرات"
+
+msgid "📖 Glossary"
+msgstr "📖 مسرد المصطلحات"
+
+msgid "💾 Backups"
+msgstr "💾 النسخ الاحتياطية"
+
+msgid "🌱 Ecosystem"
+msgstr "🌱 النظام البيئي"
+
+msgid "🌐 Search"
+msgstr "🌐 البحث"
+
+msgid "❓ FAQs"
+msgstr "❓ الأسئلة الشائعة"
+
+msgid "🔖 Bookmarks"
+msgstr "🔖 العلامات"
+
+msgid "✅ SafeGuard"
+msgstr "✅ الحماية"
+
+msgid "🚀 Startpage"
+msgstr "🚀 صفحة البداية"
+
+msgid "📋 snowbin"
+msgstr "📋 Snowbin"
+
+msgid "🔎 SearXNG"
+msgstr "🔎 SearXNG"
+
+msgid "💡 Site Hunting"
+msgstr "💡 البحث عن مواقع جديدة"
+
+msgid "😇 SFW FMHY"
+msgstr "😇 نسخة FMHY الملائمة للعمل"
+
+msgid "🏠 Selfhosting"
+msgstr "🏠 الاستضافة الذاتية"
+
+msgid "🏞 Wallpapers"
+msgstr "🏞 الخلفيات"
+
+msgid "💙 Feedback"
+msgstr "💙 الملاحظات"
+
+msgid "Adblocking / Privacy"
+msgstr "حجب الإعلانات / الخصوصية"
+
+msgid "Learn how to block ads, trackers and telemetry across all your devices."
+msgstr "تعرّف على كيفية حجب الإعلانات والمتتبعات وإيقاف التتبع على جميع أجهزتك."
+
+msgid "Artificial Intelligence"
+msgstr "الذكاء الاصطناعي"
+
+msgid "Prompting, tooling and datasets to explore the AI universe."
+msgstr "أدوات ونماذج وبيانات لاكتشاف عالم الذكاء الاصطناعي."
+
+msgid "Streaming"
+msgstr "البث"
+
+msgid "Stream, download or binge your favourite shows, movies and anime."
+msgstr "شاهد أو نزّل أو استمتع بأفضل الأفلام والمسلسلات والأنمي."
+
+msgid "Listening"
+msgstr "الاستماع"
+
+msgid "Music, podcasts and radio without paywalls."
+msgstr "موسيقى وبودكاست وراديو بدون حواجز دفع."
+
+msgid "Gaming"
+msgstr "الألعاب"
+
+msgid "PC, console, emulation and modding resources galore."
+msgstr "أدلة للحاسوب، والمنصات، والمحاكاة، والتعديل."
+
+msgid "Reading"
+msgstr "القراءة"
+
+msgid "Books, comics, manga and more for every bibliophile."
+msgstr "كتب ومانغا وكوميكس لعشاق القراءة."
+
+msgid "Downloading"
+msgstr "التنزيل"
+
+msgid "Windows, macOS, Android & iOS software, media and more."
+msgstr "برامج ووسائط لكل من ويندوز وماك وأندرويد و iOS."
+
+msgid "Torrenting"
+msgstr "التورنت"
+
+msgid "BitTorrent trackers, magnet hubs and automation scripts."
+msgstr "متتبعات تورنت ومصادر مغناطيسية وأدوات أتمتة."
+
+msgid "Educational"
+msgstr "التعليم"
+
+msgid "STEM, humanities, certifications and language learning."
+msgstr "موارد STEM والعلوم الإنسانية والشهادات وتعلم اللغات."
+
+msgid "Android / iOS"
+msgstr "أندرويد / iOS"
+
+msgid "Mobile-first resources, APK mirrors and tweaks."
+msgstr "موارد للتطبيقات، وملفات APK، والتعديلات على الهاتف."
+
+msgid "Linux / macOS"
+msgstr "لينكس / ماك"
+
+msgid "Dotfiles, package mirrors and productivity stacks."
+msgstr "ملفات ضبط، ومستودعات حزم، وأدوات إنتاجية."
+
+msgid "Non-English"
+msgstr "غير الإنجليزية"
+
+msgid "Localized libraries curated by our community."
+msgstr "مكتبات محلية منسقة بواسطة المجتمع."
+
+msgid "Miscellaneous"
+msgstr "متفرقات"
+
+msgid "Wallpaper packs, shopping, news, food, travel and beyond."
+msgstr "خلفيات، وتسوق، وأخبار، وطعام، وسفر والمزيد."
+
+msgid "GitHub"
+msgstr "غيتهاب"
+
+msgid "Reddit"
+msgstr "ريديت"
+
+msgid "Skip to content"
+msgstr "تجاوز إلى المحتوى"
+
+msgid "Primary navigation"
+msgstr "التنقل الرئيسي"
+
+msgid "Language switcher"
+msgstr "مبدل اللغة"
+
+msgid "Theme"
+msgstr "الوضع اللوني"
+
+msgid "Toggle navigation"
+msgstr "تبديل القائمة"
+
+msgid "Explore"
+msgstr "استكشف"
+
+msgid "Ecosystem & tools"
+msgstr "النظام البيئي والأدوات"
+
+msgid "Community services, mirrors and tools that power FMHY every day."
+msgstr "خدمات المجتمع والمرايا والأدوات التي تشغّل FMHY يوميًا."
+
+msgid "FMHY abstract art"
+msgstr "رسوم FMHY التجريدية"
+
+msgid "Community & socials"
+msgstr "المجتمع والشبكات الاجتماعية"
+
+msgid "Join the moderators, maintainers and curators keeping the library alive."
+msgstr "انضم إلى المشرفين والمساهمين الذين يحافظون على المكتبة."
+
+msgid "Primary menu"
+msgstr "القائمة الرئيسية"
+
+msgid "Footer menu"
+msgstr "قائمة التذييل"
+
+msgid "Unable to fetch remote document."
+msgstr "تعذّر جلب المستند من المصدر."
+
+msgid "Back to index"
+msgstr "الرجوع إلى الفهرس"
+
+msgid "Updated %s"
+msgstr "تم التحديث في %s"
+
+msgid "Table of contents"
+msgstr "جدول المحتويات"
+
+msgid "View source on GitHub"
+msgstr "عرض المصدر على غيتهاب"
+
+msgid "Made with ❤ by the FMHY community — %s"
+msgstr "صُنع بحب من مجتمع FMHY — %s"
+
+msgid "share feedback"
+msgstr "أرسل ملاحظاتك"
+
+msgid "© %1$s · Estd %2$s. This site does not host any files."
+msgstr "© %1$s · تأسس عام %2$s. هذا الموقع لا يستضيف أي ملفات."
+
+msgid "Nothing to see here… yet."
+msgstr "لا يوجد محتوى هنا حتى الآن."
+
+msgid "This install relies on the remote FMHY docs. Try visiting one of the sections from the homepage."
+msgstr "يعتمد هذا التثبيت على مستندات FMHY البعيدة. جرّب زيارة أحد الأقسام من الصفحة الرئيسية."
