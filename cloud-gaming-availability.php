@@ -1,17 +1,17 @@
 <?php
 /**
- * Plugin Name: Cloud Gaming Availability
- * Plugin URI: https://example.com/cloud-gaming-availability
+ * Plugin Name: Platforms for Cloud Games
+ * Plugin URI: https://example.com/platforms-cloud-games
  * Description: Display game availability across 9 cloud gaming platforms with customizable themes and responsive design.
  * Version: 1.0.0
  * Author: Cloud Gaming
  * Author URI: https://example.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: cloud-gaming-availability
+ * Text Domain: platforms-cloud-games
  * Domain Path: /languages
  *
- * @package CloudGamingAvailability
+ * @package PlatformsForCloudGames
  */
 
 // Exit if accessed directly
@@ -29,6 +29,8 @@ require_once CGA_PLUGIN_PATH . 'includes/class-cga-loader.php';
 require_once CGA_PLUGIN_PATH . 'includes/class-cga-cpt.php';
 require_once CGA_PLUGIN_PATH . 'includes/class-cga-settings.php';
 require_once CGA_PLUGIN_PATH . 'admin/class-cga-admin.php';
+require_once CGA_PLUGIN_PATH . 'admin/class-cga-game-manager.php';
+require_once CGA_PLUGIN_PATH . 'admin/class-cga-shortcode-display.php';
 require_once CGA_PLUGIN_PATH . 'frontend/class-cga-shortcode.php';
 require_once CGA_PLUGIN_PATH . 'includes/functions.php';
 
@@ -50,13 +52,15 @@ class CloudGamingAvailability {
      * Initialize the plugin
      */
     public function init() {
-        load_plugin_textdomain( 'cloud-gaming-availability', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+        load_plugin_textdomain( 'platforms-cloud-games', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
         // Initialize classes
         new CGA_Loader();
         new CGA_CPT();
         new CGA_Settings();
         new CGA_Admin();
+        new CGA_Game_Manager();
+        new CGA_Shortcode_Display();
         new CGA_Shortcode();
     }
 
