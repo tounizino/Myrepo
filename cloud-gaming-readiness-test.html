@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Readiness Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .test-container {
+            background-color: #ffffff;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: none;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .test-button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-bottom: 24px;
+        }
+
+        .test-button:hover {
+            background-color: #2980b9;
+        }
+
+        .test-button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .progress-section {
+            display: none;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #ecf0f1;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .results-section {
+            display: none;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 24px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .score-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .score-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: #6c757d;
+            margin-bottom: 16px;
+        }
+
+        .verdict {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .metric-unit {
+            font-size: 14px;
+            color: #6c757d;
+            margin-left: 4px;
+        }
+
+        .status-excellent { color: #27ae60; }
+        .status-good { color: #f39c12; }
+        .status-fair { color: #e67e22; }
+        .status-poor { color: #e74c3c; }
+
+        .test-info {
+            background-color: #ecf0f1;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .test-container {
+                padding: 16px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .metric-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="header">
+            <h1>Cloud Gaming Readiness Test</h1>
+            <p>Test your network performance for cloud gaming</p>
+        </div>
+
+        <button class="test-button" id="startTest">Start Test</button>
+
+        <div class="progress-section" id="progressSection">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Preparing test...</div>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+            <div class="score-display">
+                <div class="score-number" id="overallScore">--</div>
+                <div class="score-label" id="scoreLabel">Ready for Cloud Gaming</div>
+                <div class="verdict" id="verdict"></div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Average Ping</div>
+                    <div class="metric-value">
+                        <span id="pingValue">--</span>
+                        <span class="metric-unit">ms</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Jitter</div>
+                    <div class="metric-value">
+                        <span id="jitterValue">--</span>
+                        <span class="metric-unit">ms</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Packet Loss</div>
+                    <div class="metric-value">
+                        <span id="packetLossValue">--</span>
+                        <span class="metric-unit">%</span>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Stability</div>
+                    <div class="metric-value">
+                        <span id="stabilityValue">--</span>
+                        <span class="metric-unit">%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-info">
+                Test completed successfully • Results based on 12 network measurements
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class CloudGamingTest {
+            constructor() {
+                this.isRunning = false;
+                this.testData = {
+                    latencies: [],
+                    successfulRequests: 0,
+                    totalRequests: 0,
+                    failedRequests: 0
+                };
+                
+                this.elements = {
+                    startButton: document.getElementById('startTest'),
+                    progressSection: document.getElementById('progressSection'),
+                    resultsSection: document.getElementById('resultsSection'),
+                    progressFill: document.getElementById('progressFill'),
+                    progressText: document.getElementById('progressText'),
+                    overallScore: document.getElementById('overallScore'),
+                    scoreLabel: document.getElementById('scoreLabel'),
+                    verdict: document.getElementById('verdict'),
+                    pingValue: document.getElementById('pingValue'),
+                    jitterValue: document.getElementById('jitterValue'),
+                    packetLossValue: document.getElementById('packetLossValue'),
+                    stabilityValue: document.getElementById('stabilityValue')
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.elements.startButton.addEventListener('click', () => {
+                    this.startTest();
+                });
+            }
+
+            async startTest() {
+                if (this.isRunning) return;
+
+                this.isRunning = true;
+                this.resetTest();
+                this.showProgress();
+                this.elements.startButton.disabled = true;
+
+                try {
+                    await this.runLatencyTest();
+                    await this.calculateAndDisplayResults();
+                } catch (error) {
+                    console.error('Test failed:', error);
+                    this.showError();
+                } finally {
+                    this.isRunning = false;
+                    this.elements.startButton.disabled = false;
+                }
+            }
+
+            resetTest() {
+                this.testData = {
+                    latencies: [],
+                    successfulRequests: 0,
+                    totalRequests: 0,
+                    failedRequests: 0
+                };
+            }
+
+            showProgress() {
+                this.elements.progressSection.style.display = 'block';
+                this.elements.resultsSection.style.display = 'none';
+                this.updateProgress(0, 'Starting network test...');
+            }
+
+            updateProgress(percentage, text) {
+                this.elements.progressFill.style.width = percentage + '%';
+                this.elements.progressText.textContent = text;
+            }
+
+            async runLatencyTest() {
+                const testUrls = [
+                    'https://1.1.1.1/dns-query',
+                    'https://8.8.8.8/dns-query',
+                    'https://cloudflare.com',
+                    'https://google.com',
+                    'https://github.com'
+                ];
+
+                const totalTests = 12;
+                const testsPerUrl = Math.ceil(totalTests / testUrls.length);
+
+                for (let i = 0; i < testsPerUrl; i++) {
+                    for (const url of testUrls) {
+                        if (this.testData.successfulRequests + this.testData.failedRequests >= totalTests) {
+                            break;
+                        }
+
+                        this.updateProgress(
+                            ((this.testData.successfulRequests + this.testData.failedRequests) / totalTests) * 100,
+                            `Testing connection... (${this.testData.successfulRequests + this.testData.failedRequests + 1}/${totalTests})`
+                        );
+
+                        await this.measureLatency(url);
+                        await this.delay(100); // Small delay between requests
+                    }
+                }
+            }
+
+            async measureLatency(url) {
+                this.testData.totalRequests++;
+
+                try {
+                    const startTime = performance.now();
+                    
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        mode: 'no-cors',
+                        signal: controller.signal,
+                        cache: 'no-cache'
+                    });
+
+                    clearTimeout(timeoutId);
+                    const endTime = performance.now();
+                    const latency = endTime - startTime;
+
+                    // Filter out unrealistic values (likely cached or local requests)
+                    if (latency > 10 && latency < 10000) {
+                        this.testData.latencies.push(latency);
+                        this.testData.successfulRequests++;
+                    } else {
+                        this.testData.failedRequests++;
+                    }
+
+                } catch (error) {
+                    this.testData.failedRequests++;
+                }
+            }
+
+            async calculateAndDisplayResults() {
+                await this.delay(500); // Brief pause for UX
+
+                if (this.testData.latencies.length === 0) {
+                    this.showError();
+                    return;
+                }
+
+                const results = this.calculateMetrics();
+                this.displayResults(results);
+            }
+
+            calculateMetrics() {
+                const latencies = this.testData.latencies.sort((a, b) => a - b);
+                
+                const averagePing = latencies.reduce((sum, val) => sum + val, 0) / latencies.length;
+                
+                // Calculate jitter (standard deviation)
+                const variance = latencies.reduce((sum, val) => sum + Math.pow(val - averagePing, 2), 0) / latencies.length;
+                const jitter = Math.sqrt(variance);
+                
+                // Calculate packet loss percentage
+                const packetLoss = (this.testData.failedRequests / this.testData.totalRequests) * 100;
+                
+                // Calculate stability score based on latency consistency
+                const stability = Math.max(0, 100 - (jitter * 2) - (packetLoss * 10));
+
+                return {
+                    averagePing: Math.round(averagePing),
+                    jitter: Math.round(jitter),
+                    packetLoss: Math.round(packetLoss * 10) / 10,
+                    stability: Math.round(stability)
+                };
+            }
+
+            calculateReadinessScore(metrics) {
+                let score = 100;
+
+                // Ping score (40% weight)
+                if (metrics.averagePing <= 40) {
+                    score -= 0; // Excellent
+                } else if (metrics.averagePing <= 70) {
+                    score -= 10; // Good
+                } else if (metrics.averagePing <= 90) {
+                    score -= 25; // Fair
+                } else {
+                    score -= 40; // Poor
+                }
+
+                // Jitter penalty (30% weight)
+                if (metrics.jitter > 20) {
+                    score -= Math.min(30, (metrics.jitter - 20) * 2);
+                }
+
+                // Packet loss penalty (30% weight)
+                if (metrics.packetLoss > 1) {
+                    score -= Math.min(30, metrics.packetLoss * 15);
+                }
+
+                return Math.max(0, Math.min(100, Math.round(score)));
+            }
+
+            getScoreCategory(score) {
+                if (score >= 85) return { label: 'Excellent', class: 'status-excellent' };
+                if (score >= 70) return { label: 'Good', class: 'status-good' };
+                if (score >= 50) return { label: 'Fair', class: 'status-fair' };
+                return { label: 'Poor', class: 'status-poor' };
+            }
+
+            generateVerdict(metrics, score) {
+                const category = this.getScoreCategory(score);
+                
+                if (score >= 85) {
+                    return `Excellent connection for cloud gaming. Ready for 4K streaming and competitive gaming with minimal latency.`;
+                } else if (score >= 70) {
+                    return `Good for 1080p cloud gaming. May experience slight delays during peak hours or intensive gameplay.`;
+                } else if (score >= 50) {
+                    return `Fair for casual cloud gaming. Consider upgrading connection for competitive gaming or 4K streaming.`;
+                } else {
+                    return `Poor connection for cloud gaming. High latency and instability may cause significant gameplay issues.`;
+                }
+            }
+
+            displayResults(results) {
+                const score = this.calculateReadinessScore(results);
+                const category = this.getScoreCategory(score);
+                const verdict = this.generateVerdict(results, score);
+
+                // Hide progress, show results
+                this.elements.progressSection.style.display = 'none';
+                this.elements.resultsSection.style.display = 'block';
+
+                // Update display
+                this.elements.overallScore.textContent = score;
+                this.elements.scoreLabel.textContent = category.label + ' for Cloud Gaming';
+                this.elements.overallScore.className = 'score-number ' + category.class;
+                this.elements.scoreLabel.className = 'score-label ' + category.class;
+                this.elements.verdict.textContent = verdict;
+
+                // Update metrics
+                this.elements.pingValue.textContent = results.averagePing;
+                this.elements.jitterValue.textContent = results.jitter;
+                this.elements.packetLossValue.textContent = results.packetLoss;
+                this.elements.stabilityValue.textContent = results.stability;
+
+                // Apply status colors to metrics
+                this.applyMetricStatus('pingValue', results.averagePing, 'ping');
+                this.applyMetricStatus('jitterValue', results.jitter, 'jitter');
+                this.applyMetricStatus('packetLossValue', results.packetLoss, 'packetLoss');
+            }
+
+            applyMetricStatus(elementId, value, type) {
+                const element = this.elements[elementId];
+                element.className = 'metric-value';
+
+                switch (type) {
+                    case 'ping':
+                        if (value <= 40) element.classList.add('status-excellent');
+                        else if (value <= 70) element.classList.add('status-good');
+                        else if (value <= 90) element.classList.add('status-fair');
+                        else element.classList.add('status-poor');
+                        break;
+                    case 'jitter':
+                        if (value <= 20) element.classList.add('status-excellent');
+                        else if (value <= 40) element.classList.add('status-good');
+                        else element.classList.add('status-poor');
+                        break;
+                    case 'packetLoss':
+                        if (value <= 0.5) element.classList.add('status-excellent');
+                        else if (value <= 1) element.classList.add('status-good');
+                        else element.classList.add('status-poor');
+                        break;
+                }
+            }
+
+            showError() {
+                this.elements.progressSection.style.display = 'none';
+                this.elements.resultsSection.style.display = 'block';
+                
+                this.elements.overallScore.textContent = '0';
+                this.elements.scoreLabel.textContent = 'Test Failed';
+                this.elements.verdict.textContent = 'Unable to complete network test. Please check your connection and try again.';
+                
+                // Reset other values
+                this.elements.pingValue.textContent = '--';
+                this.elements.jitterValue.textContent = '--';
+                this.elements.packetLossValue.textContent = '--';
+                this.elements.stabilityValue.textContent = '--';
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize the test when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CloudGamingTest();
+        });
+    </script>
+</body>
+</html>
