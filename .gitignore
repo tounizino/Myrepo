@@ -1,0 +1,61 @@
+# WordPress
+wp-admin/
+wp-includes/
+wp-content/plugins/akismet/
+wp-content/plugins/hello.php
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/w3tc-config/
+wp-content/cache/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.buildpath
+
+# Node modules (if added later)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# Test files
+test-results/
+coverage/
+
+# WordPress specific
+*.sql
+*.sql.gz
+wp-config.php
+wp-config-local.php
+sitemap.xml
+sitemap.xml.gz
+robots.txt
+
+# Backup files
+*.bak
+*.backup
+*~
