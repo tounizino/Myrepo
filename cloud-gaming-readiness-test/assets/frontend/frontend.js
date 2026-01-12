@@ -503,12 +503,10 @@
         const v = verdict(metrics, scorePack.score);
 
         if (platform.hasDisclaimer) {
-            v.warnings.unshift('Limited diagnostic: This platform does not expose full cloud gaming server infrastructure. Measurements are approximate.');
+            v.warnings.unshift('Limited diagnostic: This platform does not expose full cloud gaming infrastructure. Measurements are approximate.');
         }
 
-        v.recs.push(
-            'Transparency note: this test measures routing quality (DNS resolution, TCP handshake, and HTTP response timing) to cloud service entry points. It does not measure exact in-game latency.'
-        );
+        v.recs.push('This test measures routing quality (DNS, TCP, HTTP) to cloud service entry points, not exact in-game latency.');
 
         const details = [
             ['Platform', platform.name],

@@ -426,7 +426,7 @@ class CGRT_Database {
                         'endpoint_url'   => $url,
                         'method'         => isset( $endpoint_seed['method'] ) ? $endpoint_seed['method'] : 'GET',
                         'enabled'        => 1,
-                        'timeout_ms'     => 2500,
+                        'timeout_ms'     => 6500,
                         'notes'          => 'Curated default endpoint.',
                         'is_default'     => 1,
                         'endpoint_type'  => isset( $endpoint_seed['endpoint_type'] ) ? $endpoint_seed['endpoint_type'] : 'service_entry',

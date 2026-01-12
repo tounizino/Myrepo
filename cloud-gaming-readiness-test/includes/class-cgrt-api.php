@@ -84,6 +84,17 @@ class CGRT_API {
                 continue;
             }
 
+            // Frontend only uses service_entry endpoints for faster test.
+            $service_entry_endpoints = array_filter( $enabled_endpoints, function( $e ) {
+                $type = isset( $e['endpoint_type'] ) ? $e['endpoint_type'] : 'service_entry';
+                return 'service_entry' === $type;
+            } );
+
+            // If no service entry found, fallback to first endpoint.
+            if ( empty( $service_entry_endpoints ) ) {
+                $service_entry_endpoints = array_slice( $enabled_endpoints, 0, 1 );
+            }
+
             $has_disclaimer = false;
             foreach ( $enabled_endpoints as $e ) {
                 if ( ! empty( $e['has_disclaimer'] ) ) {
@@ -106,7 +117,7 @@ class CGRT_API {
                         'method'     => $e['method'],
                         'timeout_ms' => $e['timeout_ms'],
                     );
-                }, $enabled_endpoints ) ),
+                }, $service_entry_endpoints ) ),
             );
         }
 
@@ -182,15 +193,7 @@ class CGRT_API {
             );
         }
 
-        $ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
-
-        if ( ! CGRT_Network_Tester::check_rate_limit( $ip ) ) {
-            return new WP_REST_Response(
-                array( 'error' => 'Rate limit exceeded. Please wait before retrying.' ),
-                429
-            );
-        }
-
+        $ip          = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
         $endpoint_id = isset( $body['endpointId'] ) ? (int) $body['endpointId'] : 0;
         $settings    = CGRT_Database::get_settings();
 
@@ -198,6 +201,26 @@ class CGRT_API {
             return new WP_REST_Response(
                 array( 'error' => 'Endpoint ID required' ),
                 400
+            );
+        }
+
+        // Cache short-term results to reduce load and avoid unnecessary rate limiting.
+        $cache_key = 'cgrt_test_' . md5( $ip . '|' . $endpoint_id );
+        $cached    = get_transient( $cache_key );
+        if ( is_array( $cached ) && isset( $cached['samples'] ) && is_array( $cached['samples'] ) ) {
+            return new WP_REST_Response(
+                array(
+                    'success' => true,
+                    'samples' => $cached['samples'],
+                ),
+                200
+            );
+        }
+
+        if ( ! CGRT_Network_Tester::check_rate_limit( $ip ) ) {
+            return new WP_REST_Response(
+                array( 'error' => 'Rate limit exceeded. Please wait before retrying.' ),
+                429
             );
         }
 
@@ -216,18 +239,39 @@ class CGRT_API {
         }
 
         $endpoint = array(
-            'id'         => (int) $row['id'],
-            'platform_id'=> (int) $row['platform_id'],
-            'url'        => esc_url_raw( $row['endpoint_url'] ),
-            'method'     => isset( $row['method'] ) ? strtoupper( sanitize_text_field( $row['method'] ) ) : 'GET',
-            'timeout_ms' => isset( $row['timeout_ms'] ) ? (int) $row['timeout_ms'] : 2500,
-            'has_disclaimer' => ! empty( $row['has_disclaimer'] ) ? 1 : 0,
+            'id'          => (int) $row['id'],
+            'platform_id' => (int) $row['platform_id'],
+            'url'         => esc_url_raw( $row['endpoint_url'] ),
+            'method'      => isset( $row['method'] ) ? strtoupper( sanitize_text_field( $row['method'] ) ) : 'GET',
+            // Force server-side timeout to the recommended range.
+            'timeout_ms'  => 6500,
         );
 
         $duration_sec = isset( $settings['test_duration_seconds'] ) ? (int) $settings['test_duration_seconds'] : 18;
         $interval_ms  = isset( $settings['sample_interval_ms'] ) ? (int) $settings['sample_interval_ms'] : 350;
         $samples      = max( 10, (int) floor( $duration_sec / ( $interval_ms / 1000 ) ) );
         $interval_sec = $interval_ms / 1000;
+
+        // Optional status endpoint used as fallback/debugging (not exposed to frontend selection).
+        $status_row = $wpdb->get_row(
+            $wpdb->prepare(
+                "SELECT * FROM {$tables['endpoints']} WHERE platform_id = %d AND enabled = 1 AND endpoint_type = %s ORDER BY is_default DESC, id ASC LIMIT 1",
+                (int) $row['platform_id'],
+                'status'
+            ),
+            ARRAY_A
+        );
+
+        $status_endpoint = null;
+        if ( $status_row && ! empty( $status_row['endpoint_url'] ) ) {
+            $status_endpoint = array(
+                'id'          => (int) $status_row['id'],
+                'platform_id' => (int) $status_row['platform_id'],
+                'url'         => esc_url_raw( $status_row['endpoint_url'] ),
+                'method'      => isset( $status_row['method'] ) ? strtoupper( sanitize_text_field( $status_row['method'] ) ) : 'GET',
+                'timeout_ms'  => 6500,
+            );
+        }
 
         $result = CGRT_Network_Tester::test_endpoint( $endpoint, $samples, $interval_sec );
 
@@ -237,6 +281,26 @@ class CGRT_API {
                 500
             );
         }
+
+        // If service entry blocks or fails for some samples, try a limited fallback to the status endpoint.
+        if ( $status_endpoint && ! empty( $result['samples'] ) ) {
+            $fallback_used = 0;
+            foreach ( $result['samples'] as $idx => $sample ) {
+                if ( $fallback_used >= 5 ) {
+                    break;
+                }
+                if ( ! empty( $sample['ok'] ) ) {
+                    continue;
+                }
+                $fallback = CGRT_Network_Tester::test_endpoint( $status_endpoint, 1, $interval_sec );
+                if ( ! empty( $fallback['samples'] ) && ! empty( $fallback['samples'][0]['ok'] ) ) {
+                    $result['samples'][ $idx ] = $fallback['samples'][0];
+                    $fallback_used++;
+                }
+            }
+        }
+
+        set_transient( $cache_key, array( 'samples' => $result['samples'] ), 30 );
 
         return new WP_REST_Response(
             array(
