@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Readiness Test - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .demo-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .demo-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .demo-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .demo-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .plugin-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>☁️ Cloud Gaming Readiness Test</h1>
+            <p>WordPress Plugin Demo</p>
+        </div>
+        
+        <div class="plugin-wrapper">
+            <!-- Cloud Gaming Readiness Test Widget -->
+            <div class="cgrt-container" data-theme="light">
+                
+                <!-- Header -->
+                <header class="cgrt-header">
+                    <h1>☁️ Cloud Gaming Readiness Test</h1>
+                    <p>Professional network diagnostic for cloud gaming performance</p>
+                </header>
+                
+                <!-- Content -->
+                <div class="cgrt-content">
+                    
+                    <!-- Welcome Screen -->
+                    <div class="cgrt-welcome">
+                        <h2>Is Your Network Ready for Cloud Gaming?</h2>
+                        <p>This test analyzes your connection's real-world cloud gaming performance including latency, jitter, packet loss, and stability. Get a complete assessment of your readiness and personalized recommendations.</p>
+                        
+                        <div class="cgrt-features">
+                            <div class="cgrt-feature">
+                                <div class="cgrt-feature-icon">⚡</div>
+                                <div class="cgrt-feature-title">Latency Analysis</div>
+                                <p class="cgrt-feature-desc">Precise ping measurement for real-time gaming</p>
+                            </div>
+                            <div class="cgrt-feature">
+                                <div class="cgrt-feature-icon">📊</div>
+                                <div class="cgrt-feature-title">Jitter Detection</div>
+                                <p class="cgrt-feature-desc">Identify connection inconsistencies that cause lag</p>
+                            </div>
+                            <div class="cgrt-feature">
+                                <div class="cgrt-feature-icon">🔍</div>
+                                <div class="cgrt-feature-title">Stability Testing</div>
+                                <p class="cgrt-feature-desc">Long-duration connection quality assessment</p>
+                            </div>
+                            <div class="cgrt-feature">
+                                <div class="cgrt-feature-icon">🎯</div>
+                                <div class="cgrt-feature-title">Quality Prediction</div>
+                                <p class="cgrt-feature-desc">Know what resolution you can realistically play</p>
+                            </div>
+                        </div>
+                        
+                        <button class="cgrt-btn cgrt-btn-primary cgrt-start-btn">
+                            Start Readiness Test
+                        </button>
+                        
+                        <p style="margin-top: 16px; font-size: 13px; color: #737373;">
+                            Test takes approximately 30 seconds • No download required
+                        </p>
+                    </div>
+                    
+                    <!-- Progress Screen -->
+                    <div class="cgrt-progress" style="display: none;">
+                        <div class="cgrt-progress-container">
+                            <h3 class="cgrt-progress-text">Testing Your Connection...</h3>
+                            <p class="cgrt-progress-status">Initializing...</p>
+                            
+                            <div class="cgrt-progress-bar">
+                                <div class="cgrt-progress-fill"></div>
+                            </div>
+                            
+                            <div class="cgrt-live-metrics">
+                                <div class="cgrt-metric cgrt-live-latency">
+                                    <div class="cgrt-metric-label">Latency</div>
+                                    <div class="cgrt-metric-value">--</div>
+                                    <div class="cgrt-metric-unit">ms</div>
+                                </div>
+                                <div class="cgrt-metric cgrt-live-jitter">
+                                    <div class="cgrt-metric-label">Jitter</div>
+                                    <div class="cgrt-metric-value">--</div>
+                                    <div class="cgrt-metric-unit">ms</div>
+                                </div>
+                                <div class="cgrt-metric cgrt-live-loss">
+                                    <div class="cgrt-metric-label">Packet Loss</div>
+                                    <div class="cgrt-metric-value">--</div>
+                                    <div class="cgrt-metric-unit">%</div>
+                                </div>
+                            </div>
+                            
+                            <p style="font-size: 13px; color: #737373; margin-top: 16px;">
+                                Testing against multiple servers for accurate results...
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Screen -->
+                    <div class="cgrt-results" style="display: none;">
+                        <div class="cgrt-results-container">
+                            
+                            <!-- Score Section -->
+                            <section class="cgrt-score-section">
+                                <div class="cgrt-score-gauge">
+                                    <div class="cgrt-score-circle" style="--score-color: #10b981; --score-percent: 85%;">
+                                        <div class="cgrt-score-inner">
+                                            <div class="cgrt-score-number">85</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h2 class="cgrt-verdict">Good</h2>
+                                <p class="cgrt-verdict-text">Your network is well-suited for cloud gaming. You can expect a quality experience at 1080p with minor occasional hiccups.</p>
+                            </section>
+                            
+                            <!-- Detailed Metrics -->
+                            <section class="cgrt-metrics-grid">
+                                <div class="cgrt-metric-card cgrt-metric-latency good">
+                                    <div class="cgrt-metric-card-header">
+                                        <span class="cgrt-metric-card-title">Average Latency</span>
+                                    </div>
+                                    <div class="cgrt-metric-card-value">32 ms</div>
+                                    <div class="cgrt-metric-card-sub">Range: 28 - 38 ms</div>
+                                </div>
+                                
+                                <div class="cgrt-metric-card cgrt-metric-jitter good">
+                                    <div class="cgrt-metric-card-header">
+                                        <span class="cgrt-metric-card-title">Jitter (Stability)</span>
+                                    </div>
+                                    <div class="cgrt-metric-card-value">4 ms</div>
+                                    <div class="cgrt-metric-card-sub">Lower is better - indicates consistency</div>
+                                </div>
+                                
+                                <div class="cgrt-metric-card cgrt-metric-loss excellent">
+                                    <div class="cgrt-metric-card-header">
+                                        <span class="cgrt-metric-card-title">Packet Loss</span>
+                                    </div>
+                                    <div class="cgrt-metric-card-value">0.2%</div>
+                                    <div class="cgrt-metric-card-sub">1 of 45 packets lost</div>
+                                </div>
+                                
+                                <div class="cgrt-metric-card cgrt-metric-stability excellent">
+                                    <div class="cgrt-metric-card-header">
+                                        <span class="cgrt-metric-card-title">Connection Stability</span>
+                                    </div>
+                                    <div class="cgrt-metric-card-value">96%</div>
+                                    <div class="cgrt-metric-card-sub">0 latency spikes detected</div>
+                                </div>
+                            </section>
+                            
+                            <!-- Quality Expectations -->
+                            <section>
+                                <h3 class="cgrt-section-title">Supported Quality Levels</h3>
+                                <div class="cgrt-quality-grid">
+                                    <div class="cgrt-quality-item">
+                                        <div class="cgrt-quality-res">4K</div>
+                                        <div class="cgrt-quality-label">Quality</div>
+                                        <div class="cgrt-quality-status">Not Supported</div>
+                                    </div>
+                                    <div class="cgrt-quality-item">
+                                        <div class="cgrt-quality-res">1440p</div>
+                                        <div class="cgrt-quality-label">Quality</div>
+                                        <div class="cgrt-quality-status">Not Supported</div>
+                                    </div>
+                                    <div class="cgrt-quality-item">
+                                        <div class="cgrt-quality-res">1080p</div>
+                                        <div class="cgrt-quality-label">Quality</div>
+                                        <div class="cgrt-quality-status">Recommended</div>
+                                    </div>
+                                    <div class="cgrt-quality-item">
+                                        <div class="cgrt-quality-res">720p</div>
+                                        <div class="cgrt-quality-label">Quality</div>
+                                        <div class="cgrt-quality-status">Supported</div>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <!-- Performance Charts -->
+                            <section class="cgrt-charts-section">
+                                <h3 class="cgrt-section-title">Performance Over Time</h3>
+                                
+                                <div class="cgrt-chart-container">
+                                    <h4 class="cgrt-chart-title">Latency Timeline</h4>
+                                    <div class="cgrt-chart">
+                                        <canvas id="cgrt-latency-chart" class="cgrt-chart-canvas"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div class="cgrt-chart-container">
+                                    <h4 class="cgrt-chart-title">Jitter Distribution</h4>
+                                    <div class="cgrt-chart">
+                                        <canvas id="cgrt-jitter-chart" class="cgrt-chart-canvas"></canvas>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <!-- Recommendations -->
+                            <section class="cgrt-recommendations">
+                                <h3 class="cgrt-section-title">Recommendations</h3>
+                                <div class="cgrt-rec-item">
+                                    <div class="cgrt-rec-icon">💡</div>
+                                    <div class="cgrt-rec-content">
+                                        <div class="cgrt-rec-title">
+                                            Your Network is Great
+                                            <span class="cgrt-rec-priority low">Low</span>
+                                        </div>
+                                        <p class="cgrt-rec-text">Your connection performs well for cloud gaming. Keep monitoring during different times of day as performance can vary with network congestion.</p>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <!-- Actions -->
+                            <div class="cgrt-actions">
+                                <button class="cgrt-btn cgrt-btn-primary cgrt-restart-btn">
+                                    Run Test Again
+                                </button>
+                                <button class="cgrt-btn cgrt-btn-secondary" onclick="window.print()">
+                                    Print Results
+                                </button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-footer">
+            <p>This is a standalone demo. The actual plugin integrates seamlessly into WordPress.</p>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

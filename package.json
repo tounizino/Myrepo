@@ -1,0 +1,49 @@
+{
+  "name": "cloud-gaming-readiness-test",
+  "version": "1.0.0",
+  "description": "Professional-grade cloud gaming network diagnostic tool for WordPress",
+  "main": "assets/js/main.js",
+  "scripts": {
+    "test": "echo \"Run tests manually or set up automated testing\" && exit 0",
+    "lint:js": "eslint assets/js/main.js",
+    "lint:css": "stylelint assets/css/style.css",
+    "format:js": "prettier --write assets/js/main.js",
+    "format:css": "prettier --write assets/css/style.css",
+    "build:js": "terser assets/js/main.js -c -m -o assets/js/main.min.js",
+    "build:css": "postcss assets/css/style.css -o assets/css/style.min.css",
+    "build": "npm run build:js && npm run build:css",
+    "watch": "echo \"Set up watch mode with your preferred tools\"",
+    "validate": "npm run lint:js && npm run lint:css"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "cloud-gaming",
+    "network-test",
+    "latency",
+    "jitter",
+    "diagnostic"
+  ],
+  "author": "Cloud Gaming Performance",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "prettier": "^3.0.3",
+    "stylelint": "^15.10.3",
+    "terser": "^5.22.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/cloud-gaming-readiness-test"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/cloud-gaming-readiness-test/issues"
+  },
+  "homepage": "https://github.com/yourusername/cloud-gaming-readiness-test#readme"
+}
