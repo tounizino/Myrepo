@@ -18,7 +18,7 @@
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 // Define plugin constants.
@@ -33,85 +33,86 @@ define( 'CGRT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
  */
 final class Cloud_Gaming_Readiness_Test {
 
-	/**
-	 * Single instance of the class.
-	 *
-	 * @var Cloud_Gaming_Readiness_Test
-	 */
-	private static $instance = null;
+    /**
+     * Single instance of the class.
+     *
+     * @var Cloud_Gaming_Readiness_Test
+     */
+    private static $instance = null;
 
-	/**
-	 * Get the single instance of the class.
-	 *
-	 * @return Cloud_Gaming_Readiness_Test
-	 */
-	public static function instance() {
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
+    /**
+     * Get the single instance of the class.
+     *
+     * @return Cloud_Gaming_Readiness_Test
+     */
+    public static function instance() {
+        if ( is_null( self::$instance ) ) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
-	/**
-	 * Constructor.
-	 */
-	private function __construct() {
-		$this->includes();
-		$this->init_hooks();
-	}
+    /**
+     * Constructor.
+     */
+    private function __construct() {
+        $this->includes();
+        $this->init_hooks();
+    }
 
-	/**
-	 * Include required files.
-	 */
-	private function includes() {
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-database.php';
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-admin.php';
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-frontend.php';
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-api.php';
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-test-engine.php';
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-score-calculator.php';
-		require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-block.php';
-	}
+    /**
+     * Include required files.
+     */
+    private function includes() {
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-database.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-admin.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-frontend.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-api.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-test-engine.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-score-calculator.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-block.php';
+        require_once CGRT_PLUGIN_DIR . 'includes/class-cgrt-network-tester.php';
+    }
 
-	/**
-	 * Initialize hooks.
-	 */
-	private function init_hooks() {
-		register_activation_hook( CGRT_PLUGIN_FILE, array( $this, 'activate' ) );
-		register_deactivation_hook( CGRT_PLUGIN_FILE, array( $this, 'deactivate' ) );
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
-	}
+    /**
+     * Initialize hooks.
+     */
+    private function init_hooks() {
+        register_activation_hook( CGRT_PLUGIN_FILE, array( $this, 'activate' ) );
+        register_deactivation_hook( CGRT_PLUGIN_FILE, array( $this, 'deactivate' ) );
+        add_action( 'plugins_loaded', array( $this, 'init' ) );
+    }
 
-	/**
-	 * Initialize plugin components.
-	 */
-	public function init() {
-		// Initialize components.
-		CGRT_Database::instance();
-		CGRT_Admin::instance();
-		CGRT_Frontend::instance();
-		CGRT_API::instance();
-		CGRT_Block::instance();
+    /**
+     * Initialize plugin components.
+     */
+    public function init() {
+        // Initialize components.
+        CGRT_Database::instance();
+        CGRT_Admin::instance();
+        CGRT_Frontend::instance();
+        CGRT_API::instance();
+        CGRT_Block::instance();
 
-		// Load textdomain.
-		load_plugin_textdomain( 'cloud-gaming-readiness-test', false, dirname( CGRT_PLUGIN_BASENAME ) . '/languages' );
-	}
+        // Load textdomain.
+        load_plugin_textdomain( 'cloud-gaming-readiness-test', false, dirname( CGRT_PLUGIN_BASENAME ) . '/languages' );
+    }
 
-	/**
-	 * Plugin activation.
-	 */
-	public function activate() {
-		CGRT_Database::create_tables();
-		CGRT_Database::insert_default_data();
-		flush_rewrite_rules();
-	}
+    /**
+     * Plugin activation.
+     */
+    public function activate() {
+        CGRT_Database::create_tables();
+        CGRT_Database::insert_default_data();
+        flush_rewrite_rules();
+    }
 
-	/**
-	 * Plugin deactivation.
-	 */
-	public function deactivate() {
-		flush_rewrite_rules();
-	}
+    /**
+     * Plugin deactivation.
+     */
+    public function deactivate() {
+        flush_rewrite_rules();
+    }
 }
 
 /**
@@ -120,7 +121,7 @@ final class Cloud_Gaming_Readiness_Test {
  * @return Cloud_Gaming_Readiness_Test
  */
 function cgrt() {
-	return Cloud_Gaming_Readiness_Test::instance();
+    return Cloud_Gaming_Readiness_Test::instance();
 }
 
 // Initialize the plugin.

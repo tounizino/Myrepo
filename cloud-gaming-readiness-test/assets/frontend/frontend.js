@@ -416,24 +416,10 @@
     }
 
     async function chooseBestEndpoint(platform, settings) {
-        const pings = settings.endpointPickPings || 5;
+        // Server-side testing handles endpoint realism. If a fallback is needed,
+        // prefer the first enabled endpoint (typically the curated service entry).
         const endpoints = platform.endpoints || [];
-        const results = [];
-
-        for (const ep of endpoints) {
-            const samples = [];
-            for (let i = 0; i < pings; i++) {
-                const r = await timedFetch(ep, ep.timeout_ms || 2500);
-                if (r.ok) samples.push(r.rttMs);
-                // small spacing to avoid queueing.
-                await new Promise(res => setTimeout(res, 80));
-            }
-            const med = samples.length ? median(samples) : Infinity;
-            results.push({ endpoint: ep, median: med, okCount: samples.length });
-        }
-
-        results.sort((a, b) => a.median - b.median);
-        return results[0]?.endpoint || endpoints[0];
+        return endpoints[0];
     }
 
     function computeVolatility(okRtts, spikeMs) {
@@ -515,6 +501,14 @@
     function renderResults(root, platform, endpoint, metrics, scorePack, cfg) {
         const step = $('[data-step="results"]', root);
         const v = verdict(metrics, scorePack.score);
+
+        if (platform.hasDisclaimer) {
+            v.warnings.unshift('Limited diagnostic: This platform does not expose full cloud gaming server infrastructure. Measurements are approximate.');
+        }
+
+        v.recs.push(
+            'Transparency note: this test measures routing quality (DNS resolution, TCP handshake, and HTTP response timing) to cloud service entry points. It does not measure exact in-game latency.'
+        );
 
         const details = [
             ['Platform', platform.name],
@@ -668,16 +662,32 @@
         status.textContent = `Testing ${platform.name} — ${endpoint.region}`;
 
         const totalSamples = Math.max(10, Math.floor((durationSec * 1000) / intervalMs));
+
+        let serverSamples = [];
+        try {
+            const testResponse = await fetch(`${BOOT.restUrl}/test`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ platformId: platform.id, endpointId: endpoint.id }),
+            });
+            if (testResponse.ok) {
+                const testData = await testResponse.json();
+                serverSamples = Array.isArray(testData.samples) ? testData.samples : [];
+            }
+        } catch (e) {
+            serverSamples = [];
+        }
+
         const samples = [];
 
         for (let i = 0; i < totalSamples; i++) {
-            const r = await timedFetch(endpoint, endpoint.timeout_ms || 2500);
+            const s = serverSamples[i] || {};
             samples.push({
                 i,
-                ok: r.ok,
-                rttMs: r.rttMs,
-                status: r.status || null,
-                error: r.error || null,
+                ok: !!s.ok,
+                rttMs: Number.isFinite(Number(s.rttMs)) ? Number(s.rttMs) : 0,
+                status: s.status || null,
+                error: s.error || null,
                 t: Date.now(),
             });
 
