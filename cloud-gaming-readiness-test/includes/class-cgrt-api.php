@@ -84,15 +84,13 @@ class CGRT_API {
                 continue;
             }
 
-            // Frontend only uses service_entry endpoints for faster test.
+            // Frontend uses ONLY Service Entry endpoints.
             $service_entry_endpoints = array_filter( $enabled_endpoints, function( $e ) {
-                $type = isset( $e['endpoint_type'] ) ? $e['endpoint_type'] : 'service_entry';
-                return 'service_entry' === $type;
+                return isset( $e['region'] ) && 'Service Entry' === $e['region'];
             } );
 
-            // If no service entry found, fallback to first endpoint.
             if ( empty( $service_entry_endpoints ) ) {
-                $service_entry_endpoints = array_slice( $enabled_endpoints, 0, 1 );
+                continue;
             }
 
             $has_disclaimer = false;
@@ -210,8 +208,9 @@ class CGRT_API {
         if ( is_array( $cached ) && isset( $cached['samples'] ) && is_array( $cached['samples'] ) ) {
             return new WP_REST_Response(
                 array(
-                    'success' => true,
-                    'samples' => $cached['samples'],
+                    'success'     => true,
+                    'samples'     => $cached['samples'],
+                    'status_info' => isset( $cached['status_info'] ) ? $cached['status_info'] : null,
                 ),
                 200
             );
@@ -230,6 +229,14 @@ class CGRT_API {
             $wpdb->prepare( "SELECT * FROM {$tables['endpoints']} WHERE id = %d AND enabled = 1", $endpoint_id ),
             ARRAY_A
         );
+
+        // Frontend test rules: ONLY Service Entry endpoints are allowed here.
+        if ( $row && isset( $row['region'] ) && 'Service Entry' !== $row['region'] ) {
+            return new WP_REST_Response(
+                array( 'error' => 'Endpoint is not a Service Entry endpoint' ),
+                400
+            );
+        }
 
         if ( ! $row ) {
             return new WP_REST_Response(
@@ -252,12 +259,12 @@ class CGRT_API {
         $samples      = max( 10, (int) floor( $duration_sec / ( $interval_ms / 1000 ) ) );
         $interval_sec = $interval_ms / 1000;
 
-        // Optional status endpoint used as fallback/debugging (not exposed to frontend selection).
+        // Optional status endpoint (diagnostic only, never affects scoring).
         $status_row = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM {$tables['endpoints']} WHERE platform_id = %d AND enabled = 1 AND endpoint_type = %s ORDER BY is_default DESC, id ASC LIMIT 1",
+                "SELECT * FROM {$tables['endpoints']} WHERE platform_id = %d AND enabled = 1 AND region = %s ORDER BY is_default DESC, id ASC LIMIT 1",
                 (int) $row['platform_id'],
-                'status'
+                'Status'
             ),
             ARRAY_A
         );
@@ -282,30 +289,43 @@ class CGRT_API {
             );
         }
 
-        // If service entry blocks or fails for some samples, try a limited fallback to the status endpoint.
-        if ( $status_endpoint && ! empty( $result['samples'] ) ) {
-            $fallback_used = 0;
-            foreach ( $result['samples'] as $idx => $sample ) {
-                if ( $fallback_used >= 5 ) {
-                    break;
-                }
-                if ( ! empty( $sample['ok'] ) ) {
-                    continue;
-                }
-                $fallback = CGRT_Network_Tester::test_endpoint( $status_endpoint, 1, $interval_sec );
-                if ( ! empty( $fallback['samples'] ) && ! empty( $fallback['samples'][0]['ok'] ) ) {
-                    $result['samples'][ $idx ] = $fallback['samples'][0];
-                    $fallback_used++;
-                }
+        $response_samples = isset( $result['samples'] ) && is_array( $result['samples'] ) ? $result['samples'] : array();
+
+        $successful_count = 0;
+        foreach ( $response_samples as $sample ) {
+            if ( ! empty( $sample['ok'] ) ) {
+                $successful_count++;
             }
         }
 
-        set_transient( $cache_key, array( 'samples' => $result['samples'] ), 30 );
+        if ( $successful_count === 0 && ! empty( $response_samples ) ) {
+            if ( function_exists( 'clg_debug_log' ) ) {
+                clg_debug_log( 'No successful samples', array(
+                    'total'       => count( $response_samples ),
+                    'endpoint'    => isset( $endpoint['url'] ) ? $endpoint['url'] : 'unknown',
+                    'platform_id' => isset( $endpoint['platform_id'] ) ? $endpoint['platform_id'] : 'unknown',
+                ) );
+            }
+        }
+
+        // Optional: Run status endpoint diagnostic (does NOT affect results and never blocks frontend).
+        $status_info = null;
+        if ( $status_endpoint ) {
+            $status_info = CGRT_Network_Tester::test_status_endpoint( $status_endpoint );
+        }
+
+        $cache_data = array(
+            'samples'     => $response_samples,
+            'status_info' => $status_info,
+        );
+
+        set_transient( $cache_key, $cache_data, 30 );
 
         return new WP_REST_Response(
             array(
-                'success' => true,
-                'samples' => $result['samples'],
+                'success'     => true,
+                'samples'     => $response_samples,
+                'status_info' => $status_info,
             ),
             200
         );

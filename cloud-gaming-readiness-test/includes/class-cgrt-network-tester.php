@@ -32,13 +32,36 @@ class CGRT_Network_Tester {
             $method = 'GET';
         }
 
+        clg_debug_log( 'Starting endpoint test batch', array(
+            'url'        => $url,
+            'method'     => $method,
+            'samples'    => $samples,
+            'timeout_ms' => $timeout_ms,
+        ) );
+
         // Intentionally do not sleep between samples: the frontend already paces the display.
         // This keeps the UX duration stable while still capturing repeated DNS/TCP/HTTP timings.
-        $results = array();
+        $results         = array();
+        $success_count   = 0;
+        $failure_count   = 0;
 
         for ( $i = 0; $i < $samples; $i++ ) {
-            $results[] = self::measure_single( $url, $method, $timeout_ms );
+            $sample = self::measure_single( $url, $method, $timeout_ms );
+            $results[] = $sample;
+
+            if ( ! empty( $sample['ok'] ) ) {
+                $success_count++;
+            } else {
+                $failure_count++;
+            }
         }
+
+        clg_debug_log( 'Endpoint test batch complete', array(
+            'url'      => $url,
+            'total'    => count( $results ),
+            'success'  => $success_count,
+            'failures' => $failure_count,
+        ) );
 
         return array(
             'ok'      => true,
@@ -188,15 +211,55 @@ class CGRT_Network_Tester {
      * @return void
      */
     private static function log_debug( $message, $context = array() ) {
-        if ( defined( 'WP_DEBUG' ) && WP_DEBUG && defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-            $log_entry = sprintf(
-                '[CGRT Network Test] %s: %s',
-                $message,
-                wp_json_encode( $context )
-            );
-            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-            error_log( $log_entry );
+        if ( function_exists( 'clg_debug_log' ) ) {
+            clg_debug_log( $message, $context );
+            return;
         }
+
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            $line = '[CloudLoadout Test] ' . $message;
+            if ( ! empty( $context ) ) {
+                $line .= ' | ' . wp_json_encode( $context );
+            }
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+            error_log( $line );
+        }
+    }
+
+    /**
+     * Test status endpoint (diagnostic only).
+     *
+     * @param array $endpoint Endpoint data.
+     * @return array Status info (never blocks frontend results).
+     */
+    public static function test_status_endpoint( $endpoint ) {
+        $url = isset( $endpoint['url'] ) ? $endpoint['url'] : '';
+        if ( empty( $url ) ) {
+            return array(
+                'reachable' => false,
+                'message'   => 'No URL provided',
+            );
+        }
+
+        $method     = isset( $endpoint['method'] ) ? strtoupper( (string) $endpoint['method'] ) : 'GET';
+        $timeout_ms = 5000;
+
+        self::log_debug( 'Status endpoint check (diagnostic only)', array( 'url' => $url ) );
+
+        $result = self::measure_single( $url, $method, $timeout_ms );
+
+        if ( $result['ok'] ) {
+            return array(
+                'reachable' => true,
+                'message'   => 'Service reachable',
+                'rtt_ms'    => $result['rttMs'],
+            );
+        }
+
+        return array(
+            'reachable' => false,
+            'message'   => 'Service may be degraded: ' . ( $result['error'] ?? 'Unknown' ),
+        );
     }
 
     /**

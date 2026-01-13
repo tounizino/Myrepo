@@ -502,12 +502,6 @@
         const step = $('[data-step="results"]', root);
         const v = verdict(metrics, scorePack.score);
 
-        if (platform.hasDisclaimer) {
-            v.warnings.unshift('Limited diagnostic: This platform does not expose full cloud gaming infrastructure. Measurements are approximate.');
-        }
-
-        v.recs.push('This test measures routing quality (DNS, TCP, HTTP) to cloud service entry points, not exact in-game latency.');
-
         const details = [
             ['Platform', platform.name],
             ['Region / endpoint', `${endpoint.region}`],
@@ -704,6 +698,12 @@
             drawLatencyChart(canvas, samples, spikeMs);
 
             await new Promise(res => setTimeout(res, intervalMs));
+        }
+
+        const okCount = samples.filter(s => s.ok).length;
+        if (okCount === 0) {
+            renderError(root, 'Platform unreachable (0 successful samples).');
+            return;
         }
 
         const metrics = computeResults(samples, spikeMs);

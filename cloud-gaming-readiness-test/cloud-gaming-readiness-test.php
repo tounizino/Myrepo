@@ -28,6 +28,22 @@ define( 'CGRT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CGRT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CGRT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+if ( ! function_exists( 'clg_debug_log' ) ) {
+    function clg_debug_log( $message, $context = array() ) {
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+            return;
+        }
+
+        $line = '[CloudLoadout Test] ' . $message;
+        if ( ! empty( $context ) ) {
+            $line .= ' | ' . wp_json_encode( $context );
+        }
+
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+        error_log( $line );
+    }
+}
+
 /**
  * Main plugin class.
  */
