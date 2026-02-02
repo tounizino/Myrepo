@@ -82,17 +82,24 @@
                     </tr>
                 </thead>
                 <tbody id="cgrt-platforms-list">
-                    <?php foreach ( $platforms as $platform ) : ?>
-                        <tr data-platform='<?php echo json_encode($platform); ?>'>
-                            <td><strong><?php echo esc_html( $platform['name'] ); ?></strong></td>
-                            <td><?php echo count( $platform['servers'] ); ?> <?php _e( 'server(s)', 'cloud-gaming-test' ); ?></td>
-                            <td><?php echo $platform['enabled'] ? __( 'Enabled', 'cloud-gaming-test' ) : __( 'Disabled', 'cloud-gaming-test' ); ?></td>
-                            <td>
-                                <button class="button edit-platform-btn"><?php _e( 'Edit', 'cloud-gaming-test' ); ?></button>
-                                <button class="button delete-platform-btn" style="color:red"><?php _e( 'Delete', 'cloud-gaming-test' ); ?></button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <?php 
+                    if ( is_array( $platforms ) ) :
+                        foreach ( $platforms as $platform ) : 
+                            if ( ! is_array( $platform ) ) continue;
+                            ?>
+                            <tr data-platform='<?php echo esc_attr( json_encode($platform) ); ?>'>
+                                <td><strong><?php echo esc_html( isset($platform['name']) ? $platform['name'] : 'Unnamed' ); ?></strong></td>
+                                <td><?php echo isset($platform['servers']) && is_array($platform['servers']) ? count( $platform['servers'] ) : 0; ?> <?php _e( 'server(s)', 'cloud-gaming-test' ); ?></td>
+                                <td><?php echo isset($platform['enabled']) && $platform['enabled'] ? __( 'Enabled', 'cloud-gaming-test' ) : __( 'Disabled', 'cloud-gaming-test' ); ?></td>
+                                <td>
+                                    <button class="button edit-platform-btn"><?php _e( 'Edit', 'cloud-gaming-test' ); ?></button>
+                                    <button class="button delete-platform-btn" style="color:red"><?php _e( 'Delete', 'cloud-gaming-test' ); ?></button>
+                                </td>
+                            </tr>
+                            <?php 
+                        endforeach; 
+                    endif;
+                    ?>
                 </tbody>
             </table>
             <p><button class="button button-secondary" id="add-platform-btn"><?php _e( 'Add New Platform', 'cloud-gaming-test' ); ?></button></p>

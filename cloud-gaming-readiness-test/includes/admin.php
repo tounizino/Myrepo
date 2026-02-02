@@ -30,29 +30,29 @@ function cgrt_render_admin_page() {
     // Save settings if posted
     if ( isset( $_POST['cgrt_save_settings'] ) && check_admin_referer( 'cgrt_settings_nonce' ) ) {
         $settings = array(
-            'test_duration' => intval( $_POST['test_duration'] ),
-            'test_intensity' => intval( $_POST['test_intensity'] ),
+            'test_duration' => isset( $_POST['test_duration'] ) ? intval( $_POST['test_duration'] ) : 15,
+            'test_intensity' => isset( $_POST['test_intensity'] ) ? intval( $_POST['test_intensity'] ) : 5,
             'weights' => array(
-                'latency' => intval( $_POST['weight_latency'] ),
-                'jitter' => intval( $_POST['weight_jitter'] ),
-                'packet_loss' => intval( $_POST['weight_packet_loss'] ),
-                'stability' => intval( $_POST['weight_stability'] )
+                'latency' => isset( $_POST['weight_latency'] ) ? intval( $_POST['weight_latency'] ) : 40,
+                'jitter' => isset( $_POST['weight_jitter'] ) ? intval( $_POST['weight_jitter'] ) : 30,
+                'packet_loss' => isset( $_POST['weight_packet_loss'] ) ? intval( $_POST['weight_packet_loss'] ) : 20,
+                'stability' => isset( $_POST['weight_stability'] ) ? intval( $_POST['weight_stability'] ) : 10
             ),
             'thresholds' => array(
-                'excellent' => intval( $_POST['threshold_excellent'] ),
-                'good' => intval( $_POST['threshold_good'] ),
-                'fair' => intval( $_POST['threshold_fair'] ),
+                'excellent' => isset( $_POST['threshold_excellent'] ) ? intval( $_POST['threshold_excellent'] ) : 90,
+                'good' => isset( $_POST['threshold_good'] ) ? intval( $_POST['threshold_good'] ) : 75,
+                'fair' => isset( $_POST['threshold_fair'] ) ? intval( $_POST['threshold_fair'] ) : 50,
                 'poor' => 0
             ),
             'latency_thresholds' => array(
-                'excellent' => intval( $_POST['latency_excellent'] ),
-                'good' => intval( $_POST['latency_good'] ),
-                'fair' => intval( $_POST['latency_fair'] )
+                'excellent' => isset( $_POST['latency_excellent'] ) ? intval( $_POST['latency_excellent'] ) : 30,
+                'good' => isset( $_POST['latency_good'] ) ? intval( $_POST['latency_good'] ) : 60,
+                'fair' => isset( $_POST['latency_fair'] ) ? intval( $_POST['latency_fair'] ) : 100
             ),
             'jitter_thresholds' => array(
-                'excellent' => intval( $_POST['jitter_excellent'] ),
-                'good' => intval( $_POST['jitter_good'] ),
-                'fair' => intval( $_POST['jitter_fair'] )
+                'excellent' => isset( $_POST['jitter_excellent'] ) ? intval( $_POST['jitter_excellent'] ) : 5,
+                'good' => isset( $_POST['jitter_good'] ) ? intval( $_POST['jitter_good'] ) : 15,
+                'fair' => isset( $_POST['jitter_fair'] ) ? intval( $_POST['jitter_fair'] ) : 30
             )
         );
         update_option( 'cgrt_settings', $settings );
@@ -67,7 +67,11 @@ function cgrt_render_admin_page() {
     wp_enqueue_style( 'cgrt-admin-css', CGRT_URL . 'assets/css/admin.css', array(), CGRT_VERSION );
     wp_enqueue_script( 'cgrt-admin-js', CGRT_URL . 'assets/js/admin.js', array( 'jquery' ), CGRT_VERSION, true );
 
-    wp_localize_script( 'cgrt-admin-js', 'cgrt_admin_nonce', wp_create_nonce( 'cgrt_admin_nonce' ) );
+    wp_localize_script( 'cgrt-admin-js', 'cgrt_admin', array(
+        'nonce' => wp_create_nonce( 'cgrt_admin_nonce' )
+    ) );
 
-    include CGRT_PATH . 'templates/admin-page.php';
+    if ( file_exists( CGRT_PATH . 'templates/admin-page.php' ) ) {
+        include CGRT_PATH . 'templates/admin-page.php';
+    }
 }

@@ -74,7 +74,7 @@ jQuery(document).ready(function($) {
 
         $.post(ajaxurl, {
             action: 'cgrt_save_platform',
-            nonce: cgrt_admin_nonce,
+            nonce: cgrt_admin.nonce,
             platform: platformData
         }, function(response) {
             if (response.success) {
@@ -90,7 +90,7 @@ jQuery(document).ready(function($) {
         const platform = $(this).closest('tr').data('platform');
         $.post(ajaxurl, {
             action: 'cgrt_delete_platform',
-            nonce: cgrt_admin_nonce,
+            nonce: cgrt_admin.nonce,
             id: platform.id
         }, function(response) {
             if (response.success) {
