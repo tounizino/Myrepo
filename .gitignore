@@ -1,0 +1,16 @@
+# WordPress standard .gitignore
+.DS_Store
+Thumbs.db
+wp-config.php
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/cache/
+wp-content/languages/
+wp-content/plugins/hello.php
+wp-content/themes/twenty*/
+node_modules/
+.npm/
+.env
+*.log
