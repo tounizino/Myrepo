@@ -1,0 +1,25 @@
+.cgrt-admin .cgrt-card {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.cgrt-admin h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.cgrt-admin .form-table th {
+    width: 250px;
+}
+
+.cgrt-admin .small-text {
+    width: 80px;
+}
+
+#cgrt-platforms-manager table {
+    margin-top: 15px;
+}

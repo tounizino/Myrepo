@@ -1,0 +1,244 @@
+:root {
+    --cgrt-primary: #007bff;
+    --cgrt-bg: #ffffff;
+    --cgrt-text: #333333;
+    --cgrt-border: #e0e0e0;
+    --cgrt-excellent: #28a745;
+    --cgrt-good: #8bc34a;
+    --cgrt-fair: #ffc107;
+    --cgrt-poor: #dc3545;
+    --cgrt-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.cgrt-container {
+    font-family: var(--cgrt-font);
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background: var(--cgrt-bg);
+    border: 1px solid var(--cgrt-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    color: var(--cgrt-text);
+}
+
+.cgrt-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cgrt-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.cgrt-header p {
+    color: #666;
+    margin-top: 10px;
+}
+
+.cgrt-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cgrt-form-group {
+    margin-bottom: 20px;
+}
+
+.cgrt-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.cgrt-form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cgrt-border);
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 16px;
+}
+
+.cgrt-btn-primary {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--cgrt-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cgrt-btn-primary:hover {
+    background: #0056b3;
+}
+
+.cgrt-btn-secondary {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Testing UI */
+.cgrt-progress-container {
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.cgrt-progress-bar {
+    height: 100%;
+    background: var(--cgrt-primary);
+    width: 0%;
+    transition: width 0.3s linear;
+}
+
+.cgrt-live-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.cgrt-stat {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.cgrt-stat .label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.cgrt-stat .value {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.cgrt-stat .unit {
+    font-size: 14px;
+    color: #999;
+    margin-left: 2px;
+}
+
+.cgrt-graph-container {
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.cgrt-status-text {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+/* Results UI */
+.cgrt-score-circle {
+    width: 150px;
+    margin: 0 auto 20px;
+}
+
+.circular-chart {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.8;
+}
+
+.circle {
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s ease;
+}
+
+.percentage {
+    fill: #333;
+    font-family: var(--cgrt-font);
+    font-size: 0.5em;
+    text-anchor: middle;
+    font-weight: 700;
+}
+
+.cgrt-verdict {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cgrt-verdict h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.cgrt-results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.cgrt-result-card {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cgrt-recommendations {
+    background: #fdfdfe;
+    border-left: 4px solid var(--cgrt-primary);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.cgrt-recommendations h4 {
+    margin-top: 0;
+}
+
+.cgrt-recommendations ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.cgrt-recommendations li {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+    .cgrt-live-stats { grid-template-columns: 1fr; }
+    .cgrt-results-grid { grid-template-columns: 1fr; }
+}
