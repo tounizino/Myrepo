@@ -1,0 +1,235 @@
+/**
+ * Admin styles for Cloud Gaming Readiness Test plugin.
+ *
+ * @package Cloud_Gaming_Readiness_Test
+ * @version 1.0.0
+ */
+
+.cgrt-admin-wrap {
+    max-width: 1200px;
+    margin: 20px 0;
+}
+
+.cgrt-admin-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+@media ( max-width: 1024px ) {
+    .cgrt-admin-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Main content */
+.cgrt-main-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.1 );
+}
+
+.cgrt-main-content h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #1f2937;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.cgrt-main-content h3 {
+    margin: 30px 0 15px;
+    color: #374151;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* Settings sections */
+.cgrt-main-content .form-table {
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.cgrt-main-content .form-table th {
+    padding: 15px 10px;
+    width: 250px;
+    vertical-align: top;
+    color: #374151;
+    font-weight: 500;
+}
+
+.cgrt-main-content .form-table td {
+    padding: 15px 10px;
+}
+
+.cgrt-main-content .form-table .description {
+    display: block;
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Color picker */
+.cgrt-color-picker {
+    width: 60px;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Number inputs grouping */
+.cgrt-three-number-inputs,
+.cgrt-two-number-inputs {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cgrt-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cgrt-input-group label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* Sidebar */
+.cgrt-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cgrt-sidebar-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.1 );
+}
+
+.cgrt-sidebar-card h3 {
+    margin: 0 0 15px;
+    color: #1f2937;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.cgrt-sidebar-card h4 {
+    margin: 15px 0 10px;
+    color: #374151;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.cgrt-sidebar-card p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.cgrt-sidebar-card ol {
+    margin: 0;
+    padding-left: 20px;
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.cgrt-sidebar-card li {
+    margin-bottom: 8px;
+}
+
+/* Shortcode display */
+.cgrt-shortcode {
+    display: block;
+    background: #f3f4f6;
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: #1f2937;
+    word-break: break-all;
+    margin: 15px 0;
+    border: 1px solid #e5e7eb;
+}
+
+/* Buttons */
+.cgrt-sidebar-card .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.cgrt-sidebar-card .button:hover {
+    transform: translateY( -1px );
+    box-shadow: 0 2px 4px rgba( 0, 0, 0, 0.1 );
+}
+
+/* Notices */
+.cgrt-notice {
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cgrt-notice-success {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+}
+
+.cgrt-notice-error {
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+}
+
+.cgrt-notice-info {
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+}
+
+/* Responsive adjustments */
+@media ( max-width: 768px ) {
+    .cgrt-admin-wrap {
+        margin: 10px;
+    }
+
+    .cgrt-main-content,
+    .cgrt-sidebar-card {
+        padding: 20px;
+    }
+
+    .cgrt-three-number-inputs,
+    .cgrt-two-number-inputs {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cgrt-main-content .form-table th,
+    .cgrt-main-content .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
