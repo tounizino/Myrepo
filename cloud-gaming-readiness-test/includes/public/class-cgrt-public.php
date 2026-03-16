@@ -64,15 +64,7 @@ class CGRT_Public {
             'all'
         );
 
-        // Enqueue theme CSS.
-        $default_mode = get_option( 'cgrt_default_mode', 'dark' );
-        wp_enqueue_style(
-            $this->plugin_name . '-' . $default_mode,
-            CGRT_PLUGIN_URL . 'assets/css/themes/' . $default_mode . '.css',
-            array( $this->plugin_name . '-public' ),
-            $this->version,
-            'all'
-        );
+        // Theme removed - using unified dark gaming theme
     }
 
     /**
@@ -91,12 +83,26 @@ class CGRT_Public {
             'restUrl'         => rest_url( 'cloud-gaming-test/v1' ),
             'nonce'           => wp_create_nonce( 'cgrt_public_nonce' ),
             'cloudflareEnabled' => get_option( 'cgrt_cloudflare_enabled', false ),
-            'pingCount'       => get_option( 'cgrt_ping_count', 10 ),
+            'pingCount'       => get_option( 'cgrt_ping_count', 20 ),
             'testTimeout'     => get_option( 'cgrt_test_timeout', 30 ),
             'enableAdvanced'  => get_option( 'cgrt_enable_advanced', false ),
             'homeUrl'         => get_option( 'cgrt_home_url', home_url() ),
-            'themeColor'      => get_option( 'cgrt_theme_color', '#6366f1' ),
-            'defaultMode'     => get_option( 'cgrt_default_mode', 'dark' ),
+            'themeColor'      => '#00ff88', // Unified gaming theme
+            'strings' => array(
+                'starting'      => __( 'Initializing...', 'cloud-gaming-readiness-test' ),
+                'testingPing'   => __( 'Testing latency...', 'cloud-gaming-readiness-test' ),
+                'testingJitter' => __( 'Testing jitter...', 'cloud-gaming-readiness-test' ),
+                'testingPacketLoss' => __( 'Testing packet loss...', 'cloud-gaming-readiness-test' ),
+                'testingSpeed'  => __( 'Testing speed...', 'cloud-gaming-readiness-test' ),
+                'complete'      => __( 'Complete!', 'cloud-gaming-readiness-test' ),
+                'error'         => __( 'An error occurred. Please try again.', 'cloud-gaming-readiness-test' ),
+                'ready'         => __( 'Ready for Cloud Gaming', 'cloud-gaming-readiness-test' ),
+                'notReady'      => __( 'Not Ready', 'cloud-gaming-readiness-test' ),
+                'excellent'     => __( 'Excellent', 'cloud-gaming-readiness-test' ),
+                'good'          => __( 'Good', 'cloud-gaming-readiness-test' ),
+                'fair'          => __( 'Fair', 'cloud-gaming-readiness-test' ),
+                'poor'          => __( 'Poor', 'cloud-gaming-readiness-test' ),
+            ),
             'thresholds'      => array(
                 'latency' => array(
                     'excellent' => get_option( 'cgrt_latency_excellent', 20 ),
@@ -141,14 +147,6 @@ class CGRT_Public {
         );
 
         wp_enqueue_script(
-            $this->plugin_name . '-speed-test',
-            CGRT_PLUGIN_URL . 'assets/js/public/speed-test.js',
-            array( $this->plugin_name . '-network-test' ),
-            $this->version,
-            true
-        );
-
-        wp_enqueue_script(
             $this->plugin_name . '-ui-animations',
             CGRT_PLUGIN_URL . 'assets/js/public/ui-animations.js',
             array(),
@@ -161,7 +159,6 @@ class CGRT_Public {
             CGRT_PLUGIN_URL . 'assets/js/public/app.js',
             array(
                 $this->plugin_name . '-network-test',
-                $this->plugin_name . '-speed-test',
                 $this->plugin_name . '-ui-animations',
             ),
             $this->version,

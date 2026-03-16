@@ -1,23 +1,9 @@
 /**
  * Dark theme for Cloud Gaming Readiness Test plugin.
  *
+ * Note: Theme removed - using unified dark gaming theme.
  * @package Cloud_Gaming_Readiness_Test
  * @version 1.0.0
  */
 
-.cgrt-mode-dark {
-    --cgrt-bg: #0f172a;
-    --cgrt-bg-card: #1e293b;
-    --cgrt-bg-card-hover: #334155;
-    --cgrt-bg-input: #334155;
-    --cgrt-border: #334155;
-    --cgrt-border-hover: #475569;
-
-    --cgrt-text-primary: #f8fafc;
-    --cgrt-text-secondary: #94a3b8;
-    --cgrt-text-muted: #64748b;
-
-    --cgrt-shadow-sm: 0 1px 2px 0 rgba( 0, 0, 0, 0.5 );
-    --cgrt-shadow-md: 0 4px 6px -1px rgba( 0, 0, 0, 0.3 );
-    --cgrt-shadow-lg: 0 10px 15px -3px rgba( 0, 0, 0, 0.4 );
-}
+/* Theme variables are now in public.css - this file kept for compatibility */

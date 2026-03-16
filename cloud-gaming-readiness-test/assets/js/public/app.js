@@ -1,5 +1,6 @@
 /**
  * Main application for Cloud Gaming Readiness Test.
+ * Full-page immersive experience without theme toggle.
  *
  * @package Cloud_Gaming_Readiness_Test
  * @version 1.0.0
@@ -18,6 +19,7 @@
             this.networkTest = null;
             this.speedTest = null;
             this.isRunning = false;
+            this.testStartTime = null;
 
             this.init();
         }
@@ -27,7 +29,7 @@
          */
         init() {
             this.bindEvents();
-            this.loadUserTheme();
+            this.initAnimations();
         }
 
         /**
@@ -52,15 +54,6 @@
                 shareBtn.addEventListener( 'click', () => this.shareResults() );
             }
 
-            // Theme toggle.
-            const themeToggle = document.getElementById( 'cgrt-theme-toggle' );
-            if ( themeToggle ) {
-                themeToggle.addEventListener( 'click', () => {
-                    this.ui.toggleTheme();
-                    this.saveThemePreference();
-                } );
-            }
-
             // Error modal close button.
             const errorCloseBtn = document.getElementById( 'cgrt-error-close-btn' );
             if ( errorCloseBtn ) {
@@ -69,6 +62,25 @@
                     this.ui.showIntroScreen();
                 } );
             }
+
+            // Close modal on background click.
+            const modal = document.getElementById( 'cgrt-error-modal' );
+            if ( modal ) {
+                modal.addEventListener( 'click', ( e ) => {
+                    if ( e.target === modal ) {
+                        this.ui.hideErrorModal();
+                        this.ui.showIntroScreen();
+                    }
+                } );
+            }
+        }
+
+        /**
+         * Initialize animations.
+         */
+        initAnimations() {
+            // Initial screen animations are handled in CSS.
+            this.ui.animateIntro();
         }
 
         /**
@@ -80,26 +92,27 @@
             }
 
             this.isRunning = true;
+            this.testStartTime = Date.now();
             this.ui.showTestScreen();
 
-            // Initialize test instances with progress callbacks.
+            // Reset metrics.
+            this.ui.resetAllMetrics();
+
+            // Initialize test instance with progress callbacks.
             this.networkTest = new CGRTNetworkTest( this.settings );
-            this.networkTest.onProgressUpdate = ( percent, message ) => {
-                this.ui.updateProgress( percent, message );
+            this.networkTest.onProgressUpdate = ( percent, message, metricValue ) => {
+                this.ui.updateProgress( percent, message, metricValue );
             };
 
-            this.speedTest = new CGRTSpeedTest( this.settings );
+            this.networkTest.onMetricUpdate = ( metric, value ) => {
+                this.ui.updateMetricLive( metric, value );
+            };
 
             try {
-                // Run browser-based tests first.
-                await this.runBrowserTests();
+                // Run all tests.
+                await this.runFullTest();
 
-                // Run Cloudflare test if enabled.
-                if ( this.settings.cloudflareEnabled ) {
-                    await this.runCloudflareTests();
-                }
-
-                // Display results.
+                // Display final results.
                 this.displayResults();
 
                 // Save results.
@@ -114,47 +127,20 @@
         }
 
         /**
-         * Run browser-based tests.
+         * Run full test suite.
          */
-        async runBrowserTests() {
+        async runFullTest() {
             const result = await this.networkTest.runAllTests();
 
-            if ( result.success ) {
-                // Update UI with results.
-                this.ui.updateMetricValue( 'latency', result.results.latency, '' );
-                this.ui.updateMetricValue( 'jitter', result.results.jitter, '' );
-                this.ui.updateMetricValue( 'packet-loss', result.results.packetLoss, '' );
-                this.ui.updateMetricValue( 'download', result.results.download, '' );
-                this.ui.updateMetricValue( 'upload', result.results.upload, '' );
-
-                this.currentResults = result.results;
-            } else {
+            if ( ! result.success ) {
                 throw new Error( result.error );
             }
+
+            this.currentResults = result.results;
         }
 
         /**
-         * Run Cloudflare tests.
-         */
-        async runCloudflareTests() {
-            const result = await this.speedTest.runCloudflareTest();
-
-            if ( result.success ) {
-                // Merge with existing results (prefer Cloudflare if available).
-                this.currentResults = {
-                    ...this.currentResults,
-                    ...result.results
-                };
-
-                // Update UI.
-                if ( result.results.latency ) {
-                    this.ui.updateMetricValue( 'latency', result.results.latency, '' );
-                }
-            }
-        }
-
-        /**
-         * Display final results.
+         * Display final results with detailed breakdown.
          */
         displayResults() {
             this.ui.showResultsScreen();
@@ -163,9 +149,20 @@
             const score = this.calculateOverallScore( this.currentResults );
             const label = this.getScoreLabel( score );
 
+            // Animate score circle.
             this.ui.updateScoreCircle( score, label );
-            this.ui.updateResultBars( this.currentResults, this.settings.thresholds );
-            this.ui.displayRecommendations( this.generateRecommendations() );
+
+            // Display all detailed metrics.
+            this.ui.displayDetailedResults( this.currentResults, this.settings.thresholds );
+
+            // Display recommendations.
+            const recommendations = this.generateRecommendations();
+            this.ui.displayRecommendations( recommendations );
+
+            // Update connection quality card.
+            this.ui.updateQualityCard( this.currentResults );
+
+            console.log( 'Test completed:', this.currentResults );
         }
 
         /**
@@ -220,31 +217,31 @@
                 }
             }
 
-            // Download speed score (20 points).
-            maxScore += 20;
+            // Download speed score (25 points).
+            maxScore += 25;
             if ( results.download ) {
                 if ( results.download >= 50 ) {
-                    score += 20;
+                    score += 25;
                 } else if ( results.download >= 25 ) {
-                    score += 15;
+                    score += 20;
                 } else if ( results.download >= 10 ) {
-                    score += 10;
+                    score += 12;
                 } else {
                     score += 5;
                 }
             }
 
-            // Upload speed score (15 points).
-            maxScore += 15;
+            // Upload speed score (10 points).
+            maxScore += 10;
             if ( results.upload ) {
                 if ( results.upload >= 25 ) {
-                    score += 15;
-                } else if ( results.upload >= 10 ) {
                     score += 10;
+                } else if ( results.upload >= 10 ) {
+                    score += 7;
                 } else if ( results.upload >= 5 ) {
-                    score += 5;
+                    score += 4;
                 } else {
-                    score += 2;
+                    score += 1;
                 }
             }
 
@@ -255,93 +252,118 @@
          * Get score label.
          */
         getScoreLabel( score ) {
-            if ( score >= 85 ) {
-                return this.settings.strings.excellent;
-            } else if ( score >= 65 ) {
-                return this.settings.strings.good;
-            } else if ( score >= 40 ) {
-                return this.settings.strings.fair;
-            } else {
-                return this.settings.strings.poor;
-            }
+            if ( score >= 90 ) return 'Excellent';
+            if ( score >= 75 ) return 'Good';
+            if ( score >= 60 ) return 'Fair';
+            if ( score >= 40 ) return 'Poor';
+            return 'Not Ready';
         }
 
         /**
-         * Generate recommendations based on results.
+         * Generate detailed recommendations.
          */
         generateRecommendations() {
             const recommendations = [];
-            const results = this.currentResults;
+            const r = this.currentResults;
             const t = this.settings.thresholds;
 
-            if ( ! results ) {
+            if ( ! r ) {
                 return [];
             }
 
             // Latency recommendations.
-            if ( results.latency ) {
-                if ( results.latency > t.latency.fair ) {
+            if ( r.latency ) {
+                if ( r.latency > t.latency.fair ) {
                     recommendations.push( {
-                        text: 'Your latency is too high for cloud gaming. Try connecting via Ethernet cable instead of WiFi, or close bandwidth-intensive applications.'
+                        title: 'High Latency Detected',
+                        text: 'Your latency of ' + r.latency.toFixed( 1 ) + 'ms is too high for competitive gaming. Switch to a wired Ethernet connection, move closer to your router, or use a gaming router with QoS prioritization.',
+                        icon: 'latency'
                     } );
-                } else if ( results.latency > t.latency.good ) {
+                } else if ( r.latency > t.latency.good ) {
                     recommendations.push( {
-                        text: 'Your latency is acceptable but could be better. Consider using a wired connection for the best gaming experience.'
+                        title: 'Latency Optimization',
+                        text: 'Your latency is acceptable but could be better for fast-paced games. Consider using a 5GHz WiFi connection or Ethernet cable for reduced input lag.',
+                        icon: 'info'
+                    } );
+                } else {
+                    recommendations.push( {
+                        title: 'Excellent Latency',
+                        text: 'Your latency of ' + r.latency.toFixed( 1 ) + 'ms is perfect for competitive gaming! You\'ll have minimal input delay in games like FPS, fighting games, and MOBAs.',
+                        icon: 'success'
                     } );
                 }
             }
 
             // Jitter recommendations.
-            if ( results.jitter && results.jitter > t.jitter.good ) {
-                recommendations.push( {
-                    text: 'Network instability detected (high jitter). This can cause stuttering in games. Try using a wired connection and contact your ISP if the issue persists.'
-                } );
-            }
-
-            // Packet loss recommendations.
-            if ( results.packetLoss && results.packetLoss > t.packetLoss.good ) {
-                recommendations.push( {
-                    text: 'Packet loss detected. This can cause input lag and disconnections. Check your network cables and router, or try a different connection.'
-                } );
-            }
-
-            // Download speed recommendations.
-            if ( results.download ) {
-                if ( results.download < 10 ) {
+            if ( r.jitter ) {
+                if ( r.jitter > t.jitter.good ) {
                     recommendations.push( {
-                        text: 'Your download speed is too low for cloud gaming. Minimum 10 Mbps is recommended for 720p streaming.'
-                    } );
-                } else if ( results.download < 25 ) {
-                    recommendations.push( {
-                        text: 'Your connection supports 720p cloud gaming. For 1080p streaming, consider upgrading to a faster plan.'
-                    } );
-                } else if ( results.download >= 25 ) {
-                    recommendations.push( {
-                        text: 'Great! Your download speed supports 1080p cloud gaming streaming.'
+                        title: 'Network Instability',
+                        text: 'High jitter (' + r.jitter.toFixed( 1 ) + 'ms) detected. This causes stuttering in games. Close bandwidth-intensive applications, use wired connection, and check for interference on WiFi.',
+                        icon: 'warning'
                     } );
                 }
             }
 
-            // Upload speed recommendations.
-            if ( results.upload && results.upload < 5 ) {
-                recommendations.push( {
-                    text: 'Low upload speed detected. This may affect multiplayer gaming and voice chat.'
-                } );
+            // Packet loss recommendations.
+            if ( r.packetLoss !== null ) {
+                if ( r.packetLoss > t.packetLoss.good ) {
+                    recommendations.push( {
+                        title: 'Packet Loss Detected',
+                        text: 'Your connection is losing ' + r.packetLoss.toFixed( 2 ) + '% of packets. This can cause input lag and disconnections. Check your cables, restart your router, or contact your ISP.',
+                        icon: 'error'
+                    } );
+                }
+            }
+
+            // Download speed recommendations.
+            if ( r.download ) {
+                if ( r.download < 10 ) {
+                    recommendations.push( {
+                        title: 'Insufficient Download Speed',
+                        text: 'Your download speed of ' + r.download.toFixed( 1 ) + ' Mbps is below the minimum for cloud gaming. Upgrade your internet plan or reduce network traffic during gaming.',
+                        icon: 'error'
+                    } );
+                } else if ( r.download < 25 ) {
+                    recommendations.push( {
+                        title: 'Basic Cloud Gaming Supported',
+                        text: 'Your connection supports 720p cloud gaming. For 1080p streaming and faster, consider upgrading to a 25+ Mbps plan.',
+                        icon: 'info'
+                    } );
+                } else if ( r.download >= 50 ) {
+                    recommendations.push( {
+                        title: 'Excellent for 4K Gaming',
+                        text: 'Your download speed of ' + r.download.toFixed( 1 ) + ' Mbps is perfect for 4K cloud gaming on GeForce NOW, Xbox Cloud Gaming, and other services.',
+                        icon: 'success'
+                    } );
+                }
             }
 
             // Overall readiness.
-            const score = this.calculateOverallScore( results );
-            if ( score >= 65 ) {
+            const score = this.calculateOverallScore( r );
+            if ( score >= 75 ) {
                 recommendations.push( {
-                    text: 'Your connection is ready for most cloud gaming services! Try GeForce NOW, Xbox Cloud Gaming, or PlayStation Now.'
+                    title: 'Cloud Gaming Ready!',
+                    text: 'Your connection is excellent for cloud gaming. Try services like GeForce NOW for high-performance gaming, Xbox Cloud Gaming for Xbox titles, or PlayStation Plus Premium for PlayStation games.',
+                    icon: 'success'
+                } );
+            } else if ( score >= 60 ) {
+                recommendations.push( {
+                    title: 'Ready for Casual Gaming',
+                    text: 'Your connection works for most cloud gaming services, though you may experience minor issues in fast-paced competitive games. Try GeForce NOW\'s Priority tier or similar.',
+                    icon: 'info'
                 } );
             } else if ( score >= 40 ) {
                 recommendations.push( {
-                    text: 'Your connection may work for casual cloud gaming, but you might experience issues with fast-paced games.'
+                    title: 'Limited Cloud Gaming',
+                    text: 'Your connection may work for slower-paced games but will struggle with fast action games. Consider improving your network quality or playing less demanding titles.',
+                    icon: 'warning'
                 } );
             } else {
                 recommendations.push( {
-                    text: 'Your connection is not ready for cloud gaming. Please improve your network quality before trying.'
+                    title: 'Not Ready for Cloud Gaming',
+                    text: 'Your connection needs significant improvements before cloud gaming will work well. Upgrade your internet plan, use a wired connection, and optimize your network.',
+                    icon: 'error'
                 } );
             }
 
@@ -381,7 +403,19 @@
             const score = this.calculateOverallScore( this.currentResults );
             const label = this.getScoreLabel( score );
 
-            const text = `I tested my cloud gaming readiness! Score: ${score}/100 (${label})\n\nLatency: ${this.currentResults.latency}ms\nDownload: ${this.currentResults.download}Mbps\nUpload: ${this.currentResults.upload}Mbps`;
+            const text = 
+'🎮 Cloud Gaming Readiness Test Results
+
+Overall Score: ' + score + '/100 (' + label + ')
+
+📊 Performance:
+   Latency: ' + this.currentResults.latency.toFixed( 1 ) + 'ms
+   Jitter: ' + this.currentResults.jitter.toFixed( 1 ) + 'ms
+   Packet Loss: ' + this.currentResults.packetLoss.toFixed( 2 ) + '%
+   Download: ' + this.currentResults.download.toFixed( 1 ) + ' Mbps
+   Upload: ' + this.currentResults.upload.toFixed( 1 ) + ' Mbps
+
+Tested at: ' + new Date().toLocaleString();
 
             if ( navigator.share ) {
                 navigator.share( {
@@ -397,27 +431,6 @@
                     prompt( 'Copy your results:', text );
                 } );
             }
-        }
-
-        /**
-         * Load user theme preference.
-         */
-        loadUserTheme() {
-            const savedTheme = localStorage.getItem( 'cgrt_theme' );
-            if ( savedTheme ) {
-                const container = document.getElementById( 'cgrt-app' );
-                container.classList.remove( 'cgrt-mode-dark', 'cgrt-mode-light' );
-                container.classList.add( 'cgrt-mode-' + savedTheme );
-            }
-        }
-
-        /**
-         * Save theme preference.
-         */
-        saveThemePreference() {
-            const container = document.getElementById( 'cgrt-app' );
-            const theme = container.classList.contains( 'cgrt-mode-dark' ) ? 'dark' : 'light';
-            localStorage.setItem( 'cgrt_theme', theme );
         }
     }
 
