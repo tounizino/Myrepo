@@ -1,0 +1,452 @@
+/* Cloud Games Availability v2 - Frontend Styles */
+
+:root {
+    --cga-primary: #6366f1;
+    --cga-secondary: #8b5cf6;
+    --cga-success: #10b981;
+    --cga-danger: #ef4444;
+    --cga-warning: #f59e0b;
+    --cga-bg-light: #f8fafc;
+    --cga-bg-dark: #0f172a;
+    --cga-card-bg-light: rgba(255, 255, 255, 0.9);
+    --cga-card-bg-dark: rgba(30, 30, 30, 0.9);
+    --cga-border: rgba(0, 0, 0, 0.1);
+    --cga-text-light: #1e293b;
+    --cga-text-dark: #f1f5f9;
+    --cga-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --cga-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Container */
+.cga-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+/* Theme Colors */
+.cga-container[data-theme="light"] {
+    --cga-bg: var(--cga-bg-light);
+    --cga-card-bg: var(--cga-card-bg-light);
+    --cga-text: var(--cga-text-light);
+}
+
+.cga-container[data-theme="dark"] {
+    --cga-bg: var(--cga-bg-dark);
+    --cga-card-bg: var(--cga-card-bg-dark);
+    --cga-text: var(--cga-text-dark);
+    --cga-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Auto Theme (System Preference) */
+@media (prefers-color-scheme: dark) {
+    .cga-container[data-theme="auto"] {
+        --cga-bg: var(--cga-bg-dark);
+        --cga-card-bg: var(--cga-card-bg-dark);
+        --cga-text: var(--cga-text-dark);
+        --cga-border: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Section Styling */
+.cga-section {
+    margin-bottom: 32px;
+}
+
+.cga-section:last-child {
+    margin-bottom: 0;
+}
+
+.cga-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cga-text);
+    margin: 0 0 20px 0;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, var(--cga-primary), var(--cga-secondary));
+    color: white;
+    border-radius: 8px;
+}
+
+/* Cards Grid */
+.cga-cards-grid {
+    display: grid;
+    gap: var(--cga-card-spacing, 16px);
+}
+
+.cga-container[data-columns="1"] .cga-cards-grid {
+    grid-template-columns: 1fr;
+}
+
+.cga-container[data-columns="2"] .cga-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cga-container[data-columns="3"] .cga-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.cga-container[data-columns="4"] .cga-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.cga-container[data-columns="6"] .cga-cards-grid {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+    .cga-container[data-columns="6"] .cga-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .cga-container[data-columns="4"] .cga-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .cga-container[data-columns="6"] .cga-cards-grid,
+    .cga-container[data-columns="4"] .cga-cards-grid,
+    .cga-container[data-columns="3"] .cga-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cga-container[data-columns="2"] .cga-cards-grid,
+    .cga-container[data-columns="1"] .cga-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .cga-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Card Base Styles */
+.cga-card {
+    background: var(--cga-card-bg);
+    border: 1px solid var(--cga-border);
+    border-radius: var(--cga-border-radius, 12px);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Glassmorphism Effect */
+.cga-card.cga-glass {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--cga-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effects */
+.cga-card.cga-hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--cga-shadow-lg);
+}
+
+.cga-card.cga-hover-scale:hover {
+    transform: scale(1.02);
+    box-shadow: var(--cga-shadow-lg);
+}
+
+.cga-card.cga-hover-glow:hover {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+}
+
+/* Unavailable Card */
+.cga-card.cga-card-unavailable {
+    opacity: 0.6;
+    filter: grayscale(0.8);
+}
+
+.cga-card.cga-card-unavailable:hover {
+    opacity: 0.8;
+    filter: grayscale(0.5);
+}
+
+/* Card Header */
+.cga-card-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--cga-border);
+}
+
+.cga-platform-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cga-bg);
+    border-radius: 12px;
+    flex-shrink: 0;
+    padding: 8px;
+}
+
+.cga-platform-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.cga-icon-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--cga-primary), var(--cga-secondary));
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.cga-platform-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cga-platform-name {
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cga-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cga-availability-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.cga-availability-badge.cga-available {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--cga-success);
+}
+
+.cga-availability-badge.cga-unavailable {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--cga-danger);
+}
+
+/* Card Body */
+.cga-card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cga-tier {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--cga-primary), var(--cga-secondary));
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.cga-tier-label {
+    margin: 0;
+}
+
+.cga-price {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--cga-text);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.cga-price-period {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--cga-text);
+    opacity: 0.7;
+}
+
+.cga-game-included {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--cga-bg);
+}
+
+.cga-game-included.cga-included {
+    color: var(--cga-success);
+}
+
+.cga-game-included.cga-own-required {
+    color: var(--cga-warning);
+}
+
+.cga-icon-check,
+.cga-icon-info {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.cga-icon-check {
+    color: var(--cga-success);
+}
+
+.cga-icon-info {
+    color: var(--cga-warning);
+}
+
+.cga-notes,
+.cga-availability-notes {
+    font-size: 13px;
+    color: var(--cga-text);
+    opacity: 0.8;
+    line-height: 1.5;
+    padding: 10px 12px;
+    background: var(--cga-bg);
+    border-radius: 8px;
+    margin: 0;
+}
+
+.cga-notes {
+    font-style: italic;
+}
+
+/* Card Footer */
+.cga-card-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--cga-border);
+    background: var(--cga-bg);
+}
+
+.cga-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--cga-primary);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.cga-cta .cga-cta-arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.cga-cta:hover .cga-cta-arrow {
+    transform: translateX(4px);
+}
+
+/* Button Styles */
+.cga-cta-filled {
+    background: linear-gradient(135deg, var(--cga-primary), var(--cga-secondary));
+    border-color: transparent;
+    color: white;
+}
+
+.cga-cta-filled:hover {
+    background: linear-gradient(135deg, var(--cga-secondary), var(--cga-primary));
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+}
+
+.cga-cta-outline {
+    background: transparent;
+    border-color: var(--cga-primary);
+    color: var(--cga-primary);
+}
+
+.cga-cta-outline:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--cga-secondary);
+    color: var(--cga-secondary);
+    transform: translateY(-2px);
+}
+
+.cga-cta-ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--cga-primary);
+}
+
+.cga-cta-ghost:hover {
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Disabled Button */
+.cga-cta-disabled {
+    background: var(--cga-bg);
+    border: 1px solid var(--cga-border);
+    color: var(--cga-text);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cga-cta-disabled:hover {
+    background: var(--cga-bg);
+    border: 1px solid var(--cga-border);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cga-card {
+    animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.cga-card:nth-child(1) { animation-delay: 0.05s; }
+.cga-card:nth-child(2) { animation-delay: 0.1s; }
+.cga-card:nth-child(3) { animation-delay: 0.15s; }
+.cga-card:nth-child(4) { animation-delay: 0.2s; }
+.cga-card:nth-child(5) { animation-delay: 0.25s; }
+.cga-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Loading State */
+.cga-container.loading .cga-card {
+    opacity: 0;
+}
