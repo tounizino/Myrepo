@@ -131,8 +131,19 @@
         },
 
         savePlatform: function() {
-            const formData = $('#cga-platform-form').serialize();
-            
+            const form = $('#cga-platform-form');
+            const nameInput = $('#cga-platform-name');
+
+            // Check if name is required
+            if (nameInput.val().trim() === '') {
+                alert('Platform name is required!');
+                nameInput.focus();
+                return;
+            }
+
+            const formData = form.serialize();
+            console.log('Saving platform...', formData);
+
             $.ajax({
                 url: cgaAdmin.ajaxUrl,
                 type: 'POST',
@@ -141,16 +152,21 @@
                     $('.cga-save-platform').prop('disabled', true).text('Saving...');
                 },
                 success: function(response) {
+                    console.log('Platform save response:', response);
                     if (response.success) {
                         CGA_Admin.closeModal();
                         CGA_Admin.loadPlatforms();
                         CGA_Admin.loadAvailability(CGA_Admin.currentGameId);
                     } else {
-                        alert(response.data?.message || cgaAdmin.strings.error || 'Error saving platform');
+                        const errorMsg = response.data?.message || cgaAdmin.strings.error || 'Error saving platform';
+                        console.error('Save error:', errorMsg);
+                        alert(errorMsg);
                     }
                 },
-                error: function() {
-                    alert(cgaAdmin.strings.error || 'Error saving platform');
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    console.error('Response:', xhr.responseText);
+                    alert(cgaAdmin.strings.error || 'Error saving platform. Check console for details.');
                 },
                 complete: function() {
                     $('.cga-save-platform').prop('disabled', false).text('Save Platform');
@@ -253,7 +269,7 @@
         openGameModal: function() {
             $('#cga-game-modal-form')[0].reset();
             $('#cga-game-modal-id').val('');
-            $('.cga-modal-header h2').text('Add Game');
+            $('.cga-modal-header h2').text(cgaAdmin.strings.addGame || 'Add Game');
             this.openModal('cga-game-modal');
         },
 
@@ -295,8 +311,20 @@
         },
 
         saveGameModal: function() {
-            const formData = $('#cga-game-modal-form').serialize();
-            
+            const form = $('#cga-game-modal-form');
+            const nameInput = $('#cga-game-modal-name');
+
+            // Check if name is required
+            if (nameInput.val().trim() === '') {
+                alert('Game name is required!');
+                nameInput.focus();
+                return;
+            }
+
+            const formData = form.serialize();
+
+            console.log('Saving game modal...', formData);
+
             $.ajax({
                 url: cgaAdmin.ajaxUrl,
                 type: 'POST',
@@ -305,15 +333,20 @@
                     $('.cga-save-game-modal').prop('disabled', true).text('Saving...');
                 },
                 success: function(response) {
+                    console.log('Game save response:', response);
                     if (response.success) {
                         CGA_Admin.closeModal();
                         location.reload();
                     } else {
-                        alert(response.data?.message || cgaAdmin.strings.error || 'Error saving game');
+                        const errorMsg = response.data?.message || cgaAdmin.strings.error || 'Error saving game';
+                        console.error('Save error:', errorMsg);
+                        alert(errorMsg);
                     }
                 },
-                error: function() {
-                    alert(cgaAdmin.strings.error || 'Error saving game');
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    console.error('Response:', xhr.responseText);
+                    alert(cgaAdmin.strings.error || 'Error saving game. Check console for details.');
                 },
                 complete: function() {
                     $('.cga-save-game-modal').prop('disabled', false).text('Save Game');
@@ -384,8 +417,20 @@
         },
 
         saveGameDetails: function() {
-            const formData = $('#cga-game-form').serialize();
-            
+            const form = $('#cga-game-form');
+            const nameInput = $('#cga-game-name');
+
+            // Check if name is required
+            if (nameInput.val().trim() === '') {
+                alert('Game name is required!');
+                nameInput.focus();
+                return;
+            }
+
+            const formData = form.serialize();
+
+            console.log('Saving game details...', formData);
+
             $.ajax({
                 url: cgaAdmin.ajaxUrl,
                 type: 'POST',
@@ -394,17 +439,23 @@
                     $('.cga-save-game-details').prop('disabled', true).text('Saving...');
                 },
                 success: function(response) {
+                    console.log('Game details save response:', response);
                     if (response.success) {
                         alert(cgaAdmin.strings.saveSuccess || 'Saved successfully!');
                     } else {
-                        alert(response.data?.message || cgaAdmin.strings.error || 'Error saving game');
+                        const errorMsg = response.data?.message || cgaAdmin.strings.error || 'Error saving game';
+                        console.error('Save error:', errorMsg);
+                        alert(errorMsg);
                     }
                 },
-                error: function() {
-                    alert(cgaAdmin.strings.error || 'Error saving game');
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    console.error('Response:', xhr.responseText);
+                    alert(cgaAdmin.strings.error || 'Error saving game. Check console for details.');
                 },
                 complete: function() {
-                    $('.cga-save-game-details').prop('disabled', false).html('<span class="dashicons dashicons-saved"></span> ' + (cgaAdmin.strings.saveGame || 'Save Game'));
+                    const text = '<span class="dashicons dashicons-saved"></span> ' + (cgaAdmin.strings.saveGame || 'Save Game');
+                    $('.cga-save-game-details').prop('disabled', false).html(text);
                 }
             });
         },
@@ -482,7 +533,8 @@
             }
 
             const formData = $('#cga-availability-form').serialize();
-            
+            console.log('Saving availability for game:', this.currentGameId, formData);
+
             $.ajax({
                 url: cgaAdmin.ajaxUrl,
                 type: 'POST',
@@ -491,17 +543,23 @@
                     $('.cga-save-availability').prop('disabled', true).text('Saving...');
                 },
                 success: function(response) {
+                    console.log('Availability save response:', response);
                     if (response.success) {
                         alert(cgaAdmin.strings.saveSuccess || 'Saved successfully!');
                     } else {
-                        alert(response.data?.message || cgaAdmin.strings.error || 'Error saving availability');
+                        const errorMsg = response.data?.message || cgaAdmin.strings.error || 'Error saving availability';
+                        console.error('Save error:', errorMsg);
+                        alert(errorMsg);
                     }
                 },
-                error: function() {
-                    alert(cgaAdmin.strings.error || 'Error saving availability');
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                    console.error('Response:', xhr.responseText);
+                    alert(cgaAdmin.strings.error || 'Error saving availability. Check console for details.');
                 },
                 complete: function() {
-                    $('.cga-save-availability').prop('disabled', false).html('<span class="dashicons dashicons-saved"></span> ' + (cgaAdmin.strings.saveAvailability || 'Save Availability'));
+                    const text = '<span class="dashicons dashicons-saved"></span> ' + (cgaAdmin.strings.saveAvailability || 'Save Availability');
+                    $('.cga-save-availability').prop('disabled', false).html(text);
                 }
             });
         },
