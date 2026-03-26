@@ -1,0 +1,62 @@
+/* Cloud Games Availability v2 - Gutenberg Block Editor Styles */
+
+.cga-block-editor-wrapper {
+    padding: 16px;
+    background: #f0f0f1;
+    border-radius: 8px;
+}
+
+.cga-block-controls {
+    margin-bottom: 16px;
+}
+
+.cga-block-controls > div {
+    margin-bottom: 12px;
+}
+
+.cga-block-controls > div:last-child {
+    margin-bottom: 0;
+}
+
+.cga-block-controls label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.cga-block-controls select,
+.cga-block-controls input[type="number"] {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.cga-block-preview {
+    background: white;
+    border-radius: 6px;
+    padding: 20px;
+    min-height: 200px;
+    border: 1px dashed #ccc;
+}
+
+.cga-block-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #64748b;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.cga-block-empty-state .dashicons {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+}
