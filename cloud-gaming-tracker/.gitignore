@@ -1,0 +1,35 @@
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.log
+
+# WordPress specific
+wp-config.php
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+wp-content/uploads/
+
+# Node modules (if any)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Translation files (edit only in source)
+languages/*.mo
+languages/*.po
+
+# Any temporary files
+*.tmp
+*.temp
