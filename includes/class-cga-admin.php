@@ -14,10 +14,14 @@ class CGA_Admin {
         // AJAX handlers
         add_action('wp_ajax_cga_save_platform', array($this, 'ajax_save_platform'));
         add_action('wp_ajax_cga_delete_platform', array($this, 'ajax_delete_platform'));
+        add_action('wp_ajax_cga_get_platform', array($this, 'ajax_get_platform'));
         add_action('wp_ajax_cga_save_game', array($this, 'ajax_save_game'));
         add_action('wp_ajax_cga_delete_game', array($this, 'ajax_delete_game'));
+        add_action('wp_ajax_cga_get_game', array($this, 'ajax_get_game'));
         add_action('wp_ajax_cga_save_availability', array($this, 'ajax_save_availability'));
+        add_action('wp_ajax_cga_get_availability', array($this, 'ajax_get_availability'));
         add_action('wp_ajax_cga_save_settings', array($this, 'ajax_save_settings'));
+        add_action('wp_ajax_cga_get_platforms', array($this, 'ajax_get_platforms'));
     }
 
     public function ajax_save_platform() {
@@ -62,6 +66,34 @@ class CGA_Admin {
         wp_send_json_success(array('message' => __('Platform deleted successfully', 'cloud-games-availability-v2')));
     }
 
+    public function ajax_get_platform() {
+        check_ajax_referer('cga_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => 'Permission denied'));
+        }
+
+        $id = intval($_POST['id']);
+        $platform = $this->database->get_platform($id);
+        
+        if (!$platform) {
+            wp_send_json_error(array('message' => __('Platform not found', 'cloud-games-availability-v2')));
+        }
+        
+        wp_send_json_success(array('data' => $platform));
+    }
+
+    public function ajax_get_platforms() {
+        check_ajax_referer('cga_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => 'Permission denied'));
+        }
+
+        $platforms = $this->database->get_platforms();
+        wp_send_json_success(array('data' => $platforms));
+    }
+
     public function ajax_save_game() {
         check_ajax_referer('cga_nonce', 'nonce');
         
@@ -96,6 +128,23 @@ class CGA_Admin {
         $this->database->delete_game($id);
         
         wp_send_json_success(array('message' => __('Game deleted successfully', 'cloud-games-availability-v2')));
+    }
+
+    public function ajax_get_game() {
+        check_ajax_referer('cga_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => 'Permission denied'));
+        }
+
+        $id = intval($_POST['id']);
+        $game = $this->database->get_game($id);
+        
+        if (!$game) {
+            wp_send_json_error(array('message' => __('Game not found', 'cloud-games-availability-v2')));
+        }
+        
+        wp_send_json_success(array('data' => $game));
     }
 
     public function ajax_save_availability() {

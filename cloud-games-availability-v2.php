@@ -138,6 +138,12 @@ class Cloud_Games_Availability_v2 {
                 'confirmDelete' => __('Are you sure you want to delete this item?', 'cloud-games-availability-v2'),
                 'saveSuccess' => __('Saved successfully!', 'cloud-games-availability-v2'),
                 'error' => __('An error occurred. Please try again.', 'cloud-games-availability-v2'),
+                'addPlatform' => __('Add Platform', 'cloud-games-availability-v2'),
+                'editPlatform' => __('Edit Platform', 'cloud-games-availability-v2'),
+                'addGame' => __('Add Game', 'cloud-games-availability-v2'),
+                'editGame' => __('Edit Game', 'cloud-games-availability-v2'),
+                'saveGame' => __('Save Game', 'cloud-games-availability-v2'),
+                'saveAvailability' => __('Save Availability', 'cloud-games-availability-v2'),
             )
         ));
     }

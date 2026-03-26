@@ -124,10 +124,10 @@ class CGA_Database {
                 'display_order' => 2,
             ),
             array(
-                'name' => 'PlayStation Cloud',
-                'slug' => 'playstation-cloud',
+                'name' => 'PlayStation Plus Premium',
+                'slug' => 'playstation-plus-premium',
                 'icon_url' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/PlayStation_4_logo.svg/512px-PlayStation_4_logo.svg.png',
-                'description' => 'Sony\'s PlayStation cloud gaming service',
+                'description' => 'Sony\'s PlayStation Plus Premium cloud gaming service',
                 'base_price' => 19.99,
                 'price_period' => 'month',
                 'cta_text' => 'Play Now',
@@ -172,28 +172,40 @@ class CGA_Database {
                 'display_order' => 6,
             ),
             array(
-                'name' => 'Antstream Arcade',
-                'slug' => 'antstream-arcade',
-                'icon_url' => 'https://antstream.com/favicon.ico',
-                'description' => 'Retro gaming cloud service',
-                'base_price' => 4.99,
+                'name' => 'Air GPU',
+                'slug' => 'air-gpu',
+                'icon_url' => 'https://airgpu.io/favicon.ico',
+                'description' => 'Cloud GPU service for gaming',
+                'base_price' => 8.00,
                 'price_period' => 'month',
-                'cta_text' => 'Play Retro',
-                'cta_url' => 'https://antstream.com',
-                'tier_name' => 'Premium',
+                'cta_text' => 'Start Gaming',
+                'cta_url' => 'https://airgpu.io',
+                'tier_name' => 'Standard',
                 'display_order' => 7,
             ),
             array(
-                'name' => 'NVIDIA GeForce NOW (Free)',
-                'slug' => 'geforce-now-free',
-                'icon_url' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/GeForce_NOW_logo.svg/512px-GeForce_NOW_logo.svg.png',
-                'description' => 'Free tier with limited session time',
-                'base_price' => 0,
+                'name' => 'Blacknut',
+                'slug' => 'blacknut',
+                'icon_url' => 'https://blacknut.com/favicon.ico',
+                'description' => 'Cloud gaming subscription service',
+                'base_price' => 14.99,
                 'price_period' => 'month',
-                'cta_text' => 'Try Free',
-                'cta_url' => 'https://www.geforcenow.com',
-                'tier_name' => 'Free',
+                'cta_text' => 'Play Now',
+                'cta_url' => 'https://blacknut.com',
+                'tier_name' => 'Premium',
                 'display_order' => 8,
+            ),
+            array(
+                'name' => 'CloudDeck',
+                'slug' => 'clouddeck',
+                'icon_url' => 'https://clouddeck.io/favicon.ico',
+                'description' => 'Nintendo Switch-style cloud gaming',
+                'base_price' => 12.99,
+                'price_period' => 'month',
+                'cta_text' => 'Play Now',
+                'cta_url' => 'https://clouddeck.io',
+                'tier_name' => 'Premium',
+                'display_order' => 9,
             ),
         );
 
@@ -249,29 +261,29 @@ class CGA_Database {
         }
     }
 
-    public function get_platforms($status = 'active') {
-        global $wpdb;
-        $platforms_table = $this->table_prefix . 'platforms';
-        
-        $query = "SELECT * FROM $platforms_table";
-        if ($status) {
-            $query .= $wpdb->prepare(" WHERE status = %s", $status);
-        }
-        $query .= " ORDER BY display_order ASC, name ASC";
-        
-        return $wpdb->get_results($query);
-    }
-
     public function get_games($status = 'active') {
         global $wpdb;
         $games_table = $this->table_prefix . 'games';
-        
+
         $query = "SELECT * FROM $games_table";
         if ($status) {
             $query .= $wpdb->prepare(" WHERE status = %s", $status);
         }
         $query .= " ORDER BY name ASC";
-        
+
+        return $wpdb->get_results($query);
+    }
+
+    public function get_platforms($status = 'active') {
+        global $wpdb;
+        $platforms_table = $this->table_prefix . 'platforms';
+
+        $query = "SELECT * FROM $platforms_table";
+        if ($status) {
+            $query .= $wpdb->prepare(" WHERE status = %s", $status);
+        }
+        $query .= " ORDER BY display_order ASC, name ASC";
+
         return $wpdb->get_results($query);
     }
 
