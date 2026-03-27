@@ -78,32 +78,6 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
     private function upgrade_database() {
         global $wpdb;
         
-        // Add tier column to games table if it doesn't exist
-        $games_table = $wpdb->prefix . 'cgt_games';
-        $column_exists = $wpdb->get_var( $wpdb->prepare( "
-            SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-            WHERE TABLE_SCHEMA = %s 
-            AND TABLE_NAME = %s 
-            AND COLUMN_NAME = 'tier'
-        ", DB_NAME, $games_table ) );
-        
-        if ( ! $column_exists ) {
-            $wpdb->query( "ALTER TABLE $games_table ADD COLUMN tier varchar(100) DEFAULT '' AFTER cover_image" );
-        }
-        
-        // Remove tier column from platforms if it exists (we moved it to games)
-        $platforms_table = $wpdb->prefix . 'cgt_platforms';
-        $platform_tier_exists = $wpdb->get_var( $wpdb->prepare( "
-            SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
-            WHERE TABLE_SCHEMA = %s 
-            AND TABLE_NAME = %s 
-            AND COLUMN_NAME = 'tier'
-        ", DB_NAME, $platforms_table ) );
-        
-        if ( $platform_tier_exists ) {
-            $wpdb->query( "ALTER TABLE $platforms_table DROP COLUMN tier" );
-        }
-        
         // Add plan_tier column to game_platforms table if it doesn't exist
         $game_platforms_table = $wpdb->prefix . 'cgt_game_platforms';
         $plan_tier_exists = $wpdb->get_var( $wpdb->prepare( "
@@ -243,7 +217,6 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                                 data-game-included="<?php echo esc_attr( $platform['game_included'] ); ?>"
                                 data-price="<?php echo esc_attr( $platform['price'] ); ?>"
                                 data-currency="<?php echo esc_attr( $platform['currency'] ); ?>"
-                                data-tier="<?php echo esc_attr( $platform['tier'] ); ?>"
                                 data-cta-text="<?php echo esc_attr( $platform['cta_text'] ); ?>"
                                 data-cta-url="<?php echo esc_attr( $platform['cta_url'] ); ?>"
                                 data-unavailable-url="<?php echo esc_attr( $platform['unavailable_url'] ?? '' ); ?>"
@@ -402,17 +375,8 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                     <h2><?php esc_html_e( 'Add New Game', 'cloud-gaming-tracker' ); ?></h2>
                 </div>
                 <div class="cgt-admin-card-body">
-                    <div style="display: flex; gap: 10px; max-width: 600px; flex-wrap: wrap;">
-                        <input type="text" id="cgt-new-game-name" class="cgt-form-input" style="flex: 1; min-width: 200px;" placeholder="<?php esc_attr_e( 'Enter game name...', 'cloud-gaming-tracker' ); ?>">
-                        <select id="cgt-new-game-tier" class="cgt-form-select" style="width: auto; min-width: 150px;">
-                            <option value=""><?php esc_html_e( 'Select Tier (Optional)', 'cloud-gaming-tracker' ); ?></option>
-                            <option value="Free"><?php esc_html_e( 'Free', 'cloud-gaming-tracker' ); ?></option>
-                            <option value="Starter"><?php esc_html_e( 'Starter', 'cloud-gaming-tracker' ); ?></option>
-                            <option value="Standard"><?php esc_html_e( 'Standard', 'cloud-gaming-tracker' ); ?></option>
-                            <option value="Premium"><?php esc_html_e( 'Premium', 'cloud-gaming-tracker' ); ?></option>
-                            <option value="Ultimate"><?php esc_html_e( 'Ultimate', 'cloud-gaming-tracker' ); ?></option>
-                            <option value="Pro"><?php esc_html_e( 'Pro', 'cloud-gaming-tracker' ); ?></option>
-                        </select>
+                    <div style="display: flex; gap: 10px; max-width: 500px;">
+                        <input type="text" id="cgt-new-game-name" class="cgt-form-input" style="flex: 1;" placeholder="<?php esc_attr_e( 'Enter game name...', 'cloud-gaming-tracker' ); ?>">
                         <button class="cgt-btn cgt-btn-primary cgt-add-game">
                             <?php esc_html_e( 'Add Game', 'cloud-gaming-tracker' ); ?>
                         </button>
@@ -425,11 +389,6 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                 <div class="cgt-admin-card-header">
                     <h2>
                         <?php echo esc_html( $game['name'] ); ?>
-                        <?php if ( ! empty( $game['tier'] ) ) : ?>
-                        <span class="cgt-badge" style="background: var(--cgt-primary); color: #fff;">
-                            <?php echo esc_html( $game['tier'] ); ?>
-                        </span>
-                        <?php endif; ?>
                         <span class="cgt-badge <?php echo $game['is_active'] ? 'cgt-badge-success' : 'cgt-badge-danger'; ?>">
                             <?php echo $game['is_active'] ? esc_html__( 'Active', 'cloud-gaming-tracker' ) : esc_html__( 'Inactive', 'cloud-gaming-tracker' ); ?>
                         </span>
@@ -475,21 +434,7 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                                     </button>
                                 </div>
                                 <div class="cgt-availability-toggle">
-                                    <select class="cgt-plan-tier-select" data-type="plan_tier" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #e5e7eb; font-size: 13px; min-width: 140px;">
-                                        <option value=""><?php esc_html_e( 'Select Plan', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Free" <?php selected( $plan_tier, 'Free' ); ?>><?php esc_html_e( 'Free', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Performance" <?php selected( $plan_tier, 'Performance' ); ?>><?php esc_html_e( 'Performance', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Ultimate" <?php selected( $plan_tier, 'Ultimate' ); ?>><?php esc_html_e( 'Ultimate', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Ultra" <?php selected( $plan_tier, 'Ultra' ); ?>><?php esc_html_e( 'Ultra', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Ultra Pro" <?php selected( $plan_tier, 'Ultra Pro' ); ?>><?php esc_html_e( 'Ultra Pro', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Boost Classic" <?php selected( $plan_tier, 'Boost Classic' ); ?>><?php esc_html_e( 'Boost Classic', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Neo" <?php selected( $plan_tier, 'Neo' ); ?>><?php esc_html_e( 'Neo', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Power" <?php selected( $plan_tier, 'Power' ); ?>><?php esc_html_e( 'Power', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Essential" <?php selected( $plan_tier, 'Essential' ); ?>><?php esc_html_e( 'Essential', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Premium" <?php selected( $plan_tier, 'Premium' ); ?>><?php esc_html_e( 'Premium', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Ultimate+" <?php selected( $plan_tier, 'Ultimate+' ); ?>><?php esc_html_e( 'Ultimate+', 'cloud-gaming-tracker' ); ?></option>
-                                        <option value="Manual" <?php selected( $plan_tier, 'Manual' ); ?>><?php esc_html_e( 'Manual', 'cloud-gaming-tracker' ); ?></option>
-                                    </select>
+                                    <input type="text" class="cgt-plan-tier-input" data-type="plan_tier" placeholder="<?php esc_attr_e( 'Enter plan...', 'cloud-gaming-tracker' ); ?>" value="<?php echo esc_attr( $plan_tier ); ?>" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #e5e7eb; font-size: 13px; min-width: 140px;">
                                 </div>
                                 <div class="cgt-availability-toggle">
                                     <button class="cgt-avail-btn cgt-avail-included <?php echo $game_included_override == 1 ? 'active' : ''; ?>" data-status="1" data-type="game_included">
@@ -876,9 +821,8 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
         }
         $game_name = sanitize_text_field( $_POST['game_name'] );
         $game_slug = sanitize_title( $_POST['game_name'] );
-        $game_tier = sanitize_text_field( $_POST['game_tier'] );
         global $wpdb;
-        $wpdb->insert( $wpdb->prefix . 'cgt_games', array( 'name' => $game_name, 'slug' => $game_slug, 'tier' => $game_tier, 'is_active' => 1 ) );
+        $wpdb->insert( $wpdb->prefix . 'cgt_games', array( 'name' => $game_name, 'slug' => $game_slug, 'is_active' => 1 ) );
         wp_send_json_success( array( 'game_id' => $wpdb->insert_id, 'message' => esc_html__( 'Game added', 'cloud-gaming-tracker' ) ) );
     }
 
