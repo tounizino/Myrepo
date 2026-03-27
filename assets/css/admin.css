@@ -1,0 +1,547 @@
+/*!
+ * Cloud Gaming Tracker - Admin Styles
+ * Version: 3.1.0
+ */
+
+/* Admin Wrap */
+.cgt-admin-wrap {
+	max-width: 1400px;
+	margin: 20px;
+}
+
+/* Admin Header */
+.cgt-admin-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cgt-admin-title h1 {
+	margin: 0;
+	font-size: 24px;
+	font-weight: 600;
+	color: #1f2937;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.version-badge {
+	background: #3b82f6;
+	color: #fff;
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+/* Admin Nav */
+.cgt-admin-nav {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.cgt-admin-nav a {
+	padding: 10px 20px;
+	background: #f3f4f6;
+	color: #4b5563;
+	text-decoration: none;
+	border-radius: 8px;
+	font-weight: 500;
+	transition: all 0.2s;
+}
+
+.cgt-admin-nav a:hover,
+.cgt-admin-nav a.current {
+	background: #3b82f6;
+	color: #fff;
+}
+
+/* Admin Card */
+.cgt-admin-card {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.cgt-admin-card-header {
+	padding: 20px;
+	border-bottom: 1px solid #e5e7eb;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cgt-admin-card-header h2 {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: #1f2937;
+}
+
+.cgt-admin-card-body {
+	padding: 20px;
+}
+
+/* Form Groups */
+.cgt-form-group {
+	margin-bottom: 20px;
+}
+
+.cgt-form-label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #374151;
+}
+
+.cgt-form-input,
+.cgt-form-select,
+.cgt-form-textarea {
+	width: 100%;
+	padding: 10px 14px;
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	font-size: 14px;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cgt-form-input:focus,
+.cgt-form-select:focus,
+.cgt-form-textarea:focus {
+	outline: none;
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.cgt-form-textarea {
+	min-height: 100px;
+	resize: vertical;
+}
+
+.cgt-form-row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+}
+
+/* Buttons */
+.cgt-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+	text-decoration: none;
+}
+
+.cgt-btn-primary {
+	background: #3b82f6;
+	color: #fff;
+}
+
+.cgt-btn-primary:hover {
+	background: #2563eb;
+}
+
+.cgt-btn-secondary {
+	background: #f3f4f6;
+	color: #4b5563;
+}
+
+.cgt-btn-secondary:hover {
+	background: #e5e7eb;
+}
+
+.cgt-btn-danger {
+	background: #ef4444;
+	color: #fff;
+}
+
+.cgt-btn-danger:hover {
+	background: #dc2626;
+}
+
+.cgt-btn-success {
+	background: #10b981;
+	color: #fff;
+}
+
+.cgt-btn-success:hover {
+	background: #059669;
+}
+
+/* Table */
+.cgt-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.cgt-table th,
+.cgt-table td {
+	padding: 12px 16px;
+	text-align: left;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.cgt-table th {
+	background: #f9fafb;
+	font-weight: 600;
+	color: #374151;
+}
+
+.cgt-table tr:hover {
+	background: #f9fafb;
+}
+
+.cgt-table-actions {
+	display: flex;
+	gap: 8px;
+}
+
+/* Icon Preview */
+.cgt-icon-preview {
+	width: 48px;
+	height: 48px;
+	border-radius: 8px;
+	background: #f3f4f6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.cgt-icon-preview img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+/* Toggle Switch */
+.cgt-toggle {
+	position: relative;
+	width: 50px;
+	height: 26px;
+	background: #d1d5db;
+	border-radius: 13px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.cgt-toggle.active {
+	background: #10b981;
+}
+
+.cgt-toggle::after {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 50%;
+	transition: transform 0.2s;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cgt-toggle.active::after {
+	transform: translateX(24px);
+}
+
+/* Color Picker */
+.cgt-color-picker-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.cgt-color-picker {
+	width: 50px;
+	height: 40px;
+	padding: 0;
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+/* Stats Grid */
+.cgt-stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+.cgt-stat-card {
+	background: #fff;
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cgt-stat-value {
+	font-size: 32px;
+	font-weight: 700;
+	color: #3b82f6;
+	margin-bottom: 5px;
+}
+
+.cgt-stat-label {
+	font-size: 14px;
+	color: #6b7280;
+}
+
+/* Notice */
+.cgt-notice {
+	padding: 15px 20px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.cgt-notice-success {
+	background: #d1fae5;
+	color: #065f46;
+	border-left: 4px solid #10b981;
+}
+
+.cgt-notice-error {
+	background: #fee2e2;
+	color: #991b1b;
+	border-left: 4px solid #ef4444;
+}
+
+/* Modal */
+.cgt-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100000;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s;
+}
+
+.cgt-modal-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.cgt-modal {
+	background: #fff;
+	border-radius: 12px;
+	width: 90%;
+	max-width: 600px;
+	max-height: 90vh;
+	overflow-y: auto;
+	transform: scale(0.9);
+	transition: transform 0.3s;
+}
+
+.cgt-modal-overlay.active .cgt-modal {
+	transform: scale(1);
+}
+
+.cgt-modal-header {
+	padding: 20px;
+	border-bottom: 1px solid #e5e7eb;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cgt-modal-header h3 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.cgt-modal-close {
+	background: none;
+	border: none;
+	font-size: 24px;
+	cursor: pointer;
+	color: #6b7280;
+	padding: 0;
+	line-height: 1;
+}
+
+.cgt-modal-close:hover {
+	color: #1f2937;
+}
+
+.cgt-modal-body {
+	padding: 20px;
+}
+
+.cgt-modal-footer {
+	padding: 20px;
+	border-top: 1px solid #e5e7eb;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+/* Spinner */
+.cgt-spinner {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #f3f4f6;
+	border-top-color: #3b82f6;
+	border-radius: 50%;
+	animation: cgt-spin 0.8s linear infinite;
+}
+
+@keyframes cgt-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Badges */
+.cgt-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.cgt-badge-success {
+	background: #d1fae5;
+	color: #065f46;
+}
+
+.cgt-badge-danger {
+	background: #fee2e2;
+	color: #991b1b;
+}
+
+.cgt-badge-warning {
+	background: #fef3c7;
+	color: #92400e;
+}
+
+/* Availability Grid */
+.cgt-availability-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 15px;
+}
+
+.cgt-availability-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+	background: #f9fafb;
+	border-radius: 8px;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.cgt-availability-info {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.cgt-availability-controls {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.cgt-availability-toggle {
+	display: flex;
+	gap: 5px;
+}
+
+/* Availability Toggle Buttons */
+.cgt-avail-btn {
+	padding: 6px 12px;
+	border: 1px solid #d1d5db;
+	background: #fff;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 12px;
+	transition: all 0.2s;
+}
+
+.cgt-avail-btn.active {
+	color: #fff;
+}
+
+.cgt-avail-available.active {
+	background: #10b981;
+	border-color: #10b981;
+}
+
+.cgt-avail-unavailable.active {
+	background: #ef4444;
+	border-color: #ef4444;
+}
+
+.cgt-avail-included.active {
+	background: #10b981;
+	border-color: #10b981;
+}
+
+.cgt-avail-required.active {
+	background: #f59e0b;
+	border-color: #f59e0b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.cgt-admin-header {
+		flex-direction: column;
+		gap: 15px;
+		align-items: flex-start;
+	}
+	
+	.cgt-admin-nav {
+		flex-wrap: wrap;
+	}
+	
+	.cgt-form-row {
+		grid-template-columns: 1fr;
+	}
+	
+	.cgt-availability-grid {
+		grid-template-columns: 1fr;
+	}
+	
+	.cgt-availability-item {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	
+	.cgt-table th,
+	.cgt-table td {
+		padding: 8px 12px;
+		font-size: 13px;
+	}
+}

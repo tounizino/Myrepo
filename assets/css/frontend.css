@@ -1,0 +1,368 @@
+/*!
+ * Cloud Gaming Tracker - Frontend Styles
+ * Version: 3.1.0
+ */
+
+/* CSS Custom Properties (Theme Variables) */
+.cgt-wrapper {
+    --cgt-primary: #3b82f6;
+    --cgt-primary-hover: #2563eb;
+    --cgt-success: #10b981;
+    --cgt-danger: #ef4444;
+    --cgt-warning: #f59e0b;
+    --cgt-text: #1f2937;
+    --cgt-text-light: #6b7280;
+    --cgt-bg: #ffffff;
+    --cgt-bg-secondary: #f3f4f6;
+    --cgt-border: #e5e7eb;
+    --cgt-card-radius: 3px;
+    --cgt-button-radius: 2px;
+    --cgt-spacing: 16px;
+    
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--cgt-spacing);
+    box-sizing: border-box;
+}
+
+.cgt-wrapper *,
+.cgt-wrapper *::before,
+.cgt-wrapper *::after {
+    box-sizing: border-box;
+}
+
+/* Theme: Dark */
+.cgt-wrapper.cgt-theme-dark,
+.cgt-wrapper.cgt-theme-auto[data-theme="dark"] {
+    --cgt-text: #f9fafb;
+    --cgt-text-light: #9ca3af;
+    --cgt-bg: #1f2937;
+    --cgt-bg-secondary: #374151;
+    --cgt-border: #4b5563;
+}
+
+/* Theme: Auto - check system preference via JS */
+
+/* Glassmorphism Effect */
+.cgt-wrapper.cgt-glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+.cgt-wrapper.cgt-theme-dark.cgt-glass,
+.cgt-wrapper.cgt-theme-auto[data-theme="dark"].cgt-glass {
+    background: rgba(31, 41, 55, 0.7) !important;
+}
+
+/* Group Title */
+.cgt-wrapper .cgt-group-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cgt-text);
+    margin: 2rem 0 1rem;
+    padding-left: calc(var(--cgt-spacing) * 0.5);
+    border-left: 4px solid var(--cgt-primary);
+    line-height: 1.3;
+}
+
+.cgt-wrapper .cgt-group-title:first-child {
+    margin-top: 0;
+}
+
+/* Platforms List */
+.cgt-wrapper .cgt-platforms-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cgt-spacing);
+    margin-bottom: 2rem;
+}
+
+/* Platform Card */
+.cgt-wrapper .cgt-platform-card {
+    background: var(--cgt-bg);
+    border: 1px solid var(--cgt-border);
+    border-radius: var(--cgt-card-radius);
+    padding: calc(var(--cgt-spacing) * 1.25);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.cgt-wrapper .cgt-platform-card:hover {
+    border-color: var(--cgt-success);
+}
+
+.cgt-wrapper .cgt-platform-card.cgt-available:hover {
+    border-color: var(--cgt-success);
+}
+
+.cgt-wrapper .cgt-platform-card.cgt-unavailable {
+    opacity: 0.9;
+    border: 1px solid var(--cgt-border);
+}
+
+.cgt-wrapper .cgt-platform-card.cgt-unavailable:hover {
+    border-color: var(--cgt-danger);
+    opacity: 1;
+}
+
+/* Card Content */
+.cgt-wrapper .cgt-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--cgt-spacing) * 0.75);
+}
+
+/* Card Header */
+.cgt-wrapper .cgt-card-header {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--cgt-spacing) * 0.75);
+    flex-wrap: wrap;
+}
+
+/* Platform Icon */
+.cgt-wrapper .cgt-platform-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--cgt-card-radius);
+    background: var(--cgt-bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.cgt-wrapper .cgt-platform-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Platform Info */
+.cgt-wrapper .cgt-platform-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cgt-wrapper .cgt-platform-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--cgt-text);
+    margin: 0 0 0.25rem;
+    line-height: 1.4;
+}
+
+/* Availability Status Badge */
+.cgt-wrapper .cgt-availability-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.cgt-wrapper .cgt-status-available {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--cgt-success);
+}
+
+.cgt-wrapper .cgt-status-unavailable {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--cgt-danger);
+}
+
+/* Status dot animation */
+.cgt-wrapper .cgt-availability-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: cgt-pulse 2s infinite;
+}
+
+@keyframes cgt-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Card Action (CTA) */
+.cgt-wrapper .cgt-card-action {
+    flex-shrink: 0;
+}
+
+/* Card Body */
+.cgt-wrapper .cgt-card-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--cgt-spacing) * 0.5) calc(var(--cgt-spacing) * 1.5);
+    padding-top: calc(var(--cgt-spacing) * 0.75);
+    border-top: 1px solid var(--cgt-border);
+}
+
+/* Game Status, Price, Tier */
+.cgt-wrapper .cgt-game-status,
+.cgt-wrapper .cgt-price,
+.cgt-wrapper .cgt-tier {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--cgt-text-light);
+}
+
+.cgt-wrapper .cgt-game-status.cgt-status-included {
+    color: var(--cgt-success);
+}
+
+.cgt-wrapper .cgt-game-status.cgt-status-required {
+    color: var(--cgt-warning);
+}
+
+/* Icons */
+.cgt-wrapper .cgt-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* CTA Button */
+.cgt-wrapper .cgt-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--cgt-primary);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: var(--cgt-button-radius);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.cgt-wrapper .cgt-cta-button:hover {
+    background: var(--cgt-primary-hover);
+    text-decoration: none;
+}
+
+/* CTA Button for unavailable platforms */
+.cgt-wrapper .cgt-cta-button.cgt-disabled {
+    background: var(--cgt-bg-secondary);
+    color: var(--cgt-text-light);
+    cursor: pointer;
+    border: 1px solid var(--cgt-border);
+}
+
+.cgt-wrapper .cgt-cta-button.cgt-disabled:hover {
+    background: var(--cgt-primary);
+    border-color: var(--cgt-primary);
+    color: #ffffff;
+}
+
+.cgt-wrapper .cgt-cta-button.cgt-disabled[data-pending="true"] {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* No Platforms Message */
+.cgt-wrapper .cgt-no-platforms {
+    text-align: center;
+    padding: 3rem;
+    color: var(--cgt-text-light);
+    font-size: 1.125rem;
+    background: var(--cgt-bg-secondary);
+    border-radius: var(--cgt-card-radius);
+    margin: var(--cgt-spacing) 0;
+}
+
+/* Theme Toggle Button */
+.cgt-wrapper .cgt-theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--cgt-primary);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--cgt-shadow);
+    transition: var(--cgt-transition);
+    z-index: 1000;
+}
+
+.cgt-wrapper .cgt-theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.cgt-wrapper .cgt-theme-toggle .cgt-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive: Tablet and below */
+@media (max-width: 768px) {
+    .cgt-wrapper {
+        padding: calc(var(--cgt-spacing) * 0.75);
+    }
+    
+    .cgt-wrapper .cgt-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .cgt-wrapper .cgt-card-action {
+        width: 100%;
+    }
+    
+    .cgt-wrapper .cgt-cta-button {
+        width: 100%;
+    }
+    
+    .cgt-wrapper .cgt-platform-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .cgt-wrapper .cgt-platform-name {
+        font-size: 1.1rem;
+    }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 480px) {
+    .cgt-wrapper {
+        padding: calc(var(--cgt-spacing) * 0.5);
+    }
+    
+    .cgt-wrapper .cgt-platform-card {
+        padding: calc(var(--cgt-spacing) * 0.75);
+    }
+    
+    .cgt-wrapper .cgt-group-title {
+        font-size: 1.25rem;
+    }
+    
+    .cgt-wrapper .cgt-card-body {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
