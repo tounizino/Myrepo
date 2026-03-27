@@ -42,8 +42,8 @@ class CGT_Frontend {
             $unavailable = array_filter( $platforms, function( $p ) { return empty( $p['is_available'] ); } );
 
             $show_titles = ! isset( $settings['show_group_titles'] ) || $settings['show_group_titles'];
-            $available_title = $show_titles ? esc_html__( 'Available Platforms', 'cloud-gaming-tracker' ) : '';
-            $unavailable_title = $show_titles ? esc_html__( 'Not Available', 'cloud-gaming-tracker' ) : '';
+            $available_title = $show_titles ? esc_html( $settings['available_title'] ?? 'Available Platforms' ) : '';
+            $unavailable_title = $show_titles ? esc_html( $settings['unavailable_title'] ?? 'Not Available' ) : '';
 
             $output  = self::render_platform_group( $available, $available_title, $settings, true );
             $output .= self::render_platform_group( $unavailable, $unavailable_title, $settings, false );
@@ -51,8 +51,12 @@ class CGT_Frontend {
             $output = self::render_platform_group( $platforms, '', $settings, null );
         }
 
-        // Add the scoped CSS wrapper
-        return '<div class="cgt-wrapper cgt-theme-' . esc_attr( $settings['theme'] ?? 'auto' ) . '">' . $output . '</div>';
+        // Add the scoped CSS wrapper with title font size
+        $title_style = '';
+        if ( ! empty( $settings['title_font_size'] ) ) {
+            $title_style = ' style="font-size: ' . intval( $settings['title_font_size'] ) . 'px;"';
+        }
+        return '<div class="cgt-wrapper cgt-theme-' . esc_attr( $settings['theme'] ?? 'auto' ) . '"' . $title_style . '>' . $output . '</div>';
     }
 
     private static function render_platform_group( $platforms, $group_title, $settings, $is_available ) {
@@ -148,10 +152,6 @@ class CGT_Frontend {
                     <div class="cgt-card-action">
                         <a href="<?php echo esc_url( $cta_url ); ?>" class="cgt-cta-button cgt-disabled" <?php echo ( $cta_url === '#' ) ? 'data-pending="true"' : ''; ?>>
                             <?php echo esc_html( $cta_text ); ?>
-                            <svg class="cgt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"/>
-                                <polyline points="12 5 19 12 12 19"/>
-                            </svg>
                         </a>
                     </div>
                     <?php endif; ?>

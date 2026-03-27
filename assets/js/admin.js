@@ -276,6 +276,7 @@
         saveSettings: function() {
             var settingsForm = $('#cgt-settings-form');
             var displayForm = $('#cgt-display-form');
+            var titlesForm = $('#cgt-titles-form');
             var data = {
                 action: 'cgt_save_settings',
                 nonce: cgtAdmin.nonce,
@@ -290,7 +291,10 @@
                 show_price: displayForm.find('[name="show_price"]').is(':checked') ? 1 : 0,
                 show_tier: displayForm.find('[name="show_tier"]').is(':checked') ? 1 : 0,
                 group_platforms: displayForm.find('[name="group_platforms"]').is(':checked') ? 1 : 0,
-                show_group_titles: displayForm.find('[name="show_group_titles"]').is(':checked') ? 1 : 0
+                show_group_titles: titlesForm.find('[name="show_group_titles"]').val(),
+                available_title: titlesForm.find('[name="available_title"]').val(),
+                unavailable_title: titlesForm.find('[name="unavailable_title"]').val(),
+                title_font_size: titlesForm.find('[name="title_font_size"]').val()
             };
             this.showLoading($('.cgt-save-settings'), true);
             $.post(cgtAdmin.ajaxUrl, data, function(response) {

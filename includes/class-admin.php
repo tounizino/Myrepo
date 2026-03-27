@@ -60,7 +60,10 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
             'show_tier'        => true,
             'group_platforms'  => true,
             'glassmorphism'    => true,
-            'show_group_titles' => true,
+            'show_group_titles' => 1,
+            'available_title'  => 'Available Platforms',
+            'unavailable_title' => 'Not Available',
+            'title_font_size'  => 24,
         );
 
         if ( ! get_option( 'cgt_settings' ) ) {
@@ -536,10 +539,38 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                         </div>
                         <div class="cgt-form-group">
                             <label class="cgt-form-label"><?php esc_html_e( 'Glassmorphism Effect', 'cloud-gaming-tracker' ); ?></label>
-                            <label class="cgt-toggle <?php echo $settings['glassmorphism'] ? 'active' : ''; ?>" style="display: inline-block;">
-                                <input type="checkbox" name="glassmorphism" <?php checked( $settings['glassmorphism'] ); ?> style="display: none;">
-                            </label>
-                            <span style="margin-left: 10px;"><?php esc_html_e( 'Enable glass/blur effect on cards', 'cloud-gaming-tracker' ); ?></span>
+                            <input type="checkbox" name="glassmorphism" <?php checked( $settings['glassmorphism'] ); ?> style="margin-right: 8px;">
+                            <span><?php esc_html_e( 'Enable glass/blur effect on cards', 'cloud-gaming-tracker' ); ?></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="cgt-admin-card">
+                <div class="cgt-admin-card-header">
+                    <h2><?php esc_html_e( 'Group Titles', 'cloud-gaming-tracker' ); ?></h2>
+                </div>
+                <div class="cgt-admin-card-body">
+                    <form id="cgt-titles-form">
+                        <div class="cgt-form-group">
+                            <label class="cgt-form-label"><?php esc_html_e( 'Available Platforms Title', 'cloud-gaming-tracker' ); ?></label>
+                            <input type="text" name="available_title" class="cgt-form-input" value="<?php echo esc_attr( $settings['available_title'] ?? 'Available Platforms' ); ?>">
+                        </div>
+                        <div class="cgt-form-group">
+                            <label class="cgt-form-label"><?php esc_html_e( 'Not Available Title', 'cloud-gaming-tracker' ); ?></label>
+                            <input type="text" name="unavailable_title" class="cgt-form-input" value="<?php echo esc_attr( $settings['unavailable_title'] ?? 'Not Available' ); ?>">
+                        </div>
+                        <div class="cgt-form-row">
+                            <div class="cgt-form-group">
+                                <label class="cgt-form-label"><?php esc_html_e( 'Title Font Size (px)', 'cloud-gaming-tracker' ); ?></label>
+                                <input type="number" name="title_font_size" class="cgt-form-input" value="<?php echo esc_attr( $settings['title_font_size'] ?? 24 ); ?>" min="12" max="48">
+                            </div>
+                            <div class="cgt-form-group">
+                                <label class="cgt-form-label"><?php esc_html_e( 'Show Group Titles', 'cloud-gaming-tracker' ); ?></label>
+                                <select name="show_group_titles" class="cgt-form-select">
+                                    <option value="1" <?php selected( $settings['show_group_titles'] ?? 1, 1 ); ?>><?php esc_html_e( 'Yes', 'cloud-gaming-tracker' ); ?></option>
+                                    <option value="0" <?php selected( $settings['show_group_titles'] ?? 1, 0 ); ?>><?php esc_html_e( 'No', 'cloud-gaming-tracker' ); ?></option>
+                                </select>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -554,28 +585,16 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                             <label class="cgt-form-label"><?php esc_html_e( 'Show Elements', 'cloud-gaming-tracker' ); ?></label>
                             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
                                 <label style="display: flex; align-items: center; gap: 10px;">
-                                    <label class="cgt-toggle <?php echo $settings['show_price'] ? 'active' : ''; ?>" style="display: inline-block; margin: 0;">
-                                        <input type="checkbox" name="show_price" <?php checked( $settings['show_price'] ); ?> style="display: none;">
-                                    </label>
+                                    <input type="checkbox" name="show_price" <?php checked( $settings['show_price'] ); ?> style="margin-right: 8px;">
                                     <span><?php esc_html_e( 'Show Price', 'cloud-gaming-tracker' ); ?></span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 10px;">
-                                    <label class="cgt-toggle <?php echo $settings['show_tier'] ? 'active' : ''; ?>" style="display: inline-block; margin: 0;">
-                                        <input type="checkbox" name="show_tier" <?php checked( $settings['show_tier'] ); ?> style="display: none;">
-                                    </label>
+                                    <input type="checkbox" name="show_tier" <?php checked( $settings['show_tier'] ); ?> style="margin-right: 8px;">
                                     <span><?php esc_html_e( 'Show Plan Tier', 'cloud-gaming-tracker' ); ?></span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 10px;">
-                                    <label class="cgt-toggle <?php echo $settings['group_platforms'] ? 'active' : ''; ?>" style="display: inline-block; margin: 0;">
-                                        <input type="checkbox" name="group_platforms" <?php checked( $settings['group_platforms'] ); ?> style="display: none;">
-                                    </label>
+                                    <input type="checkbox" name="group_platforms" <?php checked( $settings['group_platforms'] ); ?> style="margin-right: 8px;">
                                     <span><?php esc_html_e( 'Group by Availability', 'cloud-gaming-tracker' ); ?></span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 10px;">
-                                    <label class="cgt-toggle <?php echo ! empty( $settings['show_group_titles'] ) ? 'active' : ''; ?>" style="display: inline-block; margin: 0;">
-                                        <input type="checkbox" name="show_group_titles" <?php checked( $settings['show_group_titles'] ?? 1 ); ?> style="display: none;">
-                                    </label>
-                                    <span><?php esc_html_e( 'Show Group Titles (Available/Not Available)', 'cloud-gaming-tracker' ); ?></span>
                                 </label>
                             </div>
                         </div>
@@ -736,20 +755,31 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
         if ( ! current_user_can( 'manage_options' ) ) {
             wp_send_json_error( array( 'message' => esc_html__( 'Unauthorized', 'cloud-gaming-tracker' ) ) );
         }
+        
+        // Get current settings to merge
+        $current_settings = get_option( 'cgt_settings', array() );
+        
         $settings = array(
             'theme'               => sanitize_text_field( $_POST['theme'] ),
             'primary_color'      => sanitize_hex_color( $_POST['primary_color'] ),
             'success_color'      => sanitize_hex_color( $_POST['success_color'] ),
             'danger_color'       => sanitize_hex_color( $_POST['danger_color'] ),
             'card_radius'        => intval( $_POST['card_radius'] ),
-            'button_radius'    => intval( $_POST['button_radius'] ),
-            'spacing'          => intval( $_POST['spacing'] ),
-            'show_price'       => isset( $_POST['show_price'] ) ? 1 : 0,
-            'show_tier'        => isset( $_POST['show_tier'] ) ? 1 : 0,
-            'group_platforms' => isset( $_POST['group_platforms'] ) ? 1 : 0,
-            'glassmorphism'    => isset( $_POST['glassmorphism'] ) ? 1 : 0,
-            'show_group_titles' => isset( $_POST['show_group_titles'] ) ? 1 : 0,
+            'button_radius'      => intval( $_POST['button_radius'] ),
+            'spacing'            => intval( $_POST['spacing'] ),
+            'glassmorphism'     => isset( $_POST['glassmorphism'] ) ? 1 : 0,
+            'show_price'        => isset( $_POST['show_price'] ) ? 1 : 0,
+            'show_tier'         => isset( $_POST['show_tier'] ) ? 1 : 0,
+            'group_platforms'   => isset( $_POST['group_platforms'] ) ? 1 : 0,
+            'show_group_titles' => intval( $_POST['show_group_titles'] ),
+            'available_title'   => sanitize_text_field( $_POST['available_title'] ),
+            'unavailable_title' => sanitize_text_field( $_POST['unavailable_title'] ),
+            'title_font_size'   => intval( $_POST['title_font_size'] ),
         );
+        
+        // Merge with existing settings to preserve any we might have missed
+        $settings = array_merge( $current_settings, $settings );
+        
         update_option( 'cgt_settings', $settings );
         wp_send_json_success( array( 'message' => esc_html__( 'Settings saved', 'cloud-gaming-tracker' ) ) );
     }
