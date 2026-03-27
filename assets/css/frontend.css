@@ -105,6 +105,7 @@
 
 .cgt-wrapper .cgt-platform-card.cgt-unavailable {
     opacity: 0.9;
+    border: 1px solid var(--cgt-border);
 }
 
 .cgt-wrapper .cgt-platform-card.cgt-unavailable:hover {

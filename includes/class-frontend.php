@@ -114,10 +114,10 @@ class CGT_Frontend {
         $cta_text = ! empty( $platform['cta_text'] ) ? $platform['cta_text'] : esc_html__( 'Play Now', 'cloud-gaming-tracker' );
         $cta_url  = ! empty( $platform['custom_cta_url'] ) ? $platform['custom_cta_url'] : $platform['cta_url'];
 
-        // For unavailable platforms, use the unavailable CTA URL from settings or platform
+        // For unavailable platforms, use the unavailable URL from the platform
         if ( ! $is_available ) {
-            $cta_text = ! empty( $settings['unavailable_cta_text'] ) ? $settings['unavailable_cta_text'] : esc_html__( 'Stay Tuned', 'cloud-gaming-tracker' );
-            $cta_url  = ! empty( $platform['unavailable_url'] ) ? $platform['unavailable_url'] : ( ! empty( $settings['unavailable_cta_url'] ) ? $settings['unavailable_cta_url'] : '#' );
+            $cta_text = esc_html__( 'Stay Tuned', 'cloud-gaming-tracker' );
+            $cta_url  = ! empty( $platform['unavailable_url'] ) ? $platform['unavailable_url'] : '#';
         }
 
         ob_start();

@@ -49,20 +49,18 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
         self::insert_default_platforms();
 
         $default_settings = array(
-            'theme'              => 'auto',
-            'primary_color'     => '#3b82f6',
-            'success_color'      => '#10b981',
-            'danger_color'       => '#ef4444',
-            'card_radius'        => '6',
-            'button_radius'      => '4',
-            'spacing'            => '16',
-            'show_price'         => true,
-            'show_tier'          => true,
-            'group_platforms'    => true,
-            'glassmorphism'      => true,
-            'show_group_titles'  => true,
-            'unavailable_cta_text' => 'Stay Tuned',
-            'unavailable_cta_url'  => '',
+            'theme'             => 'auto',
+            'primary_color'    => '#3b82f6',
+            'success_color'    => '#10b981',
+            'danger_color'     => '#ef4444',
+            'card_radius'      => '6',
+            'button_radius'    => '4',
+            'spacing'          => '16',
+            'show_price'       => true,
+            'show_tier'        => true,
+            'group_platforms'  => true,
+            'glassmorphism'    => true,
+            'show_group_titles' => true,
         );
 
         if ( ! get_option( 'cgt_settings' ) ) {
@@ -298,13 +296,6 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                         <div class="cgt-form-group">
                             <label class="cgt-form-label"><?php esc_html_e( 'Plan Tier', 'cloud-gaming-tracker' ); ?></label>
                             <input type="text" name="tier" class="cgt-form-input" placeholder="Premium or higher">
-                        </div>
-                        <div class="cgt-form-group">
-                            <label class="cgt-form-label"><?php esc_html_e( 'Game Included?', 'cloud-gaming-tracker' ); ?></label>
-                            <label class="cgt-toggle" style="display: inline-block;">
-                                <input type="checkbox" name="game_included" style="display: none;">
-                            </label>
-                            <span style="margin-left: 10px;"><?php esc_html_e( 'Games included with subscription', 'cloud-gaming-tracker' ); ?></span>
                         </div>
                         <div class="cgt-form-group">
                             <label class="cgt-form-label"><?php esc_html_e( 'Unavailable URL', 'cloud-gaming-tracker' ); ?></label>
@@ -555,25 +546,6 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
             </div>
             <div class="cgt-admin-card">
                 <div class="cgt-admin-card-header">
-                    <h2><?php esc_html_e( 'Unavailable Platforms', 'cloud-gaming-tracker' ); ?></h2>
-                </div>
-                <div class="cgt-admin-card-body">
-                    <form id="cgt-unavailable-form">
-                        <div class="cgt-form-row">
-                            <div class="cgt-form-group">
-                                <label class="cgt-form-label"><?php esc_html_e( 'Button Text', 'cloud-gaming-tracker' ); ?></label>
-                                <input type="text" name="unavailable_cta_text" class="cgt-form-input" value="<?php echo esc_attr( $settings['unavailable_cta_text'] ?? 'Stay Tuned' ); ?>" placeholder="Stay Tuned">
-                            </div>
-                            <div class="cgt-form-group">
-                                <label class="cgt-form-label"><?php esc_html_e( 'Button URL', 'cloud-gaming-tracker' ); ?></label>
-                                <input type="url" name="unavailable_cta_url" class="cgt-form-input" value="<?php echo esc_attr( $settings['unavailable_cta_url'] ?? '' ); ?>" placeholder="https://example.com/contact">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="cgt-admin-card">
-                <div class="cgt-admin-card-header">
                     <h2><?php esc_html_e( 'Display Options', 'cloud-gaming-tracker' ); ?></h2>
                 </div>
                 <div class="cgt-admin-card-body">
@@ -770,15 +742,13 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
             'success_color'      => sanitize_hex_color( $_POST['success_color'] ),
             'danger_color'       => sanitize_hex_color( $_POST['danger_color'] ),
             'card_radius'        => intval( $_POST['card_radius'] ),
-            'button_radius'      => intval( $_POST['button_radius'] ),
-            'spacing'            => intval( $_POST['spacing'] ),
-            'show_price'         => isset( $_POST['show_price'] ) ? 1 : 0,
-            'show_tier'          => isset( $_POST['show_tier'] ) ? 1 : 0,
-            'group_platforms'    => isset( $_POST['group_platforms'] ) ? 1 : 0,
-            'glassmorphism'      => isset( $_POST['glassmorphism'] ) ? 1 : 0,
-            'show_group_titles'  => isset( $_POST['show_group_titles'] ) ? 1 : 0,
-            'unavailable_cta_text' => sanitize_text_field( $_POST['unavailable_cta_text'] ),
-            'unavailable_cta_url'  => esc_url_raw( $_POST['unavailable_cta_url'] ),
+            'button_radius'    => intval( $_POST['button_radius'] ),
+            'spacing'          => intval( $_POST['spacing'] ),
+            'show_price'       => isset( $_POST['show_price'] ) ? 1 : 0,
+            'show_tier'        => isset( $_POST['show_tier'] ) ? 1 : 0,
+            'group_platforms' => isset( $_POST['group_platforms'] ) ? 1 : 0,
+            'glassmorphism'    => isset( $_POST['glassmorphism'] ) ? 1 : 0,
+            'show_group_titles' => isset( $_POST['show_group_titles'] ) ? 1 : 0,
         );
         update_option( 'cgt_settings', $settings );
         wp_send_json_success( array( 'message' => esc_html__( 'Settings saved', 'cloud-gaming-tracker' ) ) );

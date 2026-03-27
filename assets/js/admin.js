@@ -276,7 +276,6 @@
         saveSettings: function() {
             var settingsForm = $('#cgt-settings-form');
             var displayForm = $('#cgt-display-form');
-            var unavailableForm = $('#cgt-unavailable-form');
             var data = {
                 action: 'cgt_save_settings',
                 nonce: cgtAdmin.nonce,
@@ -291,9 +290,7 @@
                 show_price: displayForm.find('[name="show_price"]').is(':checked') ? 1 : 0,
                 show_tier: displayForm.find('[name="show_tier"]').is(':checked') ? 1 : 0,
                 group_platforms: displayForm.find('[name="group_platforms"]').is(':checked') ? 1 : 0,
-                show_group_titles: displayForm.find('[name="show_group_titles"]').is(':checked') ? 1 : 0,
-                unavailable_cta_text: unavailableForm.find('[name="unavailable_cta_text"]').val(),
-                unavailable_cta_url: unavailableForm.find('[name="unavailable_cta_url"]').val()
+                show_group_titles: displayForm.find('[name="show_group_titles"]').is(':checked') ? 1 : 0
             };
             this.showLoading($('.cgt-save-settings'), true);
             $.post(cgtAdmin.ajaxUrl, data, function(response) {
@@ -378,11 +375,35 @@
         },
 
         initToggles: function() {
-            $(document).on('click', '.cgt-toggle', function() {
-                $(this).toggleClass('active');
-                var checkbox = $(this).find('input[type="checkbox"]');
+            // Bind toggle click events with delegation
+            $(document).on('click', '.cgt-toggle', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                var $toggle = $(this);
+                var isActive = $toggle.hasClass('active');
+                
+                // Toggle the active class
+                $toggle.toggleClass('active');
+                
+                // Update the checkbox state
+                var checkbox = $toggle.find('input[type="checkbox"]');
                 if (checkbox.length) {
-                    checkbox.prop('checked', $(this).hasClass('active'));
+                    checkbox.prop('checked', !isActive);
+                }
+                
+                // Trigger change event for any listeners
+                checkbox.trigger('change');
+            });
+            
+            // Ensure checkboxes inside toggles sync with toggle state
+            $(document).on('change', '.cgt-toggle input[type="checkbox"]', function() {
+                var $checkbox = $(this);
+                var $toggle = $checkbox.closest('.cgt-toggle');
+                if ($checkbox.is(':checked')) {
+                    $toggle.addClass('active');
+                } else {
+                    $toggle.removeClass('active');
                 }
             });
         },
