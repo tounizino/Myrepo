@@ -103,6 +103,19 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
         if ( $platform_tier_exists ) {
             $wpdb->query( "ALTER TABLE $platforms_table DROP COLUMN tier" );
         }
+        
+        // Add plan_tier column to game_platforms table if it doesn't exist
+        $game_platforms_table = $wpdb->prefix . 'cgt_game_platforms';
+        $plan_tier_exists = $wpdb->get_var( $wpdb->prepare( "
+            SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_SCHEMA = %s 
+            AND TABLE_NAME = %s 
+            AND COLUMN_NAME = 'plan_tier'
+        ", DB_NAME, $game_platforms_table ) );
+        
+        if ( ! $plan_tier_exists ) {
+            $wpdb->query( "ALTER TABLE $game_platforms_table ADD COLUMN plan_tier varchar(100) DEFAULT '' AFTER game_included_override" );
+        }
     }
 
     public function deactivate() {
@@ -432,13 +445,14 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                 </div>
                 <div class="cgt-admin-card-body">
                     <p style="margin-bottom: 20px; color: #6b7280;">
-                        <?php esc_html_e( 'Set availability and game included status for each platform, then click "Save Availability":', 'cloud-gaming-tracker' ); ?>
+                        <?php esc_html_e( 'Set availability, plan tier, and game status for each platform, then click "Save Availability":', 'cloud-gaming-tracker' ); ?>
                     </p>
                     <div class="cgt-availability-grid" data-game-id="<?php echo esc_attr( $game['id'] ); ?>">
                         <?php foreach ( $platforms as $platform ) : 
                             $availability              = self::get_game_availability( $game['id'], $platform['id'] );
                             $is_available              = $availability ? $availability['is_available'] : 1;
                             $game_included_override    = $availability ? $availability['game_included_override'] : -1;
+                            $plan_tier                 = $availability ? $availability['plan_tier'] : '';
                         ?>
                         <div class="cgt-availability-item" data-platform-id="<?php echo esc_attr( $platform['id'] ); ?>">
                             <div class="cgt-availability-info">
@@ -459,6 +473,23 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                                     <button class="cgt-avail-btn cgt-avail-unavailable <?php echo ! $is_available ? 'active' : ''; ?>" data-status="0" data-type="availability">
                                         <?php esc_html_e( 'Unavailable', 'cloud-gaming-tracker' ); ?>
                                     </button>
+                                </div>
+                                <div class="cgt-availability-toggle">
+                                    <select class="cgt-plan-tier-select" data-type="plan_tier" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #e5e7eb; font-size: 13px; min-width: 140px;">
+                                        <option value=""><?php esc_html_e( 'Select Plan', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Free" <?php selected( $plan_tier, 'Free' ); ?>><?php esc_html_e( 'Free', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Performance" <?php selected( $plan_tier, 'Performance' ); ?>><?php esc_html_e( 'Performance', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Ultimate" <?php selected( $plan_tier, 'Ultimate' ); ?>><?php esc_html_e( 'Ultimate', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Ultra" <?php selected( $plan_tier, 'Ultra' ); ?>><?php esc_html_e( 'Ultra', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Ultra Pro" <?php selected( $plan_tier, 'Ultra Pro' ); ?>><?php esc_html_e( 'Ultra Pro', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Boost Classic" <?php selected( $plan_tier, 'Boost Classic' ); ?>><?php esc_html_e( 'Boost Classic', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Neo" <?php selected( $plan_tier, 'Neo' ); ?>><?php esc_html_e( 'Neo', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Power" <?php selected( $plan_tier, 'Power' ); ?>><?php esc_html_e( 'Power', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Essential" <?php selected( $plan_tier, 'Essential' ); ?>><?php esc_html_e( 'Essential', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Premium" <?php selected( $plan_tier, 'Premium' ); ?>><?php esc_html_e( 'Premium', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Ultimate+" <?php selected( $plan_tier, 'Ultimate+' ); ?>><?php esc_html_e( 'Ultimate+', 'cloud-gaming-tracker' ); ?></option>
+                                        <option value="Manual" <?php selected( $plan_tier, 'Manual' ); ?>><?php esc_html_e( 'Manual', 'cloud-gaming-tracker' ); ?></option>
+                                    </select>
                                 </div>
                                 <div class="cgt-availability-toggle">
                                     <button class="cgt-avail-btn cgt-avail-included <?php echo $game_included_override == 1 ? 'active' : ''; ?>" data-status="1" data-type="game_included">
@@ -793,8 +824,9 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
             $platform_id            = intval( $platform_id );
             $is_available           = isset( $data['is_available'] ) ? intval( $data['is_available'] ) : 1;
             $game_included_override = isset( $data['game_included'] ) ? intval( $data['game_included'] ) : -1;
+            $plan_tier             = isset( $data['plan_tier'] ) ? sanitize_text_field( $data['plan_tier'] ) : '';
 
-            self::save_game_availability( $game_id, $platform_id, $is_available, $game_included_override );
+            self::save_game_availability( $game_id, $platform_id, $is_available, $game_included_override, $plan_tier );
             $saved++;
         }
 

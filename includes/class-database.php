@@ -53,6 +53,7 @@ class CGT_Database {
             game_id bigint(20) UNSIGNED NOT NULL,
             is_available tinyint(1) DEFAULT 1,
             game_included_override tinyint(1) DEFAULT -1,
+            plan_tier varchar(100) DEFAULT '',
             custom_price varchar(50) DEFAULT '',
             custom_cta_url varchar(500) DEFAULT '',
             created_at datetime DEFAULT CURRENT_TIMESTAMP,
@@ -259,6 +260,7 @@ class CGT_Database {
             if ( isset( $availability_map[ $platform['id'] ] ) ) {
                 $platform['is_available']            = $availability_map[ $platform['id'] ]['is_available'];
                 $platform['game_included_override'] = $availability_map[ $platform['id'] ]['game_included_override'];
+                $platform['plan_tier']              = $availability_map[ $platform['id'] ]['plan_tier'];
                 if ( ! empty( $availability_map[ $platform['id'] ]['custom_price'] ) ) {
                     $platform['custom_price'] = $availability_map[ $platform['id'] ]['custom_price'];
                 }
@@ -268,6 +270,7 @@ class CGT_Database {
             } else {
                 $platform['is_available']            = 1;
                 $platform['game_included_override'] = -1;
+                $platform['plan_tier']              = '';
             }
         }
 
@@ -291,7 +294,7 @@ class CGT_Database {
         return $wpdb->insert_id;
     }
 
-    public static function save_game_availability( $game_id, $platform_id, $is_available, $game_included_override = -1 ) {
+    public static function save_game_availability( $game_id, $platform_id, $is_available, $game_included_override = -1, $plan_tier = '' ) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'cgt_game_platforms';
 
@@ -302,7 +305,8 @@ class CGT_Database {
                 $table_name,
                 array(
                     'is_available'            => $is_available,
-                    'game_included_override' => $game_included_override,
+                    'game_included_override'  => $game_included_override,
+                    'plan_tier'               => $plan_tier,
                 ),
                 array( 'id' => $existing->id )
             );
@@ -314,6 +318,7 @@ class CGT_Database {
                     'platform_id'            => $platform_id,
                     'is_available'           => $is_available,
                     'game_included_override' => $game_included_override,
+                    'plan_tier'              => $plan_tier,
                 )
             );
         }

@@ -110,9 +110,9 @@ class CGT_Frontend {
         }
 
         $tier = '';
-        if ( ! empty( $settings['show_tier'] ) && ! empty( $platform['tier'] ) ) {
+        if ( ! empty( $settings['show_tier'] ) && ! empty( $platform['plan_tier'] ) ) {
             /* translators: %s = tier name */
-            $tier = sprintf( esc_html__( 'Plan: %s', 'cloud-gaming-tracker' ), $platform['tier'] );
+            $tier = sprintf( esc_html__( 'Plan: %s', 'cloud-gaming-tracker' ), $platform['plan_tier'] );
         }
 
         $cta_text = ! empty( $platform['cta_text'] ) ? $platform['cta_text'] : esc_html__( 'Play Now', 'cloud-gaming-tracker' );

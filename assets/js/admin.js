@@ -250,10 +250,12 @@
                 var platformId = $(this).data('platform-id');
                 var isAvailable = $(this).find('.cgt-avail-available.active').length > 0 ? 1 : 0;
                 var gameIncluded = $(this).find('.cgt-avail-included.active').length > 0 ? 1 : ($(this).find('.cgt-avail-required.active').length > 0 ? 0 : -1);
+                var planTier = $(this).find('.cgt-plan-tier-select').val() || '';
 
                 availability[platformId] = {
                     is_available: isAvailable,
-                    game_included: gameIncluded
+                    game_included: gameIncluded,
+                    plan_tier: planTier
                 };
             });
 
