@@ -311,6 +311,7 @@
 
         addGame: function() {
             var gameName = $('#cgt-new-game-name').val().trim();
+            var gameTier = $('#cgt-new-game-tier').val();
             if (!gameName) {
                 this.showNotice('Please enter a game name', 'error');
                 return;
@@ -318,11 +319,13 @@
             $.post(cgtAdmin.ajaxUrl, {
                 action: 'cgt_add_game',
                 nonce: cgtAdmin.nonce,
-                game_name: gameName
+                game_name: gameName,
+                game_tier: gameTier
             }, function(response) {
                 if (response.success) {
                     CGTAdmin.showNotice(response.data.message, 'success');
                     $('#cgt-new-game-name').val('');
+                    $('#cgt-new-game-tier').val('');
                     setTimeout(function() {
                         location.reload();
                     }, 1000);

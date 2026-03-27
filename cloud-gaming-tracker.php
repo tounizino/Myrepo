@@ -3,7 +3,7 @@
  * Plugin Name: Cloud Games Checker v2
  * Plugin URI: https://cloudloadout.com/cloud-gaming-tracker
  * Description: Track and display cloud gaming platform availability for your games. Modern card-based UI with full admin control.
- * Version: 3.2.0
+ * Version: 3.2.1
  * Author: Cloud Loadout
  * Author URI: https://cloudloadout.com
  * License: GPL v2 or later
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CGT_VERSION', '3.2.0' );
+define( 'CGT_VERSION', '3.2.1' );
 define( 'CGT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CGT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'CGT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
