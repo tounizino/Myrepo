@@ -120,7 +120,7 @@ class CGT_Frontend {
 
         // For unavailable platforms, use the unavailable URL from the platform
         if ( ! $is_available ) {
-            $cta_text = esc_html__( 'Stay Tuned', 'cloud-gaming-tracker' );
+            $cta_text = ! empty( $settings['unavailable_button_text'] ) ? $settings['unavailable_button_text'] : esc_html__( 'Stay Tuned', 'cloud-gaming-tracker' );
             $cta_url  = ! empty( $platform['unavailable_url'] ) ? $platform['unavailable_url'] : '#';
         }
 

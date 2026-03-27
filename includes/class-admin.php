@@ -49,21 +49,22 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
         self::insert_default_platforms();
 
         $default_settings = array(
-            'theme'             => 'auto',
-            'primary_color'    => '#3b82f6',
-            'success_color'    => '#10b981',
-            'danger_color'     => '#ef4444',
-            'card_radius'      => '6',
-            'button_radius'    => '4',
-            'spacing'          => '16',
-            'show_price'       => true,
-            'show_tier'        => true,
-            'group_platforms'  => true,
-            'glassmorphism'    => true,
-            'show_group_titles' => 1,
-            'available_title'  => 'Available Platforms',
-            'unavailable_title' => 'Not Available',
-            'title_font_size'  => 24,
+            'theme'               => 'auto',
+            'primary_color'      => '#3b82f6',
+            'success_color'      => '#10b981',
+            'danger_color'       => '#ef4444',
+            'card_radius'        => '3',
+            'button_radius'      => '2',
+            'spacing'            => '16',
+            'show_price'         => 1,
+            'show_tier'          => 1,
+            'group_platforms'    => 1,
+            'glassmorphism'      => 1,
+            'show_group_titles'  => 1,
+            'available_title'    => 'Available Platforms',
+            'unavailable_title'  => 'Not Available',
+            'title_font_size'    => 24,
+            'unavailable_button_text' => 'Stay Tuned',
         );
 
         if ( ! get_option( 'cgt_settings' ) ) {
@@ -322,9 +323,7 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
                             </div>
                             <div class="cgt-form-group">
                                 <label class="cgt-form-label"><?php esc_html_e( 'Active', 'cloud-gaming-tracker' ); ?></label>
-                                <label class="cgt-toggle active" style="display: inline-block;">
-                                    <input type="checkbox" name="is_active" checked style="display: none;">
-                                </label>
+                                <input type="checkbox" name="is_active" checked style="margin-right: 8px;">
                             </div>
                         </div>
                     </form>
@@ -577,6 +576,19 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
             </div>
             <div class="cgt-admin-card">
                 <div class="cgt-admin-card-header">
+                    <h2><?php esc_html_e( 'Unavailable Button', 'cloud-gaming-tracker' ); ?></h2>
+                </div>
+                <div class="cgt-admin-card-body">
+                    <form id="cgt-unavailable-form">
+                        <div class="cgt-form-group">
+                            <label class="cgt-form-label"><?php esc_html_e( 'Stay Tuned Button Text', 'cloud-gaming-tracker' ); ?></label>
+                            <input type="text" name="unavailable_button_text" class="cgt-form-input" value="<?php echo esc_attr( $settings['unavailable_button_text'] ?? 'Stay Tuned' ); ?>">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="cgt-admin-card">
+                <div class="cgt-admin-card-header">
                     <h2><?php esc_html_e( 'Display Options', 'cloud-gaming-tracker' ); ?></h2>
                 </div>
                 <div class="cgt-admin-card-body">
@@ -760,28 +772,29 @@ final class Cloud_Gaming_Tracker extends CGT_Database {
         $current_settings = get_option( 'cgt_settings', array() );
         
         $settings = array(
-            'theme'               => sanitize_text_field( $_POST['theme'] ),
-            'primary_color'      => sanitize_hex_color( $_POST['primary_color'] ),
-            'success_color'      => sanitize_hex_color( $_POST['success_color'] ),
-            'danger_color'       => sanitize_hex_color( $_POST['danger_color'] ),
-            'card_radius'        => intval( $_POST['card_radius'] ),
-            'button_radius'      => intval( $_POST['button_radius'] ),
-            'spacing'            => intval( $_POST['spacing'] ),
-            'glassmorphism'     => isset( $_POST['glassmorphism'] ) ? 1 : 0,
-            'show_price'        => isset( $_POST['show_price'] ) ? 1 : 0,
-            'show_tier'         => isset( $_POST['show_tier'] ) ? 1 : 0,
-            'group_platforms'   => isset( $_POST['group_platforms'] ) ? 1 : 0,
-            'show_group_titles' => intval( $_POST['show_group_titles'] ),
-            'available_title'   => sanitize_text_field( $_POST['available_title'] ),
-            'unavailable_title' => sanitize_text_field( $_POST['unavailable_title'] ),
+            'theme'                => sanitize_text_field( $_POST['theme'] ),
+            'primary_color'       => sanitize_hex_color( $_POST['primary_color'] ),
+            'success_color'       => sanitize_hex_color( $_POST['success_color'] ),
+            'danger_color'        => sanitize_hex_color( $_POST['danger_color'] ),
+            'card_radius'         => intval( $_POST['card_radius'] ),
+            'button_radius'       => intval( $_POST['button_radius'] ),
+            'spacing'             => intval( $_POST['spacing'] ),
+            'glassmorphism'       => isset( $_POST['glassmorphism'] ) ? 1 : 0,
+            'show_price'          => isset( $_POST['show_price'] ) ? 1 : 0,
+            'show_tier'           => isset( $_POST['show_tier'] ) ? 1 : 0,
+            'group_platforms'     => isset( $_POST['group_platforms'] ) ? 1 : 0,
+            'show_group_titles'  => intval( $_POST['show_group_titles'] ),
+            'available_title'    => sanitize_text_field( $_POST['available_title'] ),
+            'unavailable_title'  => sanitize_text_field( $_POST['unavailable_title'] ),
             'title_font_size'   => intval( $_POST['title_font_size'] ),
+            'unavailable_button_text' => sanitize_text_field( $_POST['unavailable_button_text'] ),
         );
         
         // Merge with existing settings to preserve any we might have missed
         $settings = array_merge( $current_settings, $settings );
         
         update_option( 'cgt_settings', $settings );
-        wp_send_json_success( array( 'message' => esc_html__( 'Settings saved', 'cloud-gaming-tracker' ) ) );
+        wp_send_json_success( array( 'message' => esc_html__( 'Settings saved successfully!', 'cloud-gaming-tracker' ) ) );
     }
 
     public function ajax_add_game() {

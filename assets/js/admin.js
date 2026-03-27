@@ -277,6 +277,7 @@
             var settingsForm = $('#cgt-settings-form');
             var displayForm = $('#cgt-display-form');
             var titlesForm = $('#cgt-titles-form');
+            var unavailableForm = $('#cgt-unavailable-form');
             var data = {
                 action: 'cgt_save_settings',
                 nonce: cgtAdmin.nonce,
@@ -294,7 +295,8 @@
                 show_group_titles: titlesForm.find('[name="show_group_titles"]').val(),
                 available_title: titlesForm.find('[name="available_title"]').val(),
                 unavailable_title: titlesForm.find('[name="unavailable_title"]').val(),
-                title_font_size: titlesForm.find('[name="title_font_size"]').val()
+                title_font_size: titlesForm.find('[name="title_font_size"]').val(),
+                unavailable_button_text: unavailableForm.find('[name="unavailable_button_text"]').val()
             };
             this.showLoading($('.cgt-save-settings'), true);
             $.post(cgtAdmin.ajaxUrl, data, function(response) {
