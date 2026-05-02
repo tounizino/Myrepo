@@ -1,0 +1,254 @@
+<!-- Cloud Loadout Advanced Info Sheet - Dark Theme -->
+<div class="cl-container cl-dark-mode">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    .cl-container {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 100%;
+      max-width: 1100px;
+      margin: 40px auto;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: clFadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes clFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cl-header {
+      padding: 40px 40px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .cl-title-group h2 {
+      margin: 0;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .cl-category-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .cl-main-grid {
+      padding: 20px 40px 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .cl-stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .cl-stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cl-stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cl-stat-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #eee;
+    }
+
+    .cl-platforms {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cl-platform-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .cl-platform-pill {
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+
+    .cl-footer-actions {
+      padding: 20px 40px 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cl-btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cl-btn-primary {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .cl-btn-primary:hover {
+      background: #e0e0e0;
+      transform: scale(1.02);
+    }
+
+    .cl-badge-watermark {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    @media (max-width: 900px) {
+      .cl-main-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .cl-platforms {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cl-header { padding: 30px 24px 15px; }
+      .cl-main-grid { 
+        padding: 15px 24px 30px; 
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .cl-platforms { grid-column: span 1; }
+      .cl-footer-actions { padding: 20px 24px 30px; flex-direction: column; gap: 20px; align-items: flex-start; }
+      .cl-title-group h2 { font-size: 2.2rem; }
+      .cl-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+
+  <div class="cl-header">
+    <div class="cl-title-group">
+      <span class="cl-category-tag">Game Profile</span>
+      <h2>Arc Raiders</h2>
+    </div>
+    <div class="cl-badge-watermark">Cloud Loadout</div>
+  </div>
+
+  <div class="cl-main-grid">
+    <div class="cl-stat-card">
+      <div class="cl-stat-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Developer
+      </div>
+      <div class="cl-stat-value">Embark Studios</div>
+    </div>
+
+    <div class="cl-stat-card">
+      <div class="cl-stat-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        Publisher
+      </div>
+      <div class="cl-stat-value">Nexon</div>
+    </div>
+
+    <div class="cl-stat-card">
+      <div class="cl-stat-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        Release
+      </div>
+      <div class="cl-stat-value">2026</div>
+    </div>
+
+    <div class="cl-stat-card">
+      <div class="cl-stat-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+        Genre
+      </div>
+      <div class="cl-stat-value">Co-op Shooter</div>
+    </div>
+
+    <div class="cl-stat-card cl-platforms">
+      <div class="cl-stat-label">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+        Cloud & Platforms
+      </div>
+      <div class="cl-platform-list">
+        <span class="cl-platform-pill">GeForce NOW</span>
+        <span class="cl-platform-pill">Xbox Cloud</span>
+        <span class="cl-platform-pill">PC</span>
+        <span class="cl-platform-pill">PlayStation 5</span>
+        <span class="cl-platform-pill">Xbox Series X</span>
+      </div>
+    </div>
+    
+    <div class="cl-stat-card">
+      <div class="cl-stat-label">Status</div>
+      <div class="cl-stat-value" style="color: #4ade80;">Active Dev</div>
+    </div>
+
+    <div class="cl-stat-card">
+      <div class="cl-stat-label">Engine</div>
+      <div class="cl-stat-value">Unreal Engine 5</div>
+    </div>
+  </div>
+
+  <div class="cl-footer-actions">
+    <a href="https://arcraiders.com/" class="cl-btn cl-btn-primary" target="_blank">
+      Official Website
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+    </a>
+    <div class="cl-badge-watermark" style="font-size: 0.6rem;">© 2024 CLOUD LOADOUT</div>
+  </div>
+</div>
