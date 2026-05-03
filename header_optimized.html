@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout Header</title>
+    <!-- Font Awesome (WordPress Optimized) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css">
+    <style>
+        /* CSS Variables for performance and theme consistency */
+        :root {
+            --cld-primary: #154360;
+            --cld-secondary: #1f6cab;
+            --cld-accent: #d6eaf8;
+            --cld-border: #aed6f1;
+            --cld-bg-white: #ffffff;
+            --cld-bg-input: #fdfefe;
+            --cld-text-main: #154360;
+            --cld-text-muted: #4a6378;
+            --cld-grad-start: #ff4b2b;
+            --cld-grad-mid: #ff416c;
+            --cld-grad-end: #3f2b96;
+            --cld-radius: 12px;
+            --cld-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --cld-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        #cloud-loadout-header-wrapper {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--cld-text-main);
+            line-height: 1.5;
+        }
+
+        #cloud-loadout-header-wrapper * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Main */
+        #cloud-loadout-header-wrapper .cld-header-main {
+            background: var(--cld-accent);
+            border-bottom: 2px solid var(--cld-border);
+            position: sticky;
+            top: 0;
+            z-index: 9999; /* High priority to stay above other elements */
+            width: 100%;
+        }
+
+        #cloud-loadout-header-wrapper .cld-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* Logo Area */
+        #cloud-loadout-header-wrapper .cld-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: var(--cld-transition);
+        }
+
+        #cloud-loadout-header-wrapper .cld-logo:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        #cloud-loadout-header-wrapper .cld-logo-svg {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        #cloud-loadout-header-wrapper .cld-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        #cloud-loadout-header-wrapper .cld-logo-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--cld-primary);
+            letter-spacing: -0.03em;
+        }
+
+        #cloud-loadout-header-wrapper .cld-logo-subtitle {
+            font-size: 0.68rem;
+            color: var(--cld-secondary);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* Search Bar */
+        #cloud-loadout-header-wrapper .cld-search-box {
+            flex: 1;
+            max-width: 540px;
+            position: relative;
+        }
+
+        #cloud-loadout-header-wrapper .cld-search-inner {
+            position: relative;
+        }
+
+        #cloud-loadout-header-wrapper .cld-search-input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1.1rem;
+            background: var(--cld-bg-input);
+            border: 2px solid var(--cld-border);
+            border-radius: var(--cld-radius);
+            color: var(--cld-primary);
+            font-size: 0.92rem;
+            transition: var(--cld-transition);
+            outline: none;
+            font-family: inherit;
+        }
+
+        #cloud-loadout-header-wrapper .cld-search-input:focus {
+            border-color: var(--cld-secondary);
+            background: var(--cld-bg-white);
+            box-shadow: 0 0 0 4px rgba(31, 108, 171, 0.1);
+        }
+
+        #cloud-loadout-header-wrapper .cld-search-icon {
+            position: absolute;
+            right: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--cld-secondary);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        /* Results Panel */
+        #cloud-loadout-header-wrapper .cld-results-panel {
+            position: absolute;
+            top: calc(100% + 0.6rem);
+            left: 0;
+            right: 0;
+            background: var(--cld-bg-white);
+            border: 1px solid var(--cld-border);
+            border-radius: var(--cld-radius);
+            max-height: 420px;
+            overflow-y: auto;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            display: none;
+            z-index: 10001;
+        }
+
+        #cloud-loadout-header-wrapper .cld-results-panel.cld-visible {
+            display: block;
+            animation: cldFadeIn 0.2s ease-out;
+        }
+
+        @keyframes cldFadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #cloud-loadout-header-wrapper .cld-result-item {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #f1f7fb;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        #cloud-loadout-header-wrapper .cld-result-item:hover {
+            background: #f1f7fb;
+        }
+
+        #cloud-loadout-header-wrapper .cld-item-title {
+            color: var(--cld-primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        #cloud-loadout-header-wrapper .cld-item-excerpt {
+            color: var(--cld-text-muted);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* Action Group */
+        #cloud-loadout-header-wrapper .cld-action-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        #cloud-loadout-header-wrapper .cld-btn-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cld-bg-white);
+            border: 2px solid var(--cld-border);
+            border-radius: var(--cld-radius);
+            color: var(--cld-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: var(--cld-transition);
+            cursor: pointer;
+        }
+
+        #cloud-loadout-header-wrapper .cld-btn-icon:hover {
+            background: var(--cld-secondary);
+            border-color: var(--cld-secondary);
+            color: var(--cld-bg-white);
+            transform: translateY(-2px);
+        }
+
+        #cloud-loadout-header-wrapper .cld-mobile-toggle {
+            display: none;
+        }
+
+        /* Secondary Nav */
+        #cloud-loadout-header-wrapper .cld-nav-bar {
+            background: var(--cld-accent);
+            border-bottom: 1px solid var(--cld-border);
+            width: 100%;
+        }
+
+        #cloud-loadout-header-wrapper .cld-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        #cloud-loadout-header-wrapper .cld-nav-items {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 0.7rem 0;
+        }
+
+        #cloud-loadout-header-wrapper .cld-nav-items::-webkit-scrollbar {
+            display: none;
+        }
+
+        #cloud-loadout-header-wrapper .cld-nav-link {
+            color: var(--cld-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 0.65rem 1.1rem;
+            border-radius: 10px;
+            transition: var(--cld-transition);
+            background: var(--cld-bg-white);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+
+        #cloud-loadout-header-wrapper .cld-nav-link:hover {
+            background: var(--cld-border);
+        }
+
+        #cloud-loadout-header-wrapper .cld-nav-link.cld-active {
+            background: var(--cld-secondary);
+            color: var(--cld-bg-white);
+            border-color: var(--cld-secondary);
+        }
+
+        /* Mobile Drawer */
+        #cloud-loadout-header-wrapper .cld-mobile-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(21, 67, 96, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--cld-transition);
+        }
+
+        #cloud-loadout-header-wrapper .cld-mobile-backdrop.cld-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #cloud-loadout-header-wrapper .cld-drawer-content {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 310px;
+            height: 100dvh;
+            background: var(--cld-accent);
+            z-index: 10001;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 35px rgba(0,0,0,0.15);
+        }
+
+        #cloud-loadout-header-wrapper .cld-mobile-backdrop.cld-open .cld-drawer-content {
+            transform: translateX(0);
+        }
+
+        #cloud-loadout-header-wrapper .cld-drawer-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--cld-border);
+        }
+
+        #cloud-loadout-header-wrapper .cld-close-btn {
+            background: var(--cld-bg-white);
+            border: 2px solid var(--cld-border);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            color: var(--cld-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cloud-loadout-header-wrapper .cld-drawer-nav {
+            padding: 1.25rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        #cloud-loadout-header-wrapper .cld-drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--cld-primary);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 1.1rem;
+            border-radius: 12px;
+            margin-bottom: 0.65rem;
+            transition: var(--cld-transition);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        #cloud-loadout-header-wrapper .cld-drawer-item:hover {
+            background: var(--cld-bg-white);
+            color: var(--cld-secondary);
+            transform: translateX(5px);
+        }
+
+        #cloud-loadout-header-wrapper .cld-drawer-footer {
+            padding: 1.5rem;
+            border-top: 2px solid var(--cld-border);
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            #cloud-loadout-header-wrapper .cld-container { padding: 0.75rem 1.5rem; }
+            #cloud-loadout-header-wrapper .cld-search-box { max-width: 400px; }
+        }
+
+        @media (max-width: 768px) {
+            #cloud-loadout-header-wrapper .cld-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding: 0.75rem 1rem;
+            }
+
+            #cloud-loadout-header-wrapper .cld-search-box {
+                order: 3;
+                max-width: 100%;
+                flex-basis: 100%;
+            }
+
+            #cloud-loadout-header-wrapper .cld-action-group .cld-btn-icon:not(.cld-mobile-toggle) {
+                display: none;
+            }
+
+            #cloud-loadout-header-wrapper .cld-mobile-toggle {
+                display: flex;
+            }
+
+            #cloud-loadout-header-wrapper .cld-nav-bar {
+                display: none;
+            }
+
+            #cloud-loadout-header-wrapper .cld-logo-title { font-size: 1.3rem; }
+            #cloud-loadout-header-wrapper .cld-logo-svg { width: 46px; height: 46px; }
+        }
+
+        @media (max-width: 480px) {
+            #cloud-loadout-header-wrapper .cld-logo-subtitle { display: none; }
+            #cloud-loadout-header-wrapper .cld-logo-title { font-size: 1.25rem; }
+            #cloud-loadout-header-wrapper .cld-container { gap: 0.75rem; }
+            #cloud-loadout-header-wrapper .cld-logo { gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="cloud-loadout-header-wrapper">
+        <header class="cld-header-main">
+            <div class="cld-container">
+                <!-- Branding -->
+                <a href="/" class="cld-logo" aria-label="Cloud Loadout Home">
+                    <div class="cld-logo-svg">
+                        <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="cld_main_grad" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="var(--cld-grad-start)"/>
+                                    <stop offset="0.5" stop-color="var(--cld-grad-mid)"/>
+                                    <stop offset="1" stop-color="var(--cld-grad-end)"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Recreated Gear (Background Element) -->
+                            <path d="M304 64h-96v48c-12 3-23 7-33 12l-34-34-68 68 34 34c-5 10-9 21-12 33H48v96h47c3 12 7 23 12 33l-34 34 68 68 34-34c10 5 21 9 33 12v47h96v-47c12-3 23-7 33-12l34 34 68-68-34-34c5-10 9-21 12-33h47v-96h-47c-3-12-7-23-12-33l34-34-68-68-34 34c-10-5-21-9-33-12V64z" fill="url(#cld_main_grad)" opacity="0.3"/>
+                            <!-- Recreated Cloud Shape -->
+                            <path d="M406 190c-22-64-83-110-153-110-71 0-132 46-154 110-63 11-107 69-107 138 0 75 61 136 136 136h240c75 0 136-61 136-136 0-69-45-125-112-136z" fill="url(#cld_main_grad)"/>
+                            <!-- Recreated Controller Symbol -->
+                            <path d="M360 300c-16 0-30 14-30 30s14 30 30 30 30-14 30-30-14-30-30-30zm-208 0c-16 0-30 14-30 30s14 30 30 30 30-14 30-30-14-30-30-30zm136-40h-64v64c0 8-8 16-16 16s-16-8-16-16v-64h-64c-8 0-16-8-16-16s8-16 16-16h64v-64c0-8 8-16 16-16s16 8 16 16v64h64c8 0 16 8 16 16s-8 16-16 16z" fill="#ffffff"/>
+                        </svg>
+                    </div>
+                    <div class="cld-logo-text">
+                        <span class="cld-logo-title">Cloud Loadout</span>
+                        <span class="cld-logo-subtitle">Pro Configs & Guides</span>
+                    </div>
+                </a>
+
+                <!-- Search -->
+                <div class="cld-search-box">
+                    <div class="cld-search-inner">
+                        <input
+                            type="text"
+                            class="cld-search-input"
+                            placeholder="Search guides, configs, setups..."
+                            id="cldSearchInput"
+                            aria-label="Search"
+                            autocomplete="off"
+                        >
+                        <i class="fas fa-search cld-search-icon"></i>
+                        <div class="cld-results-panel" id="cldSearchResults"></div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="cld-action-group">
+                    <a href="https://x.com/cloudLoadout" class="cld-btn-icon" aria-label="Twitter" target="_blank" rel="noopener">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="https://www.facebook.com/CloudLoadoutOfficial/" class="cld-btn-icon" aria-label="Facebook" target="_blank" rel="noopener">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <button id="cldMobileToggle" class="cld-btn-icon cld-mobile-toggle" aria-label="Open Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Secondary Nav -->
+        <nav class="cld-nav-bar">
+            <div class="cld-nav-inner">
+                <div class="cld-nav-items">
+                    <a href="/getting-started" class="cld-nav-link cld-active">
+                        <i class="fas fa-rocket"></i> Getting Started
+                    </a>
+                    <a href="/performance" class="cld-nav-link">
+                        <i class="fas fa-gauge-high"></i> Performance
+                    </a>
+                    <a href="/pro-config" class="cld-nav-link">
+                        <i class="fas fa-sliders"></i> Pro Config
+                    </a>
+                    <a href="/troubleshooting" class="cld-nav-link">
+                        <i class="fas fa-wrench"></i> Troubleshooting
+                    </a>
+                    <a href="/game-guides" class="cld-nav-link">
+                        <i class="fas fa-gamepad"></i> Game Guides
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="cldMobileBackdrop" class="cld-mobile-backdrop">
+            <div class="cld-drawer-content">
+                <div class="cld-drawer-header">
+                    <span class="cld-logo-title" style="font-size: 1.4rem;">Menu</span>
+                    <button id="cldMobileClose" class="cld-close-btn" aria-label="Close Menu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <nav class="cld-drawer-nav">
+                    <a href="/getting-started" class="cld-drawer-item"><i class="fas fa-rocket"></i> Getting Started</a>
+                    <a href="/performance" class="cld-drawer-item"><i class="fas fa-gauge-high"></i> Performance</a>
+                    <a href="/pro-config" class="cld-drawer-item"><i class="fas fa-sliders"></i> Pro Config</a>
+                    <a href="/troubleshooting" class="cld-drawer-item"><i class="fas fa-wrench"></i> Troubleshooting</a>
+                    <a href="/game-guides" class="cld-drawer-item"><i class="fas fa-gamepad"></i> Game Guides</a>
+                </nav>
+                <div class="cld-drawer-footer">
+                    <a href="https://x.com/cloudLoadout" class="cld-btn-icon" aria-label="Twitter" target="_blank" rel="noopener">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="https://www.facebook.com/CloudLoadoutHub" class="cld-btn-icon" aria-label="Facebook" target="_blank" rel="noopener">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.youtube.com/c/TouniZino/videos" class="cld-btn-icon" aria-label="YouTube" target="_blank" rel="noopener">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            /**
+             * WordPress Ajax Search
+             */
+            const searchInput = document.getElementById('cldSearchInput');
+            const searchResults = document.getElementById('cldSearchResults');
+            let searchTimeout;
+
+            const performSearch = async (query) => {
+                const q = query.trim();
+                if (q.length < 2) {
+                    searchResults.classList.remove('cld-visible');
+                    return;
+                }
+
+                searchResults.innerHTML = '<div style="padding: 2.5rem; text-align: center; color: var(--cld-text-muted);"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+                searchResults.classList.add('cld-visible');
+
+                try {
+                    const apiPath = window.location.origin + '/wp-json/wp/v2';
+                    const params = new URLSearchParams({ search: q, per_page: 6, _embed: 'true' });
+
+                    const [postsRes, pagesRes] = await Promise.all([
+                        fetch(`${apiPath}/posts?${params}`).catch(() => null),
+                        fetch(`${apiPath}/pages?${params}`).catch(() => null)
+                    ]);
+
+                    const posts = postsRes && postsRes.ok ? await postsRes.json() : [];
+                    const pages = pagesRes && pagesRes.ok ? await pagesRes.json() : [];
+                    const combined = [...posts, ...pages].slice(0, 8);
+
+                    if (!combined.length) {
+                        searchResults.innerHTML = '<div style="padding: 2.5rem; text-align: center; color: var(--cld-text-muted);">No results found for "' + q + '".</div>';
+                        return;
+                    }
+
+                    searchResults.innerHTML = combined.map(item => {
+                        const title = item.title.rendered;
+                        const excerpt = (item.excerpt?.rendered || item.content?.rendered || '')
+                            .replace(/<[^>]*>/g, '')
+                            .substring(0, 110) + '...';
+                        return `
+                            <a href="${item.link}" class="cld-result-item">
+                                <div class="cld-item-title">${title}</div>
+                                <div class="cld-item-excerpt">${excerpt}</div>
+                            </a>
+                        `;
+                    }).join('');
+
+                } catch (e) {
+                    searchResults.innerHTML = '<div style="padding: 2.5rem; text-align: center; color: var(--cld-text-muted);">Search error. Please try again.</div>';
+                }
+            };
+
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => performSearch(e.target.value), 350);
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && searchInput.value.trim()) {
+                    window.location.href = '/?s=' + encodeURIComponent(searchInput.value.trim());
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.cld-search-box')) {
+                    searchResults.classList.remove('cld-visible');
+                }
+            });
+
+            /**
+             * Mobile Sidebar Toggle logic
+             */
+            const mobileToggle = document.getElementById('cldMobileToggle');
+            const mobileClose = document.getElementById('cldMobileClose');
+            const backdrop = document.getElementById('cldMobileBackdrop');
+
+            const toggleMenu = (open) => {
+                backdrop.classList.toggle('cld-open', open);
+                document.body.style.overflow = open ? 'hidden' : '';
+                mobileToggle.setAttribute('aria-expanded', open);
+            };
+
+            mobileToggle.addEventListener('click', () => toggleMenu(true));
+            mobileClose.addEventListener('click', () => toggleMenu(false));
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) toggleMenu(false);
+            });
+
+        })();
+    </script>
+</body>
+</html>
