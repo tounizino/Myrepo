@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamepad Tester & Controller Diagnostics</title>
+    <style>
+        /* [COPY-PASTE CSS START] */
+        :root {
+            --gt-bg: #f8fafc;
+            --gt-card-bg: #ffffff;
+            --gt-border: #e2e8f0;
+            --gt-text-main: #1e293b;
+            --gt-text-muted: #64748b;
+            --gt-accent: #3b82f6;
+            --gt-accent-dim: #dbeafe;
+            --gt-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --gt-radius: 4px;
+        }
+
+        #gamepad-tester-root * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gt-container {
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+            color: var(--gt-text-main);
+            background: var(--gt-bg);
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid var(--gt-border);
+            border-radius: var(--gt-radius);
+            line-height: 1.5;
+        }
+
+        .gt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--gt-border);
+            margin-bottom: 24px;
+        }
+
+        .gt-title-group h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
+        .gt-accent { color: var(--gt-accent); }
+        .gt-status { font-size: 13px; font-weight: 600; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+        .gt-disconnected { background: #fee2e2; color: #b91c1c; }
+        .gt-connected { background: #dcfce7; color: #15803d; }
+        .gt-global-stats { display: flex; gap: 20px; }
+        .gt-stat-item { text-align: right; }
+        .gt-label { display: block; font-size: 11px; text-transform: uppercase; color: var(--gt-text-muted); font-weight: 600; letter-spacing: 0.05em; }
+        .gt-value { font-family: var(--gt-font-mono); font-size: 14px; font-weight: 600; }
+
+        .gt-main { display: grid; grid-template-columns: 1fr 380px; gap: 24px; }
+        @media (max-width: 1024px) { .gt-main { grid-template-columns: 1fr; } }
+
+        .gt-card { background: var(--gt-card-bg); border: 1px solid var(--gt-border); border-radius: var(--gt-radius); overflow: hidden; }
+        .gt-card-header { background: #f1f5f9; padding: 10px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gt-text-muted); border-bottom: 1px solid var(--gt-border); }
+
+        .gt-viz-card { display: flex; flex-direction: column; min-height: 500px; }
+        .gt-controller-viz { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; background: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%); }
+        .gt-controller-wrapper { width: 100%; max-width: 540px; aspect-ratio: 540 / 340; position: relative; }
+        .gt-controller-body { width: 100%; height: 100%; background: #ffffff; border: 1px solid #94a3b8; border-radius: 15%; position: relative; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), inset 0 0 40px rgba(0,0,0,0.02); }
+
+        .gt-stick-container { position: absolute; width: 16%; aspect-ratio: 1; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 50%; }
+        .gt-stick-left { left: 18%; top: 32%; }
+        .gt-stick-right { right: 18%; top: 50%; }
+        .gt-stick-dot { position: absolute; width: 45%; height: 45%; background: #475569; border: 2px solid #ffffff; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10; }
+
+        .gt-btn { position: absolute; width: 6.5%; aspect-ratio: 1; border-radius: 50%; background: #ffffff; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: clamp(8px, 1.5vw, 13px); font-weight: 700; color: #475569; transition: all 0.05s; }
+        .gt-btn.active { background: #3b82f6; color: white; border-color: #2563eb; }
+        .gt-btn-a { right: 18.5%; top: 32%; }
+        .gt-btn-b { right: 11%; top: 22%; }
+        .gt-btn-x { right: 26%; top: 22%; }
+        .gt-btn-y { right: 18.5%; top: 12%; }
+        .gt-btn-lb { left: 15%; top: -3%; width: 13%; height: 7%; border-radius: 4px; font-size: clamp(6px, 1vw, 10px); }
+        .gt-btn-rb { right: 15%; top: -3%; width: 13%; height: 7%; border-radius: 4px; font-size: clamp(6px, 1vw, 10px); }
+
+        .gt-trigger-bar { position: absolute; width: 13%; height: 4%; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden; }
+        .gt-lt-bar { left: 15%; top: -10%; }
+        .gt-rt-bar { right: 15%; top: -10%; }
+        .gt-trigger-fill { height: 100%; background: #3b82f6; width: 0%; }
+        .gt-trigger-bar span { position: absolute; width: 100%; text-align: center; font-size: 8px; font-weight: 800; top: 0; color: #475569; z-index: 2; }
+
+        .gt-dpad { position: absolute; left: 18%; top: 53%; width: 16%; aspect-ratio: 1; }
+        .gt-dpad div { position: absolute; background: #ffffff; border: 1px solid #cbd5e1; }
+        .gt-dpad-up { width: 32%; height: 38%; left: 34%; top: 0; border-radius: 4px 4px 0 0; }
+        .gt-dpad-down { width: 32%; height: 38%; left: 34%; bottom: 0; border-radius: 0 0 4px 4px; }
+        .gt-dpad-left { width: 38%; height: 32%; left: 0; top: 34%; border-radius: 4px 0 0 4px; }
+        .gt-dpad-right { width: 38%; height: 32%; right: 0; top: 34%; border-radius: 0 4px 4px 0; }
+        .gt-dpad div.active { background: #3b82f6; }
+
+        .gt-btn-select { left: 40%; top: 25%; width: 5.5%; height: 4%; border-radius: 4px; }
+        .gt-btn-start { right: 40%; top: 25%; width: 5.5%; height: 4%; border-radius: 4px; }
+        .gt-btn-home { left: 50%; top: 25%; transform: translateX(-50%); width: 7.5%; aspect-ratio: 1; border-radius: 50%; }
+
+        .gt-analog-grid { padding: 16px; display: flex; flex-direction: column; gap: 20px; }
+        .gt-analog-unit { background: #f8fafc; border: 1px solid var(--gt-border); padding: 12px; border-radius: var(--gt-radius); }
+        .gt-unit-title { font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; color: var(--gt-text-muted); }
+        .gt-canvas-container { display: flex; justify-content: center; margin-bottom: 12px; }
+        canvas { background: #ffffff; border: 1px solid var(--gt-border); border-radius: 4px; max-width: 100%; height: auto; }
+        .gt-unit-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .gt-stat-row { font-family: var(--gt-font-mono); font-size: 12px; }
+        .gt-stat-row span:first-child { color: var(--gt-text-muted); }
+
+        .gt-input-log { height: 200px; overflow-y: auto; font-family: var(--gt-font-mono); font-size: 11px; padding: 8px; background: #0f172a; color: #94a3b8; }
+        .gt-log-entry { padding: 2px 4px; border-bottom: 1px solid #1e293b; }
+        .gt-log-entry .gt-log-time { color: #64748b; margin-right: 8px; }
+        .gt-log-entry .gt-log-action { color: #3b82f6; }
+
+        .gt-footer { margin-top: 24px; border-top: 1px solid var(--gt-border); padding-top: 16px; }
+        .gt-info-strip { display: flex; gap: 32px; flex-wrap: wrap; }
+        .gt-info-item { display: flex; align-items: center; gap: 8px; }
+        .gt-btn-small { background: #f1f5f9; border: 1px solid var(--gt-border); padding: 2px 8px; font-size: 11px; font-weight: 600; cursor: pointer; border-radius: 3px; }
+
+        @media (max-width: 600px) {
+            .gt-viz-card { min-height: auto; }
+            .gt-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .gt-global-stats { width: 100%; justify-content: space-between; }
+        }
+        /* [COPY-PASTE CSS END] */
+    </style>
+</head>
+<body>
+    <!-- [COPY-PASTE HTML START] -->
+    <div id="gamepad-tester-root">
+        <div class="gt-container">
+            <header class="gt-header">
+                <div class="gt-title-group">
+                    <h1>Gamepad <span class="gt-accent">Diagnostics</span></h1>
+                    <div id="gt-connection-status" class="gt-status gt-disconnected">No Controller Detected</div>
+                </div>
+                <div class="gt-global-stats">
+                    <div class="gt-stat-item">
+                        <span class="gt-label">Polling Rate</span>
+                        <span id="gt-polling-rate" class="gt-value">0 Hz</span>
+                    </div>
+                    <div class="gt-stat-item">
+                        <span class="gt-label">Device Type</span>
+                        <span id="gt-device-type" class="gt-value">Unknown</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="gt-main">
+                <section class="gt-viz-section">
+                    <div class="gt-card gt-viz-card">
+                        <div class="gt-card-header">Hardware Visualization</div>
+                        <div class="gt-controller-viz">
+                            <div class="gt-controller-wrapper">
+                                <div class="gt-controller-body">
+                                    <div class="gt-stick-container gt-stick-left" id="gt-stick-l">
+                                        <div class="gt-stick-dot"></div>
+                                    </div>
+                                    <div class="gt-stick-container gt-stick-right" id="gt-stick-r">
+                                        <div class="gt-stick-dot"></div>
+                                    </div>
+                                    <div class="gt-btn gt-btn-a" data-btn="0">A</div>
+                                    <div class="gt-btn gt-btn-b" data-btn="1">B</div>
+                                    <div class="gt-btn gt-btn-x" data-btn="2">X</div>
+                                    <div class="gt-btn gt-btn-y" data-btn="3">Y</div>
+                                    <div class="gt-btn gt-btn-lb" data-btn="4">LB</div>
+                                    <div class="gt-btn gt-btn-rb" data-btn="5">RB</div>
+                                    <div class="gt-trigger-bar gt-lt-bar" data-axis="lt">
+                                        <div class="gt-trigger-fill" id="gt-lt-fill"></div>
+                                        <span>LT</span>
+                                    </div>
+                                    <div class="gt-trigger-bar gt-rt-bar" data-axis="rt">
+                                        <div class="gt-trigger-fill" id="gt-rt-fill"></div>
+                                        <span>RT</span>
+                                    </div>
+                                    <div class="gt-dpad">
+                                        <div class="gt-dpad-up" data-btn="12"></div>
+                                        <div class="gt-dpad-down" data-btn="13"></div>
+                                        <div class="gt-dpad-left" data-btn="14"></div>
+                                        <div class="gt-dpad-right" data-btn="15"></div>
+                                    </div>
+                                    <div class="gt-btn gt-btn-select" data-btn="8"></div>
+                                    <div class="gt-btn gt-btn-start" data-btn="9"></div>
+                                    <div class="gt-btn gt-btn-home" data-btn="16"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="gt-side-section">
+                    <div class="gt-card gt-analog-card">
+                        <div class="gt-card-header">Analog Diagnostics</div>
+                        <div class="gt-analog-grid">
+                            <div class="gt-analog-unit">
+                                <div class="gt-unit-title">Left Stick</div>
+                                <div class="gt-canvas-container">
+                                    <canvas id="gt-canvas-l" width="160" height="160"></canvas>
+                                </div>
+                                <div class="gt-unit-stats">
+                                    <div class="gt-stat-row"><span>X:</span> <span id="gt-l-x">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Y:</span> <span id="gt-l-y">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Circularity:</span> <span id="gt-l-circ">0.0%</span></div>
+                                </div>
+                            </div>
+                            <div class="gt-analog-unit">
+                                <div class="gt-unit-title">Right Stick</div>
+                                <div class="gt-canvas-container">
+                                    <canvas id="gt-canvas-r" width="160" height="160"></canvas>
+                                </div>
+                                <div class="gt-unit-stats">
+                                    <div class="gt-stat-row"><span>X:</span> <span id="gt-r-x">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Y:</span> <span id="gt-r-y">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Circularity:</span> <span id="gt-r-circ">0.0%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gt-card gt-buttons-card">
+                        <div class="gt-card-header">Input Activity Monitor</div>
+                        <div id="gt-input-log" class="gt-input-log"></div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="gt-footer">
+                <div class="gt-info-strip">
+                    <div class="gt-info-item">
+                        <span class="gt-label">ID:</span>
+                        <span id="gt-ctrl-id" class="gt-value">-</span>
+                    </div>
+                    <div class="gt-info-item">
+                        <span class="gt-label">Battery:</span>
+                        <span id="gt-ctrl-battery" class="gt-value">N/A</span>
+                    </div>
+                    <div class="gt-info-item">
+                        <span class="gt-label">Vibration:</span>
+                        <button id="gt-test-vibration" class="gt-btn-small">Test Motor</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- [COPY-PASTE HTML END] -->
+
+    <script>
+        /* [COPY-PASTE JS START] */
+        class GamepadDiagnostics {
+            constructor() {
+                this.gamepadIndex = null;
+                this.rafId = null;
+                this.frameCount = 0;
+                this.lastPollingUpdate = 0;
+                this.stats = { l: { points: [] }, r: { points: [] } };
+                this.maxHistory = 100;
+                this.elements = {
+                    status: document.getElementById('gt-connection-status'),
+                    pollingRate: document.getElementById('gt-polling-rate'),
+                    deviceType: document.getElementById('gt-device-type'),
+                    ctrlId: document.getElementById('gt-ctrl-id'),
+                    battery: document.getElementById('gt-ctrl-battery'),
+                    inputLog: document.getElementById('gt-input-log'),
+                    vibeBtn: document.getElementById('gt-test-vibration'),
+                    stickL: document.querySelector('#gt-stick-l .gt-stick-dot'),
+                    stickR: document.querySelector('#gt-stick-r .gt-stick-dot'),
+                    lX: document.getElementById('gt-l-x'),
+                    lY: document.getElementById('gt-l-y'),
+                    lCirc: document.getElementById('gt-l-circ'),
+                    rX: document.getElementById('gt-r-x'),
+                    rY: document.getElementById('gt-r-y'),
+                    rCirc: document.getElementById('gt-r-circ'),
+                    ltFill: document.getElementById('gt-lt-fill'),
+                    rtFill: document.getElementById('gt-rt-fill'),
+                    canvasL: document.getElementById('gt-canvas-l'),
+                    canvasR: document.getElementById('gt-canvas-r')
+                };
+                this.ctxL = this.elements.canvasL.getContext('2d');
+                this.ctxR = this.elements.canvasR.getContext('2d');
+                this.init();
+            }
+            init() {
+                window.addEventListener("gamepadconnected", (e) => this.onConnect(e));
+                window.addEventListener("gamepaddisconnected", (e) => this.onDisconnect(e));
+                this.elements.vibeBtn.addEventListener('click', () => this.testVibration());
+                this.drawCanvas(this.ctxL, []);
+                this.drawCanvas(this.ctxR, []);
+                const gps = navigator.getGamepads();
+                for (let i = 0; i < gps.length; i++) { if (gps[i]) { this.onConnect({ gamepad: gps[i] }); break; } }
+            }
+            onConnect(e) {
+                if (this.gamepadIndex === null) {
+                    this.gamepadIndex = e.gamepad.index;
+                    this.updateStaticUI(e.gamepad);
+                    this.startLoop();
+                    this.logInput(`Connected: ${e.gamepad.id}`);
+                }
+            }
+            onDisconnect(e) {
+                if (this.gamepadIndex === e.gamepad.index) {
+                    this.logInput(`Disconnected: ${e.gamepad.id}`);
+                    this.gamepadIndex = null;
+                    this.stopLoop();
+                    this.resetUI();
+                }
+            }
+            updateStaticUI(gamepad) {
+                this.elements.status.textContent = "Controller Connected";
+                this.elements.status.className = "gt-status gt-connected";
+                this.elements.deviceType.textContent = this.detectType(gamepad.id);
+                this.elements.ctrlId.textContent = gamepad.id.split('(')[0].trim();
+            }
+            resetUI() {
+                this.elements.status.textContent = "No Controller Detected";
+                this.elements.status.className = "gt-status gt-disconnected";
+                this.elements.pollingRate.textContent = "0 Hz";
+                this.elements.deviceType.textContent = "Unknown";
+                this.elements.ctrlId.textContent = "-";
+                this.elements.battery.textContent = "N/A";
+                this.elements.stickL.style.transform = `translate(-50%, -50%)`;
+                this.elements.stickR.style.transform = `translate(-50%, -50%)`;
+                document.querySelectorAll('.gt-btn, .gt-dpad div').forEach(el => el.classList.remove('active'));
+                this.elements.ltFill.style.width = '0%';
+                this.elements.rtFill.style.width = '0%';
+            }
+            detectType(id) {
+                id = id.toLowerCase();
+                if (id.includes('xbox')) return 'Xbox Controller';
+                if (id.includes('dualsense')) return 'DualSense';
+                if (id.includes('dualshock') || id.includes('playstation')) return 'PlayStation';
+                if (id.includes('nintendo') || id.includes('pro controller')) return 'Switch Pro';
+                return 'Standard Gamepad';
+            }
+            startLoop() {
+                this.lastPollingUpdate = performance.now();
+                this.frameCount = 0;
+                const loop = (time) => { this.update(time); this.rafId = requestAnimationFrame(loop); };
+                this.rafId = requestAnimationFrame(loop);
+            }
+            stopLoop() { if (this.rafId) cancelAnimationFrame(this.rafId); }
+            update(time) {
+                const gamepads = navigator.getGamepads();
+                const gamepad = gamepads[this.gamepadIndex];
+                if (!gamepad) return;
+                this.frameCount++;
+                if (time - this.lastPollingUpdate > 1000) {
+                    this.pollingRate = Math.round((this.frameCount * 1000) / (time - this.lastPollingUpdate));
+                    this.elements.pollingRate.textContent = `${this.pollingRate} Hz`;
+                    this.frameCount = 0;
+                    this.lastPollingUpdate = time;
+                }
+                if (gamepad.battery) this.elements.battery.textContent = `${Math.round(gamepad.battery.level * 100)}%`;
+                this.processAxes(gamepad.axes);
+                this.processButtons(gamepad.buttons);
+            }
+            processAxes(axes) {
+                const lx = axes[0] || 0, ly = axes[1] || 0, rx = axes[2] || 0, ry = axes[3] || 0;
+                // Use percentages for the transform to handle responsiveness
+                this.elements.stickL.style.transform = `translate(calc(-50% + ${lx * 50}%), calc(-50% + ${ly * 50}%))`;
+                this.elements.stickR.style.transform = `translate(calc(-50% + ${rx * 50}%), calc(-50% + ${ry * 50}%))`;
+                this.elements.lX.textContent = lx.toFixed(4);
+                this.elements.lY.textContent = ly.toFixed(4);
+                this.elements.rX.textContent = rx.toFixed(4);
+                this.elements.rY.textContent = ry.toFixed(4);
+                this.updateStickStats('l', lx, ly);
+                this.updateStickStats('r', rx, ry);
+                this.drawCanvas(this.ctxL, this.stats.l.points);
+                this.drawCanvas(this.ctxR, this.stats.r.points);
+            }
+            updateStickStats(side, x, y) {
+                const dist = Math.sqrt(x*x + y*y);
+                const s = this.stats[side];
+                s.points.push({x, y});
+                if (s.points.length > this.maxHistory) s.points.shift();
+                if (dist > 0.75) {
+                    const error = Math.abs(1 - dist) * 100;
+                    this.elements[`${side}Circ`].textContent = `${error.toFixed(1)}%`;
+                } else { this.elements[`${side}Circ`].textContent = "0.0%"; }
+            }
+            processButtons(buttons) {
+                buttons.forEach((btn, i) => {
+                    const el = document.querySelector(`[data-btn="${i}"]`);
+                    const wasActive = el?.classList.contains('active');
+                    const isActive = btn.pressed || btn.value > 0.1;
+                    if (el) {
+                        if (isActive) el.classList.add('active');
+                        else el.classList.remove('active');
+                    }
+                    if (i === 6) this.elements.ltFill.style.width = `${btn.value * 100}%`;
+                    if (i === 7) this.elements.rtFill.style.width = `${btn.value * 100}%`;
+                    if (isActive && !wasActive) this.logInput(`Button ${i} [${btn.value.toFixed(2)}]`);
+                });
+            }
+            logInput(msg) {
+                const entry = document.createElement('div');
+                entry.className = 'gt-log-entry';
+                const now = new Date();
+                const time = now.toTimeString().split(' ')[0] + '.' + now.getMilliseconds().toString().padStart(3, '0');
+                entry.innerHTML = `<span class="gt-log-time">${time}</span> <span class="gt-log-action">${msg}</span>`;
+                this.elements.inputLog.prepend(entry);
+                if (this.elements.inputLog.childNodes.length > 30) this.elements.inputLog.removeChild(this.elements.inputLog.lastChild);
+            }
+            drawCanvas(ctx, points) {
+                const w = 160, h = 160, center = 80, scale = 65;
+                ctx.clearRect(0, 0, w, h);
+                ctx.strokeStyle = '#f1f5f9';
+                ctx.beginPath();
+                for(let i=0; i<=w; i+=20) { ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.moveTo(0, i); ctx.lineTo(w, i); }
+                ctx.stroke();
+                ctx.strokeStyle = '#e2e8f0'; ctx.setLineDash([2, 2]); ctx.beginPath();
+                ctx.moveTo(center, 0); ctx.lineTo(center, h); ctx.moveTo(0, center); ctx.lineTo(w, center); ctx.stroke();
+                ctx.setLineDash([]); ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.arc(center, center, scale, 0, Math.PI * 2); ctx.stroke();
+                if (points.length > 1) {
+                    ctx.beginPath(); ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)'; ctx.lineWidth = 2;
+                    points.forEach((p, i) => { const px = center + p.x * scale; const py = center + p.y * scale; if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); });
+                    ctx.stroke();
+                }
+                points.forEach((p, i) => {
+                    const alpha = i / points.length;
+                    ctx.fillStyle = `rgba(59, 130, 246, ${alpha * 0.5})`;
+                    ctx.beginPath(); ctx.arc(center + p.x * scale, center + p.y * scale, 2, 0, Math.PI * 2); ctx.fill();
+                });
+                if (points.length > 0) {
+                    const last = points[points.length - 1];
+                    ctx.fillStyle = '#1e293b'; ctx.beginPath(); ctx.arc(center + last.x * scale, center + last.y * scale, 4, 0, Math.PI * 2); ctx.fill();
+                }
+            }
+            testVibration() {
+                const gamepad = navigator.getGamepads()[this.gamepadIndex];
+                if (gamepad?.vibrationActuator) {
+                    gamepad.vibrationActuator.playEffect("dual-rumble", { startDelay: 0, duration: 400, weakMagnitude: 0.8, strongMagnitude: 0.5 });
+                } else { this.logInput("Vibration not supported"); }
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => new GamepadDiagnostics());
+        /* [COPY-PASTE JS END] */
+    </script>
+</body>
+</html>
