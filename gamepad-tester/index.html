@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamepad Tester & Controller Diagnostics</title>
+    <link rel="stylesheet" href="gamepad-tester.css">
+</head>
+<body>
+    <div id="gamepad-tester-root">
+        <!-- The component will be injected here or just live here -->
+        <div class="gt-container">
+            <header class="gt-header">
+                <div class="gt-title-group">
+                    <h1>Gamepad <span class="gt-accent">Diagnostics</span></h1>
+                    <div id="gt-connection-status" class="gt-status gt-disconnected">No Controller Detected</div>
+                </div>
+                <div class="gt-global-stats">
+                    <div class="gt-stat-item">
+                        <span class="gt-label">Polling Rate</span>
+                        <span id="gt-polling-rate" class="gt-value">0 Hz</span>
+                    </div>
+                    <div class="gt-stat-item">
+                        <span class="gt-label">Device Type</span>
+                        <span id="gt-device-type" class="gt-value">Unknown</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="gt-main">
+                <section class="gt-viz-section">
+                    <div class="gt-card gt-viz-card">
+                        <div class="gt-card-header">Hardware Visualization</div>
+                        <div class="gt-controller-viz" id="gt-controller-viz">
+                            <!-- Controller SVG/HTML will go here -->
+                            <div class="gt-controller-body">
+                                <!-- Stick L -->
+                                <div class="gt-stick-container gt-stick-left" id="gt-stick-l">
+                                    <div class="gt-stick-bound"></div>
+                                    <div class="gt-stick-dot"></div>
+                                </div>
+                                <!-- Stick R -->
+                                <div class="gt-stick-container gt-stick-right" id="gt-stick-r">
+                                    <div class="gt-stick-bound"></div>
+                                    <div class="gt-stick-dot"></div>
+                                </div>
+                                <!-- Buttons will be positioned via CSS -->
+                                <div class="gt-btn gt-btn-a" data-btn="0">A</div>
+                                <div class="gt-btn gt-btn-b" data-btn="1">B</div>
+                                <div class="gt-btn gt-btn-x" data-btn="2">X</div>
+                                <div class="gt-btn gt-btn-y" data-btn="3">Y</div>
+                                
+                                <div class="gt-btn gt-btn-lb" data-btn="4">LB</div>
+                                <div class="gt-btn gt-btn-rb" data-btn="5">RB</div>
+                                
+                                <div class="gt-trigger-bar gt-lt-bar" data-axis="lt">
+                                    <div class="gt-trigger-fill" id="gt-lt-fill"></div>
+                                    <span>LT</span>
+                                </div>
+                                <div class="gt-trigger-bar gt-rt-bar" data-axis="rt">
+                                    <div class="gt-trigger-fill" id="gt-rt-fill"></div>
+                                    <span>RT</span>
+                                </div>
+
+                                <div class="gt-dpad">
+                                    <div class="gt-dpad-up" data-btn="12"></div>
+                                    <div class="gt-dpad-down" data-btn="13"></div>
+                                    <div class="gt-dpad-left" data-btn="14"></div>
+                                    <div class="gt-dpad-right" data-btn="15"></div>
+                                </div>
+
+                                <div class="gt-btn gt-btn-select" data-btn="8"></div>
+                                <div class="gt-btn gt-btn-start" data-btn="9"></div>
+                                <div class="gt-btn gt-btn-home" data-btn="16"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="gt-side-section">
+                    <div class="gt-card gt-analog-card">
+                        <div class="gt-card-header">Analog Diagnostics</div>
+                        <div class="gt-analog-grid">
+                            <div class="gt-analog-unit">
+                                <div class="gt-unit-title">Left Stick</div>
+                                <div class="gt-canvas-container">
+                                    <canvas id="gt-canvas-l" width="160" height="160"></canvas>
+                                </div>
+                                <div class="gt-unit-stats">
+                                    <div class="gt-stat-row"><span>X:</span> <span id="gt-l-x">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Y:</span> <span id="gt-l-y">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Circularity Error:</span> <span id="gt-l-circ">0.0%</span></div>
+                                </div>
+                            </div>
+                            <div class="gt-analog-unit">
+                                <div class="gt-unit-title">Right Stick</div>
+                                <div class="gt-canvas-container">
+                                    <canvas id="gt-canvas-r" width="160" height="160"></canvas>
+                                </div>
+                                <div class="gt-unit-stats">
+                                    <div class="gt-stat-row"><span>X:</span> <span id="gt-r-x">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Y:</span> <span id="gt-r-y">0.000</span></div>
+                                    <div class="gt-stat-row"><span>Circularity Error:</span> <span id="gt-r-circ">0.0%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gt-card gt-buttons-card">
+                        <div class="gt-card-header">Input Activity Monitor</div>
+                        <div id="gt-input-log" class="gt-input-log">
+                            <!-- Input log entries -->
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="gt-footer">
+                <div class="gt-info-strip">
+                    <div class="gt-info-item">
+                        <span class="gt-label">ID:</span>
+                        <span id="gt-ctrl-id" class="gt-value">-</span>
+                    </div>
+                    <div class="gt-info-item">
+                        <span class="gt-label">Battery:</span>
+                        <span id="gt-ctrl-battery" class="gt-value">N/A</span>
+                    </div>
+                    <div class="gt-info-item">
+                        <span class="gt-label">Vibration:</span>
+                        <button id="gt-test-vibration" class="gt-btn-small">Test</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="gamepad-tester.js"></script>
+</body>
+</html>
