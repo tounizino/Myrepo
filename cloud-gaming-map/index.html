@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Global Infrastructure Map</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+</head>
+<body>
+    <div id="app-container">
+        <header class="map-header">
+            <div class="title-section">
+                <h1>CLOUD NETWORK</h1>
+                <p>Global Infrastructure Real-time Monitor</p>
+            </div>
+            <div class="controls-section">
+                <div class="search-box">
+                    <input type="text" id="location-input" placeholder="Enter your city or region...">
+                    <button id="find-node-btn">OPTIMIZE ROUTE</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="map-wrapper">
+            <div id="map-canvas"></div>
+            <div id="overlay-panel" class="hidden">
+                <button class="close-btn">&times;</button>
+                <div class="panel-content">
+                    <h2 id="region-name">Region Name</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <label>Latency</label>
+                            <span id="stat-latency">-- ms</span>
+                        </div>
+                        <div class="stat-item">
+                            <label>Status</label>
+                            <span id="stat-status">Operational</span>
+                        </div>
+                        <div class="stat-item">
+                            <label>Load</label>
+                            <div class="load-bar"><div id="stat-load-fill"></div></div>
+                        </div>
+                    </div>
+                    <div class="region-details">
+                        <p><strong>Supported Providers:</strong> GeForce Now, Xbox Cloud, PS Plus</p>
+                        <p><strong>Data Centers:</strong> <span id="stat-datacenters">0</span> active nodes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="map-footer">
+            <div class="legend">
+                <div class="legend-item"><span class="dot optimal"></span> Optimal</div>
+                <div class="legend-item"><span class="dot stable"></span> Stable</div>
+                <div class="legend-item"><span class="dot high-load"></span> High Load</div>
+            </div>
+            <div class="system-status">
+                <span class="status-indicator"></span> SYSTEM ONLINE // GLOBAL TRAFFIC: <span id="global-traffic">24.5 TB/s</span>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
