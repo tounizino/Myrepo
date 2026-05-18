@@ -2,115 +2,131 @@
 
 A **2026-style, minimal, transparent** news ticker + expandable card component for cloud gaming websites. Light theme, no shadows, no glow — designed for professional cloud gaming platforms.
 
+Two versions available: **v1** (original frosted glass style) and **v2 Sky Blue** (improved with pricing tables, spec grids, and richer card content).
+
 ---
 
-##  Features
+##  Features (v2 Sky Blue)
 
--  **Auto-scrolling ticker** — seamless infinite scroll through headlines
--  **Expandable cards** — click a headline or the bar to reveal detailed news cards
--  **Per-card detail** — click any card to expand with full story, stats, and links
--  **"Live" indicator** — pulsing dot + label
+-  **Auto-scrolling ticker** — CSS-powered seamless infinite scroll through headlines
+-  **Dropdown detail cards** — click any headline, dot, or arrow to open the card
+-  **Specs info grid** — key stats displayed in a clean grid layout
+-  **Pricing tables** — tier/price/detail comparison tables inside cards
+-  **Tag pills** — keyword badges for quick categorization
+-  **Live pulsing indicator** — animated dot with ring effect
+-  **Progress bar** — auto-advances to next news after 5 seconds
+-  **Prev/Next controls** — navigate through news items
+-  **Dot indicators** — clickable dots with auto-cycling when idle
+-  **Sky blue palette** — `#0284C7`, `#0EA5E9`, `#E0F2FE` accents
+-  **Transparent background** — clean, minimal, no shadows or glow
 -  **Fully responsive** — mobile, tablet, desktop
--  **Transparent background** — frost-blur glass effect on light themes
--  **No shadows, no glow** — clean 2026 minimal aesthetic
--  **WordPress ready** — shortcode + functions.php snippet included
+-  **Escape key** closes the card
+-  **WordPress ready** — paste into any Custom HTML block
 
 ---
 
 ##  Files
 
-| File | Description |
-|------|-------------|
-| `cloud-gaming-news-bar.html` | Standalone HTML + CSS + JS — paste anywhere |
-| `cloud-gaming-news-bar-wordpress.php` | WordPress-ready PHP file with `[cloud_gaming_news]` shortcode |
+| File | Version | Description |
+|------|---------|-------------|
+| `cloud-gaming-news-bar.html` | v1 | Original frosted glass style with expandable cards |
+| `cloud-gaming-news-bar-wordpress.php` | v1 | WordPress PHP version with `[cloud_gaming_news]` shortcode |
+| `cloud-gaming-news-ticker-v2-skyblue.html` | v2 | **Sky Blue Edition** — improved design with pricing tables & spec grids |
+
+> **Recommendation:** Use `cloud-gaming-news-ticker-v2-skyblue.html` — it's the latest and most polished version.
 
 ---
 
-##  Quick Start — HTML Version
+##  Quick Start
 
-1. Open `cloud-gaming-news-bar.html`
+1. Open `cloud-gaming-news-ticker-v2-skyblue.html`
 2. Copy the **entire file contents**
 3. Paste into any WordPress page via **Custom HTML block** (Gutenberg) or into any HTML area of your site
 
-> The component is fully self-contained — all CSS and JS are embedded.
+> The component is fully self-contained — all CSS and JS are embedded. No plugins needed.
 
 ---
 
-##  Quick Start — WordPress Version
+##  Adding / Editing News Items (v2 Sky Blue)
 
-### Option A: Theme `functions.php`
-1. Open your theme's `functions.php`
-2. Copy the entire contents of `cloud-gaming-news-bar-wordpress.php` and paste at the bottom
-3. Use the shortcode `[cloud_gaming_news]` in any page, post, or widget area
-
-### Option B: Custom Plugin (recommended)
-1. Create a new file: `/wp-content/plugins/cloud-gaming-news/cloud-gaming-news.php`
-2. Paste the contents of `cloud-gaming-news-wordpress.php` into it
-3. Activate the plugin from WordPress Admin → Plugins
-4. Use `[cloud_gaming_news]` anywhere
-
----
-
-##  Adding / Editing News Items
-
-Find the `NEWS_ITEMS` array in the JavaScript (HTML version) or the `$news_items` array in the PHP (WordPress version).
-
-Each item supports:
+Find the `NEWS` array in the JavaScript section:
 
 ```js
-{
-  id:        1,                      // unique number
-  title:     'Headline text',
-  category:  'Hardware',             // badge label
-  date:      '2 hours ago',
-  icon:      '⚡',                   // emoji or text
-  iconColor: 'purple',               // purple | green | orange | pink | cyan
-  desc:      'Short preview text (2 lines)',
-  detail:    'Full story text...',
-  stats:     ['240 FPS', '4K Native'],  // pill badges
-  link:      'https://...',
-  linkText:  'Read full announcement'
-}
+var NEWS = [
+  {
+    platform:      'GeForce NOW',          // Platform name
+    platformColor: '#16A34A',              // Badge color
+    category:      'Performance',          // Category label
+    date:          'May 18, 2026',
+    headline:      'Your Headline Here',
+    summary:       'Short description...',
+    tag:           'ULTIMATE',             // Ticker tag (UPPERCASE)
+    tagColor:      '#16A34A',              // Ticker tag color
+    specs: [                               // Info grid
+      { label: 'Max Resolution', value: '4K Native (240 fps)' },
+      { label: 'Latency', value: 'Up to 38%' }
+    ],
+    pricing: {                             // Pricing table (optional)
+      title: 'Current Plans',
+      rows: [
+        { tier: 'Free',       price: '$0/mo',  detail: '1080p/60' },
+        { tier: 'Premium',    price: '$9.99/mo', detail: '1440p/120' }
+      ],
+      footnote: 'Prices may vary.'
+    },
+    tags: ['NVIDIA', '4K 240fps'],         // Keyword pills
+    link: '#'                              // Read More URL
+  }
+];
 ```
 
 Just add or remove objects from the array — the component auto-adjusts.
 
 ---
 
-##  Color Customization
+##  Customization
 
-The accent color is `#3478f6` (blue). To change it:
+**Sky Blue palette** — CSS custom properties at the top of the `<style>` block:
 
-**CSS:** replace `#3478f6` throughout with your brand color  
-**Convenient:** do a find-and-replace for `#3478f6` → your color
+```css
+--c-sky-500: #0EA5E9;   /* primary accent */
+--c-sky-600: #0284C7;   /* hover / links */
+--c-sky-700: #0369A1;   /* label text */
+```
 
-Icon accent options: `purple` (#8b5cf6), `green` (#10b981), `orange` (#fb923c), `pink` (#ec4899), `cyan` (#06b6d4)
+Change these values to rebrand with your own colors.
 
 ---
 
-##  Behavior
+##  Behavior (v2 Sky Blue)
 
 | Action | Result |
 |--------|--------|
-| Click ticker bar (not on a headline) | Toggle card panel open/closed |
-| Click a scrolling headline | Open card panel + scroll to that card + expand it |
-| Click a card | Expand/collapse that card's detail section |
-| Hover ticker | Pause auto-scroll |
+| Click a scrolling headline | Opens that news card |
+| Click a dot | Opens that news card |
+| Click Prev / Next arrows | Navigate through cards |
+| Click close (×) button | Closes the card |
+| Press Escape key | Closes the card |
+| Progress bar | Auto-advances to next news (5s) |
+| Dots auto-cycle | Cycle through dots when no card is open |
+| Hover ticker | Pauses auto-scroll |
+| Hover away from ticker | Resumes auto-scroll |
 
 ---
 
 ##  Browser Support
 
 Chrome, Firefox, Safari, Edge — latest 2 versions.  
-Uses `backdrop-filter: blur()` which requires modern browsers.
+Uses CSS `mask-image` and custom properties — modern browsers only.
 
 ---
 
-##  Design Philosophy
+##  Design Philosophy (v2 Sky Blue)
 
+- **Sky blue palette** — calming, tech-forward, cloud-inspired
 - **Transparent** — lets your site background show through
-- **Light theme** — clean whites and soft grays
-- **No shadows** — flat, crisp, modern
-- **No glow** — relies on clean borders and spacing
-- **Frost glass** — subtle backdrop blur for depth without heavy visual weight
+- **No shadows, no glow** — flat, crisp, modern
+- **Barlow Condensed** — for labels, tags, and compact UI text
+- **Outfit** — for headlines and body copy
 - **2026 aesthetic** — minimal, spacious, typography-forward
+- **Content-rich cards** — specs grids + pricing tables for real utility
