@@ -1,0 +1,18 @@
+{
+    "name": "cloud-loadout/cloud-gamers-discuss",
+    "description": "The ultimate modern commenting system for cloud gaming sites.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "CloudGamersDiscuss\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cloud Loadout",
+            "email": "dev@cloudloadout.com"
+        }
+    ],
+    "require": {}
+}
