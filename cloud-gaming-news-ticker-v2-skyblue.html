@@ -1,0 +1,1140 @@
+<!-- 
+╔══════════════════════════════════════════════════════════════╗
+║   CLOUD GAMING NEWS TICKER v2 — Sky Blue Edition            ║
+║   WordPress Custom HTML Block · Paste & go                  ║
+║   Features: auto-ticker · dropdown cards · pricing tables   ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   CLOUD GAMING NEWS TICKER v2 — Sky Blue
+   All styles scoped under #cgn2
+   ═══════════════════════════════════════════════════════ */
+
+#cgn2 *,
+#cgn2 *::before,
+#cgn2 *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#cgn2 {
+  --c-sky-50:   #F0F9FF;
+  --c-sky-100:  #E0F2FE;
+  --c-sky-200:  #BAE6FD;
+  --c-sky-300:  #7DD3FC;
+  --c-sky-400:  #38BDF8;
+  --c-sky-500:  #0EA5E9;
+  --c-sky-600:  #0284C7;
+  --c-sky-700:  #0369A1;
+  --c-sky-800:  #075985;
+  --c-text:     #0F172A;
+  --c-muted:    #64748B;
+  --c-light:    #94A3B8;
+  --c-border:   #E2E8F0;
+  --c-border-2: #CBD5E1;
+  --c-surface:  rgba(255, 255, 255, 0.5);
+  --c-hover:    rgba(2, 132, 204, 250, 0.15);
+
+  --bar-h:        48px;
+  --font-head:    'Barlow Condensed', sans-serif;
+  --font-body:    'Outfit', sans-serif;
+
+  font-family:  var(--font-body);
+  width:        100%;
+  max-width:    1120px;
+  margin:       0 auto;
+  position:     relative;
+  user-select:  none;
+  background:   transparent;
+}
+
+/* ── BAR ─────────────────────────────────────────────── */
+#cgn2-bar {
+  display:         flex;
+  align-items:     center;
+  height:          var(--bar-h);
+  border-bottom:   1.5px solid var(--c-border-2);
+  background:      transparent;
+  position:        relative;
+  overflow:        hidden;
+}
+
+/* ── LABEL ───────────────────────────────────────────── */
+#cgn2-label {
+  display:      flex;
+  align-items:  center;
+  gap:          10px;
+  padding:      0 16px 0 14px;
+  border-right: 1.5px solid var(--c-border-2);
+  height:       100%;
+  flex-shrink:  0;
+}
+
+.cgn2-pulse {
+  position:      relative;
+  width:         9px;
+  height:        9px;
+  flex-shrink:   0;
+}
+
+.cgn2-pulse-dot {
+  position:      absolute;
+  inset:         0;
+  border-radius: 50%;
+  background:    var(--c-sky-500);
+}
+
+.cgn2-pulse-ring {
+  position:      absolute;
+  inset:         -3px;
+  border-radius: 50%;
+  border:        1.5px solid var(--c-sky-400);
+  opacity:       0;
+  animation:     cgn2-ring 2.4s ease-out infinite;
+}
+
+@keyframes cgn2-ring {
+  0%   { inset: 0;    opacity: 0.7; }
+  100% { inset: -6px; opacity: 0;   }
+}
+
+.cgn2-label-text {
+  font-family:    var(--font-head);
+  font-size:      13px;
+  font-weight:    700;
+  letter-spacing: 0.12em;
+  color:          var(--c-sky-700);
+  text-transform: uppercase;
+  white-space:    nowrap;
+  line-height:    1;
+}
+
+/* ── TICKER TRACK ────────────────────────────────────── */
+#cgn2-track-wrap {
+  flex:      1;
+  overflow:  hidden;
+  height:    100%;
+  position:  relative;
+  min-width: 0;
+  cursor:    pointer;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    rgba(0,0,0,0.35) 16px,
+    black 48px,
+    black calc(100% - 48px),
+    rgba(0,0,0,0.35) calc(100% - 16px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    rgba(0,0,0,0.35) 16px,
+    black 48px,
+    black calc(100% - 48px),
+    rgba(0,0,0,0.35) calc(100% - 16px),
+    transparent 100%
+  );
+}
+
+#cgn2-ticker {
+  display:        inline-flex;
+  align-items:    center;
+  height:         100%;
+  animation:      cgn2-scroll 42s linear infinite;
+  will-change:    transform;
+  white-space:    nowrap;
+}
+
+#cgn2-ticker.is-paused {
+  animation-play-state: paused;
+}
+
+@keyframes cgn2-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--cgn2-offset, -50%)); }
+}
+
+/* ── TICKER ITEMS ────────────────────────────────────── */
+.cgn2-item {
+  display:      inline-flex;
+  align-items:  center;
+  gap:          10px;
+  padding:      0 26px 0 6px;
+  height:       100%;
+  cursor:       pointer;
+  flex-shrink:  0;
+  transition:   background 0.15s ease;
+  border-radius: 3px;
+}
+
+.cgn2-item:hover {
+  background: var(--c-hover);
+}
+
+.cgn2-item.is-active .cgn2-headline {
+  color: var(--c-sky-600);
+}
+
+.cgn2-tag {
+  font-family:    var(--font-head);
+  font-size:      10px;
+  font-weight:    700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding:        2px 8px;
+  border:         1.5px solid currentColor;
+  border-radius:  2px;
+  flex-shrink:    0;
+  line-height:    1.6;
+}
+
+.cgn2-platform {
+  font-family:    var(--font-head);
+  font-size:      11.5px;
+  font-weight:    600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color:          var(--c-muted);
+  flex-shrink:    0;
+}
+
+.cgn2-sep {
+  color:      var(--c-light);
+  font-size:  14px;
+  flex-shrink: 0;
+  font-weight: 300;
+}
+
+.cgn2-headline {
+  font-size:   13px;
+  font-weight: 500;
+  color:       var(--c-text);
+  transition:  color 0.15s ease;
+  line-height: 1;
+}
+
+.cgn2-bullet {
+  width:       3px;
+  height:      3px;
+  background:  var(--c-border-2);
+  border-radius: 50%;
+  margin:      0 8px 0 0;
+  flex-shrink: 0;
+}
+
+/* ── DOTS ────────────────────────────────────────────── */
+#cgn2-dots {
+  display:      flex;
+  align-items:  center;
+  gap:          6px;
+  padding:      0 14px;
+  border-left:  1.5px solid var(--c-border-2);
+  height:       100%;
+  flex-shrink:  0;
+}
+
+.cgn2-dot {
+  width:         5px;
+  height:        5px;
+  border-radius: 50%;
+  background:    var(--c-border);
+  cursor:        pointer;
+  transition:    background 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink:   0;
+}
+
+.cgn2-dot.is-live {
+  background: var(--c-sky-500);
+  transform:  scale(1.45);
+}
+
+/* ── CONTROLS ────────────────────────────────────────── */
+#cgn2-controls {
+  display:     flex;
+  align-items: center;
+  border-left: 1.5px solid var(--c-border-2);
+  height:      100%;
+  flex-shrink: 0;
+}
+
+.cgn2-btn {
+  width:       40px;
+  height:      100%;
+  border:      none;
+  background:  transparent;
+  cursor:      pointer;
+  color:       var(--c-light);
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  transition:  color 0.18s ease, background 0.18s ease;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cgn2-btn:hover {
+  color:       var(--c-sky-600);
+  background:  var(--c-hover);
+}
+
+.cgn2-btn:active {
+  color: var(--c-sky-700);
+}
+
+.cgn2-btn svg {
+  width:  15px;
+  height: 15px;
+  display: block;
+}
+
+.cgn2-btn + .cgn2-btn {
+  border-left: 1.5px solid var(--c-border-2);
+}
+
+#cgn2-counter {
+  font-family:    var(--font-head);
+  font-size:      12px;
+  font-weight:    600;
+  color:          var(--c-muted);
+  padding:        0 12px;
+  border-left:    1.5px solid var(--c-border-2);
+  height:         100%;
+  display:        flex;
+  align-items:    center;
+  white-space:    nowrap;
+  letter-spacing: 0.04em;
+  min-width:      50px;
+  justify-content: center;
+}
+
+/* ── PROGRESS LINE ───────────────────────────────────── */
+#cgn2-progress {
+  height:     2px;
+  background: var(--c-border);
+  position:   relative;
+  overflow:   hidden;
+}
+
+#cgn2-progress-fill {
+  position:   absolute;
+  left:       0;
+  top:        0;
+  height:     100%;
+  background: var(--c-sky-500);
+  width:      0%;
+  transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════════════════════
+   DROPDOWN CARD
+   ═══════════════════════════════════════════════════════ */
+
+#cgn2-dropdown {
+  border-left:  1.5px solid var(--c-border-2);
+  border-right: 1.5px solid var(--c-border-2);
+  background:   transparent;
+  max-height:   0;
+  overflow-y:   auto;
+  transition:   max-height 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#cgn2-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+#cgn2-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#cgn2-dropdown::-webkit-scrollbar-thumb {
+  background: var(--c-border-2);
+  border-radius: 3px;
+}
+
+#cgn2-dropdown.is-open {
+  max-height: 640px;
+  border-bottom: 1.5px solid var(--c-border-2);
+}
+
+#cgn2-card {
+  padding:             28px 28px 24px;
+  display:             grid;
+  grid-template-columns: 1fr auto;
+  gap:                 28px;
+  align-items:         start;
+  opacity:             0;
+  transform:           translateY(-8px);
+  transition:          opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+}
+
+#cgn2-dropdown.is-open #cgn2-card {
+  opacity:   1;
+  transform: translateY(0);
+}
+
+/* ── CARD LEFT ────────────────────────────────────────── */
+#cgn2-card-meta {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  margin-bottom: 12px;
+  flex-wrap:   wrap;
+}
+
+.cgn2-badge {
+  font-family:    var(--font-head);
+  font-size:      11.5px;
+  font-weight:    700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding:        3px 10px;
+  border:         1.5px solid currentColor;
+  border-radius:  2px;
+  line-height:    1.5;
+  flex-shrink:    0;
+}
+
+.cgn2-category {
+  font-family:    var(--font-head);
+  font-size:      12px;
+  font-weight:    500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color:          var(--c-muted);
+}
+
+.cgn2-meta-sep {
+  color:     var(--c-light);
+  font-size: 12px;
+}
+
+.cgn2-date {
+  font-family:    var(--font-head);
+  font-size:      12px;
+  font-weight:    400;
+  letter-spacing: 0.04em;
+  color:          var(--c-muted);
+}
+
+#cgn2-card-headline {
+  font-size:      22px;
+  font-weight:    600;
+  color:          var(--c-text);
+  line-height:    1.25;
+  letter-spacing: -0.03em;
+  margin-bottom:  10px;
+  font-family:    var(--font-body);
+}
+
+#cgn2-card-summary {
+  font-size:      14px;
+  font-weight:    400;
+  color:          var(--c-muted);
+  line-height:    1.7;
+  max-width:      620px;
+  margin-bottom:  16px;
+}
+
+/* ── CARD INFO GRID (specs / stats) ──────────────────── */
+#cgn2-card-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.cgn2-spec {
+  display:        flex;
+  flex-direction: column;
+  gap:           3px;
+  padding:        10px 12px;
+  background:    rgba(14, 165, 233, 0.04);
+  border:        1px solid var(--c-sky-100);
+  border-radius: 4px;
+}
+
+.cgn2-spec-label {
+  font-family:    var(--font-head);
+  font-size:      10px;
+  font-weight:    600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color:          var(--c-sky-600);
+}
+
+.cgn2-spec-value {
+  font-size:   13px;
+  font-weight: 500;
+  color:       var(--c-text);
+}
+
+/* ── PRICING TABLE ───────────────────────────────────── */
+#cgn2-card-pricing {
+  margin-bottom: 18px;
+}
+
+.cgn2-pricing-title {
+  font-family:    var(--font-head);
+  font-size:      11px;
+  font-weight:    700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color:          var(--c-muted);
+  margin-bottom:  8px;
+}
+
+.cgn2-pricing-table {
+  width:         100%;
+  border-collapse: collapse;
+  font-size:     13px;
+}
+
+.cgn2-pricing-table th {
+  font-family:    var(--font-head);
+  font-size:      11px;
+  font-weight:    600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color:          var(--c-muted);
+  text-align:     left;
+  padding:        8px 12px;
+  border-bottom:  1.5px solid var(--c-border-2);
+}
+
+.cgn2-pricing-table td {
+  padding:        8px 12px;
+  border-bottom:  1px solid var(--c-border);
+  color:          var(--c-text);
+  line-height:    1.5;
+}
+
+.cgn2-pricing-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cgn2-pricing-table td:last-child {
+  font-weight: 500;
+  color:       var(--c-sky-600);
+}
+
+.cgn2-table-ft {
+  font-size:   11px;
+  color:       var(--c-light);
+  margin-top:  6px;
+  line-height:  1.5;
+}
+
+/* ── TAGS ────────────────────────────────────────────── */
+#cgn2-card-tags {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  flex-wrap:   wrap;
+}
+
+.cgn2-pill {
+  font-family:    var(--font-head);
+  font-size:      10.5px;
+  font-weight:    600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding:        3px 10px;
+  background:     rgba(2, 132, 199, 0.07);
+  color:          var(--c-sky-600);
+  border-radius:  2px;
+}
+
+/* ── CARD RIGHT ──────────────────────────────────────── */
+#cgn2-card-right {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     flex-end;
+  gap:             14px;
+  padding-top:     2px;
+  flex-shrink:     0;
+}
+
+#cgn2-close-btn {
+  width:       34px;
+  height:      34px;
+  border:      1.5px solid var(--c-border-2);
+  background:  transparent;
+  border-radius: 3px;
+  cursor:      pointer;
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  color:       var(--c-light);
+  transition:  color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  flex-shrink: 0;
+}
+
+#cgn2-close-btn:hover {
+  color:        var(--c-text);
+  border-color: var(--c-sky-400);
+  background:   rgba(14, 165, 233, 0.05);
+}
+
+#cgn2-close-btn svg {
+  width:  14px;
+  height: 14px;
+}
+
+#cgn2-read-more {
+  display:      inline-flex;
+  align-items:  center;
+  gap:          8px;
+  font-family:  var(--font-head);
+  font-size:    12.5px;
+  font-weight:  700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color:        var(--c-sky-600);
+  text-decoration: none;
+  border:       1.5px solid var(--c-sky-600);
+  padding:      8px 18px;
+  border-radius: 3px;
+  white-space:  nowrap;
+  transition:   background 0.2s ease, color 0.2s ease;
+}
+
+#cgn2-read-more:hover {
+  background: var(--c-sky-600);
+  color:      #fff;
+}
+
+#cgn2-read-more svg {
+  width:  12px;
+  height: 12px;
+  transition: transform 0.2s ease;
+}
+
+#cgn2-read-more:hover svg {
+  transform: translateX(4px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 720px) {
+  #cgn2-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 20px 18px 18px;
+  }
+
+  #cgn2-card-right {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  #cgn2-dropdown.is-open {
+    max-height: 740px;
+  }
+
+  #cgn2-label .cgn2-label-text { display: none; }
+
+  #cgn2-dots { display: none; }
+
+  #cgn2-counter { display: none; }
+
+  .cgn2-platform { display: none; }
+  .cgn2-sep      { display: none; }
+
+  #cgn2-card-headline { font-size: 17px; }
+
+  #cgn2-card-specs {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  #cgn2 { --bar-h: 42px; }
+
+  .cgn2-btn { width: 36px; }
+
+  .cgn2-btn svg { width: 13px; height: 13px; }
+
+  .cgn2-item {
+    padding: 0 16px 0 4px;
+    gap: 7px;
+  }
+
+  .cgn2-headline { font-size: 12px; }
+
+  .cgn2-tag { font-size: 9px; padding: 1px 6px; }
+
+  #cgn2-card-headline { font-size: 15px; }
+
+  #cgn2-card-specs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #cgn2-card-summary {
+    font-size: 13px;
+  }
+
+  .cgn2-pricing-table { font-size: 12px; }
+  .cgn2-pricing-table th,
+  .cgn2-pricing-table td { padding: 6px 8px; }
+}
+
+/* ── Smooth font rendering ── */
+#cgn2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+
+<!-- ════════════════════════════════════
+     HTML
+     ════════════════════════════════════ -->
+
+<div id="cgn2">
+
+  <!-- BAR -->
+  <div id="cgn2-bar">
+
+    <div id="cgn2-label">
+      <div class="cgn2-pulse">
+        <div class="cgn2-pulse-dot"></div>
+        <div class="cgn2-pulse-ring"></div>
+      </div>
+      <span class="cgn2-label-text">Cloud News</span>
+    </div>
+
+    <div id="cgn2-track-wrap">
+      <div id="cgn2-ticker"></div>
+    </div>
+
+    <div id="cgn2-dots"></div>
+
+    <div id="cgn2-controls">
+      <button class="cgn2-btn" id="cgn2-prev" title="Previous news" aria-label="Previous">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="10 12 6 8 10 4"/>
+        </svg>
+      </button>
+      <span id="cgn2-counter">1 / 3</span>
+      <button class="cgn2-btn" id="cgn2-next" title="Next news" aria-label="Next">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 12 10 8 6 4"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="cgn2-progress">
+    <div id="cgn2-progress-fill"></div>
+  </div>
+
+  <!-- DROPDOWN CARD -->
+  <div id="cgn2-dropdown">
+    <div id="cgn2-card">
+      <div id="cgn2-card-left">
+        <div id="cgn2-card-meta"></div>
+        <h3 id="cgn2-card-headline"></h3>
+        <p id="cgn2-card-summary"></p>
+        <div id="cgn2-card-specs"></div>
+        <div id="cgn2-card-pricing"></div>
+        <div id="cgn2-card-tags"></div>
+      </div>
+      <div id="cgn2-card-right">
+        <button id="cgn2-close-btn" title="Close" aria-label="Close news">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <line x1="2" y1="2" x2="12" y2="12"/>
+            <line x1="12" y1="2" x2="2" y2="12"/>
+          </svg>
+        </button>
+        <a id="cgn2-read-more" href="#" target="_blank" rel="noopener">
+          Read More
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="2" y1="6" x2="10" y2="6"/>
+            <polyline points="7 3 10 6 7 9"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════
+     JAVASCRIPT
+     ════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ════════════════════════════════════════════════════════
+     ✎  NEWS DATA — Add / edit news items below
+        Each item supports:
+          platform      : Platform name (e.g. "GeForce NOW")
+          platformColor : Badge hex color
+          category      : Category label
+          date          : Display date
+          headline      : Main title
+          summary       : 1-2 sentence description
+          tag           : Short ticker tag (UPPERCASE)
+          tagColor      : Ticker tag color
+          specs         : [{ label, value }] — info grid
+          pricing       : { title, rows: [{ tier, price, detail }], footnote }
+          tags          : [ keyword pills ]
+          link          : Read More URL
+     ════════════════════════════════════════════════════════ */
+  var NEWS = [
+    {
+      platform:      'GeForce NOW',
+      platformColor: '#16A34A',
+      category:      'Performance',
+      date:          'May 18, 2026',
+      headline:      'GeForce NOW Ultimate Doubles Performance with New SuperPODs',
+      summary:      'NVIDIA rolls out next-gen SuperPODs across all data centers, delivering up to 2x the streaming performance for Ultimate subscribers with native 4K at 240 fps and full ray tracing.',
+      tag:           'ULTIMATE',
+      tagColor:      '#16A34A',
+      specs: [
+        { label: 'Max Resolution', value: '4K Native (240 fps)' },
+        { label: 'Latency Reduction', value: 'Up to 38%' },
+        { label: 'RT Cores', value: '142 per POD' },
+        { label: 'Codec', value: 'AV1 / HEVC' }
+      ],
+      pricing: {
+        title: 'Current Plans',
+        rows: [
+          { tier: 'Free',          price: '$0/mo',    detail: '1-hr sessions, 1080p/60' },
+          { tier: 'Performance',   price: '$9.99/mo',  detail: '6-hr sessions, 1440p/120' },
+          { tier: 'Ultimate',      price: '$19.99/mo', detail: '8-hr sessions, 4K/240, RTX 5090' }
+        ],
+        footnote: 'Prices may vary by region. Ultimate requires 35 Mbps+ connection.'
+      },
+      tags: ['NVIDIA', 'SuperPOD', '4K 240fps', 'AV1'],
+      link: '#'
+    },
+    {
+      platform:      'Xbox Cloud Gaming',
+      platformColor: '#107C10',
+      category:      'New Feature',
+      date:          'May 16, 2026',
+      headline:      'Xbox Cloud Gaming Expands to 40 New Countries with xCloud 2.0',
+      summary:      'Microsoft launches xCloud 2.0 infrastructure, bringing 120 fps streaming to 40 new markets and introducing game caching for on-the-go play across mobile and tablet devices.',
+      tag:           'XCLOUD 2.0',
+      tagColor:      '#107C10',
+      specs: [
+        { label: 'New Markets', value: '40 countries' },
+        { label: 'Max Stream', value: '1440p at 120 fps' },
+        { label: 'Game Cache', value: 'Up to 5 titles' },
+        { label: 'Input Lag', value: '< 18 ms' }
+      ],
+      pricing: {
+        title: 'Subscription Options',
+        rows: [
+          { tier: 'Game Pass Core',    price: '$9.99/mo',   detail: 'Cloud access, 25+ titles' },
+          { tier: 'Game Pass Standard', price: '$14.99/mo', detail: 'Full library, 480+ titles' },
+          { tier: 'Game Pass Ultimate', price: '$19.99/mo', detail: 'xCloud 2.0, EA Play, Perks' }
+        ],
+        footnote: 'All cloud tiers include cross-save and device streaming.'
+      },
+      tags: ['Microsoft', 'xCloud 2.0', '120 fps', '40 Markets'],
+      link: '#'
+    },
+    {
+      platform:      'PlayStation Cloud',
+      platformColor: '#0070D1',
+      category:      'Library Drop',
+      date:          'May 14, 2026',
+      headline:      'PS Cloud Adds 47 New Titles — Day-One PS6 Exclusives Included',
+      summary:      'Sony\'s cloud gaming service receives its biggest content drop yet. 47 titles join the library including three PS6 launch exclusives playable on day one — no console needed. Stream at 4K/60 on any device.',
+      tag:           '+47 TITLES',
+      tagColor:      '#0070D1',
+      specs: [
+        { label: 'New Additions', value: '47 titles' },
+        { label: 'PS6 Exclusives', value: '3 day-one' },
+        { label: 'Stream Quality', value: '4K HDR at 60 fps' },
+        { label: 'Supported Devices', value: 'Phone, Tablet, TV, PC' }
+      ],
+      pricing: {
+        title: 'Available Plans',
+        rows: [
+          { tier: 'PS Cloud Essential',   price: '$9.99/mo',   detail: 'Stream library, 1080p' },
+          { tier: 'PS Cloud Extra',       price: '$14.99/mo',  detail: '4K HDR, PS6 exclusives' },
+          { tier: 'PS Cloud Premium',     price: '$17.99/mo',  detail: '4K/120, offline cache, share play' }
+        ],
+        footnote: 'PS6 exclusives require Extra tier or above. Offline cache coming Q3 2026.'
+      },
+      tags: ['Sony', 'PS6', '4K HDR', 'Content Drop'],
+      link: '#'
+    }
+    /* ── Add more items below ────────────────── */
+  ];
+
+  /* ── DOM ── */
+  var ticker       = document.getElementById('cgn2-ticker');
+  var trackWrap    = document.getElementById('cgn2-track-wrap');
+  var dropdown     = document.getElementById('cgn2-dropdown');
+  var dotsEl       = document.getElementById('cgn2-dots');
+  var counter      = document.getElementById('cgn2-counter');
+  var progressFill = document.getElementById('cgn2-progress-fill');
+  var cardMeta     = document.getElementById('cgn2-card-meta');
+  var cardHeadline = document.getElementById('cgn2-card-headline');
+  var cardSummary  = document.getElementById('cgn2-card-summary');
+  var cardSpecs    = document.getElementById('cgn2-card-specs');
+  var cardPricing  = document.getElementById('cgn2-card-pricing');
+  var cardTags     = document.getElementById('cgn2-card-tags');
+  var readMoreLink = document.getElementById('cgn2-read-more');
+  var closeBtn     = document.getElementById('cgn2-close-btn');
+  var prevBtn      = document.getElementById('cgn2-prev');
+  var nextBtn      = document.getElementById('cgn2-next');
+
+  /* ── State ── */
+  var activeIdx     = null;
+  var progressTimer = null;
+  var progressVal   = 0;
+  var dotCycleTimer = null;
+  var dotCycleIdx   = 0;
+  var CYCLE_MS      = 5000;
+
+  /* ══════════════════════════════════════════════════════
+     BUILD TICKER
+     ══════════════════════════════════════════════════════ */
+  function buildTicker() {
+    var items = [];
+    var pool = NEWS.concat(NEWS); // duplicate for seamless loop
+    pool.forEach(function (n, i) {
+      var realIdx = i % NEWS.length;
+      items.push(
+        '<div class="cgn2-item" data-idx="' + realIdx + '" role="button" tabindex="0" aria-label="' + escAttr(n.headline) + '">' +
+          '<span class="cgn2-tag" style="color:' + escAttr(n.tagColor) + ';border-color:' + escAttr(n.tagColor) + ';">' + escHtml(n.tag) + '</span>' +
+          '<span class="cgn2-platform">' + escHtml(n.platform) + '</span>' +
+          '<span class="cgn2-sep">|</span>' +
+          '<span class="cgn2-headline">' + escHtml(n.headline) + '</span>' +
+          '<span class="cgn2-bullet"></span>' +
+        '</div>'
+      );
+    });
+    ticker.innerHTML = items.join('');
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var halfW = ticker.scrollWidth / 2;
+        ticker.style.setProperty('--cgn2-offset', '-' + halfW + 'px');
+        var dur = Math.max(22, Math.round(halfW / 95));
+        ticker.style.animationDuration = dur + 's';
+      });
+    });
+
+    ticker.addEventListener('click', function (e) {
+      var item = e.target.closest('.cgn2-item');
+      if (item) openCard(parseInt(item.dataset.idx, 10));
+    });
+
+    ticker.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        var item = e.target.closest('.cgn2-item');
+        if (item) { e.preventDefault(); openCard(parseInt(item.dataset.idx, 10)); }
+      }
+    });
+
+    trackWrap.addEventListener('mouseenter', function () {
+      ticker.classList.add('is-paused');
+    });
+    trackWrap.addEventListener('mouseleave', function () {
+      if (activeIdx === null) ticker.classList.remove('is-paused');
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════
+     BUILD DOTS
+     ══════════════════════════════════════════════════════ */
+  function buildDots() {
+    var html = '';
+    NEWS.forEach(function (n, i) {
+      html += '<div class="cgn2-dot' + (i === 0 ? ' is-live' : '') + '" data-idx="' + i + '" role="button" tabindex="0" title="' + escAttr(n.headline) + '" aria-label="News ' + (i + 1) + '"></div>';
+    });
+    dotsEl.innerHTML = html;
+
+    dotsEl.addEventListener('click', function (e) {
+      var d = e.target.closest('.cgn2-dot');
+      if (d) openCard(parseInt(d.dataset.idx, 10));
+    });
+  }
+
+  function setActiveDot(idx) {
+    var dots = dotsEl.querySelectorAll('.cgn2-dot');
+    dots.forEach(function (d, i) {
+      d.classList.toggle('is-live', i === idx);
+    });
+    counter.textContent = (idx + 1) + ' / ' + NEWS.length;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     CARD
+     ══════════════════════════════════════════════════════ */
+  function openCard(idx) {
+    var n = NEWS[idx];
+    activeIdx = idx;
+
+    cardMeta.innerHTML =
+      '<span class="cgn2-badge" style="color:' + escAttr(n.platformColor) + ';border-color:' + escAttr(n.platformColor) + ';">' + escHtml(n.platform) + '</span>' +
+      '<span class="cgn2-category">' + escHtml(n.category) + '</span>' +
+      '<span class="cgn2-meta-sep">·</span>' +
+      '<span class="cgn2-date">' + escHtml(n.date) + '</span>';
+
+    cardHeadline.textContent = n.headline;
+    cardSummary.textContent  = n.summary;
+
+    // Specs grid
+    var specsHtml = '';
+    (n.specs || []).forEach(function (s) {
+      specsHtml +=
+        '<div class="cgn2-spec">' +
+          '<span class="cgn2-spec-label">' + escHtml(s.label) + '</span>' +
+          '<span class="cgn2-spec-value">' + escHtml(s.value) + '</span>' +
+        '</div>';
+    });
+    cardSpecs.innerHTML = specsHtml;
+
+    // Pricing table
+    var pricingHtml = '';
+    if (n.pricing) {
+      pricingHtml = '<div class="cgn2-pricing-title">' + escHtml(n.pricing.title) + '</div>' +
+        '<table class="cgn2-pricing-table">' +
+          '<thead><tr><th>Plan</th><th>Price</th><th>Details</th></tr></thead>' +
+          '<tbody>';
+      (n.pricing.rows || []).forEach(function (r) {
+        pricingHtml += '<tr><td>' + escHtml(r.tier) + '</td><td>' + escHtml(r.price) + '</td><td>' + escHtml(r.detail) + '</td></tr>';
+      });
+      pricingHtml += '</tbody></table>';
+      if (n.pricing.footnote) {
+        pricingHtml += '<div class="cgn2-table-ft">' + escHtml(n.pricing.footnote) + '</div>';
+      }
+    }
+    cardPricing.innerHTML = pricingHtml;
+
+    // Tags
+    var tagsHtml = '';
+    (n.tags || []).forEach(function (t) {
+      tagsHtml += '<span class="cgn2-pill">' + escHtml(t) + '</span>';
+    });
+    cardTags.innerHTML = tagsHtml;
+
+    readMoreLink.href = n.link;
+
+    dropdown.classList.add('is-open');
+    ticker.classList.add('is-paused');
+
+    ticker.querySelectorAll('.cgn2-item').forEach(function (el) {
+      el.classList.toggle('is-active', parseInt(el.dataset.idx, 10) === idx);
+    });
+
+    setActiveDot(idx);
+    startProgress();
+    stopDotCycle();
+  }
+
+  function closeCard() {
+    dropdown.classList.remove('is-open');
+    activeIdx = null;
+    ticker.classList.remove('is-paused');
+    ticker.querySelectorAll('.cgn2-item').forEach(function (el) {
+      el.classList.remove('is-active');
+    });
+    stopProgress();
+    startDotCycle();
+  }
+
+  prevBtn.addEventListener('click', function () {
+    var cur = activeIdx !== null ? activeIdx : 0;
+    openCard((cur - 1 + NEWS.length) % NEWS.length);
+  });
+
+  nextBtn.addEventListener('click', function () {
+    var cur = activeIdx !== null ? activeIdx : -1;
+    openCard((cur + 1) % NEWS.length);
+  });
+
+  closeBtn.addEventListener('click', function () {
+    if (activeIdx !== null) closeCard();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && activeIdx !== null) closeCard();
+  });
+
+  /* ══════════════════════════════════════════════════════
+     PROGRESS BAR
+     ══════════════════════════════════════════════════════ */
+  function startProgress() {
+    stopProgress();
+    progressVal = 0;
+    var step = 100 / (CYCLE_MS / 80);
+    progressTimer = setInterval(function () {
+      progressVal = Math.min(100, progressVal + step);
+      progressFill.style.width = progressVal + '%';
+      if (progressVal >= 100) {
+        var next = (activeIdx + 1) % NEWS.length;
+        openCard(next);
+      }
+    }, 80);
+  }
+
+  function stopProgress() {
+    clearInterval(progressTimer);
+    progressFill.style.width = '0%';
+  }
+
+  /* ══════════════════════════════════════════════════════
+     DOT AUTO-CYCLE
+     ══════════════════════════════════════════════════════ */
+  function startDotCycle() {
+    stopDotCycle();
+    dotCycleTimer = setInterval(function () {
+      if (activeIdx === null) {
+        dotCycleIdx = (dotCycleIdx + 1) % NEWS.length;
+        setActiveDot(dotCycleIdx);
+      }
+    }, CYCLE_MS);
+  }
+
+  function stopDotCycle() {
+    clearInterval(dotCycleTimer);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     HELPERS
+     ══════════════════════════════════════════════════════ */
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function escAttr(str) {
+    return String(str).replace(/"/g, '&quot;').replace(/&/g, '&amp;');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     INIT
+     ══════════════════════════════════════════════════════ */
+  buildTicker();
+  buildDots();
+  setActiveDot(0);
+  startDotCycle();
+
+})();
+</script>
