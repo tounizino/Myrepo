@@ -63,17 +63,22 @@ get_header();
                             foreach ($all_providers as $p): 
                                 $status = 'Unsupported';
                                 $status_class = 'unsupported';
+                                $cloud_notes = '';
                                 foreach ($providers as $gp) {
                                     if ($gp->slug === $p->slug) {
                                         $status = ucfirst($gp->status);
                                         $status_class = strtolower($gp->status);
+                                        $cloud_notes = $gp->cloud_notes;
                                         break;
                                     }
                                 }
                             ?>
-                            <div class="cl-provider-card <?php echo $status_class; ?>">
+                            <div class="cl-provider-card <?php echo $status_class; ?>" title="<?php echo esc_attr($cloud_notes); ?>">
                                 <div class="cl-provider-name"><?php echo esc_html($p->name); ?></div>
                                 <div class="cl-provider-status"><?php echo $status; ?></div>
+                                <?php if ($cloud_notes): ?>
+                                    <div class="cl-provider-notes"><?php echo esc_html($cloud_notes); ?></div>
+                                <?php endif; ?>
                             </div>
                             <?php endforeach; ?>
                         </div>
@@ -115,8 +120,39 @@ get_header();
                         <li><strong>Developer:</strong> <?php echo esc_html($game->developer); ?></li>
                         <li><strong>Publisher:</strong> <?php echo esc_html($game->publisher); ?></li>
                         <li><strong>Release Date:</strong> <?php echo date('M j, Y', strtotime($game->release_date)); ?></li>
+                        <?php if ($game->controller_support): ?>
+                            <li><strong>Controller Support:</strong> <?php echo esc_html($game->controller_support); ?></li>
+                        <?php endif; ?>
+                        <li><strong>Cross-Platform:</strong> <?php echo $game->cross_platform ? 'Yes' : 'No'; ?></li>
                     </ul>
                 </div>
+
+                <div class="cl-info-box cl-mt-20">
+                    <h3>Supported Devices</h3>
+                    <p class="cl-small-text"><?php echo esc_html($game->supported_devices ?: 'PC, Mac, Mobile, TV'); ?></p>
+                </div>
+
+                <?php 
+                $related_games = $wpdb->get_results($wpdb->prepare(
+                    "SELECT name, slug, cover_url FROM {$wpdb->prefix}cl_games 
+                     WHERE genres LIKE %s AND id != %d LIMIT 3",
+                    '%' . $wpdb->esc_like(explode(',', $game->genres)[0]) . '%',
+                    $game->id
+                ));
+                if ($related_games):
+                ?>
+                <div class="cl-info-box cl-mt-20">
+                    <h3>Related Games</h3>
+                    <div class="cl-related-list">
+                        <?php foreach ($related_games as $rg): ?>
+                            <a href="/g/<?php echo $rg->slug; ?>" class="cl-related-item">
+                                <img src="<?php echo esc_url($rg->cover_url); ?>" alt="<?php echo esc_attr($rg->name); ?>">
+                                <span><?php echo esc_html($rg->name); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

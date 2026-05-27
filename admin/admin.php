@@ -38,12 +38,21 @@ class Admin {
         // Handle manual override
         if (isset($_POST['cl_override_nonce']) && wp_verify_nonce($_POST['cl_override_nonce'], 'cl_override')) {
             $game_id = intval($_POST['game_id']);
-            $provider_id = intval($_POST['provider_id']);
-            $status = sanitize_text_field($_POST['status']);
             
-            $sync_engine = \CloudLoadout\SyncEngine::get_instance();
-            $sync_engine->update_game_compatibility($game_id, $provider_id, $status, 'manual-override');
-            echo '<div class="updated"><p>Compatibility updated successfully!</p></div>';
+            if (isset($_POST['action']) && $_POST['action'] === 'update_meta') {
+                $wpdb->update($wpdb->prefix . 'cl_games', [
+                    'supported_devices' => sanitize_text_field($_POST['devices']),
+                    'controller_support' => sanitize_text_field($_POST['controller'])
+                ], ['id' => $game_id]);
+                echo '<div class="updated"><p>Meta updated!</p></div>';
+            } else {
+                $provider_id = intval($_POST['provider_id']);
+                $status = sanitize_text_field($_POST['status']);
+                
+                $sync_engine = \CloudLoadout\SyncEngine::get_instance();
+                $sync_engine->update_game_compatibility($game_id, $provider_id, $status, 'manual-override');
+                echo '<div class="updated"><p>Compatibility updated successfully!</p></div>';
+            }
         }
 
         $games = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}cl_games LIMIT 50");
@@ -81,6 +90,16 @@ class Admin {
                                     </select>
                                     <button type="submit" class="button button-small">Update</button>
                                 </form>
+                                <div style="margin-top:10px;">
+                                    <form method="post">
+                                        <?php wp_nonce_field('cl_override', 'cl_override_nonce'); ?>
+                                        <input type="hidden" name="game_id" value="<?php echo $game->id; ?>">
+                                        <input type="hidden" name="action" value="update_meta">
+                                        <input type="text" name="devices" placeholder="Devices" value="<?php echo esc_attr($game->supported_devices); ?>" style="font-size:10px; width:80px;">
+                                        <input type="text" name="controller" placeholder="Controller" value="<?php echo esc_attr($game->controller_support); ?>" style="font-size:10px; width:80px;">
+                                        <button type="submit" class="button button-small">Save Meta</button>
+                                    </form>
+                                </div>
                             </td>
                             <td>
                                 <a href="<?php echo home_url('/g/' . $game->slug); ?>" target="_blank">View</a> | 

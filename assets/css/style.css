@@ -244,6 +244,49 @@ body {
     text-transform: uppercase;
 }
 
+.cl-mt-20 { margin-top: 20px; }
+.cl-small-text { font-size: 0.85rem; color: var(--cl-text-dim); }
+
+.cl-related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cl-related-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+.cl-related-item:hover {
+    opacity: 0.8;
+}
+
+.cl-related-item img {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cl-related-item span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.cl-provider-notes {
+    font-size: 0.7rem;
+    margin-top: 8px;
+    color: var(--cl-text-dim);
+    font-style: italic;
+    border-top: 1px solid var(--cl-glass);
+    padding-top: 5px;
+}
+
 /* Homepage Styles */
 .cl-hero-section {
     padding: 100px 20px;

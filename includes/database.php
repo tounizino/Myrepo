@@ -24,6 +24,9 @@ class Database {
                 developer varchar(255) DEFAULT NULL,
                 publisher varchar(255) DEFAULT NULL,
                 genres varchar(255) DEFAULT NULL,
+                supported_devices text,
+                controller_support varchar(100) DEFAULT NULL,
+                cross_platform tinyint(1) DEFAULT 0,
                 last_updated datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 PRIMARY KEY  (id),
                 UNIQUE KEY slug (slug),
@@ -48,6 +51,7 @@ class Database {
                 last_checked datetime DEFAULT CURRENT_TIMESTAMP,
                 confidence_score int(3) DEFAULT 100,
                 source_url varchar(255) DEFAULT NULL,
+                cloud_notes text,
                 notes text,
                 PRIMARY KEY  (id),
                 UNIQUE KEY game_provider (game_id, provider_id)
