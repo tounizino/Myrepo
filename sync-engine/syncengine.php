@@ -33,9 +33,13 @@ class SyncEngine {
     }
 
     private function sync_providers() {
-        // Example: Trigger GFN scraper
-        // $gfn = new \CloudLoadout\Scrapers\GeForceNow();
-        // $gfn->scrape();
+        // GFN
+        $gfn = new \CloudLoadout\Scrapers\GeForceNow();
+        $gfn->scrape();
+
+        // Boosteroid
+        $boosteroid = new \CloudLoadout\Scrapers\Boosteroid();
+        $boosteroid->scrape();
     }
 
     public function log_sync($provider_id, $status, $message) {
@@ -73,3 +77,9 @@ class SyncEngine {
         }
     }
 }
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
