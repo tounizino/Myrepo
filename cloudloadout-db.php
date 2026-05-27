@@ -85,6 +85,7 @@ class CloudLoadoutDB {
         \CloudLoadout\MatchEngine::get_instance();
         \CloudLoadout\SyncEngine::get_instance();
         \CloudLoadout\SEO::get_instance();
+        \CloudLoadout\Shortcodes::get_instance();
         
         // Register custom rewrites for /g/ slug
         $this->register_rewrites();
@@ -119,6 +120,7 @@ class CloudLoadoutDB {
         add_submenu_page('cloudloadout-db', 'Games', 'Games', 'manage_options', 'cl-games', ['CloudLoadout\Admin', 'render_games']);
         add_submenu_page('cloudloadout-db', 'Providers', 'Providers', 'manage_options', 'cl-providers', ['CloudLoadout\Admin', 'render_providers']);
         add_submenu_page('cloudloadout-db', 'Sync Logs', 'Sync Logs', 'manage_options', 'cl-sync-logs', ['CloudLoadout\Admin', 'render_logs']);
+        add_submenu_page('cloudloadout-db', 'Settings', 'Settings', 'manage_options', 'cl-settings', ['CloudLoadout\Admin', 'render_settings']);
     }
 
     public function enqueue_assets() {
@@ -137,6 +139,18 @@ class CloudLoadoutDB {
 }
 
 CloudLoadoutDB::get_instance();
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
+/home/engine/.bashrc: line 1: syntax error near unexpected token `('
+/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
 /home/engine/.bashrc: line 1: syntax error near unexpected token `('
 /home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
 /home/engine/.bashrc: line 1: syntax error near unexpected token `('

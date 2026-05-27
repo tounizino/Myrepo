@@ -34,7 +34,20 @@ class Admin {
 
     public static function render_games() {
         global $wpdb;
+        
+        // Handle manual override
+        if (isset($_POST['cl_override_nonce']) && wp_verify_nonce($_POST['cl_override_nonce'], 'cl_override')) {
+            $game_id = intval($_POST['game_id']);
+            $provider_id = intval($_POST['provider_id']);
+            $status = sanitize_text_field($_POST['status']);
+            
+            $sync_engine = \CloudLoadout\SyncEngine::get_instance();
+            $sync_engine->update_game_compatibility($game_id, $provider_id, $status, 'manual-override');
+            echo '<div class="updated"><p>Compatibility updated successfully!</p></div>';
+        }
+
         $games = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}cl_games LIMIT 50");
+        $providers = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}cl_providers");
         ?>
         <div class="wrap">
             <h1>Games Management</h1>
@@ -43,8 +56,7 @@ class Admin {
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Slug</th>
-                        <th>Release Date</th>
+                        <th>Providers Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -52,11 +64,27 @@ class Admin {
                     <?php foreach ($games as $game): ?>
                         <tr>
                             <td><?php echo $game->id; ?></td>
-                            <td><?php echo esc_html($game->name); ?></td>
-                            <td><?php echo esc_html($game->slug); ?></td>
-                            <td><?php echo $game->release_date; ?></td>
+                            <td><strong><?php echo esc_html($game->name); ?></strong></td>
                             <td>
-                                <a href="#">Edit</a> | <a href="#" style="color:red">Delete</a>
+                                <form method="post" style="display:flex; gap:5px; align-items:center;">
+                                    <?php wp_nonce_field('cl_override', 'cl_override_nonce'); ?>
+                                    <input type="hidden" name="game_id" value="<?php echo $game->id; ?>">
+                                    <select name="provider_id" style="font-size:11px;">
+                                        <?php foreach ($providers as $p): ?>
+                                            <option value="<?php echo $p->id; ?>"><?php echo esc_html($p->name); ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <select name="status" style="font-size:11px;">
+                                        <option value="supported">Supported</option>
+                                        <option value="unsupported">Unsupported</option>
+                                        <option value="playable">Playable</option>
+                                    </select>
+                                    <button type="submit" class="button button-small">Update</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a href="<?php echo home_url('/g/' . $game->slug); ?>" target="_blank">View</a> | 
+                                <a href="#" style="color:red">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -118,6 +146,33 @@ class Admin {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+        </div>
+        <?php
+    }
+
+    public static function render_settings() {
+        if (isset($_POST['cl_settings_nonce']) && wp_verify_nonce($_POST['cl_settings_nonce'], 'cl_settings')) {
+            update_option('cl_rawg_api_key', sanitize_text_field($_POST['rawg_api_key']));
+            echo '<div class="updated"><p>Settings saved!</p></div>';
+        }
+
+        $api_key = get_option('cl_rawg_api_key', '');
+        ?>
+        <div class="wrap">
+            <h1>CloudLoadout Settings</h1>
+            <form method="post">
+                <?php wp_nonce_field('cl_settings', 'cl_settings_nonce'); ?>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><label for="rawg_api_key">RAWG API Key</label></th>
+                        <td>
+                            <input name="rawg_api_key" type="text" id="rawg_api_key" value="<?php echo esc_attr($api_key); ?>" class="regular-text">
+                            <p class="description">Get your API key at <a href="https://rawg.io/apidocs" target="_blank">rawg.io/apidocs</a></p>
+                        </td>
+                    </tr>
+                </table>
+                <?php submit_button(); ?>
+            </form>
         </div>
         <?php
     }

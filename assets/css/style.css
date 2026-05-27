@@ -244,6 +244,198 @@ body {
     text-transform: uppercase;
 }
 
+/* Homepage Styles */
+.cl-hero-section {
+    padding: 100px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #1f1f1f 0%, #141414 100%);
+    border-radius: 20px;
+    margin: 40px 0;
+}
+
+.cl-hero-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.cl-search-container {
+    max-width: 600px;
+    margin: 40px auto;
+    position: relative;
+}
+
+.cl-search-input {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 30px;
+    border: 2px solid var(--cl-glass);
+    background: var(--cl-bg-light);
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.cl-search-input:focus {
+    border-color: var(--cl-primary);
+}
+
+.cl-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--cl-bg-light);
+    border-radius: 15px;
+    margin-top: 10px;
+    z-index: 100;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.cl-search-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    gap: 15px;
+}
+
+.cl-search-item:hover {
+    background: var(--cl-glass);
+}
+
+.cl-search-item img {
+    width: 40px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cl-section {
+    margin: 60px 0;
+}
+
+.cl-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cl-game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+}
+
+.cl-game-card {
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s;
+}
+
+.cl-game-card:hover {
+    transform: scale(1.05);
+}
+
+.cl-card-image {
+    position: relative;
+    aspect-ratio: 2/3;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.cl-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cl-card-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #ffd700;
+}
+
+.cl-game-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.cl-game-card-mini {
+    flex: 0 0 120px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.cl-game-card-mini img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.cl-game-card-mini span {
+    font-size: 0.8rem;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cl-provider-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.cl-provider-bubble {
+    background: var(--cl-glass);
+    padding: 10px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.cl-provider-bubble:hover {
+    background: var(--cl-primary);
+}
+
+.cl-theme-toggle {
+    background: var(--cl-glass);
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body[data-theme="light"] .cl-theme-toggle {
+    color: var(--cl-text);
+}
+
+body[data-theme="light"] .light-icon { display: none; }
+body[data-theme="dark"] .dark-icon { display: none; }
+
 /* Responsive */
 @media (max-width: 900px) {
     .cl-hero-content {
@@ -264,9 +456,3 @@ body {
         justify-content: center;
     }
 }
-/home/engine/.bashrc: line 1: syntax error near unexpected token `('
-/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
-/home/engine/.bashrc: line 1: syntax error near unexpected token `('
-/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
-/home/engine/.bashrc: line 1: syntax error near unexpected token `('
-/home/engine/.bashrc: line 1: `. /etc/profile.d/workload-containment.shn# ~/.bashrc: executed by bash(1) for non-login shells.'
