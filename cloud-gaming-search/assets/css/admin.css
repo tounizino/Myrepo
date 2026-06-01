@@ -1,0 +1,73 @@
+/* CGS Admin Styles */
+
+.cgs-admin {
+    max-width: 800px;
+    margin: 24px auto;
+}
+
+.cgs-admin h1 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    color: #1a1a2e;
+}
+
+.cgs-admin-section {
+    background: #fff;
+    border: 1px solid #e0e0e8;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.cgs-admin-section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: #1a1a2e;
+}
+
+.cgs-admin-section p {
+    margin: 0 0 12px;
+    color: #5a5a7a;
+    font-size: 13px;
+}
+
+.cgs-admin-section code {
+    display: inline-block;
+    background: #f5f5fa;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.cgs-admin-section input[type="text"],
+.cgs-admin-section input[type="number"] {
+    width: 100%;
+    max-width: 400px;
+}
+
+.cgs-admin-section table {
+    margin-top: 12px;
+}
+
+.cgs-admin-section table th {
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.cgs-admin .button-primary {
+    background: #6c5ce7;
+    border-color: #6c5ce7;
+    color: #fff;
+}
+
+.cgs-admin .button-primary:hover {
+    background: #5a4bd1;
+    border-color: #5a4bd1;
+}
+
+#cgs-clear-cache {
+    margin-left: 12px;
+    vertical-align: middle;
+}

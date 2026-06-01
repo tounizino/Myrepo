@@ -1,0 +1,44 @@
+# WordPress Plugin - Cloud Gaming Search
+# .gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Node/npm (if used for build tools)
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+
+# Composer
+vendor/
+composer.lock
+
+# Build artifacts
+dist/
+build/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# WordPress specific
+wp-content/uploads/
+wp-config.php
+
+# Plugin specific
+# (cached data that shouldn't be committed)
+/cloud-gaming-search/cache/
