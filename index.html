@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Gaming Discovery Engine</title>
+    <style>
+        /*
+         * CLOUD GAMING DISCOVERY TOOL - EMBED VERSION
+         * Isolated Styles via #cloudloadout-app
+         */
+
+        :root {
+            --cg-primary: #0071ff;
+            --cg-primary-hover: #0059c8;
+            --cg-bg: #0b0e14;
+            --cg-card-bg: #1a1d23;
+            --cg-card-bg-hover: #23272f;
+            --cg-text: #ffffff;
+            --cg-text-muted: #9ba1a6;
+            --cg-border: #2d333b;
+            --cg-modal-overlay: rgba(0, 0, 0, 0.85);
+            --cg-glass: rgba(255, 255, 255, 0.03);
+            --cg-glass-border: rgba(255, 255, 255, 0.1);
+            --cg-success: #2ea043;
+            --cg-warning: #d29922;
+            --cg-danger: #f85149;
+            --cg-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --cg-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            --cg-radius: 12px;
+            --cg-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-theme {
+            --cg-bg: #f5f7f9;
+            --cg-card-bg: #ffffff;
+            --cg-card-bg-hover: #fcfcfc;
+            --cg-text: #1a1d23;
+            --cg-text-muted: #57606a;
+            --cg-border: #d0d7de;
+            --cg-glass: rgba(0, 0, 0, 0.03);
+            --cg-glass-border: rgba(0, 0, 0, 0.1);
+            --cg-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+        }
+
+        #cloudloadout-app {
+            all: initial; /* Reset everything */
+            display: block;
+            background: var(--cg-bg);
+            color: var(--cg-text);
+            font-family: var(--cg-font);
+            box-sizing: border-box;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            transition: background 0.3s ease;
+        }
+
+        #cloudloadout-app * {
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        #cloudloadout-app .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Search Section */
+        .cg-hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 113, 255, 0.05) 0%, transparent 100%);
+        }
+
+        .cg-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--cg-text);
+        }
+
+        .cg-search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 10;
+        }
+
+        .cg-search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cg-search-input {
+            width: 100%;
+            padding: 18px 50px 18px 24px;
+            font-size: 1.1rem;
+            background: var(--cg-card-bg);
+            border: 2px solid var(--cg-border);
+            border-radius: 50px;
+            color: var(--cg-text);
+            transition: var(--cg-transition);
+            box-shadow: var(--cg-shadow);
+        }
+
+        .cg-search-input:focus {
+            outline: none;
+            border-color: var(--cg-primary);
+            box-shadow: 0 0 0 4px rgba(0, 113, 255, 0.15);
+        }
+
+        .cg-search-icon {
+            position: absolute;
+            right: 20px;
+            color: var(--cg-text-muted);
+            pointer-events: none;
+        }
+
+        .cg-search-clear {
+            position: absolute;
+            right: 50px;
+            background: none;
+            border: none;
+            color: var(--cg-text-muted);
+            cursor: pointer;
+            padding: 5px;
+            display: none;
+        }
+
+        .cg-search-clear.visible {
+            display: block;
+        }
+
+        /* Theme Toggle */
+        .cg-theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--cg-card-bg);
+            border: 1px solid var(--cg-border);
+            color: var(--cg-text);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            box-shadow: var(--cg-shadow);
+        }
+
+        /* Filters & Controls */
+        .cg-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .cg-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cg-filter-chip {
+            padding: 8px 16px;
+            background: var(--cg-card-bg);
+            border: 1px solid var(--cg-border);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--cg-text-muted);
+            cursor: pointer;
+            transition: var(--cg-transition);
+        }
+
+        .cg-filter-chip:hover {
+            border-color: var(--cg-primary);
+            color: var(--cg-text);
+        }
+
+        .cg-filter-chip.active {
+            background: var(--cg-primary);
+            border-color: var(--cg-primary);
+            color: white;
+        }
+
+        .cg-sort-select {
+            padding: 8px 16px;
+            background: var(--cg-card-bg);
+            border: 1px solid var(--cg-border);
+            border-radius: 8px;
+            color: var(--cg-text);
+            cursor: pointer;
+            outline: none;
+        }
+
+        .cg-view-toggle {
+            display: flex;
+            background: var(--cg-card-bg);
+            border: 1px solid var(--cg-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cg-view-btn {
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            color: var(--cg-text-muted);
+            cursor: pointer;
+            transition: var(--cg-transition);
+        }
+
+        .cg-view-btn.active {
+            background: var(--cg-glass);
+            color: var(--cg-primary);
+        }
+
+        /* Game Grid */
+        .cg-game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .cg-game-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        /* Game Card */
+        .cg-card {
+            background: var(--cg-card-bg);
+            border: 1px solid var(--cg-border);
+            border-radius: var(--cg-radius);
+            overflow: hidden;
+            transition: var(--cg-transition);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .cg-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--cg-shadow);
+            border-color: var(--cg-primary);
+        }
+
+        .cg-card-img-wrapper {
+            position: relative;
+            padding-top: 135%; /* 3:4 aspect ratio approx */
+            background: #2a2a2a;
+            overflow: hidden;
+        }
+
+        .cg-card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .cg-card:hover .cg-card-img {
+            transform: scale(1.05);
+        }
+
+        .cg-card-content {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cg-card-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cg-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--cg-text-muted);
+            margin-bottom: 12px;
+        }
+
+        .cg-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--cg-warning);
+            font-weight: 600;
+        }
+
+        .cg-card-platforms {
+            display: flex;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+        .cg-platform-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: var(--cg-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--cg-text-muted);
+            border: 1px solid var(--cg-glass-border);
+        }
+
+        .cg-platform-icon.active {
+            color: var(--cg-primary);
+            border-color: var(--cg-primary);
+        }
+
+        /* List View Styles */
+        .list-view .cg-card {
+            flex-direction: row;
+            height: 100px;
+        }
+
+        .list-view .cg-card-img-wrapper {
+            width: 75px;
+            padding-top: 0;
+            height: 100%;
+        }
+
+        .list-view .cg-card-content {
+            padding: 12px 20px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .list-view .cg-card-title {
+            width: 250px;
+            margin-bottom: 0;
+        }
+
+        /* Modal Styles */
+        .cg-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cg-modal-overlay);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--cg-transition);
+            backdrop-filter: blur(8px);
+        }
+
+        .cg-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cg-modal-content {
+            background: var(--cg-bg);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 20px;
+            position: relative;
+            overflow-y: auto;
+            transform: translateY(40px);
+            transition: var(--cg-transition);
+            border: 1px solid var(--cg-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .cg-modal-overlay.active .cg-modal-content {
+            transform: translateY(0);
+        }
+
+        .cg-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .cg-modal-hero {
+            height: 350px;
+            position: relative;
+        }
+
+        .cg-modal-hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cg-modal-hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(transparent, var(--cg-bg));
+        }
+
+        .cg-modal-body {
+            padding: 30px;
+            margin-top: -80px;
+            position: relative;
+        }
+
+        .cg-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .cg-modal-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .cg-modal-badges {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .cg-badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--cg-glass);
+            border: 1px solid var(--cg-glass-border);
+        }
+
+        .cg-modal-desc {
+            color: var(--cg-text-muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 700px;
+        }
+
+        /* Platform Matrix */
+        .cg-platform-matrix {
+            background: var(--cg-card-bg);
+            border: 1px solid var(--cg-border);
+            border-radius: var(--cg-radius);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .cg-platform-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--cg-border);
+        }
+
+        .cg-platform-row:last-child {
+            border-bottom: none;
+        }
+
+        .cg-platform-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .cg-status-pill {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-available { background: rgba(46, 160, 67, 0.15); color: #3fb950; }
+        .status-partial { background: rgba(210, 153, 34, 0.15); color: #d29922; }
+        .status-none { background: rgba(248, 81, 73, 0.15); color: #f85149; }
+
+        .cg-cta-btn {
+            background: var(--cg-primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--cg-transition);
+        }
+
+        .cg-cta-btn:hover {
+            background: var(--cg-primary-hover);
+        }
+
+        /* Screens strip */
+        .cg-screens {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+        }
+
+        .cg-screen-img {
+            height: 150px;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Skeleton Loaders */
+        .cg-skeleton {
+            background: linear-gradient(90deg, var(--cg-border) 25%, var(--cg-card-bg-hover) 50%, var(--cg-border) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .cg-hero h1 { font-size: 1.8rem; }
+            .cg-game-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .cg-controls { flex-direction: column; align-items: flex-start; }
+            .cg-modal-content {
+                max-height: 95vh;
+                margin-bottom: 0;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                position: fixed;
+                bottom: 0;
+                transform: translateY(100%);
+            }
+            .cg-modal-hero { height: 200px; }
+            .cg-modal-title { font-size: 1.5rem; }
+            .cg-modal-body { padding: 20px; }
+            .list-view .cg-card { height: auto; flex-direction: column; }
+            .list-view .cg-card-img-wrapper { width: 100%; padding-top: 135%; }
+            .list-view .cg-card-content { flex-direction: column; align-items: flex-start; }
+            .list-view .cg-card-title { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="cloudloadout-app">
+    <button class="cg-theme-toggle" id="theme-toggle" title="Toggle Theme">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+
+    <div class="cg-hero">
+        <div class="container">
+            <h1>Cloud Gaming Engine</h1>
+            <div class="cg-search-container">
+                <div class="cg-search-input-wrapper">
+                    <input type="text" id="cg-search" class="cg-search-input" placeholder="Search 800,000+ games across all cloud platforms...">
+                    <button class="cg-search-clear" id="cg-search-clear">&times;</button>
+                    <div class="cg-search-icon" id="cg-search-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+                    </div>
+                    <div class="cg-search-spinner" id="cg-search-spinner" style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" fill="none"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="cg-top-heading" style="margin-bottom: 20px;">
+            <h2 style="font-size: 1.5rem; font-weight: 700;">Top Cloud Games</h2>
+        </div>
+        <div class="cg-controls">
+            <div class="cg-filters" id="cg-filters">
+                <div class="cg-filter-chip active" data-platform="all">All Platforms</div>
+                <div class="cg-filter-chip" data-platform="geforceNow">GeForce Now</div>
+                <div class="cg-filter-chip" data-platform="xboxCloud">Xbox Cloud</div>
+                <div class="cg-filter-chip" data-platform="psCloud">PS Cloud</div>
+                <div class="cg-filter-chip" data-platform="luna">Luna</div>
+                <div class="cg-filter-chip" data-platform="boosteroid">Boosteroid</div>
+            </div>
+
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <select class="cg-sort-select" id="cg-sort">
+                    <option value="popular">Most Popular</option>
+                    <option value="rating">Top Rated</option>
+                    <option value="metacritic">Metacritic</option>
+                    <option value="newest">Newest</option>
+                    <option value="az">A-Z</option>
+                </select>
+
+                <div class="cg-view-toggle">
+                    <button class="cg-view-btn active" id="grid-view-btn" title="Grid View">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    </button>
+                    <button class="cg-view-btn" id="list-view-btn" title="List View">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="cg-game-grid" class="cg-game-grid">
+            <!-- Cards injected here -->
+        </div>
+
+        <div id="cg-no-results" style="display: none; text-align: center; padding: 60px; color: var(--cg-text-muted);">
+            <p>No games found matching your search or filters.</p>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="cg-modal-overlay" id="cg-modal">
+        <div class="cg-modal-content">
+            <button class="cg-modal-close" id="cg-modal-close">&times;</button>
+            <div id="cg-modal-inner">
+                <!-- Modal content injected here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    // --- MOCK DATA ---
+    const GAMES = [
+        { id: 1, name: "Cyberpunk 2077", rating: 4.8, metacritic: 86, year: 2020, image: "https://images.unsplash.com/photo-1605898835544-7258593445d0?w=400&q=80", genres: ["RPG", "Open World"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "available", luna: "available", boosteroid: "available" } },
+        { id: 2, name: "Elden Ring", rating: 4.9, metacritic: 96, year: 2022, image: "https://images.unsplash.com/photo-1614294149010-950b698f72c0?w=400&q=80", genres: ["Soulslike", "Action"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 3, name: "Halo Infinite", rating: 4.5, metacritic: 87, year: 2021, image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&q=80", genres: ["FPS", "Sci-Fi"], platforms: { geforceNow: "none", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 4, name: "The Witcher 3", rating: 4.9, metacritic: 92, year: 2015, image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80", genres: ["RPG", "Fantasy"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 5, name: "Starfield", rating: 4.2, metacritic: 83, year: 2023, image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=400&q=80", genres: ["RPG", "Space"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 6, name: "Forza Horizon 5", rating: 4.7, metacritic: 92, year: 2021, image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400&q=80", genres: ["Racing"], platforms: { geforceNow: "none", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 7, name: "Genshin Impact", rating: 4.4, metacritic: 81, year: 2020, image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80", genres: ["RPG", "Gacha"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 8, name: "Red Dead Redemption 2", rating: 4.9, metacritic: 97, year: 2018, image: "https://images.unsplash.com/photo-1533236897111-3e94666b2edf?w=400&q=80", genres: ["Western", "Open World"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "available" } },
+        { id: 9, name: "God of War Ragnarok", rating: 4.9, metacritic: 94, year: 2022, image: "https://images.unsplash.com/photo-1580234797602-22c37b2a6230?w=400&q=80", genres: ["Action", "Mythology"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "none" } },
+        { id: 10, name: "Baldur's Gate 3", rating: 4.9, metacritic: 96, year: 2023, image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80", genres: ["RPG", "Turn-based"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 11, name: "Assassin's Creed Mirage", rating: 4.1, metacritic: 77, year: 2023, image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&q=80", genres: ["Stealth", "Action"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "available", boosteroid: "none" } },
+        { id: 12, name: "Spider-Man 2", rating: 4.8, metacritic: 90, year: 2023, image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&q=80", genres: ["Action", "Hero"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "none" } },
+        { id: 13, name: "Apex Legends", rating: 4.3, metacritic: 88, year: 2019, image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80", genres: ["Battle Royale", "FPS"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 14, name: "Sea of Thieves", rating: 4.4, metacritic: 70, year: 2018, image: "https://images.unsplash.com/photo-1519074063912-ad25b5ce4409?w=400&q=80", genres: ["Pirate", "Adventure"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 15, name: "Stray", rating: 4.6, metacritic: 83, year: 2022, image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80", genres: ["Indie", "Adventure"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "none" } },
+        { id: 16, name: "Control", rating: 4.5, metacritic: 85, year: 2019, image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80", genres: ["Action", "Sci-Fi"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "available", luna: "available", boosteroid: "available" } },
+        { id: 17, name: "Hades", rating: 4.9, metacritic: 93, year: 2020, image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80", genres: ["Roguelike"], platforms: { geforceNow: "none", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 18, name: "Dead Cells", rating: 4.7, metacritic: 89, year: 2018, image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80", genres: ["Roguelike", "Action"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 19, name: "Resident Evil Village", rating: 4.7, metacritic: 84, year: 2021, image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&q=80", genres: ["Horror", "Action"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 20, name: "Fortnite", rating: 4.2, metacritic: 81, year: 2017, image: "https://images.unsplash.com/photo-1589241062272-c0a000072dfa?w=400&q=80", genres: ["Battle Royale"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "available", boosteroid: "none" } },
+        { id: 21, name: "The Last of Us Part I", rating: 4.9, metacritic: 88, year: 2022, image: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&q=80", genres: ["Action", "Story"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "none" } },
+        { id: 22, name: "Cities: Skylines II", rating: 3.8, metacritic: 74, year: 2023, image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&q=80", genres: ["Simulation"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 23, name: "Lies of P", rating: 4.6, metacritic: 80, year: 2023, image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80", genres: ["Soulslike"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 24, name: "Minecraft", rating: 4.8, metacritic: 93, year: 2011, image: "https://images.unsplash.com/photo-1603481546238-487240415921?w=400&q=80", genres: ["Sandbox"], platforms: { geforceNow: "none", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 25, name: "Remnant II", rating: 4.5, metacritic: 81, year: 2023, image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80", genres: ["Action", "Co-op"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 26, name: "Alan Wake 2", rating: 4.8, metacritic: 89, year: 2023, image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80", genres: ["Horror", "Story"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 27, name: "Dying Light 2", rating: 4.3, metacritic: 76, year: 2022, image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400&q=80", genres: ["Action", "Zombies"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 28, name: "Battlefield 2042", rating: 3.5, metacritic: 68, year: 2021, image: "https://images.unsplash.com/photo-1589241062272-c0a000072dfa?w=400&q=80", genres: ["FPS", "Multiplayer"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 29, name: "Rocket League", rating: 4.7, metacritic: 85, year: 2015, image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400&q=80", genres: ["Sports"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 30, name: "Path of Exile", rating: 4.6, metacritic: 86, year: 2013, image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&q=80", genres: ["ARPG"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "none" } },
+        { id: 31, name: "Cyberpunk 2077: Phantom Liberty", rating: 4.9, metacritic: 89, year: 2023, image: "https://images.unsplash.com/photo-1605898835544-7258593445d0?w=400&q=80", genres: ["RPG", "Action"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "available", luna: "available", boosteroid: "available" } },
+        { id: 32, name: "God of War", rating: 4.9, metacritic: 94, year: 2018, image: "https://images.unsplash.com/photo-1580234797602-22c37b2a6230?w=400&q=80", genres: ["Action", "Story"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "available" } },
+        { id: 33, name: "Spider-Man Remastered", rating: 4.8, metacritic: 87, year: 2022, image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&q=80", genres: ["Action", "Hero"], platforms: { geforceNow: "none", xboxCloud: "none", psCloud: "available", luna: "none", boosteroid: "none" } },
+        { id: 34, name: "Destiny 2", rating: 4.4, metacritic: 82, year: 2017, image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&q=80", genres: ["FPS", "MMO"], platforms: { geforceNow: "available", xboxCloud: "none", psCloud: "none", luna: "none", boosteroid: "available" } },
+        { id: 35, name: "Gears 5", rating: 4.5, metacritic: 84, year: 2019, image: "https://images.unsplash.com/photo-1519074063912-ad25b5ce4409?w=400&q=80", genres: ["TPS", "Action"], platforms: { geforceNow: "available", xboxCloud: "available", psCloud: "none", luna: "none", boosteroid: "none" } },
+    ];
+
+    const PLATFORM_INFO = {
+        geforceNow: { name: "GeForce Now", color: "#76b900" },
+        xboxCloud: { name: "Xbox Cloud", color: "#107c10" },
+        psCloud: { name: "PlayStation Cloud", color: "#003791" },
+        luna: { name: "Amazon Luna", color: "#9c27b0" },
+        boosteroid: { name: "Boosteroid", color: "#0071ff" }
+    };
+
+    // --- APP STATE ---
+    let state = {
+        searchQuery: "",
+        activePlatform: "all",
+        sortBy: "popular",
+        viewMode: "grid",
+        theme: "dark"
+    };
+
+    // --- DOM ELEMENTS ---
+    const searchInput = document.getElementById('cg-search');
+    const searchClear = document.getElementById('cg-search-clear');
+    const gameGrid = document.getElementById('cg-game-grid');
+    const noResults = document.getElementById('cg-no-results');
+    const filterChips = document.querySelectorAll('.cg-filter-chip');
+    const sortSelect = document.getElementById('cg-sort');
+    const gridBtn = document.getElementById('grid-view-btn');
+    const listBtn = document.getElementById('list-view-btn');
+    const themeToggle = document.getElementById('theme-toggle');
+    const modal = document.getElementById('cg-modal');
+    const modalInner = document.getElementById('cg-modal-inner');
+    const modalClose = document.getElementById('cg-modal-close');
+    const appWrapper = document.getElementById('cloudloadout-app');
+    const searchSpinner = document.getElementById('cg-search-spinner');
+    const searchIcon = document.getElementById('cg-search-icon');
+    const topHeading = document.getElementById('cg-top-heading');
+
+    // --- INITIALIZATION ---
+    function init() {
+        renderGames();
+        setupEventListeners();
+    }
+
+    // --- CORE LOGIC ---
+    function renderGames() {
+        const filtered = GAMES.filter(game => {
+            const matchesSearch = game.name.toLowerCase().includes(state.searchQuery.toLowerCase());
+            const matchesPlatform = state.activePlatform === 'all' || game.platforms[state.activePlatform] === 'available' || game.platforms[state.activePlatform] === 'partial';
+            return matchesSearch && matchesPlatform;
+        });
+
+        // Update heading
+        if (state.searchQuery) {
+            topHeading.innerHTML = `<h2 style="font-size: 1.5rem; font-weight: 700;">Search results for "${state.searchQuery}"</h2>`;
+        } else {
+            topHeading.innerHTML = `<h2 style="font-size: 1.5rem; font-weight: 700;">Top Cloud Games</h2>`;
+        }
+
+        // Sorting
+        filtered.sort((a, b) => {
+            if (state.sortBy === 'popular') return 0; // Default order
+            if (state.sortBy === 'rating') return b.rating - a.rating;
+            if (state.sortBy === 'metacritic') return b.metacritic - a.metacritic;
+            if (state.sortBy === 'newest') return b.year - a.year;
+            if (state.sortBy === 'az') return a.name.localeCompare(b.name);
+            return 0;
+        });
+
+        if (filtered.length === 0) {
+            gameGrid.style.display = 'none';
+            noResults.style.display = 'block';
+        } else {
+            gameGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            gameGrid.innerHTML = filtered.map(game => `
+                <div class="cg-card" data-id="${game.id}">
+                    <div class="cg-card-img-wrapper">
+                        <img src="${game.image}" class="cg-card-img" alt="${game.name}" loading="lazy">
+                    </div>
+                    <div class="cg-card-content">
+                        <div class="cg-card-title" title="${game.name}">${game.name}</div>
+                        <div class="cg-card-meta">
+                            <span class="cg-rating">
+                                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                ${game.rating}
+                            </span>
+                            <span>${game.year}</span>
+                        </div>
+                        <div class="cg-card-platforms">
+                            ${Object.keys(PLATFORM_INFO).map(p => `
+                                <div class="cg-platform-icon ${game.platforms[p] === 'available' ? 'active' : ''}" title="${PLATFORM_INFO[p].name}">
+                                    ${PLATFORM_INFO[p].name.charAt(0)}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add event listeners to cards
+            gameGrid.querySelectorAll('.cg-card').forEach(card => {
+                card.onclick = () => openGameDetail(card.dataset.id);
+            });
+        }
+        
+        searchSpinner.style.display = 'none';
+        searchIcon.style.display = 'block';
+    }
+
+    function openGameDetail(gameId) {
+        const game = GAMES.find(g => g.id == gameId);
+        if (!game) return;
+
+        modalInner.innerHTML = `
+            <div class="cg-modal-hero">
+                <img src="${game.image}" class="cg-modal-hero-img" alt="${game.name}">
+                <div class="cg-modal-hero-overlay"></div>
+            </div>
+            <div class="cg-modal-body">
+                <div class="cg-modal-header">
+                    <div>
+                        <h2 class="cg-modal-title">${game.name}</h2>
+                        <div class="cg-modal-badges">
+                            <span class="cg-badge">${game.year}</span>
+                            ${game.genres.map(g => `<span class="cg-badge">${g}</span>`).join('')}
+                            <span class="cg-badge" style="color: var(--cg-warning)">Metacritic: ${game.metacritic}</span>
+                        </div>
+                    </div>
+                    <div class="cg-rating" style="font-size: 1.5rem">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        ${game.rating}
+                    </div>
+                </div>
+
+                <p class="cg-modal-desc">
+                    Experience ${game.name} on your favorite cloud gaming platforms. No downloads required, just high-quality streaming directly to your devices. This title features stunning visuals and immersive gameplay optimized for cloud infrastructure.
+                </p>
+
+                <h3 style="margin-bottom: 15px;">Cloud Availability</h3>
+                <div class="cg-platform-matrix">
+                    ${Object.entries(PLATFORM_INFO).map(([key, info]) => {
+                        const status = game.platforms[key];
+                        return `
+                        <div class="cg-platform-row">
+                            <div class="cg-platform-name">
+                                <div class="cg-platform-icon active" style="width: 32px; height: 32px; font-size: 14px;">${info.name.charAt(0)}</div>
+                                ${info.name}
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <span class="cg-status-pill status-${status}">${status.replace(/^\w/, c => c.toUpperCase())}</span>
+                                ${status === 'available' ? '<button class="cg-cta-btn">Play Now</button>' : ''}
+                            </div>
+                        </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <h3 style="margin-bottom: 15px;">Screenshots</h3>
+                <div class="cg-screens">
+                    <img src="${game.image}" class="cg-screen-img">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&q=80" class="cg-screen-img">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80" class="cg-screen-img">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80" class="cg-screen-img">
+                </div>
+            </div>
+        `;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function setupEventListeners() {
+        // Search with debounce
+        let searchTimeout;
+        searchInput.oninput = (e) => {
+            const val = e.target.value;
+            state.searchQuery = val;
+            searchClear.classList.toggle('visible', val.length > 0);
+            
+            searchSpinner.style.display = 'block';
+            searchIcon.style.display = 'none';
+
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                renderGames();
+            }, 300);
+        };
+
+        searchClear.onclick = () => {
+            searchInput.value = "";
+            state.searchQuery = "";
+            searchClear.classList.remove('visible');
+            renderGames();
+            searchInput.focus();
+        };
+
+        // Filters
+        filterChips.forEach(chip => {
+            chip.onclick = () => {
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                state.activePlatform = chip.dataset.platform;
+                renderGames();
+            };
+        });
+
+        // Sorting
+        sortSelect.onchange = (e) => {
+            state.sortBy = e.target.value;
+            renderGames();
+        };
+
+        // View Toggles
+        gridBtn.onclick = () => {
+            gridBtn.classList.add('active');
+            listBtn.classList.remove('active');
+            gameGrid.classList.remove('list-view');
+            state.viewMode = 'grid';
+        };
+
+        listBtn.onclick = () => {
+            listBtn.classList.add('active');
+            gridBtn.classList.remove('active');
+            gameGrid.classList.add('list-view');
+            state.viewMode = 'list';
+        };
+
+        // Theme Toggle
+        themeToggle.onclick = () => {
+            state.theme = state.theme === 'dark' ? 'light' : 'dark';
+            appWrapper.classList.toggle('light-theme');
+            themeToggle.innerHTML = state.theme === 'dark' 
+                ? '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>'
+                : '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+        };
+
+        // Modal Close
+        modalClose.onclick = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        modal.onclick = (e) => {
+            if (e.target === modal) modalClose.onclick();
+        };
+
+        // Keyboard support
+        window.onkeydown = (e) => {
+            if (e.key === 'Escape') modalClose.onclick();
+        };
+    }
+
+    init();
+})();
+</script>
+
+</body>
+</html>
