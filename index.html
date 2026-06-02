@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Loadout Navigation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="cl-header" id="mainHeader">
+        <div class="cl-nav-container">
+            <a href="#" class="cl-logo">
+                <div class="cl-logo-icon">C</div>
+                CLOUD LOADOUT
+            </a>
+
+            <nav class="cl-desktop-nav">
+                <div class="cl-nav-item">
+                    <a href="#" class="cl-nav-link">Products</a>
+                    <div class="cl-mega-menu">
+                        <div class="cl-mega-menu-inner">
+                            <div class="cl-mega-group">
+                                <h4>Compute</h4>
+                                <ul>
+                                    <li><a href="#">Virtual Machines</a></li>
+                                    <li><a href="#">Kubernetes Engine</a></li>
+                                    <li><a href="#">Cloud Functions</a></li>
+                                    <li><a href="#">App Engine</a></li>
+                                </ul>
+                            </div>
+                            <div class="cl-mega-group">
+                                <h4>Storage</h4>
+                                <ul>
+                                    <li><a href="#">Object Storage</a></li>
+                                    <li><a href="#">Block Storage</a></li>
+                                    <li><a href="#">File Storage</a></li>
+                                    <li><a href="#">Database Services</a></li>
+                                </ul>
+                            </div>
+                            <div class="cl-mega-featured">
+                                <h4>New Release</h4>
+                                <p>Introducing the high-performance Z-Series instances for AI workloads.</p>
+                                <a href="#" class="cl-featured-action">Learn more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-nav-item">
+                    <a href="#" class="cl-nav-link">Solutions</a>
+                    <div class="cl-mega-menu">
+                        <div class="cl-mega-menu-inner">
+                            <div class="cl-mega-group">
+                                <h4>Industry</h4>
+                                <ul>
+                                    <li><a href="#">Finance</a></li>
+                                    <li><a href="#">Healthcare</a></li>
+                                    <li><a href="#">Retail</a></li>
+                                    <li><a href="#">Gaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="cl-mega-group">
+                                <h4>Use Case</h4>
+                                <ul>
+                                    <li><a href="#">DevOps</a></li>
+                                    <li><a href="#">Data Analytics</a></li>
+                                    <li><a href="#">Security</a></li>
+                                    <li><a href="#">Hybrid Cloud</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cl-nav-item">
+                    <a href="#" class="cl-nav-link">Developers</a>
+                </div>
+                <div class="cl-nav-item">
+                    <a href="#" class="cl-nav-link">Pricing</a>
+                </div>
+            </nav>
+
+            <div class="cl-actions">
+                <button class="cl-search-btn" id="openSearch">
+                    <svg class="cl-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    Search...
+                    <kbd>⌘K</kbd>
+                </button>
+                <a href="#" class="cl-btn-primary">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="cl-modal-overlay" id="searchModal">
+        <div class="cl-modal-box">
+            <div class="cl-modal-header">
+                <svg class="cl-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="cl-search-input" placeholder="Search documentation, components, and more...">
+                <button class="cl-esc-btn" id="closeSearch">ESC</button>
+            </div>
+            <div class="cl-modal-body">
+                No recent searches
+            </div>
+        </div>
+    </div>
+
+    <main style="padding-top: 100px; text-align: center; color: var(--cl-text-muted);">
+        <h1>Scroll down to see header effect</h1>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
