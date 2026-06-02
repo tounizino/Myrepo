@@ -1,0 +1,57 @@
+:root {
+    --primary-blue: #38bdf8;
+    --sky-50: #082f49;
+    --sky-100: #0c4a6e;
+    --sky-600: #0ea5e9;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --bg-transparent: rgba(2, 6, 23, 0.8);
+    --border-color: rgba(56, 189, 248, 0.2);
+}
+
+body {
+    background-color: #020617;
+    color: var(--text-main);
+}
+
+.site-header {
+    background: var(--bg-transparent);
+}
+
+.hero {
+    background: linear-gradient(180deg, #082f49 0%, rgba(2, 6, 23, 0) 100%);
+}
+
+.hero-tag {
+    background: #0c4a6e;
+    color: #38bdf8;
+}
+
+.btn-secondary {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+.btn-secondary:hover {
+    background-color: #1e293b;
+}
+
+.search-overlay {
+    background: rgba(2, 6, 23, 0.98);
+}
+
+.search-input {
+    color: #fff;
+}
+
+.mobile-menu {
+    background: #0f172a;
+}
+
+.nav-link:hover {
+    color: var(--primary-blue);
+}
+
+.social-link:hover {
+    color: var(--primary-blue);
+}
